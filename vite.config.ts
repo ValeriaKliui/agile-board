@@ -5,6 +5,11 @@ import legacy from "@vitejs/plugin-legacy";
 // https://vite.dev/config/
 export default defineConfig({
   esbuild: { target: "es2020" },
+  server: {
+    watch: {
+      usePolling: true,
+    },
+  },
   plugins: [
     react(),
     legacy({

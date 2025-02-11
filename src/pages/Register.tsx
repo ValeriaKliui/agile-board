@@ -1,4 +1,5 @@
 import { Button, Checkbox, Form, Input } from "antd";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const { Item } = Form;
 
@@ -7,6 +8,17 @@ export default function Register() {
 
   const onFinish = () => {
     console.log("Received values of form: ");
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, "email@gmail.com", "sdfsdf")
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
 
   return (
@@ -37,6 +49,7 @@ export default function Register() {
               required: true,
               message: "Please input your password!",
             },
+            { min: 8, message: "Password must be more than 8 symbols" },
           ]}
           hasFeedback
         >
@@ -59,28 +72,13 @@ export default function Register() {
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error("The new password that you entered do not match!"),
+                  new Error("The new password that you entered do not match!")
                 );
               },
             }),
           ]}
         >
           <Input.Password autoComplete="password" />
-        </Item>
-
-        <Item
-          name="nickname"
-          label="Nickname"
-          tooltip="What do you want others to call you?"
-          rules={[
-            {
-              required: true,
-              message: "Please input your nickname!",
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input autoComplete="name" />
         </Item>
 
         <Item

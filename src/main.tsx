@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthLayout from "./layout/auth/layout";
 import GlobalStyle from "./globalStyles";
+import "./config/firebase";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -27,5 +28,5 @@ createRoot(document.getElementById("root")!).render(
         </Route>*/}
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 );
