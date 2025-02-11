@@ -11,9 +11,9 @@ export default function Login() {
         console.log(user);
         // ...
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      .catch(() => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
       });
 
   return <button onClick={onClick}>Login</button>;
