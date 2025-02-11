@@ -55,3 +55,8 @@
 - Cross-browser compatibility (modern browsers: Chrome, Firefox, Edge, Safari).
 - Optimize Firestore performance to minimize the number of requests.
 - Flexible access rights system (e.g., board admin, member, etc.).
+
+## TODO:
+
+- handle errors login/register
+- aliases

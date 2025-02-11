@@ -1,11 +1,11 @@
 import { Outlet, useLocation } from "react-router";
 import { useNavigate } from "react-router";
 import { Flex, Tabs } from "antd";
-import { AUTH_TABS } from "../../constants";
-import { Content, Layout } from "./styled";
-import { getTabInfo } from "../../utils";
+import { Content, Layout } from "@layout/auth/styled";
+import { getTabInfo } from "@utils/index";
+import { AUTH_TABS } from "@constants/ui";
 
-export default function AuthLayout() {
+export const AuthLayout = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

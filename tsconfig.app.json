@@ -7,6 +7,17 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@utils/*": ["./utils/*"],
+      "@styles/*": ["./styles/*"],
+      "@pages/*": ["./pages/*"],
+      "@layout/*": ["./layout/*"],
+      "@constants/*": ["./constants/*"],
+      "@types/*": ["./types/*"]
+    },
+
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
@@ -20,5 +31,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "vite-env.d.ts"]
 }
