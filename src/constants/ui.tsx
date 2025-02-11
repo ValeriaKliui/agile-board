@@ -1,4 +1,6 @@
-export const AUTH_TABS = [
+import { DefaultTabInfo } from "@layout/auth/interfaces";
+
+export const AUTH_TABS: DefaultTabInfo[] = [
   {
     key: "1",
     label: "Log in",

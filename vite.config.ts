@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
+import react from '@vitejs/plugin-react';
 import path from 'path';
+import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,7 +14,7 @@ export default defineConfig({
       '@config': path.resolve(__dirname, './src/config'),
       '@constants': path.resolve(__dirname, './src/constants'),
       '@utils': path.resolve(__dirname, './src/utils'),
-      '@types': path.resolve(__dirname, './src/types'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
     },
   },
   server: {

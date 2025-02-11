@@ -1,7 +1,27 @@
-import { TabInfo } from "../types";
+import { DefaultTabInfo } from '@layout/auth/interfaces';
+import { EnumType, ErrorMessageProps } from '@utils/types';
 
 export const getTabInfo = (
-  tabsInfo: TabInfo[],
-  key: keyof TabInfo,
-  value: string,
-) => tabsInfo.find((tabInfo) => tabInfo[key] === value) || tabsInfo[0];
+  tabsInfo: DefaultTabInfo[],
+  key: keyof DefaultTabInfo,
+  value: string
+) =>
+  tabsInfo.find((tabInfo) => tabInfo[key] === value) || tabsInfo[0];
+
+export const getErrorMessage = <
+  TErrors extends EnumType,
+  TErrorsMessages extends EnumType,
+>({
+  errors,
+  errorsMessages,
+  errorCode,
+}: ErrorMessageProps<TErrors, TErrorsMessages>) => {
+  const foundError =
+    Object.entries(errors).find((error) => error[1] === errorCode) ||
+    [];
+
+  const foundErrorCode = foundError[0] as keyof TErrorsMessages;
+
+  const errorMessage = errorsMessages[foundErrorCode];
+  return errorMessage;
+};

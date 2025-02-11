@@ -1,30 +1,21 @@
-import { Outlet, useLocation } from "react-router";
-import { useNavigate } from "react-router";
-import { Flex, Tabs } from "antd";
-import { Content, Layout } from "@layout/auth/styled";
-import { getTabInfo } from "@utils/index";
+import { Tabs } from "@components/Tabs";
 import { AUTH_TABS } from "@constants/ui";
+import { useTabNavigation } from "@hooks/useTabNavigation";
+import { Content, Layout } from "@layout/auth/styled";
+import { Flex, } from "antd";
+import { Outlet } from "react-router";
 
 export const AuthLayout = () => {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { onTabChange, activeTabKey } = useTabNavigation({ tabItems: AUTH_TABS })
 
-  const { key } = getTabInfo(AUTH_TABS, "link", pathname);
-
-  const onTabChange = (tabKey: string) => {
-    const { link } = getTabInfo(AUTH_TABS, "key", tabKey);
-    navigate(link);
-  };
-
+  // console.log(activeTabKey)
   return (
     <Flex gap="middle" wrap justify="center" align="center" >
       <Layout>
         <Content>
-          <Tabs
-            defaultActiveKey={key}
+          <Tabs defaultActiveKey={activeTabKey}
             items={AUTH_TABS}
-            onChange={onTabChange}
-          />
+            onChange={onTabChange} />
           <Outlet />
         </Content>
       </Layout>

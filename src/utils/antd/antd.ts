@@ -17,7 +17,7 @@ export const getPasswordRules = (): Rule[] => {
       required: true,
       message: 'Please input your password!',
     },
-    { min: 8, message: 'Password must be more than 8 symbols' },
+    { min: 6, message: 'Password must be 6 symbols or more' },
   ];
 };
 
@@ -36,13 +36,4 @@ export const getConfirmPasswordRules = (): Rule[] => [
       );
     },
   }),
-];
-
-export const getCheckboxRules = (acceptionError: string): Rule[] => [
-  {
-    validator: (_, value) =>
-      value
-        ? Promise.resolve()
-        : Promise.reject(new Error(acceptionError)),
-  },
 ];
