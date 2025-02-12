@@ -16,7 +16,9 @@
       "@pages/*": ["./pages/*"],
       "@layout/*": ["./layout/*"],
       "@constants/*": ["./constants/*"],
-      "@hooks/*": ["./hooks/*"]
+      "@hooks/*": ["./hooks/*"],
+      "@store/*": ["./store/*"],
+      "@config/*": ["./config/*"]
     },
 
     "moduleResolution": "bundler",

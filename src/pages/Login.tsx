@@ -1,5 +1,8 @@
-import { LoginForm } from "@components/Forms/Login"
+import { LoginForm } from "@components/Forms/Login";
+import { useRedirectAuthorizedUsers } from "@hooks/useRedirectAuthorizedUsers";
 
 export const Login = () => {
-  return <LoginForm />
-}
+  useRedirectAuthorizedUsers();
+
+  return <LoginForm />;
+};

@@ -3,15 +3,17 @@ import {
   AuthUserReturns,
   REGISTER_ERRORS,
   REGISTER_ERRORS_MESSAGES,
-} from '@utils/auth/types';
-import { getErrorMessage } from '@utils/index';
+} from "@utils/auth/types";
+import { getErrorMessage } from "@utils/index";
 import {
   AuthError,
   createUserWithEmailAndPassword,
-} from 'firebase/auth';
+  getAuth,
+} from "firebase/auth";
+
+const auth = getAuth();
 
 export const registerUser = async ({
-  auth,
   email,
   password,
 }: AuthUserProps): Promise<AuthUserReturns> => {
@@ -19,10 +21,12 @@ export const registerUser = async ({
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
 
-    return { result: 'success', user: userCredential.user };
+    await auth.signOut();
+
+    return { result: "success", user: userCredential.user };
   } catch (error: unknown) {
     if (error instanceof Error) {
       const { code } = error as AuthError;
@@ -34,10 +38,10 @@ export const registerUser = async ({
       });
 
       return {
-        result: 'error',
+        result: "error",
         error: errorMessage,
       };
     }
   }
-  return { result: 'error', error: 'Unknown error' };
+  return { result: "error", error: "Unknown error" };
 };

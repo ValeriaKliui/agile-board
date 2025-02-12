@@ -1,5 +1,8 @@
 import { FormRegister } from "@components/Forms/Register";
+import { useRedirectAuthorizedUsers } from "@hooks/useRedirectAuthorizedUsers";
 
 export const Register = () => {
-  return <FormRegister />
-}
+  useRedirectAuthorizedUsers();
+
+  return <FormRegister />;
+};
