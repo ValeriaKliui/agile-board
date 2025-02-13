@@ -6,7 +6,7 @@ import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
 import { useAuthHandler } from "@hooks/useAuthHandler";
 import useModal from "@hooks/useModal";
-import { resetPassword } from "@utils/auth/auth";
+import { resetPassword } from "@utils/auth/resetPassword";
 import { Alert, Form } from "antd";
 import { useNavigate } from "react-router";
 

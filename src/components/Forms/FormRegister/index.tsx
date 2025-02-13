@@ -5,7 +5,7 @@ import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
 import { useAuthHandler } from "@hooks/useAuthHandler";
 import { getConfirmPasswordRules } from "@utils/antd/antd";
-import { registerUser } from "@utils/auth/auth";
+import { registerUser } from "@utils/auth/registerUser";
 import { Alert, Form, Input } from "antd";
 
 const { Item } = Form;
@@ -28,6 +28,10 @@ export const FormRegister = () => {
       onFinish={onFormSubmit}
       onChange={onFormChange}
       scrollToFirstError
+      colon={false}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 18 }}
+      labelWrap
     >
       <EmailInput />
       <PasswordInput />
@@ -42,11 +46,9 @@ export const FormRegister = () => {
       </Item>
 
       {authError && <Alert type="warning" message={authError} />}
-      <Item>
-        <Button type="primary" htmlType="submit" loading={isLoading} centered>
-          Register
-        </Button>
-      </Item>
+      <Button type="primary" htmlType="submit" loading={isLoading} centered>
+        Register
+      </Button>
     </Form>
   );
 };

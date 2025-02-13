@@ -1,8 +1,10 @@
+import { ProtectedRoute } from "@components/ProtectedRoute";
 import { PATHS } from "@constants/index";
 import { AuthLayout } from "@layout/auth/layout";
 import { ForgotPasswordPage } from "@pages/ForgotPasswordPage";
 import { HomePage } from "@pages/HomePage";
 import { LoginPage } from "@pages/LoginPage";
+import { ProfilePage } from "@pages/ProfilePage";
 import { RegisterPage } from "@pages/RegisterPage";
 import { Route } from "react-router";
 import { BrowserRouter, Routes } from "react-router";
@@ -12,6 +14,15 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route index element={<HomePage />} />
+
+        <Route
+          path={PATHS.PROFILE}
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route element={<AuthLayout />}>
           <Route path={PATHS.LOGIN} element={<LoginPage />} />

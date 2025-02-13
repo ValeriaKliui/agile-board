@@ -5,6 +5,7 @@ export enum PATHS {
   LOGIN = "/login",
   REGISTER = "/register",
   FORGOT_PASSWORD = "/forgot-password",
+  PROFILE = "/profile",
 }
 
 export const AUTH_TABS: DefaultTabInfo[] = [

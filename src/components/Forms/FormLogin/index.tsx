@@ -4,7 +4,7 @@ import { PasswordInput } from "@components/Forms/Fields/Password";
 import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
 import { useAuthHandler } from "@hooks/useAuthHandler";
-import { loginUser } from "@utils/auth/auth";
+import { loginUser } from "@utils/auth/loginUser";
 import { Alert, Flex, Form } from "antd";
 import Link from "antd/es/typography/Link";
 
@@ -25,18 +25,23 @@ export const LoginForm = () => {
       name={"login"}
       onFinish={onFormSubmit}
       onChange={onFormChange}
-      scrollToFirstError
+      colon={false}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 18 }}
+      labelWrap
     >
       <EmailInput />
       <PasswordInput />
-      <Flex justify="space-evenly">
-        <Item>
-          <Button type="primary" htmlType="submit" loading={isLoading}>
-            Log in
-          </Button>
-        </Item>
+      <Flex vertical gap="middle">
         {authError && <Alert message={authError} type="error" />}
-        <Link href={PATHS.FORGOT_PASSWORD}>Forgot password?</Link>
+        <Flex justify="space-evenly" align="baseline">
+          <Item>
+            <Button type="primary" htmlType="submit" loading={isLoading}>
+              Log in
+            </Button>
+          </Item>
+          <Link href={PATHS.FORGOT_PASSWORD}>Forgot password?</Link>
+        </Flex>
       </Flex>
     </Form>
   );
