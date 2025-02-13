@@ -12,7 +12,7 @@ const { Item } = Form;
 export const FormRegister = () => {
   const [form] = Form.useForm();
 
-  const { onFormChange, onFormSubmit, authError } = useAuthHandler({
+  const { onFormChange, onFormSubmit, authError, isLoading } = useAuthHandler({
     auth,
     authFunction: registerUser,
     redirectPath: PATHS.LOGIN,
@@ -42,7 +42,7 @@ export const FormRegister = () => {
 
       {authError && <Alert type="warning" message={authError} />}
       <Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Register
         </Button>
       </Item>

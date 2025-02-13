@@ -1,10 +1,11 @@
+import { Button } from "@components/Button";
 import { EmailInput } from "@components/Forms/Fields/Email";
 import { PasswordInput } from "@components/Forms/Fields/Password";
 import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
 import { useAuthHandler } from "@hooks/useAuthHandler";
 import { loginUser } from "@utils/auth/auth";
-import { Alert, Button, Flex, Form } from "antd";
+import { Alert, Flex, Form } from "antd";
 import Link from "antd/es/typography/Link";
 
 const { Item } = Form;
@@ -12,7 +13,7 @@ const { Item } = Form;
 export const LoginForm = () => {
   const [form] = Form.useForm();
 
-  const { onFormChange, onFormSubmit, authError } = useAuthHandler({
+  const { onFormChange, onFormSubmit, authError, isLoading } = useAuthHandler({
     auth,
     authFunction: loginUser,
     redirectPath: "/",
@@ -30,7 +31,7 @@ export const LoginForm = () => {
       <PasswordInput />
       <Flex justify="space-evenly">
         <Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={isLoading}>
             Log in
           </Button>
         </Item>

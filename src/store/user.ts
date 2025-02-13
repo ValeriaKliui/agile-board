@@ -7,7 +7,7 @@ class User {
     makeAutoObservable(this);
   }
 
-  setUser() {
+  setUser(user) {
     this.user = user;
   }
 }

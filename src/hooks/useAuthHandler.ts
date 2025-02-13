@@ -16,14 +16,17 @@ export const useAuthHandler = ({
 }) => {
   const navigate = useNavigate();
   const [authError, setAuthError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onFormSubmit = async (formValues: FormAuthValues) => {
+    setIsLoading(true);
     const { result, error = "" } = await authFunction({ auth, ...formValues });
+    setIsLoading(false);
     if (result === "success") navigate(redirectPath);
     else setAuthError(error);
   };
 
   const onFormChange = () => setAuthError(null);
 
-  return { onFormSubmit, onFormChange, authError };
+  return { onFormSubmit, onFormChange, authError, isLoading };
 };

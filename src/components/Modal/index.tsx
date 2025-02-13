@@ -9,6 +9,7 @@ export const Modal: React.FC<ModalProps> = ({
   onOk,
   onCancel,
   children,
+  ...modalProps
 }) => {
   return (
     <ModalAntd
@@ -24,6 +25,7 @@ export const Modal: React.FC<ModalProps> = ({
           OK
         </Button>,
       ]}
+      {...modalProps}
     >
       {children}
     </ModalAntd>

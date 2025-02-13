@@ -11,5 +11,5 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <GlobalStyle />
     <AppRoutes />
-  </StrictMode>
+  </StrictMode>,
 );

@@ -1,3 +1,4 @@
+import { Button } from "@components/Button";
 import { EmailInput } from "@components/Forms/Fields/Email";
 import { FormAuthValues } from "@components/Forms/types";
 import { Modal } from "@components/Modal";
@@ -6,7 +7,7 @@ import { PATHS } from "@constants/index";
 import { useAuthHandler } from "@hooks/useAuthHandler";
 import useModal from "@hooks/useModal";
 import { resetPassword } from "@utils/auth/auth";
-import { Alert, Button, Form } from "antd";
+import { Alert, Form } from "antd";
 import { useNavigate } from "react-router";
 
 const { Item } = Form;
@@ -16,7 +17,7 @@ export const FormForgotPassword = () => {
   const navigate = useNavigate();
   const { isModalOpen, showModal, closeModal } = useModal();
 
-  const { authError, onFormSubmit } = useAuthHandler({
+  const { authError, onFormSubmit, isLoading } = useAuthHandler({
     auth,
     authFunction: resetPassword,
   });
@@ -41,7 +42,7 @@ export const FormForgotPassword = () => {
       <EmailInput />
       {authError && <Alert message={authError} type="error" />}
       <Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Send new password
         </Button>
       </Item>

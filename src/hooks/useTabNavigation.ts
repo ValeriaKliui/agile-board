@@ -1,6 +1,6 @@
-import { DefaultTabInfo } from '@layout/auth/interfaces';
-import { getTabInfo } from '@utils/index';
-import { useLocation, useNavigate } from 'react-router';
+import { DefaultTabInfo } from "@layout/auth/interfaces";
+import { getTabInfo } from "@utils/index";
+import { useLocation, useNavigate } from "react-router";
 
 export const useTabNavigation = ({
   tabItems,
@@ -10,14 +10,10 @@ export const useTabNavigation = ({
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const { key: activeTabKey } = getTabInfo(
-    tabItems,
-    'link',
-    pathname
-  );
+  const { key: activeTabKey } = getTabInfo(tabItems, "link", pathname);
 
   const onTabChange = (tabKey: string) => {
-    const { link } = getTabInfo(tabItems, 'key', tabKey);
+    const { link } = getTabInfo(tabItems, "key", tabKey);
     navigate(link);
   };
 

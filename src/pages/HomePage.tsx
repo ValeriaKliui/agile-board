@@ -1,3 +1,4 @@
+import { Button } from "@components/Button";
 import { auth } from "@config/firebase";
 import { logOutUser } from "@utils/auth/auth";
 import { NavLink } from "react-router";
@@ -12,7 +13,7 @@ export const HomePage = () => {
       <NavLink to="/register" end>
         register
       </NavLink>
-      <button onClick={onClick}>logout</button>
+      <Button onClick={onClick}>logout</Button>
     </>
   );
 };

@@ -4,14 +4,11 @@ import { Form, Input } from "antd";
 const { Item } = Form;
 
 export const EmailInput = () => {
-    const emailRules = getEmailRules()
+  const emailRules = getEmailRules();
 
-    return <Item
-        name="email"
-        label="E-mail"
-        rules={emailRules}
-    >
-        <Input autoComplete="email" />
+  return (
+    <Item name="email" label="E-mail" rules={emailRules}>
+      <Input autoComplete="email" />
     </Item>
-
-}
+  );
+};
