@@ -1,3 +1,4 @@
+import user from "@store/user";
 import { handleAuthError } from "@utils/auth/handleAuthError";
 import {
   AuthUserReturns,
@@ -13,6 +14,8 @@ export const logOutUser = async ({
 }): Promise<AuthUserReturns> => {
   try {
     await signOut(auth);
+
+    user.setUID("");
 
     return { result: "success" };
   } catch (error) {

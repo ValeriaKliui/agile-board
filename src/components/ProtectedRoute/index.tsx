@@ -1,7 +1,8 @@
-import { useRedirectAuthorizedUsers } from "@hooks/useRedirectAuthorizedUsers";
+import { useProtectedRoute } from "@hooks/useProtectedRoute";
+import { PropsWithChildren } from "react";
 
-export const ProtectedRoute = ({ children }) => {
-  useRedirectAuthorizedUsers(true);
+export const ProtectedRoute = ({ children }: PropsWithChildren) => {
+  useProtectedRoute();
 
   return <>{children}</>;
 };

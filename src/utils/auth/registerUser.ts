@@ -1,19 +1,20 @@
-import { auth, db } from "@config/firebase";
+import { db } from "@config/firebase";
 import { handleAuthError } from "@utils/auth/handleAuthError";
 import {
-  AuthUserProps,
   AuthUserReturns,
   REGISTER_ERRORS,
   REGISTER_ERRORS_MESSAGES,
+  RegisterUserProps,
 } from "@utils/auth/interfaces";
 import { createUserWithEmailAndPassword, User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
-const createUserAccount = async ({ uid, email }: User) => {
+const createUserAccount = async ({ uid, email, username }: User) => {
   try {
     if (uid) {
       await setDoc(doc(db, "Users", uid), {
         email,
+        username,
       });
     }
   } catch (error) {
@@ -24,16 +25,15 @@ const createUserAccount = async ({ uid, email }: User) => {
 export const registerUser = async ({
   email,
   password,
-}: AuthUserProps): Promise<AuthUserReturns> => {
+  auth,
+  username,
+}: RegisterUserProps): Promise<AuthUserReturns> => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+    const {
+      user: { uid },
+    } = await createUserWithEmailAndPassword(auth, email, password);
 
-    await createUserAccount(userCredential.user);
-    await auth.signOut();
+    await createUserAccount({ uid, username, email });
 
     return { result: "success" };
   } catch (error) {

@@ -6,6 +6,10 @@ export interface AuthUserProps {
   password: string;
 }
 
+export interface RegisterUserProps extends AuthUserProps {
+  username: string;
+}
+
 export interface AuthUserReturns {
   result: "success" | "error";
   error?: string;
