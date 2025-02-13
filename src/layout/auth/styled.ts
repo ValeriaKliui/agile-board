@@ -12,7 +12,6 @@ export const Layout = styled(LayoutAntd)`
 
 export const Content = styled(ContentAntd)`
   text-align: center;
-  min-height: 120;
   line-height: 120px;
 `;
 

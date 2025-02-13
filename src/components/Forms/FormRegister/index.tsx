@@ -1,35 +1,31 @@
 import { EmailInput } from "@components/Forms/Fields/Email";
 import { PasswordInput } from "@components/Forms/Fields/Password";
-import { FormAuthValues } from "@components/Forms/types";
+import { auth } from "@config/firebase";
+import { PATHS } from "@constants/index";
+import { useAuthHandler } from "@hooks/useAuthHandler";
 import { getConfirmPasswordRules } from "@utils/antd/antd";
-import { registerUser } from "@utils/auth/registerUser";
+import { registerUser } from "@utils/auth/auth";
 import { Alert, Button, Form, Input } from "antd";
-import { useState } from "react";
-import { useNavigate } from "react-router";
 
 const { Item } = Form;
 
 export const FormRegister = () => {
   const [form] = Form.useForm();
-  const navigate = useNavigate();
-  const [authError, setAuthError] = useState<string | null>(null);
+
+  const { onFormChange, onFormSubmit, authError } = useAuthHandler({
+    auth,
+    authFunction: registerUser,
+    redirectPath: PATHS.LOGIN,
+  });
+
   const confirmPasswordRules = getConfirmPasswordRules();
-
-  const onFinish = async (formValues: FormAuthValues) => {
-    const { result, error = "" } = await registerUser(formValues);
-
-    if (result === "success") navigate("/login");
-    else setAuthError(error);
-  };
-
-  const onChange = () => setAuthError(null);
 
   return (
     <Form
       form={form}
       name={"register"}
-      onFinish={onFinish}
-      onChange={onChange}
+      onFinish={onFormSubmit}
+      onChange={onFormChange}
       scrollToFirstError
     >
       <EmailInput />

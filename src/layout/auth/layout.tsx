@@ -1,4 +1,4 @@
-import { AUTH_TABS } from "@constants/ui";
+import { AUTH_TABS } from "@constants/index";
 import { useTabNavigation } from "@hooks/useTabNavigation";
 import { Content, Flex, Layout, Tabs } from "@layout/auth/styled";
 import { Outlet } from "react-router";

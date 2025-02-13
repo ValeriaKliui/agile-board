@@ -1,14 +1,21 @@
 import { DefaultTabInfo } from "@layout/auth/interfaces";
 
+export enum PATHS {
+  HOME = "/",
+  LOGIN = "/login",
+  REGISTER = "/register",
+  FORGOT_PASSWORD = "/forgot-password",
+}
+
 export const AUTH_TABS: DefaultTabInfo[] = [
   {
     key: "1",
     label: "Log in",
-    link: "/login",
+    link: PATHS.LOGIN,
   },
   {
     key: "2",
     label: "Register",
-    link: "/register",
+    link: PATHS.REGISTER,
   },
 ];

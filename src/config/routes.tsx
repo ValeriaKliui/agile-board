@@ -1,7 +1,9 @@
+import { PATHS } from "@constants/index";
 import { AuthLayout } from "@layout/auth/layout";
-import { Home } from "@pages/Home";
-import { Login } from "@pages/Login";
-import { Register } from "@pages/Register";
+import { ForgotPasswordPage } from "@pages/ForgotPasswordPage";
+import { HomePage } from "@pages/HomePage";
+import { LoginPage } from "@pages/LoginPage";
+import { RegisterPage } from "@pages/RegisterPage";
 import { Route } from "react-router";
 import { BrowserRouter, Routes } from "react-router";
 
@@ -9,11 +11,15 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home />} />
+        <Route index element={<HomePage />} />
 
         <Route element={<AuthLayout />}>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path={PATHS.LOGIN} element={<LoginPage />} />
+          <Route path={PATHS.REGISTER} element={<RegisterPage />} />
+          <Route
+            path={PATHS.FORGOT_PASSWORD}
+            element={<ForgotPasswordPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

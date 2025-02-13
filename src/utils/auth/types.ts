@@ -1,6 +1,7 @@
-import { User } from "firebase/auth";
+import { Auth, User } from "firebase/auth";
 
 export interface AuthUserProps {
+  auth: Auth;
   email: string;
   password: string;
 }
@@ -27,4 +28,18 @@ export enum LOGIN_ERRORS {
 }
 export enum LOGIN_ERRORS_MESSAGES {
   INVALID_CREDENTIAL = "Email or password is wrong",
+}
+
+export enum SIGN_OUT_ERRORS {
+  NETWORK_FAILED = "auth/network-request-failed",
+}
+export enum SIGN_OUT_ERRORS_MESSAGES {
+  NETWORK_FAILED = "Network issues",
+}
+
+export enum RESET_PASSWORD_ERRORS {
+  USER_NOT_FOUND = "auth/user-not-found",
+}
+export enum RESET_PASSWORD_ERRORS_MESSAGE {
+  USER_NOT_FOUND = "User with such email doesn't exist",
 }

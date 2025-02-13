@@ -1,9 +1,10 @@
-import { logoutUser } from "@utils/auth/logoutUser";
+import { auth } from "@config/firebase";
+import { logOutUser } from "@utils/auth/auth";
 import { NavLink } from "react-router";
 
-export const Home = () => {
+export const HomePage = () => {
   const onClick = async () => {
-    await logoutUser();
+    await logOutUser({ auth });
   };
 
   return (

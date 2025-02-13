@@ -1,4 +1,5 @@
 import { auth } from "@config/firebase";
+import { PATHS } from "@constants/index";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
@@ -8,7 +9,7 @@ export const useRedirectAuthorizedUsers = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigate("/");
+        navigate(PATHS.HOME);
       }
     });
 
