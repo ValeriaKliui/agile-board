@@ -1,6 +1,6 @@
 import { AUTH_TABS } from "@constants/index";
 import { useTabNavigation } from "@hooks/useTabNavigation";
-import { Content, Flex, Layout, Tabs } from "@layout/auth/styled";
+import { Card, Content, Flex, Layout, Tabs } from "@layout/auth/styled";
 import { Outlet } from "react-router";
 
 export const AuthLayout = () => {
@@ -12,12 +12,14 @@ export const AuthLayout = () => {
     <Flex gap="middle" wrap justify="center" align="center">
       <Layout>
         <Content>
-          <Tabs
-            defaultActiveKey={activeTabKey}
-            items={AUTH_TABS}
-            onChange={onTabChange}
-          />
-          <Outlet />
+          <Card>
+            <Tabs
+              defaultActiveKey={activeTabKey}
+              items={AUTH_TABS}
+              onChange={onTabChange}
+            />
+            <Outlet />
+          </Card>
         </Content>
       </Layout>
     </Flex>

@@ -42,7 +42,7 @@ export const FormForgotPassword = () => {
       <EmailInput />
       {authError && <Alert message={authError} type="error" />}
       <Item>
-        <Button type="primary" htmlType="submit" loading={isLoading}>
+        <Button type="primary" htmlType="submit" loading={isLoading} centered>
           Send new password
         </Button>
       </Item>

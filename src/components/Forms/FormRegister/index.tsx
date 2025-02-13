@@ -1,3 +1,4 @@
+import { Button } from "@components/Button";
 import { EmailInput } from "@components/Forms/Fields/Email";
 import { PasswordInput } from "@components/Forms/Fields/Password";
 import { auth } from "@config/firebase";
@@ -5,7 +6,7 @@ import { PATHS } from "@constants/index";
 import { useAuthHandler } from "@hooks/useAuthHandler";
 import { getConfirmPasswordRules } from "@utils/antd/antd";
 import { registerUser } from "@utils/auth/auth";
-import { Alert, Button, Form, Input } from "antd";
+import { Alert, Form, Input } from "antd";
 
 const { Item } = Form;
 
@@ -42,7 +43,7 @@ export const FormRegister = () => {
 
       {authError && <Alert type="warning" message={authError} />}
       <Item>
-        <Button type="primary" htmlType="submit" loading={isLoading}>
+        <Button type="primary" htmlType="submit" loading={isLoading} centered>
           Register
         </Button>
       </Item>

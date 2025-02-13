@@ -1,5 +1,10 @@
-import { Button as ButtonAntd, ButtonProps } from "antd";
+import { ButtonProps } from "./interfaces";
+import { ButtonStyled } from "./styled";
 
-export const Button = ({ children, ...buttonProps }: ButtonProps) => {
-  return <ButtonAntd {...buttonProps}>{children}</ButtonAntd>;
+export const Button = ({ children, centered, ...buttonProps }: ButtonProps) => {
+  return (
+    <ButtonStyled centered={centered} {...buttonProps}>
+      {children}
+    </ButtonStyled>
+  );
 };
