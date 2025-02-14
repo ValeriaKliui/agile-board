@@ -39,7 +39,16 @@ export const FormRegister = observer(() => {
       labelWrap
     >
       <EmailInput />
+
+      <Item
+        label="Username"
+        name="username"
+        rules={[{ required: true, message: "Please input your username!" }]}
+      >
+        <Input />
+      </Item>
       <PasswordInput />
+
       <Item
         name="confirm"
         label="Confirm Password"

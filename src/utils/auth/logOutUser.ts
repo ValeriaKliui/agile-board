@@ -9,7 +9,7 @@ export const logOutUser = async ({ auth }: AuthParams) => {
     await signOut(auth);
   } catch (error) {
     throw Error(
-      handleAuthError(error, SIGN_OUT_ERRORS, SIGN_OUT_ERRORS_MESSAGES),
+      handleAuthError(error, SIGN_OUT_ERRORS, SIGN_OUT_ERRORS_MESSAGES)
     );
   }
 };
