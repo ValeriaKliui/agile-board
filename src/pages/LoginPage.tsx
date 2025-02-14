@@ -1,5 +1,5 @@
 import { AUTH_TABS } from "@constants/index";
-import { LoginFormContainer } from "@containers/LoginFormContainer";
+import { FormLoginContainer } from "@containers/FormLoginContainer";
 import { useRedirectAuthorizedUsers } from "@hooks/useRedirectAuthorizedUsers";
 import { useTabNavigation } from "@hooks/useTabNavigation";
 import { Tabs } from "@layout/auth/styled";
@@ -18,7 +18,7 @@ export const LoginPage = () => {
         items={AUTH_TABS}
         onChange={onTabChange}
       />
-      <LoginFormContainer />
+      <FormLoginContainer />
     </>
   );
 };

@@ -3,10 +3,12 @@ import { FormAuthValues } from "@components/Forms/types";
 import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
 import authStore from "@store/auth/authStore";
+import { Form } from "antd";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 
-export const LoginFormContainer = observer(() => {
+export const FormLoginContainer = observer(() => {
+    const [form] = Form.useForm();
     const navigate = useNavigate();
 
     const onFormSubmit = async (userValues: FormAuthValues) => {
@@ -19,5 +21,5 @@ export const LoginFormContainer = observer(() => {
     const error = authStore.errors.login
     const isLoading = authStore.inProgress
 
-    return <FormLogin onFormSubmit={onFormSubmit} onFormChange={onFormChange} error={error} isLoading={isLoading} />
+    return <FormLogin form={form} onFormSubmit={onFormSubmit} onFormChange={onFormChange} error={error} isLoading={isLoading} />
 })

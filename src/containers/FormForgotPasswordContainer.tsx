@@ -4,10 +4,12 @@ import { PATHS } from "@constants/index";
 import useModal from "@hooks/useModal";
 import authStore from "@store/auth/authStore";
 import { ForgotPasswordParams } from "@store/auth/interfaces";
+import { Form } from "antd";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 
 export const FormForgotPasswordContainer = observer(() => {
+  const [form] = Form.useForm();
   const navigate = useNavigate();
   const { isModalOpen, showModal, closeModal } = useModal();
 
@@ -28,6 +30,7 @@ export const FormForgotPasswordContainer = observer(() => {
 
   return (
     <FormForgotPassword
+      form={form}
       onFormSubmit={onFormSubmit}
       onFormChange={onFormChange}
       error={error}

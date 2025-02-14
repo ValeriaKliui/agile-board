@@ -6,9 +6,7 @@ import { Alert, Form, } from "antd";
 
 const { Item } = Form
 
-export const FormForgotPassword = <T,>({ onFormSubmit, onFormChange, error, isLoading, modalProps }: FormForgotPasswordProps<T>) => {
-  const [form] = Form.useForm();
-
+export const FormForgotPassword = <TFormValues, TForm>({ onFormSubmit, onFormChange, error, isLoading, modalProps, form }: FormForgotPasswordProps<TFormValues, TForm>) => {
   return (
     <Form
       form={form}

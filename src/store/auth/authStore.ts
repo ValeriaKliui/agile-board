@@ -4,7 +4,7 @@ import { resetPassword } from '@utils/auth/resetPassword';
 import { signOut } from 'firebase/auth';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import userStore from '../userStore';
+import userStore from '../user/userStore';
 import {
   AuthErrors,
   AuthParams,
@@ -37,7 +37,7 @@ class AuthStore {
 
     try {
       const { uid } = await registerUser({ auth, email, password });
-      await userStore.createUserAccount({ uid, username, email });
+      await userStore.updateUser({ uid, username, email });
     } catch (error) {
       runInAction(() => {
         if (error instanceof Error)
@@ -55,7 +55,7 @@ class AuthStore {
     try {
       const { uid } = await loginUser({ auth, email, password });
       userStore.setUserID(uid);
-      // await userStore.pullUser();
+      await userStore.fetchUser();
     } catch (error) {
       runInAction(() => {
         if (error instanceof Error) this.errors.login = error.message;

@@ -3,14 +3,12 @@ import { AuthFormPropsDefault } from "@components/Forms/AuthForms/interfaces";
 import { EmailInput } from "@components/Forms/Fields/Email";
 import { PasswordInput } from "@components/Forms/Fields/Password";
 import { PATHS } from "@constants/index";
-import { Alert, Flex, Form } from "antd";
+import { Alert, Flex, Form, FormInstance } from "antd";
 import Link from "antd/es/typography/Link";
 
 const { Item } = Form;
 
-export const FormLogin = <T,>({ onFormSubmit, onFormChange, error, isLoading }: AuthFormPropsDefault<T>) => {
-  const [form] = Form.useForm();
-
+export const FormLogin = <TFormValues, TForm extends FormInstance<TFormValues> | undefined>({ onFormSubmit, onFormChange, form, error, isLoading }: AuthFormPropsDefault<TFormValues, TForm>) => {
   return (
     <Form
       form={form}

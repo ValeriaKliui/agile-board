@@ -20,3 +20,7 @@ export const AUTH_TABS: DefaultTabInfo[] = [
     link: PATHS.REGISTER,
   },
 ];
+
+export const USER_PROPERTIES = [
+  'username', 'email', 'city', 'occupation'
+]

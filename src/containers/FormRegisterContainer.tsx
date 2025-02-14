@@ -25,7 +25,6 @@ export const FormRegisterContainer = observer(() => {
             onFormChange={onFormChange}
             error={error}
             isLoading={isLoading}
-            confirmPasswordRules={confirmPasswordRules}
         />
     );
 });

@@ -7,8 +7,7 @@ import { Alert, Form, Input, } from "antd";
 
 const { Item } = Form
 
-export const FormRegister = <T,>({ onFormSubmit, onFormChange, error, isLoading, }: AuthFormPropsDefault<T>) => {
-  const [form] = Form.useForm();
+export const FormRegister = <TFormValues, TForm>({ form, onFormSubmit, onFormChange, error, isLoading, }: AuthFormPropsDefault<TFormValues, TForm>) => {
   const confirmPasswordRules = getConfirmPasswordRules();
 
   return (

@@ -1,5 +1,5 @@
-import { FormUpdateUserInfo } from "@components/Forms/FormUpdateUserInfo";
+import { FormUpdateUserInfoContainer } from "@containers/FormUpdateUserInfoContainer";
 
 export const ProfilePage = () => {
-  return <FormUpdateUserInfo />;
+  return <FormUpdateUserInfoContainer />;
 };
