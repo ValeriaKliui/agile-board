@@ -1,37 +1,22 @@
 import { Button } from "@components/Button";
+import { AuthFormPropsDefault } from "@components/Forms/AuthForms/interfaces";
 import { EmailInput } from "@components/Forms/Fields/Email";
 import { PasswordInput } from "@components/Forms/Fields/Password";
-import { auth } from "@config/firebase";
-import { PATHS } from "@constants/index";
-import authStore from "@store/auth/authStore";
 import { getConfirmPasswordRules } from "@utils/antd/antd";
-import { Alert, Form, Input } from "antd";
-import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router";
+import { Alert, Form, Input, } from "antd";
 
-import { FormAuthValues } from "../types";
+const { Item } = Form
 
-const { Item } = Form;
-
-export const FormRegister = observer(() => {
+export const FormRegister = <T,>({ onFormSubmit, onFormChange, error, isLoading, }: AuthFormPropsDefault<T>) => {
   const [form] = Form.useForm();
-
-  const navigate = useNavigate();
   const confirmPasswordRules = getConfirmPasswordRules();
-
-  const onFormSubmit = async (userValues: FormAuthValues) => {
-    await authStore.register({ auth, ...userValues });
-    if (!authStore.errors.register) navigate(PATHS.LOGIN);
-  };
-
-  const onChange = () => authStore.resetError();
 
   return (
     <Form
       form={form}
-      name={"register"}
+      name="register"
       onFinish={onFormSubmit}
-      onChange={onChange}
+      onChange={onFormChange}
       scrollToFirstError
       colon={false}
       labelCol={{ span: 6 }}
@@ -47,6 +32,7 @@ export const FormRegister = observer(() => {
       >
         <Input />
       </Item>
+
       <PasswordInput />
 
       <Item
@@ -59,17 +45,16 @@ export const FormRegister = observer(() => {
         <Input.Password autoComplete="password" />
       </Item>
 
-      {authStore.errors.register && (
-        <Alert type="error" message={authStore.errors.register} />
-      )}
+      {error && <Alert type="error" message={error} />}
+
       <Button
         type="primary"
         htmlType="submit"
-        loading={authStore.inProgress}
+        loading={isLoading}
         centered
       >
         Register
       </Button>
     </Form>
   );
-});
+};

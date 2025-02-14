@@ -18,7 +18,8 @@
       "@constants/*": ["./constants/*"],
       "@hooks/*": ["./hooks/*"],
       "@store/*": ["./store/*"],
-      "@config/*": ["./config/*"]
+      "@config/*": ["./config/*"],
+      "@containers/*": ["./containers/*"]
     },
 
     "moduleResolution": "bundler",
