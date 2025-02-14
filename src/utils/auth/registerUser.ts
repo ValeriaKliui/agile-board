@@ -10,10 +10,15 @@ export const registerUser = async ({
   password,
 }: RegisterParams) => {
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return user;
   } catch (error) {
     throw Error(
-      handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES),
+      handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES)
     );
   }
 };

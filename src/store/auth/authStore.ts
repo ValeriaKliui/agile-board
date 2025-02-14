@@ -26,12 +26,13 @@ class AuthStore {
     makeAutoObservable(this);
   }
 
-  async register({ auth, email, password }: RegisterParams) {
+  async register({ auth, email, password, username }: RegisterParams) {
     this.inProgress = true;
     this.errors.register = null;
 
     try {
-      await registerUser({ auth, email, password });
+      const { uid } = await registerUser({ auth, email, password });
+      await userStore.createUserAccount({ uid, username, email });
     } catch (error) {
       if (error instanceof Error) this.errors.register = error.message;
     } finally {
