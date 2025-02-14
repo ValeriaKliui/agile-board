@@ -3,30 +3,35 @@ import { EmailInput } from "@components/Forms/Fields/Email";
 import { PasswordInput } from "@components/Forms/Fields/Password";
 import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
-import { useAuthHandler } from "@hooks/useAuthHandler";
+import authStore from "@store/auth/authStore";
 import { getConfirmPasswordRules } from "@utils/antd/antd";
-import { registerUser } from "@utils/auth/registerUser";
 import { Alert, Form, Input } from "antd";
+import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router";
+
+import { FormAuthValues } from "../types";
 
 const { Item } = Form;
 
-export const FormRegister = () => {
+export const FormRegister = observer(() => {
   const [form] = Form.useForm();
 
-  const { onFormChange, onFormSubmit, authError, isLoading } = useAuthHandler({
-    auth,
-    authFunction: registerUser,
-    redirectPath: PATHS.LOGIN,
-  });
-
+  const navigate = useNavigate();
   const confirmPasswordRules = getConfirmPasswordRules();
+
+  const onFormSubmit = async (userValues: FormAuthValues) => {
+    await authStore.register({ auth, ...userValues });
+    if (!authStore.errors.register) navigate(PATHS.LOGIN);
+  };
+
+  const onChange = () => authStore.resetError();
 
   return (
     <Form
       form={form}
       name={"register"}
       onFinish={onFormSubmit}
-      onChange={onFormChange}
+      onChange={onChange}
       scrollToFirstError
       colon={false}
       labelCol={{ span: 6 }}
@@ -45,10 +50,17 @@ export const FormRegister = () => {
         <Input.Password autoComplete="password" />
       </Item>
 
-      {authError && <Alert type="warning" message={authError} />}
-      <Button type="primary" htmlType="submit" loading={isLoading} centered>
+      {authStore.errors.register && (
+        <Alert type="error" message={authStore.errors.register} />
+      )}
+      <Button
+        type="primary"
+        htmlType="submit"
+        loading={authStore.inProgress}
+        centered
+      >
         Register
       </Button>
     </Form>
   );
-};
+});

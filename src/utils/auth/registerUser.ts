@@ -1,42 +1,19 @@
-import { auth, db } from "@config/firebase";
-import { handleAuthError } from "@utils/auth/handleAuthError";
-import {
-  AuthUserProps,
-  AuthUserReturns,
-  REGISTER_ERRORS,
-  REGISTER_ERRORS_MESSAGES,
-} from "@utils/auth/interfaces";
-import { createUserWithEmailAndPassword, User } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { RegisterParams } from "@store/auth/interfaces";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const createUserAccount = async ({ uid, email }: User) => {
-  try {
-    if (uid) {
-      await setDoc(doc(db, "Users", uid), {
-        email,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { handleAuthError } from "./handleAuthError";
+import { REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES } from "./interfaces";
 
 export const registerUser = async ({
+  auth,
   email,
   password,
-}: AuthUserProps): Promise<AuthUserReturns> => {
+}: RegisterParams) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-
-    await createUserAccount(userCredential.user);
-    await auth.signOut();
-
-    return { result: "success" };
+    await createUserWithEmailAndPassword(auth, email, password);
   } catch (error) {
-    return handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES);
+    throw Error(
+      handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES),
+    );
   }
 };

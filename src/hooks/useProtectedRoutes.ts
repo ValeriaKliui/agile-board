@@ -3,10 +3,10 @@ import userStore from "@store/userStore";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-export const useRedirectAuthorizedUsers = () => {
+export const useProtectedRoutes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userStore.isLoggedIn) navigate(PATHS.HOME);
+    if (!userStore.isLoggedIn) navigate(PATHS.LOGIN);
   }, [navigate]);
 };

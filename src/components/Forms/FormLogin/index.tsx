@@ -3,28 +3,34 @@ import { EmailInput } from "@components/Forms/Fields/Email";
 import { PasswordInput } from "@components/Forms/Fields/Password";
 import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
-import { useAuthHandler } from "@hooks/useAuthHandler";
-import { loginUser } from "@utils/auth/loginUser";
+import authStore from "@store/auth/authStore";
 import { Alert, Flex, Form } from "antd";
 import Link from "antd/es/typography/Link";
+import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router";
+
+import { FormAuthValues } from "../types";
 
 const { Item } = Form;
 
-export const LoginForm = () => {
+export const LoginForm = observer(() => {
   const [form] = Form.useForm();
 
-  const { onFormChange, onFormSubmit, authError, isLoading } = useAuthHandler({
-    auth,
-    authFunction: loginUser,
-    redirectPath: "/",
-  });
+  const navigate = useNavigate();
+
+  const onFormSubmit = async (userValues: FormAuthValues) => {
+    await authStore.login({ auth, ...userValues });
+    if (!authStore.errors.login) navigate(PATHS.HOME);
+  };
+
+  const onChange = () => authStore.resetError();
 
   return (
     <Form
       form={form}
       name={"login"}
       onFinish={onFormSubmit}
-      onChange={onFormChange}
+      onChange={onChange}
       colon={false}
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
@@ -33,10 +39,16 @@ export const LoginForm = () => {
       <EmailInput />
       <PasswordInput />
       <Flex vertical gap="middle">
-        {authError && <Alert message={authError} type="error" />}
+        {authStore.errors.login && (
+          <Alert type="error" message={authStore.errors.login} />
+        )}
         <Flex justify="space-evenly" align="baseline">
           <Item>
-            <Button type="primary" htmlType="submit" loading={isLoading}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={authStore.inProgress}
+            >
               Log in
             </Button>
           </Item>
@@ -45,4 +57,4 @@ export const LoginForm = () => {
       </Flex>
     </Form>
   );
-};
+});

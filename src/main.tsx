@@ -4,12 +4,12 @@ import "@ant-design/v5-patch-for-react-19";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
+import { App } from "./App";
 import GlobalStyle from "./config/globalStyles";
-import { AppRoutes } from "./config/routes";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <GlobalStyle />
-    <AppRoutes />
+    <App />
   </StrictMode>,
 );

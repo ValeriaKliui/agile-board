@@ -1,20 +1,17 @@
+import { ForgotPasswordParams } from "@store/auth/interfaces";
 import { handleAuthError } from "@utils/auth/handleAuthError";
 import {
-  AuthUserProps,
   REGISTER_ERRORS_MESSAGES,
   RESET_PASSWORD_ERRORS,
 } from "@utils/auth/interfaces";
 import { sendPasswordResetEmail } from "firebase/auth";
 
-export const resetPassword = async ({ auth, email }: AuthUserProps) => {
+export const resetPassword = async ({ auth, email }: ForgotPasswordParams) => {
   try {
     await sendPasswordResetEmail(auth, email);
-    return { result: "success" };
   } catch (error) {
-    return handleAuthError(
-      error,
-      RESET_PASSWORD_ERRORS,
-      REGISTER_ERRORS_MESSAGES,
+    throw Error(
+      handleAuthError(error, RESET_PASSWORD_ERRORS, REGISTER_ERRORS_MESSAGES),
     );
   }
 };

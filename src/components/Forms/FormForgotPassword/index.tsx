@@ -1,12 +1,11 @@
 import { Button } from "@components/Button";
 import { EmailInput } from "@components/Forms/Fields/Email";
-import { FormAuthValues } from "@components/Forms/types";
 import { Modal } from "@components/Modal";
 import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
-import { useAuthHandler } from "@hooks/useAuthHandler";
 import useModal from "@hooks/useModal";
-import { resetPassword } from "@utils/auth/resetPassword";
+import authStore from "@store/auth/authStore";
+import { ForgotPasswordParams } from "@store/auth/interfaces";
 import { Alert, Form } from "antd";
 import { useNavigate } from "react-router";
 
@@ -17,32 +16,37 @@ export const FormForgotPassword = () => {
   const navigate = useNavigate();
   const { isModalOpen, showModal, closeModal } = useModal();
 
-  const { authError, onFormSubmit, isLoading } = useAuthHandler({
-    auth,
-    authFunction: resetPassword,
-  });
-
-  const onResetPassword = (formValues: FormAuthValues) => {
-    onFormSubmit(formValues);
-    if (!authError) showModal();
-  };
-
   const handleModalClose = () => {
     closeModal();
     navigate(PATHS.LOGIN);
   };
 
+  const onFormSubmit = async ({ email }: ForgotPasswordParams) => {
+    await authStore.forgotPassword({ auth, email });
+    if (!authStore.errors.forgot) showModal();
+  };
+
+  const onChange = () => authStore.resetError();
+
   return (
     <Form
       form={form}
       name={"forgot_password"}
-      onFinish={onResetPassword}
+      onFinish={onFormSubmit}
+      onChange={onChange}
       scrollToFirstError
     >
       <EmailInput />
-      {authError && <Alert message={authError} type="error" />}
+      {authStore.errors.login && (
+        <Alert type="error" message={authStore.errors.forgot} />
+      )}
       <Item>
-        <Button type="primary" htmlType="submit" loading={isLoading} centered>
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={authStore.inProgress}
+          centered
+        >
           Send new password
         </Button>
       </Item>
