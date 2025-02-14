@@ -14,6 +14,7 @@ export interface AuthParams {
 export interface RegisterParams extends AuthParams {
   email: string;
   password: string;
+  username?: string;
 }
 
 export interface LoginParams extends AuthParams {

@@ -1,3 +1,5 @@
+import { db } from "@config/firebase";
+import { doc, setDoc } from "firebase/firestore";
 import { makeAutoObservable, reaction } from "mobx";
 
 class UserStore {
@@ -18,7 +20,7 @@ class UserStore {
         } else {
           window.localStorage.removeItem("uid");
         }
-      },
+      }
     );
   }
 
@@ -28,6 +30,17 @@ class UserStore {
 
   setUserID(uid) {
     this.userID = uid;
+  }
+
+  async createUserAccount({ uid, username, email }) {
+    try {
+      await setDoc(doc(db, "Users", uid), {
+        email,
+        username,
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   pullUser = async () => {

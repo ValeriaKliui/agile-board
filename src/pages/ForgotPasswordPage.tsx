@@ -1,6 +1,6 @@
 import { ForgotPasswordHeader } from "@components/ForgotPasswordHeader";
-import { FormForgotPassword } from "@components/Forms/FormForgotPassword";
 import { PATHS } from "@constants/index";
+import { FormForgotPasswordContainer } from "@containers/FormForgotPasswordContainer";
 
 const { Text } = Typography;
 
@@ -11,7 +11,7 @@ export const ForgotPasswordPage = () => {
   return (
     <Flex vertical gap={"small"}>
       <ForgotPasswordHeader />
-      <FormForgotPassword />
+      <FormForgotPasswordContainer />
       <Text type="secondary">
         Back to <Link href={PATHS.LOGIN}> Login Page</Link>
       </Text>

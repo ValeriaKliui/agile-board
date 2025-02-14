@@ -1,17 +1,17 @@
-import { loginUser } from "@utils/auth/loginUser";
-import { registerUser } from "@utils/auth/registerUser";
-import { resetPassword } from "@utils/auth/resetPassword";
-import { signOut } from "firebase/auth";
-import { makeAutoObservable } from "mobx";
+import { loginUser } from '@utils/auth/loginUser';
+import { registerUser } from '@utils/auth/registerUser';
+import { resetPassword } from '@utils/auth/resetPassword';
+import { signOut } from 'firebase/auth';
+import { makeAutoObservable, runInAction } from 'mobx';
 
-import userStore from "../userStore";
+import userStore from '../userStore';
 import {
   AuthErrors,
   AuthParams,
   ForgotPasswordParams,
   LoginParams,
   RegisterParams,
-} from "./interfaces";
+} from './interfaces';
 
 class AuthStore {
   inProgress = false;
@@ -26,16 +26,25 @@ class AuthStore {
     makeAutoObservable(this);
   }
 
-  async register({ auth, email, password }: RegisterParams) {
+  async register({
+    auth,
+    email,
+    password,
+    username,
+  }: RegisterParams) {
     this.inProgress = true;
     this.errors.register = null;
 
     try {
-      await registerUser({ auth, email, password });
+      const { uid } = await registerUser({ auth, email, password });
+      await userStore.createUserAccount({ uid, username, email });
     } catch (error) {
-      if (error instanceof Error) this.errors.register = error.message;
+      runInAction(() => {
+        if (error instanceof Error)
+          this.errors.register = error.message;
+      });
     } finally {
-      this.inProgress = false;
+      runInAction(() => (this.inProgress = false));
     }
   }
 
@@ -48,9 +57,11 @@ class AuthStore {
       userStore.setUserID(uid);
       // await userStore.pullUser();
     } catch (error) {
-      if (error instanceof Error) this.errors.login = error.message;
+      runInAction(() => {
+        if (error instanceof Error) this.errors.login = error.message;
+      });
     } finally {
-      this.inProgress = false;
+      runInAction(() => (this.inProgress = false));
     }
   }
 
@@ -62,9 +73,12 @@ class AuthStore {
       await signOut(auth);
       userStore.forgetUser();
     } catch (error) {
-      if (error instanceof Error) this.errors.logout = error.message;
+      runInAction(() => {
+        if (error instanceof Error)
+          this.errors.logout = error.message;
+      });
     } finally {
-      this.inProgress = false;
+      runInAction(() => (this.inProgress = false));
     }
   }
 
@@ -75,9 +89,12 @@ class AuthStore {
     try {
       await resetPassword({ auth, email });
     } catch (error) {
-      if (error instanceof Error) this.errors.logout = error.message;
+      runInAction(() => {
+        if (error instanceof Error)
+          this.errors.logout = error.message;
+      });
     } finally {
-      this.inProgress = false;
+      runInAction(() => (this.inProgress = false));
     }
   }
   resetError() {

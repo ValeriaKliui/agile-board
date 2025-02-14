@@ -1,3 +1,5 @@
+import { FormUpdateUserInfo } from "@components/Forms/FormUpdateUserInfo";
+
 export const ProfilePage = () => {
-  return <div>profile</div>;
+  return <FormUpdateUserInfo />;
 };

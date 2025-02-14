@@ -1,5 +1,5 @@
-import { FormRegister } from "@components/Forms/FormRegister";
 import { AUTH_TABS } from "@constants/index";
+import { FormRegisterContainer } from "@containers/FormRegisterContainer";
 import { useRedirectAuthorizedUsers } from "@hooks/useRedirectAuthorizedUsers";
 import { useTabNavigation } from "@hooks/useTabNavigation";
 import { Tabs } from "@layout/auth/styled";
@@ -18,7 +18,7 @@ export const RegisterPage = () => {
         items={AUTH_TABS}
         onChange={onTabChange}
       />
-      <FormRegister />
+      <FormRegisterContainer />
     </>
   );
 };
