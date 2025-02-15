@@ -18,7 +18,7 @@ export const FormUpdateUserInfoContainer = observer(() => {
   );
 
   const onFormSubmit = async (userData) => {
-    await userStore.updateUser({ userID: userStore.userID, userData });
+    await userStore.updateUser({ userID: userStore.userID, ...userData });
   };
 
   useEffect(() => {

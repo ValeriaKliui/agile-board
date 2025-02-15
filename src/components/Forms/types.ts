@@ -1,4 +1,3 @@
-import { Auth } from "firebase/auth";
 import { PropsWithChildren } from "react";
 
 export interface FormAuthValues {
@@ -16,5 +15,5 @@ export interface AuthFormWrapperProps<
   TFuncReturns extends FormSubmit,
 > extends PropsWithChildren {
   name: string;
-  authFunction: (props: TFormValue & { auth: Auth }) => Promise<TFuncReturns>;
+  authFunction: (props: TFormValue) => Promise<TFuncReturns>;
 }

@@ -1,5 +1,3 @@
-import { Auth } from "firebase/auth";
-
 export interface AuthErrors {
   login: string | null;
   register: string | null;
@@ -7,21 +5,17 @@ export interface AuthErrors {
   forgot: string | null;
 }
 
-export interface AuthParams {
-  auth: Auth;
-}
-
-export interface RegisterParams extends AuthParams {
+export interface RegisterParams {
   email: string;
   password: string;
   username?: string;
 }
 
-export interface LoginParams extends AuthParams {
+export interface LoginParams {
   email: string;
   password: string;
 }
 
-export interface ForgotPasswordParams extends AuthParams {
+export interface ForgotPasswordParams {
   email: string;
 }

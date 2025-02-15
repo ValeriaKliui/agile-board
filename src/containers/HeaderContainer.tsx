@@ -1,5 +1,4 @@
 import { Header } from "@components/Header";
-import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
 import authStore from "@store/auth/authStore";
 import userStore from "@store/user/userStore";
@@ -11,7 +10,7 @@ export const HeaderContainer = observer(() => {
   const navigate = useNavigate();
 
   const onLogin = () => navigate(PATHS.LOGIN);
-  const onLogout = async () => await authStore.logout({ auth });
+  const onLogout = async () => await authStore.logout();
 
   return (
     <Header isUserExists={isUserExists} onLogin={onLogin} onLogout={onLogout} />

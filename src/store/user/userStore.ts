@@ -1,6 +1,7 @@
 import { db } from "@config/firebase";
 import { User } from "@store/user/interfaces";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { getData } from "@utils/firebase/db/getData";
+import { doc, setDoc } from "firebase/firestore";
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 
 class UserStore {
@@ -36,11 +37,10 @@ class UserStore {
   async fetchUser() {
     this.loadingUser = true;
     try {
-      const docRef = doc(db, "Users", this.userID);
-      const docSnap = await getDoc(docRef);
+      const user = await getData<User>("Users", this.userID);
 
       runInAction(() => {
-        if (docSnap.exists()) this.user = docSnap.data() as User;
+        if (user) this.user = user;
       });
     } catch (error) {
       console.log(error);
@@ -49,12 +49,13 @@ class UserStore {
     }
   }
 
-  async updateUser({ uid = this.userID, ...userData }) {
+  async updateUser({ userID = this.userID, ...userData }) {
     try {
       const newData = Object.fromEntries(
         Object.entries(userData).filter(([_, value]) => value !== undefined),
       );
-      await setDoc(doc(db, "Users", uid), newData);
+      console.log(userData);
+      await setDoc(doc(db, "Users", userID), newData);
 
       runInAction(() => (this.user = { ...this.user, ...newData }));
     } catch (error) {

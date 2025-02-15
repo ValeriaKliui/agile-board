@@ -1,11 +1,10 @@
 import { Button } from "@components/Button";
-import { auth } from "@config/firebase";
 import authStore from "@store/auth/authStore";
 import { NavLink } from "react-router";
 
 export const HomePage = () => {
   const onClick = async () => {
-    await authStore.logout({ auth });
+    await authStore.logout();
   };
 
   return (

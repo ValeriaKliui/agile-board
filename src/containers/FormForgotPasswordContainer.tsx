@@ -1,5 +1,4 @@
 import { FormForgotPassword } from "@components/Forms/AuthForms/FormForgotPassword";
-import { auth } from "@config/firebase";
 import { PATHS } from "@constants/index";
 import useModal from "@hooks/useModal";
 import authStore from "@store/auth/authStore";
@@ -19,7 +18,7 @@ export const FormForgotPasswordContainer = observer(() => {
   };
 
   const onFormSubmit = async ({ email }: ForgotPasswordParams) => {
-    await authStore.forgotPassword({ auth, email });
+    await authStore.forgotPassword({ email });
     if (!authStore.errors.forgot) showModal();
   };
 

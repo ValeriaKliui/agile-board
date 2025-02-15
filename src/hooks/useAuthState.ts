@@ -1,6 +1,6 @@
-import { auth } from '@config/firebase';
-import userStore from '@store/user/userStore';
-import { useEffect } from 'react';
+import { auth } from "@config/firebase";
+import userStore from "@store/user/userStore";
+import { useEffect } from "react";
 
 export const useAuthState = () => {
   useEffect(() => {
@@ -8,7 +8,7 @@ export const useAuthState = () => {
       if (user && userStore.isLoggedIn) {
         userStore.setUserID(user.uid);
         userStore.fetchUser();
-      } else userStore.setUserID(null);
+      } else userStore.setUserID("");
     });
 
     return () => unsubscribe();

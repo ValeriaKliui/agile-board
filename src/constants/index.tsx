@@ -21,6 +21,4 @@ export const AUTH_TABS: DefaultTabInfo[] = [
   },
 ];
 
-export const USER_PROPERTIES = [
-  'username', 'email', 'city', 'occupation'
-]
+export const USER_PROPERTIES = ["username", "email", "city", "occupation"];

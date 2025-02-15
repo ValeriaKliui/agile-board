@@ -13,12 +13,12 @@ export const registerUser = async ({
     const { user } = await createUserWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
     return user;
   } catch (error) {
     throw Error(
-      handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES)
+      handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES),
     );
   }
 };
