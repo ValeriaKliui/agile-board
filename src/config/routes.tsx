@@ -1,6 +1,7 @@
 import { ProtectedRoute } from "@components/ProtectedRoute";
 import { PATHS } from "@constants/index";
-import { AuthLayout } from "@layout/auth/layout";
+import { AuthLayout } from "@layout/auth";
+import { DefaultLayout } from "@layout/default";
 import { ForgotPasswordPage } from "@pages/ForgotPasswordPage";
 import { HomePage } from "@pages/HomePage";
 import { LoginPage } from "@pages/LoginPage";
@@ -13,7 +14,9 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<HomePage />} />
+        <Route element={<DefaultLayout />}>
+          <Route index element={<HomePage />} />
+        </Route>
 
         <Route
           path={PATHS.PROFILE}

@@ -5,7 +5,8 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "noImplicitAny": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
 
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -17,7 +18,21 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@utils/*": ["./utils/*"],
+      "@styles/*": ["./styles/*"],
+      "@pages/*": ["./pages/*"],
+      "@layout/*": ["./layout/*"],
+      "@constants/*": ["./constants/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@store/*": ["./store/*"],
+      "@config/*": ["./config/*"],
+      "@containers/*": ["./containers/*"]
+    }
   },
   "include": ["vite.config.ts"]
 }
