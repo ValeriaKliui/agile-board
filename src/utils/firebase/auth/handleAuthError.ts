@@ -6,10 +6,13 @@ export const handleAuthError = (
   error: unknown,
   errors: EnumType,
   errorsMessages: EnumType,
-) => {
-  if (error instanceof Error) {
-    const { code } = error as AuthError;
+): string | undefined => {
+  if (!(error instanceof Error)) return undefined;
 
-    return String(getErrorMessage({ errors, errorsMessages, errorCode: code }));
-  }
+  const authError = error as AuthError;
+
+  return (
+    getErrorMessage({ errors, errorsMessages, errorCode: authError.code }) ||
+    "An unknown error occurred."
+  );
 };

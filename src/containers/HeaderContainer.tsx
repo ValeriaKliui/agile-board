@@ -6,13 +6,16 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 
 export const HeaderContainer = observer(() => {
-  const isUserExists = userStore.isLoggedIn;
   const navigate = useNavigate();
 
   const onLogin = () => navigate(PATHS.LOGIN);
-  const onLogout = async () => await authStore.logout();
+  const onLogout = () => authStore.logout();
 
   return (
-    <Header isUserExists={isUserExists} onLogin={onLogin} onLogout={onLogout} />
+    <Header
+      isUserExists={userStore.isLoggedIn}
+      onLogin={onLogin}
+      onLogout={onLogout}
+    />
   );
 });

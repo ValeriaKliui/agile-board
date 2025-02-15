@@ -37,6 +37,7 @@ export enum LOGIN_ERRORS_MESSAGES {
 export enum SIGN_OUT_ERRORS {
   NETWORK_FAILED = "auth/network-request-failed",
 }
+
 export enum SIGN_OUT_ERRORS_MESSAGES {
   NETWORK_FAILED = "Network issues",
 }
@@ -44,6 +45,6 @@ export enum SIGN_OUT_ERRORS_MESSAGES {
 export enum RESET_PASSWORD_ERRORS {
   USER_NOT_FOUND = "auth/user-not-found",
 }
-export enum RESET_PASSWORD_ERRORS_MESSAGE {
+export enum RESET_PASSWORD_ERRORS_MESSAGES {
   USER_NOT_FOUND = "User with such email doesn't exist",
 }

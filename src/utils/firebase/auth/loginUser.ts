@@ -1,14 +1,25 @@
 import { LoginParams } from "@store/auth/interfaces";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, User } from "firebase/auth";
 
 import { handleAuthError } from "./handleAuthError";
 import { LOGIN_ERRORS, LOGIN_ERRORS_MESSAGES } from "./interfaces";
+import { auth } from "@config/firebase";
 
-export const loginUser = async ({ auth, email, password }: LoginParams) => {
+export const loginUser = async ({
+  email,
+  password,
+}: LoginParams): Promise<User> => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     return user;
   } catch (error) {
-    throw Error(handleAuthError(error, LOGIN_ERRORS, LOGIN_ERRORS_MESSAGES));
+    const errorMessage = handleAuthError(
+      error,
+      LOGIN_ERRORS,
+      LOGIN_ERRORS_MESSAGES,
+    );
+    throw new Error(
+      errorMessage || "An unexpected error occurred during login.",
+    );
   }
 };

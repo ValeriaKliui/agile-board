@@ -3,9 +3,10 @@ import { FormRegisterContainer } from "@containers/FormRegisterContainer";
 import { useRedirectAuthorizedUsers } from "@hooks/useRedirectAuthorizedUsers";
 import { useTabNavigation } from "@hooks/useTabNavigation";
 import { Tabs } from "@layout/auth/styled";
+import userStore from "@store/user/userStore";
 
 export const RegisterPage = () => {
-  useRedirectAuthorizedUsers();
+  useRedirectAuthorizedUsers(userStore.isLoggedIn);
 
   const { onTabChange, activeTabKey } = useTabNavigation({
     tabItems: AUTH_TABS,

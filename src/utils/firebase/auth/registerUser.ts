@@ -1,24 +1,29 @@
 import { RegisterParams } from "@store/auth/interfaces";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, User } from "firebase/auth";
 
 import { handleAuthError } from "./handleAuthError";
 import { REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES } from "./interfaces";
+import { auth } from "@config/firebase";
+import { createUserAccount } from "@utils/firebase/auth/createUserAccount";
 
-export const registerUser = async ({
-  auth,
-  email,
-  password,
-}: RegisterParams) => {
+export const registerUser = async (userData: RegisterParams): Promise<User> => {
   try {
     const { user } = await createUserWithEmailAndPassword(
       auth,
-      email,
-      password,
+      userData.email,
+      userData.password,
     );
+    await createUserAccount({ userID: user.uid, ...userData });
+
     return user;
   } catch (error) {
-    throw Error(
-      handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES),
+    const errorMessage = handleAuthError(
+      error,
+      REGISTER_ERRORS,
+      REGISTER_ERRORS_MESSAGES,
+    );
+    throw new Error(
+      errorMessage || "An unexpected error occurred during registration.",
     );
   }
 };

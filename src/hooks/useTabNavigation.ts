@@ -1,5 +1,6 @@
 import { DefaultTabInfo } from "@layout/auth/interfaces";
 import { getTabInfo } from "@utils/index";
+import { useCallback, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 export const useTabNavigation = ({
@@ -10,12 +11,18 @@ export const useTabNavigation = ({
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const { key: activeTabKey } = getTabInfo(tabItems, "link", pathname);
+  const activeTabKey = useMemo(() => {
+    const tab = getTabInfo(tabItems, "link", pathname);
+    return tab?.key ?? "";
+  }, [pathname, tabItems]);
 
-  const onTabChange = (tabKey: string) => {
-    const { link } = getTabInfo(tabItems, "key", tabKey);
-    navigate(link);
-  };
+  const onTabChange = useCallback(
+    (tabKey: string) => {
+      const { link } = getTabInfo(tabItems, "key", tabKey);
+      navigate(link);
+    },
+    [navigate, tabItems],
+  );
 
   return { activeTabKey, onTabChange };
 };

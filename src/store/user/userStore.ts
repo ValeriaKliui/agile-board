@@ -1,12 +1,14 @@
-import { db } from "@config/firebase";
 import { User } from "@store/user/interfaces";
+import { USERS_DB_NAME } from "@utils/firebase/db/constants";
 import { getData } from "@utils/firebase/db/getData";
-import { doc, setDoc } from "firebase/firestore";
+import { setData } from "@utils/firebase/db/setData";
+import { filterUndefinedValues } from "@utils/index";
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 
 class UserStore {
   user: User | null = null;
   loadingUser = false;
+  loadingError = "";
   updatingUser = false;
   updatingUserErrors = null;
   userID = window.localStorage.getItem("uid") ?? "";
@@ -26,6 +28,13 @@ class UserStore {
     );
   }
 
+  private handleError(error: Error) {
+    console.error(error);
+    runInAction(() => {
+      this.loadingError = error.message;
+    });
+  }
+
   get isLoggedIn() {
     return !!this.userID;
   }
@@ -37,29 +46,37 @@ class UserStore {
   async fetchUser() {
     this.loadingUser = true;
     try {
-      const user = await getData<User>("Users", this.userID);
+      const user = await getData<User>(USERS_DB_NAME, this.userID);
 
       runInAction(() => {
         if (user) this.user = user;
       });
     } catch (error) {
       console.log(error);
+      if (error instanceof Error) {
+        this.handleError(error);
+      }
     } finally {
-      runInAction(() => (this.loadingUser = false));
+      this.loadingUser = false;
     }
   }
 
   async updateUser({ userID = this.userID, ...userData }) {
     try {
-      const newData = Object.fromEntries(
-        Object.entries(userData).filter(([_, value]) => value !== undefined),
-      );
-      console.log(userData);
-      await setDoc(doc(db, "Users", userID), newData);
+      this.loadingUser = true;
+      const newData = filterUndefinedValues(userData);
 
-      runInAction(() => (this.user = { ...this.user, ...newData }));
+      await setData(USERS_DB_NAME, userID, newData);
+
+      runInAction(() => {
+        if (this.user) this.user = { ...this.user, ...newData };
+      });
     } catch (error) {
-      throw new Error(error.message);
+      if (error instanceof Error) {
+        this.handleError(error);
+      }
+    } finally {
+      this.loadingUser = false;
     }
   }
 

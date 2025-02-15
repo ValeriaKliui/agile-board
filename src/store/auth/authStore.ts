@@ -1,7 +1,8 @@
 import { loginUser } from "@utils/firebase/auth/loginUser";
 import { registerUser } from "@utils/firebase/auth/registerUser";
 import { resetPassword } from "@utils/firebase/auth/resetPassword";
-import { makeAutoObservable, runInAction } from "mobx";
+import { logOutUser } from "@utils/firebase/auth/logOutUser";
+import { makeAutoObservable } from "mobx";
 
 import userStore from "../user/userStore";
 import {
@@ -10,7 +11,6 @@ import {
   LoginParams,
   RegisterParams,
 } from "./interfaces";
-import { logOutUser } from "@utils/firebase/auth/logOutUser";
 
 class AuthStore {
   inProgress = false;
@@ -25,69 +25,57 @@ class AuthStore {
     makeAutoObservable(this);
   }
 
-  async register({ email, password, username }: RegisterParams) {
+  private async performAuthAction<T>(
+    action: keyof AuthErrors,
+    authFn: () => Promise<T>,
+    successCallback?: (result: T) => void,
+  ) {
     this.inProgress = true;
-    this.errors.register = null;
+    this.errors[action] = null;
 
     try {
-      const { uid } = await registerUser({ email, password });
-      await userStore.updateUser({ uid, username, email });
+      const result = await authFn();
+      successCallback?.(result);
     } catch (error) {
-      runInAction(() => {
-        if (error instanceof Error) this.errors.register = error.message;
-      });
+      if (error instanceof Error) {
+        this.errors[action] = error.message;
+      }
     } finally {
-      runInAction(() => (this.inProgress = false));
+      this.inProgress = false;
     }
+  }
+
+  async register(userData: RegisterParams) {
+    await this.performAuthAction(
+      "register",
+      () => registerUser(userData),
+      async ({ uid }) => {
+        await userStore.updateUser({ userID: uid, ...userData });
+      },
+    );
   }
 
   async login({ email, password }: LoginParams) {
-    this.inProgress = true;
-    this.errors.login = null;
-
-    try {
-      const { uid } = await loginUser({ email, password });
-      userStore.setUserID(uid);
-      await userStore.fetchUser();
-    } catch (error) {
-      runInAction(() => {
-        if (error instanceof Error) this.errors.login = error.message;
-      });
-    } finally {
-      runInAction(() => (this.inProgress = false));
-    }
+    await this.performAuthAction(
+      "login",
+      () => loginUser({ email, password }),
+      async ({ uid }) => {
+        userStore.setUserID(uid);
+        await userStore.fetchUser();
+      },
+    );
   }
 
   async logout() {
-    this.inProgress = true;
-    this.errors.logout = null;
-
-    try {
-      await logOutUser();
+    await this.performAuthAction("logout", logOutUser, () => {
       userStore.forgetUser();
-    } catch (error) {
-      runInAction(() => {
-        if (error instanceof Error) this.errors.logout = error.message;
-      });
-    } finally {
-      runInAction(() => (this.inProgress = false));
-    }
+    });
   }
 
   async forgotPassword({ email }: ForgotPasswordParams) {
-    this.inProgress = true;
-    this.errors.logout = null;
-
-    try {
-      await resetPassword({ email });
-    } catch (error) {
-      runInAction(() => {
-        if (error instanceof Error) this.errors.logout = error.message;
-      });
-    } finally {
-      runInAction(() => (this.inProgress = false));
-    }
+    await this.performAuthAction("forgot", () => resetPassword({ email }));
   }
+
   resetError() {
     this.errors = {
       login: null,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useUploadGallery = <
-  TFileType extends { uid: string; url: string; name: string }, // Add constraint to TFileType
+  TFileType extends { uid: string; url: string; name: string },
   TResponse extends Record<string, unknown>,
 >(
   fetchFunc: () => Promise<TResponse>,
@@ -21,8 +21,8 @@ export const useUploadGallery = <
 
         setGalleryData(
           data.map((url, index) => ({
-            uid: String(index), // Assign unique ID
-            name: String(index), // You can customize this based on your requirements
+            uid: String(index),
+            name: String(index),
             url,
           })),
         );

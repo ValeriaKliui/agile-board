@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
 
 export const FormRegisterContainer = observer(() => {
-  const form = Form.useForm();
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
   const onFormSubmit = async (userValues: FormAuthValues) => {

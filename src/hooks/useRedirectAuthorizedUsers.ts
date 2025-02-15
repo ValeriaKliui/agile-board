@@ -1,12 +1,11 @@
-import { PATHS } from '@constants/index';
-import userStore from '@store/user/userStore';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { PATHS } from "@constants/index";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
-export const useRedirectAuthorizedUsers = () => {
+export const useRedirectAuthorizedUsers = (isLoggedIn: boolean) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userStore.isLoggedIn) navigate(PATHS.HOME);
-  }, [navigate]);
+    if (isLoggedIn) navigate(PATHS.HOME);
+  }, [navigate, isLoggedIn]);
 };

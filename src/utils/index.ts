@@ -1,37 +1,41 @@
-import { DefaultTabInfo } from '@layout/auth/interfaces';
-import { EnumType, ErrorMessageProps } from '@utils/types';
+import { DefaultTabInfo } from "@layout/auth/interfaces";
+import { EnumType, ErrorMessageProps } from "@utils/types";
 
 export const getTabInfo = (
   tabsInfo: DefaultTabInfo[],
   key: keyof DefaultTabInfo,
-  value: string
-) =>
-  tabsInfo.find((tabInfo) => tabInfo[key] === value) || tabsInfo[0];
+  value: string,
+) => tabsInfo.find((tabInfo) => tabInfo[key] === value) || tabsInfo[0];
 
 export const getErrorMessage = <
   TErrors extends EnumType,
-  TErrorsMessages extends EnumType,
+  TErrorMessages extends EnumType,
 >({
   errors,
   errorsMessages,
   errorCode,
-}: ErrorMessageProps<TErrors, TErrorsMessages>) => {
-  const foundError =
-    Object.entries(errors).find((error) => error[1] === errorCode) ||
-    [];
+}: ErrorMessageProps<TErrors, TErrorMessages>): string | undefined => {
+  const foundErrorEntry = Object.entries(errors).find(
+    ([, code]) => code === errorCode,
+  );
 
-  const foundErrorCode = foundError[0] as keyof TErrorsMessages;
+  if (!foundErrorEntry) return undefined;
+  const errorKey = foundErrorEntry[0] as keyof TErrorMessages;
 
-  const errorMessage = errorsMessages[foundErrorCode];
-  return errorMessage;
+  return String(errorsMessages[errorKey]);
 };
 
 export const getUserProperties = (
   fulfilledProperties: string[],
-  allProperties: string[]
-) => {
-  const summedProperties = allProperties.concat(fulfilledProperties);
-  const uniqueProperties = new Set(summedProperties);
+  allProperties: string[],
+): string[] => {
+  return Array.from(new Set([...allProperties, ...fulfilledProperties]));
+};
 
-  return Array.from(uniqueProperties);
+export const filterUndefinedValues = <T>(
+  data: Record<string, T>,
+): Record<string, T> => {
+  return Object.fromEntries(
+    Object.entries(data).filter(([_, value]) => value !== undefined),
+  );
 };
