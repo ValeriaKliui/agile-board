@@ -16,16 +16,15 @@ export const AppRoutes = () => {
       <Routes>
         <Route element={<DefaultLayout />}>
           <Route index element={<HomePage />} />
+          <Route
+            path={PATHS.PROFILE}
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
-
-        <Route
-          path={PATHS.PROFILE}
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
 
         <Route element={<AuthLayout />}>
           <Route path={PATHS.LOGIN} element={<LoginPage />} />

@@ -3,12 +3,12 @@ export interface AuthErrors {
   register: string | null;
   logout: string | null;
   forgot: string | null;
+  updatePassword: string | null;
 }
 
 export interface RegisterParams {
   email: string;
   password: string;
-  username?: string;
 }
 
 export interface LoginParams {

@@ -1,9 +1,10 @@
 import { User } from "@store/user/interfaces";
-import { USERS_DB_NAME } from "@utils/firebase/db/constants";
 import { getData } from "@utils/firebase/db/getData";
 import { setData } from "@utils/firebase/db/setData";
 import { filterUndefinedValues } from "@utils/index";
 import { makeAutoObservable, reaction, runInAction } from "mobx";
+
+const { VITE_USERS_DB_NAME } = import.meta.env;
 
 class UserStore {
   user: User | null = null;
@@ -46,8 +47,7 @@ class UserStore {
   async fetchUser() {
     this.loadingUser = true;
     try {
-      const user = await getData<User>(USERS_DB_NAME, this.userID);
-
+      const user = await getData<User>(VITE_USERS_DB_NAME, this.userID);
       runInAction(() => {
         if (user) this.user = user;
       });
@@ -66,7 +66,8 @@ class UserStore {
       this.loadingUser = true;
       const newData = filterUndefinedValues(userData);
 
-      await setData(USERS_DB_NAME, userID, newData);
+      console.log("userData", userData);
+      await setData(VITE_USERS_DB_NAME, userID, newData);
 
       runInAction(() => {
         if (this.user) this.user = { ...this.user, ...newData };

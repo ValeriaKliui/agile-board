@@ -10,8 +10,12 @@ export const FormRegisterContainer = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFormSubmit = async (userValues: FormAuthValues) => {
-    await authStore.register(userValues);
+  const onFormSubmit = async ({
+    email,
+    password,
+    username,
+  }: FormAuthValues) => {
+    await authStore.register({ email, password, username });
     if (!authStore.errors.register) navigate(PATHS.LOGIN);
   };
 

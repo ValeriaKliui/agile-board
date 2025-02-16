@@ -8,7 +8,6 @@ export const setData = async <T extends WithFieldValue<DocumentData>>(
 ) => {
   try {
     await setDoc(doc(db, dbName, key), data);
-    console.log();
   } catch (error) {
     if (error instanceof Error) throw new Error(error.message);
   }

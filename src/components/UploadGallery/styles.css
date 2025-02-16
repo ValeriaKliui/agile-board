@@ -1,0 +1,8 @@
+.ant-upload-list-item-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}

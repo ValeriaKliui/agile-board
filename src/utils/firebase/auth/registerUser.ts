@@ -6,14 +6,23 @@ import { REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES } from "./interfaces";
 import { auth } from "@config/firebase";
 import { createUserAccount } from "@utils/firebase/auth/createUserAccount";
 
-export const registerUser = async (userData: RegisterParams): Promise<User> => {
+export const registerUser = async ({
+  email,
+  password,
+  username,
+}: RegisterParams): Promise<User> => {
   try {
     const { user } = await createUserWithEmailAndPassword(
       auth,
-      userData.email,
-      userData.password,
+      email,
+      password,
     );
-    await createUserAccount({ userID: user.uid, ...userData });
+
+    await createUserAccount({
+      userID: user.uid,
+      email,
+      username,
+    });
 
     return user;
   } catch (error) {

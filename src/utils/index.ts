@@ -26,10 +26,10 @@ export const getErrorMessage = <
 };
 
 export const getUserProperties = (
-  fulfilledProperties: string[],
+  filledProperties: string[],
   allProperties: string[],
 ): string[] => {
-  return Array.from(new Set([...allProperties, ...fulfilledProperties]));
+  return Array.from(new Set([...allProperties, ...filledProperties]));
 };
 
 export const filterUndefinedValues = <T>(

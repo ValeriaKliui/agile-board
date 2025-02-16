@@ -11,6 +11,7 @@ import {
   LoginParams,
   RegisterParams,
 } from "./interfaces";
+import { updatePassword } from "@utils/firebase/auth/updatePassword";
 
 class AuthStore {
   inProgress = false;
@@ -19,6 +20,7 @@ class AuthStore {
     register: null,
     logout: null,
     forgot: null,
+    updatePassword: null,
   };
 
   constructor() {
@@ -40,19 +42,14 @@ class AuthStore {
       if (error instanceof Error) {
         this.errors[action] = error.message;
       }
+      console.log(error);
     } finally {
       this.inProgress = false;
     }
   }
 
   async register(userData: RegisterParams) {
-    await this.performAuthAction(
-      "register",
-      () => registerUser(userData),
-      async ({ uid }) => {
-        await userStore.updateUser({ userID: uid, ...userData });
-      },
-    );
+    await this.performAuthAction("register", () => registerUser(userData));
   }
 
   async login({ email, password }: LoginParams) {
@@ -68,6 +65,7 @@ class AuthStore {
 
   async logout() {
     await this.performAuthAction("logout", logOutUser, () => {
+      logOutUser();
       userStore.forgetUser();
     });
   }
@@ -76,12 +74,19 @@ class AuthStore {
     await this.performAuthAction("forgot", () => resetPassword({ email }));
   }
 
+  async updatePassword({ oldPassword, newPassword }) {
+    await this.performAuthAction("updatePassword", () =>
+      updatePassword({ oldPassword, newPassword }),
+    );
+  }
+
   resetError() {
     this.errors = {
       login: null,
       register: null,
       logout: null,
       forgot: null,
+      updatePassword: null,
     };
   }
 }

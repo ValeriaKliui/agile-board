@@ -13,12 +13,9 @@ export const FormUpdateUserInfoContainer = observer(() => {
   const loadingUser = userStore.loadingUser;
   const user = userStore.user;
 
-  const fulfilledUserProperties = user ? Object.keys(user) : [];
-  const isLoading = fulfilledUserProperties.length === 0;
-  const formFields = getUserProperties(
-    fulfilledUserProperties,
-    USER_PROPERTIES,
-  );
+  const filledUserProperties = user ? Object.keys(user) : [];
+  const isLoading = filledUserProperties.length === 0 || loadingUser;
+  const formFields = getUserProperties(filledUserProperties, USER_PROPERTIES);
 
   const onFormSubmit = useCallback(async (userData: Partial<User>) => {
     await userStore.updateUser({ userID: userStore.userID, ...userData });

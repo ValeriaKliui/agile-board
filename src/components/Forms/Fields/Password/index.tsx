@@ -3,12 +3,12 @@ import { Form, Input } from "antd";
 
 const { Item } = Form;
 
-export const PasswordInput = () => {
+export const PasswordInput = ({ name = "password", label = "Password" }) => {
   const passwordRules = getPasswordRules();
 
   return (
-    <Item name="password" label="Password" rules={passwordRules} hasFeedback>
-      <Input.Password autoComplete="password" />
+    <Item name={name} label={label} rules={passwordRules} hasFeedback>
+      <Input.Password autoComplete={name} />
     </Item>
   );
 };

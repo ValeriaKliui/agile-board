@@ -48,3 +48,11 @@ export enum RESET_PASSWORD_ERRORS {
 export enum RESET_PASSWORD_ERRORS_MESSAGES {
   USER_NOT_FOUND = "User with such email doesn't exist",
 }
+export enum UPDATE_PASSWORD_ERRORS {
+  REQUIRES_RECENT_LOGIN = "auth/requires-recent-login",
+  INVALID_LOGIN_CREDENTIALS = "auth/invalid-credential",
+}
+export enum UPDATE_PASSWORD_ERRORS_MESSAGES {
+  REQUIRES_RECENT_LOGIN = "Requires recent login",
+  INVALID_LOGIN_CREDENTIALS = "Current password is incorrect",
+}
