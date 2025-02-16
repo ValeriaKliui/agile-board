@@ -19,7 +19,7 @@ export const UploadGallery = ({
   const { fileList, isErrorUploading, handleChange, handleUpload } =
     useUpload<UploadFile>({ filesData, onUpload, onRemove });
 
-  const hasUploadButton = fileList.length < maxPhotoAmount || isEditable;
+  const hasUploadButton = fileList.length < maxPhotoAmount;
 
   return (
     <div>

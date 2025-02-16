@@ -13,7 +13,8 @@ export const HeaderContainer = observer(() => {
 
   return (
     <Header
-      isUserExists={userStore.isLoggedIn}
+      username={userStore.user?.username}
+      avatar={userStore.user?.avatar}
       onLogin={onLogin}
       onLogout={onLogout}
     />

@@ -1,5 +1,4 @@
 import { AvatarsSelection } from "@components/AvatarsSelection";
-import { AvatarContainer } from "@containers/AvatarContainer";
 import userStore from "@store/user/userStore";
 import { Button } from "antd";
 import { useState } from "react";
@@ -15,9 +14,8 @@ export const Avatars = () => {
 
   return (
     <>
-      <AvatarContainer />
       {!isEditing && (
-        <Button type="primary" onClick={toggleAvatarEditing}>
+        <Button type="dashed" onClick={toggleAvatarEditing}>
           Change avatar
         </Button>
       )}

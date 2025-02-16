@@ -10,6 +10,7 @@ const { Content: ContentAntd } = LayoutAntd;
 
 export const Layout = styled(LayoutAntd)`
   min-height: 100vh;
+  background: #985ace;
 `;
 
 export const Content = styled(ContentAntd)`

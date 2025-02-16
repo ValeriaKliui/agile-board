@@ -1,5 +1,6 @@
 export interface HeaderProps {
-  isUserExists: boolean;
   onLogout: () => void;
   onLogin: () => void;
+  username?: string;
+  avatar?: string;
 }

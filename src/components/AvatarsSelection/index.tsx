@@ -1,10 +1,10 @@
 import { AvatarGallery } from "@components/AvatarsGallery";
+import { Flex } from "@components/AvatarsSelection/styled";
+import { AVATARS_DB_NAME } from "@constants/index";
 import { useAvatars } from "@containers/useAvatars";
 import userStore from "@store/user/userStore";
-import { Button, Flex, UploadFile } from "antd";
+import { Button, Spin, UploadFile } from "antd";
 import { useState } from "react";
-
-const { VITE_AVATARS_DB_NAME } = import.meta.env;
 
 export const AvatarsSelection = ({ onSave }) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);
@@ -15,13 +15,13 @@ export const AvatarsSelection = ({ onSave }) => {
     avatars: userAvatars,
     isAvatarsLoading: isUserAvatarsLoading,
     errorLoading: errorUser,
-  } = useAvatars(VITE_AVATARS_DB_NAME, userStore.userID);
+  } = useAvatars(AVATARS_DB_NAME, userStore.userID);
 
   const {
     avatars: defaultAvatars,
     isAvatarsLoading: isDefaultAvatarsLoading,
     errorLoading: errorDefault,
-  } = useAvatars(VITE_AVATARS_DB_NAME, "default");
+  } = useAvatars(AVATARS_DB_NAME, "default");
 
   const handleSelection = (elem: UploadFile) => {
     const { uid = "", url = "" } = elem;
@@ -32,30 +32,40 @@ export const AvatarsSelection = ({ onSave }) => {
     onSave(selectedAvatar);
   };
 
+  const isLoading = isDefaultAvatarsLoading || isUserAvatarsLoading;
+
   return (
-    <Flex justify="space-between">
-      <AvatarGallery
-        title="Default Avatars"
-        filesData={defaultAvatars}
-        isLoading={isDefaultAvatarsLoading}
-        error={errorDefault}
-        handleClick={handleSelection}
-        selectedAvatar={selectedAvatar}
-        maxPhotoAmount={defaultAvatars.length}
-        onRemove={onRemove}
-      />
-      <AvatarGallery
-        title="User Avatars"
-        filesData={userAvatars}
-        error={errorUser}
-        isLoading={isUserAvatarsLoading}
-        handleClick={handleSelection}
-        selectedAvatar={selectedAvatar}
-        onRemove={onRemove}
-        onUpload={onUpload}
-        isEditable
-      />
-      <Button onClick={onAvatarSave}>Save</Button>
+    <Flex vertical gap="middle" align="flex-start">
+      {isLoading ? (
+        <Spin />
+      ) : (
+        <>
+          <AvatarGallery
+            title="Default Avatars"
+            filesData={defaultAvatars}
+            error={errorDefault}
+            handleClick={handleSelection}
+            selectedAvatar={selectedAvatar}
+            maxPhotoAmount={defaultAvatars.length}
+            onRemove={onRemove}
+          />
+          <AvatarGallery
+            title="User Avatars"
+            filesData={userAvatars}
+            error={errorUser}
+            handleClick={handleSelection}
+            selectedAvatar={selectedAvatar}
+            onRemove={onRemove}
+            onUpload={onUpload}
+            maxPhotoAmount={4}
+            isEditable
+          />
+        </>
+      )}
+
+      <Button onClick={onAvatarSave} type="primary">
+        Save new avatar
+      </Button>
     </Flex>
   );
 };

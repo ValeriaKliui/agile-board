@@ -1,6 +1,6 @@
 import { FormUpdatePassword } from "@components/Forms/FormUpdatePassword";
 import authStore from "@store/auth/authStore";
-import { Button, Form } from "antd";
+import { Button, Flex, Form } from "antd";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 
@@ -19,7 +19,11 @@ export const FormUpdatePasswordContainer = observer(() => {
       {isEditing ? (
         <FormUpdatePassword form={form} onSubmit={onSubmit} error={isError} />
       ) : (
-        <Button onClick={toggleEditing}>Change password</Button>
+        <Flex>
+          <Button onClick={toggleEditing} type="dashed">
+            Change password
+          </Button>
+        </Flex>
       )}
     </>
   );

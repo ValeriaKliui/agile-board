@@ -9,6 +9,9 @@ const GlobalStyle = styled.createGlobalStyle`
     min-height: 100vh;
     margin: 0;
   }
+  .capitalize {
+    text-transform: capitalize;
+  }
 `;
 
 export default GlobalStyle;

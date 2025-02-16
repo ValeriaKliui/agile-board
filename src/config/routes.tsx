@@ -15,6 +15,7 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<DefaultLayout />}>
+          <Route path="*" element={<>Path was not found</>} />
           <Route index element={<HomePage />} />
           <Route
             path={PATHS.PROFILE}

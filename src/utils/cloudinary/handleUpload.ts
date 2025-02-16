@@ -1,10 +1,5 @@
+import { AVATARS_PATH, UPLOAD_PRESET, UPLOAD_URL } from "@constants/index";
 import type { UploadRequestOption } from "rc-upload/lib/interface";
-
-const {
-  VITE_CLOUDINARY_UPLOAD_PRESET,
-  VITE_CLOUDINARY_UPLOAD_URL,
-  VITE_AVATARS_PATH,
-} = import.meta.env;
 
 export const handleUploadToStorage = async ({
   file,
@@ -12,11 +7,11 @@ export const handleUploadToStorage = async ({
 }: UploadRequestOption) => {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", VITE_CLOUDINARY_UPLOAD_PRESET);
-  formData.append("folder", VITE_AVATARS_PATH);
+  formData.append("upload_preset", UPLOAD_PRESET);
+  formData.append("folder", AVATARS_PATH);
 
   try {
-    const response = await fetch(VITE_CLOUDINARY_UPLOAD_URL, {
+    const response = await fetch(UPLOAD_URL, {
       method: "POST",
       body: formData,
     });

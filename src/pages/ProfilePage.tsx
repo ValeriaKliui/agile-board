@@ -1,13 +1,25 @@
 import { Avatars } from "@components/Avatars";
 import { FormUpdatePasswordContainer } from "@containers/FormUpdatePasswordContainer";
 import { FormUpdateUserInfoContainer } from "@containers/FormUpdateUserInfoContainer";
+import { ProfileInfoContainer } from "@containers/ProfileInfoContainer";
+import { Card, Divider, Flex } from "antd";
 
 export const ProfilePage = () => {
   return (
     <>
-      <Avatars />
-      <FormUpdateUserInfoContainer />
-      <FormUpdatePasswordContainer />
+      <Card style={{ width: "100%", height: "100%" }}>
+        <Flex vertical gap="large">
+          <Flex vertical gap="large" align="flex-start">
+            <ProfileInfoContainer />
+            <Avatars />
+          </Flex>
+
+          <Divider />
+          <FormUpdateUserInfoContainer />
+          <Divider />
+          <FormUpdatePasswordContainer />
+        </Flex>
+      </Card>
     </>
   );
 };

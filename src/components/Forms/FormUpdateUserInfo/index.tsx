@@ -1,8 +1,10 @@
-import { Button } from '@components/Button';
-import { FormUpdateUserInfoProps } from '@components/Forms/FormUpdateUserInfo/interfaces';
-import { Form, Input, Spin } from 'antd';
-import { useState } from 'react';
+import { Button } from "@components/Button";
+import { FormUpdateUserInfoProps } from "@components/Forms/FormUpdateUserInfo/interfaces";
+import { Input } from "@components/Forms/FormUpdateUserInfo/styled";
+import { Col, Form, Row, Spin, Typography } from "antd";
+import { useState } from "react";
 
+const { Text } = Typography;
 const { Item } = Form;
 
 export const FormUpdateUserInfo = <TForm, TFormValues>({
@@ -34,29 +36,33 @@ export const FormUpdateUserInfo = <TForm, TFormValues>({
         disabled={!isEditing}
         onFinish={onFinish}
       >
-        {fields?.map((name) => (
-          <Item label={name} name={name} key={name}>
-            <Input />
-          </Item>
-        ))}
+        <Row gutter={[16, 16]}>
+          {fields?.map((name) => (
+            <Col xs={24} sm={12}>
+              <Text strong className="capitalize">
+                {name}
+              </Text>
+              <Item name={name} key={name}>
+                <Input $isEditable={isEditing} />
+              </Item>
+            </Col>
+          ))}
+        </Row>
 
         {!isEditing && (
           <Button
             type="dashed"
             onClick={toggleEditing}
             disabled={false}
+            htmlType="submit"
           >
-            Edit Info
+            Update Info
           </Button>
         )}
 
         {isEditing && (
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ marginLeft: 10 }}
-          >
-            Update
+          <Button type="primary" htmlType="submit">
+            Save Info
           </Button>
         )}
       </Form>
