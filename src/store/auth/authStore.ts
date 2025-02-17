@@ -42,7 +42,6 @@ class AuthStore {
       if (error instanceof Error) {
         this.errors[action] = error.message;
       }
-      console.log(error);
     } finally {
       this.inProgress = false;
     }

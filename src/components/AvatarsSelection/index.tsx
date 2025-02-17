@@ -24,8 +24,8 @@ export const AvatarsSelection = ({ onSave }) => {
   } = useAvatars(AVATARS_DB_NAME, "default");
 
   const handleSelection = (elem: UploadFile) => {
-    const { uid = "", url = "" } = elem;
-    selectAvatar(uid ?? url);
+    const { url = "" } = elem;
+    selectAvatar(url);
   };
 
   const onAvatarSave = () => {
@@ -64,7 +64,7 @@ export const AvatarsSelection = ({ onSave }) => {
       )}
 
       <Button onClick={onAvatarSave} type="primary">
-        Save new avatar
+        Update avatar
       </Button>
     </Flex>
   );

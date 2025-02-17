@@ -51,7 +51,6 @@ class UserStore {
         if (user) this.user = user;
       });
     } catch (error) {
-      console.log(error);
       if (error instanceof Error) {
         this.handleError(error);
       }
@@ -65,7 +64,6 @@ class UserStore {
       this.loadingUser = true;
       const newData = filterUndefinedValues(userData);
 
-      console.log("userData", userData);
       await setData(USERS_DB_NAME, userID, newData);
 
       runInAction(() => {

@@ -29,10 +29,7 @@ export const UploadGallery = ({
         customRequest={handleUpload}
         listType="picture-card"
         fileList={fileList}
-        onPreview={(elem) => {
-          console.log(fileList, filesData);
-          handleClick(elem);
-        }}
+        onPreview={handleClick}
         onChange={handleChange}
         disabled={!isEditable}
         itemRender={itemRender}
