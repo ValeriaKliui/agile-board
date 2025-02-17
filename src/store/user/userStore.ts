@@ -1,17 +1,18 @@
-import { USERS_DB_NAME } from "@constants/index";
-import { User } from "@store/user/interfaces";
-import { getData } from "@utils/firebase/db/getData";
-import { setData } from "@utils/firebase/db/setData";
-import { filterUndefinedValues } from "@utils/index";
-import { makeAutoObservable, reaction, runInAction } from "mobx";
+import { USERS_DB_NAME } from '@constants/common';
+import { User } from '@store/user/interfaces';
+import { getData } from '@utils/firebase/db/getData';
+import { setData } from '@utils/firebase/db/setData';
+import { filterUndefinedValues } from '@utils/common';
+import { makeAutoObservable, reaction, runInAction } from 'mobx';
+import boardsStore from '@store/boards/boardsStore';
 
 class UserStore {
   user: User | null = null;
   loadingUser = false;
-  loadingError = "";
+  loadingError = '';
   updatingUser = false;
   updatingUserErrors = null;
-  userID = window.localStorage.getItem("uid") ?? "";
+  userID = window.localStorage.getItem('uid') ?? '';
 
   constructor() {
     makeAutoObservable(this);
@@ -20,9 +21,9 @@ class UserStore {
       () => this.userID,
       (userID) => {
         if (userID) {
-          window.localStorage.setItem("uid", userID);
+          window.localStorage.setItem('uid', userID);
         } else {
-          window.localStorage.removeItem("uid");
+          window.localStorage.removeItem('uid');
         }
       },
     );
@@ -47,8 +48,12 @@ class UserStore {
     this.loadingUser = true;
     try {
       const user = await getData<User>(USERS_DB_NAME, this.userID);
+
       runInAction(() => {
-        if (user) this.user = user;
+        if (user) {
+          this.user = user;
+          if (user.boards) boardsStore.setUserBoards(user.boards);
+        }
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -80,7 +85,7 @@ class UserStore {
 
   forgetUser() {
     this.user = null;
-    this.userID = "";
+    this.userID = '';
   }
 }
 

@@ -1,22 +1,19 @@
-import { AVATARS_PATH, UPLOAD_PRESET, UPLOAD_URL } from "@constants/index";
-import type { UploadRequestOption } from "rc-upload/lib/interface";
+import { AVATARS_PATH, UPLOAD_PRESET, UPLOAD_URL } from '@constants/common';
+import type { UploadRequestOption } from 'rc-upload/lib/interface';
 
-export const handleUploadToStorage = async ({
-  file,
-  onSuccess,
-}: UploadRequestOption) => {
+export const handleUploadToStorage = async ({ file, onSuccess }: UploadRequestOption) => {
   const formData = new FormData();
-  formData.append("file", file);
-  formData.append("upload_preset", UPLOAD_PRESET);
-  formData.append("folder", AVATARS_PATH);
+  formData.append('file', file);
+  formData.append('upload_preset', UPLOAD_PRESET);
+  formData.append('folder', AVATARS_PATH);
 
   try {
     const response = await fetch(UPLOAD_URL, {
-      method: "POST",
+      method: 'POST',
       body: formData,
     });
 
-    if (!response.ok) throw new Error("Upload failed");
+    if (!response.ok) throw new Error('Upload failed');
 
     const data = await response.json();
     const imageUrl = data.secure_url;

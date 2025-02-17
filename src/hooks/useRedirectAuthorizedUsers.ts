@@ -1,6 +1,6 @@
-import { PATHS } from "@constants/index";
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { PATHS } from '@constants/common';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 export const useRedirectAuthorizedUsers = (isLoggedIn: boolean) => {
   const navigate = useNavigate();

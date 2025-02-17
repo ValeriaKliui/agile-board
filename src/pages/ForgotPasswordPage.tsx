@@ -1,15 +1,15 @@
-import { ForgotPasswordHeader } from "@components/ForgotPasswordHeader";
-import { PATHS } from "@constants/index";
-import { FormForgotPasswordContainer } from "@containers/FormForgotPasswordContainer";
+import { ForgotPasswordHeader } from '@components/ForgotPasswordHeader';
+import { PATHS } from '@constants/common';
+import { FormForgotPasswordContainer } from '@containers/PermissionGate';
 
 const { Text } = Typography;
 
-import { Flex, Typography } from "antd";
+import { Flex, Typography } from 'antd';
 
 const { Link } = Typography;
 export const ForgotPasswordPage = () => {
   return (
-    <Flex vertical gap={"small"}>
+    <Flex vertical gap={'small'}>
       <ForgotPasswordHeader />
       <FormForgotPasswordContainer />
       <Text type="secondary">

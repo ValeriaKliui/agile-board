@@ -1,7 +1,4 @@
-export interface ErrorMessageProps<
-  TErrors extends EnumType,
-  TErrorsMessages extends EnumType,
-> {
+export interface ErrorMessageProps<TErrors extends EnumType, TErrorsMessages extends EnumType> {
   errors: TErrors;
   errorsMessages: TErrorsMessages;
   errorCode: string;

@@ -1,10 +1,10 @@
-import { FormLogin } from "@components/Forms/AuthForms/FormLogin";
-import { FormAuthValues } from "@components/Forms/types";
-import { PATHS } from "@constants/index";
-import authStore from "@store/auth/authStore";
-import { Form } from "antd";
-import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router";
+import { FormLogin } from '@components/Forms/AuthForms/FormLogin';
+import { FormAuthValues } from '@components/Forms/types';
+import { PATHS } from '@constants/common';
+import authStore from '@store/auth/authStore';
+import { Form } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router';
 
 export const FormLoginContainer = observer(() => {
   const [form] = Form.useForm();

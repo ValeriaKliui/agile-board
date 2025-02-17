@@ -1,23 +1,18 @@
-import { Button } from "@components/Button";
-import { PATHS } from "@constants/index";
-import { Avatar, Flex } from "antd";
-import { Link } from "react-router";
-import { Header as HeaderStyled } from "./styled";
-import { HeaderProps } from "@components/Header/interfaces";
-import { Breadcrumbs } from "@components/Breadcrumbs";
+import { Button } from '@components/Button';
+import { PATHS } from '@constants/common';
+import { Avatar, Flex } from 'antd';
+import { Link } from 'react-router';
+import { Header as HeaderStyled } from './styled';
+import { HeaderProps } from '@components/Header/interfaces';
+import { Breadcrumbs } from '@components/Breadcrumbs';
 
-export const Header = ({
-  onLogout,
-  onLogin,
-  avatar,
-  username,
-}: HeaderProps) => {
-  const defaultUsername = username ?? "Guest";
+export const Header = ({ onLogout, onLogin, avatar, username }: HeaderProps) => {
+  const defaultUsername = username ?? 'Guest';
 
   return (
     <HeaderStyled>
       <Breadcrumbs />
-      <Flex gap={"middle"} align="center">
+      <Flex gap={'middle'} align="center">
         <Link to={PATHS.PROFILE}>
           <Avatar size={40} src={avatar ?? null}>
             {!avatar && defaultUsername?.[0]}

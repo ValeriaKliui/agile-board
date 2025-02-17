@@ -1,20 +1,16 @@
-import { FormRegister } from "@components/Forms/AuthForms/FormRegister";
-import { FormAuthValues } from "@components/Forms/types";
-import { PATHS } from "@constants/index";
-import authStore from "@store/auth/authStore";
-import { Form } from "antd";
-import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router";
+import { FormRegister } from '@components/Forms/AuthForms/FormRegister';
+import { FormAuthValues } from '@components/Forms/types';
+import { PATHS } from '@constants/common';
+import authStore from '@store/auth/authStore';
+import { Form } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router';
 
 export const FormRegisterContainer = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFormSubmit = async ({
-    email,
-    password,
-    username,
-  }: FormAuthValues) => {
+  const onFormSubmit = async ({ email, password, username }: FormAuthValues) => {
     await authStore.register({ email, password, username });
     if (!authStore.errors.register) navigate(PATHS.LOGIN);
   };

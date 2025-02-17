@@ -1,6 +1,6 @@
-import { getErrorMessage } from "@utils/index";
-import { EnumType } from "@utils/types";
-import { AuthError } from "firebase/auth";
+import { getErrorMessage } from '@utils/common';
+import { EnumType } from '@utils/interfaces';
+import { AuthError } from 'firebase/auth';
 
 export const handleAuthError = (
   error: unknown,
@@ -12,7 +12,10 @@ export const handleAuthError = (
   const authError = error as AuthError;
 
   return (
-    getErrorMessage({ errors, errorsMessages, errorCode: authError.code }) ||
-    "An unknown error occurred."
+    getErrorMessage({
+      errors,
+      errorsMessages,
+      errorCode: authError.code,
+    }) || 'An unknown error occurred.'
   );
 };

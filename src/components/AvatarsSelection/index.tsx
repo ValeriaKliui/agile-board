@@ -1,10 +1,10 @@
-import { AvatarGallery } from "@components/AvatarsGallery";
-import { Flex } from "@components/AvatarsSelection/styled";
-import { AVATARS_DB_NAME } from "@constants/index";
-import { useAvatars } from "@containers/useAvatars";
-import userStore from "@store/user/userStore";
-import { Button, Spin, UploadFile } from "antd";
-import { useState } from "react";
+import { AvatarGallery } from '@components/AvatarsGallery';
+import { Flex } from '@components/AvatarsSelection/styled';
+import { AVATARS_DB_NAME } from '@constants/common';
+import { useAvatars } from '@hooks/useAvatars';
+import userStore from '@store/user/userStore';
+import { Button, Spin, UploadFile } from 'antd';
+import { useState } from 'react';
 
 export const AvatarsSelection = ({ onSave }) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);
@@ -21,10 +21,10 @@ export const AvatarsSelection = ({ onSave }) => {
     avatars: defaultAvatars,
     isAvatarsLoading: isDefaultAvatarsLoading,
     errorLoading: errorDefault,
-  } = useAvatars(AVATARS_DB_NAME, "default");
+  } = useAvatars(AVATARS_DB_NAME, 'default');
 
   const handleSelection = (elem: UploadFile) => {
-    const { url = "" } = elem;
+    const { url = '' } = elem;
     selectAvatar(url);
   };
 
