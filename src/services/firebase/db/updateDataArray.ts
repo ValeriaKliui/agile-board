@@ -1,5 +1,5 @@
 import { db } from '@config/firebase';
-import { UpdateDataType } from '@utils/firebase/db/interfaces';
+import { UpdateDataType } from '@services/firebase/db/interfaces';
 import { arrayUnion, arrayRemove, doc, setDoc, updateDoc, getDoc } from 'firebase/firestore';
 
 export const updateDataArray = async <T>(

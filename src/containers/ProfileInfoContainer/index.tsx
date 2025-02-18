@@ -1,6 +1,6 @@
-import { ProfileInfo } from "@components/ProfileInfo";
-import userStore from "@store/user/userStore";
-import { observer } from "mobx-react-lite";
+import { ProfileInfo } from '@components/ProfileInfo';
+import { userStore } from '@store/user/userStore';
+import { observer } from 'mobx-react-lite';
 
 export const ProfileInfoContainer = observer(() => {
   const username = userStore.user?.username;

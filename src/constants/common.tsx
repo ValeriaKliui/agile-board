@@ -7,6 +7,7 @@ const {
   VITE_UPLOAD_URL,
   VITE_AVATARS_PATH,
   VITE_BOARDS_DB_NAME,
+  VITE_USER_BOARDS_DB_NAME,
 } = import.meta.env;
 
 export enum PATHS {
@@ -38,6 +39,7 @@ export const UPLOAD_PRESET = VITE_UPLOAD_PRESET;
 export const UPLOAD_URL = VITE_UPLOAD_URL;
 export const AVATARS_PATH = VITE_AVATARS_PATH;
 export const BOARDS_DB_NAME = VITE_BOARDS_DB_NAME;
+export const USER_BOARDS_DB_NAME = VITE_USER_BOARDS_DB_NAME;
 
 export const BREADCRUMBS_MAP = {
   [PATHS.HOME]: 'Home',
@@ -46,3 +48,5 @@ export const BREADCRUMBS_MAP = {
   [PATHS.REGISTER]: 'Register',
   [PATHS.FORGOT_PASSWORD]: 'Forgot Password',
 };
+
+export const PAGE_SIZE = 10;

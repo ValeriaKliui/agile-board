@@ -1,7 +1,7 @@
 import { useFetchUploadGalleryData } from '@hooks/useFetchUploadGalleryData';
-import { getData } from '@utils/firebase/db/getData';
-import { UpdateDataType } from '@utils/firebase/db/interfaces';
-import { updateDataArray } from '@utils/firebase/db/updateDataArray';
+import { getData } from '@services/firebase/db/getData';
+import { UpdateDataType } from '@services/firebase/db/interfaces';
+import { updateDataArray } from '@services/firebase/db/updateDataArray';
 import { UploadFile } from 'antd';
 import { useCallback } from 'react';
 

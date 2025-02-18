@@ -1,9 +1,9 @@
 import { AUTH_TABS } from '@constants/common';
-import { FormRegisterContainer } from '@containers/FormRegisterContainer';
+import { FormRegisterContainer } from '@containers/FormRegisterContainer/index';
 import { useRedirectAuthorizedUsers } from '@hooks/useRedirectAuthorizedUsers';
 import { useTabNavigation } from '@hooks/useTabNavigation';
 import { Tabs } from '@layout/auth/styled';
-import userStore from '@store/user/userStore';
+import { userStore } from '@store/user/userStore';
 
 export const RegisterPage = () => {
   useRedirectAuthorizedUsers(userStore.isLoggedIn);

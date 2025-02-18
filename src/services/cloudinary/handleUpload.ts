@@ -1,4 +1,4 @@
-import { AVATARS_PATH, UPLOAD_PRESET, UPLOAD_URL } from '@constants/index';
+import { AVATARS_PATH, UPLOAD_PRESET, UPLOAD_URL } from '@constants/common';
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 
 export const handleUploadToStorage = async ({ file, onSuccess }: UploadRequestOption) => {

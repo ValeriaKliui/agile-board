@@ -1,6 +1,6 @@
 import { ForgotPasswordHeader } from '@components/ForgotPasswordHeader';
 import { PATHS } from '@constants/common';
-import { FormForgotPasswordContainer } from '@containers/PermissionGate';
+import { FormForgotPasswordContainer } from '@containers/FormForgotPasswordContainer';
 
 const { Text } = Typography;
 

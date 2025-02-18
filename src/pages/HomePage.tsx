@@ -1,9 +1,9 @@
-import { UserBoardsInfoContainer } from '@containers/UserBoardsInfoContainer';
+import { UserBoardsInfo } from '@containers/UserBoardsInfo';
 
 export const HomePage = () => {
   return (
     <>
-      <UserBoardsInfoContainer />
+      <UserBoardsInfo />
     </>
   );
 };

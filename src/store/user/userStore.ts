@@ -1,10 +1,9 @@
 import { USERS_DB_NAME } from '@constants/common';
 import { User } from '@store/user/interfaces';
-import { getData } from '@utils/firebase/db/getData';
-import { setData } from '@utils/firebase/db/setData';
+import { getData } from '@services/firebase/db/getData';
 import { filterUndefinedValues } from '@utils/common';
-import { makeAutoObservable, reaction, runInAction } from 'mobx';
-import boardsStore from '@store/boards/boardsStore';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { setData } from '@services/firebase/db/setData';
 
 class UserStore {
   user: User | null = null;
@@ -12,32 +11,20 @@ class UserStore {
   loadingError = '';
   updatingUser = false;
   updatingUserErrors = null;
-  userID = window.localStorage.getItem('uid') ?? '';
+  userID = '';
 
   constructor() {
     makeAutoObservable(this);
-
-    reaction(
-      () => this.userID,
-      (userID) => {
-        if (userID) {
-          window.localStorage.setItem('uid', userID);
-        } else {
-          window.localStorage.removeItem('uid');
-        }
-      },
-    );
   }
 
   private handleError(error: Error) {
-    console.error(error);
     runInAction(() => {
       this.loadingError = error.message;
     });
   }
 
   get isLoggedIn() {
-    return !!this.userID;
+    return !!this.user;
   }
 
   setUserID(uid: string) {
@@ -52,7 +39,6 @@ class UserStore {
       runInAction(() => {
         if (user) {
           this.user = user;
-          if (user.boards) boardsStore.setUserBoards(user.boards);
         }
       });
     } catch (error) {
@@ -89,4 +75,4 @@ class UserStore {
   }
 }
 
-export default new UserStore();
+export const userStore = new UserStore();

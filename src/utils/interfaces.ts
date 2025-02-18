@@ -5,3 +5,8 @@ export interface ErrorMessageProps<TErrors extends EnumType, TErrorsMessages ext
 }
 
 export type EnumType = Record<string, string | number>;
+
+export interface Option {
+  value: string;
+  label: string;
+}

@@ -1,7 +1,7 @@
 import { FormLogin } from '@components/Forms/AuthForms/FormLogin';
 import { FormAuthValues } from '@components/Forms/types';
 import { PATHS } from '@constants/common';
-import authStore from '@store/auth/authStore';
+import { authStore } from '@store/auth/authStore';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';

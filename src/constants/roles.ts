@@ -1,6 +1,5 @@
 export const PERMISSIONS = Object.freeze({
   boards: Object.freeze({
-    create: 'can_create_boards',
     edit: 'can_edit_boards',
     delete: 'can_delete_boards',
     select_template: 'can_select_board_template',
@@ -16,13 +15,19 @@ export const PERMISSIONS = Object.freeze({
   }),
 });
 
-export const ROLES = {
-  owner: {
+export enum ROLES {
+  OWNER = 'owner',
+  MEMBER = 'member',
+  GUEST = 'guest',
+}
+
+export const ROLES_PERMISSIONS = {
+  [ROLES.OWNER]: {
     permissions: [...Object.values(PERMISSIONS.boards), ...Object.values(PERMISSIONS.tasks)],
     label: 'Owner',
     color: 'red',
   },
-  member: {
+  [ROLES.MEMBER]: {
     permissions: [
       PERMISSIONS.boards.view,
       PERMISSIONS.tasks.create,
@@ -32,7 +37,7 @@ export const ROLES = {
     label: 'Member',
     color: 'blue',
   },
-  guest: {
+  [ROLES.GUEST]: {
     permissions: [PERMISSIONS.boards.view],
     label: 'Guest',
     color: 'gray',

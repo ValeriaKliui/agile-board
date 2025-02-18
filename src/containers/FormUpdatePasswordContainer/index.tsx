@@ -1,8 +1,8 @@
-import { FormUpdatePassword } from "@components/Forms/FormUpdatePassword";
-import authStore from "@store/auth/authStore";
-import { Button, Flex, Form } from "antd";
-import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { FormUpdatePassword } from '@components/Forms/FormUpdatePassword';
+import { authStore } from '@store/auth/authStore';
+import { Button, Flex, Form } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
 
 export const FormUpdatePasswordContainer = observer(() => {
   const [isEditing, setIsEditing] = useState(false);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import userStore from '@store/user/userStore';
+import { userStore } from '@store/user/userStore';
 import { AvatarEditor } from '@components/AvatarEditor';
 
 export const AvatarEditorContainer = () => {

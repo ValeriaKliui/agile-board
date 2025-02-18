@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { handleUploadToStorage } from 'services/cloudinary/handleUpload';
+import { handleUploadToStorage } from '@services/cloudinary/handleUpload';
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 import { UploadProps } from 'antd';
 

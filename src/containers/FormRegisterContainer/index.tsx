@@ -1,7 +1,7 @@
 import { FormRegister } from '@components/Forms/AuthForms/FormRegister';
 import { FormAuthValues } from '@components/Forms/types';
 import { PATHS } from '@constants/common';
-import authStore from '@store/auth/authStore';
+import { authStore } from '@store/auth/authStore';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';
@@ -12,6 +12,7 @@ export const FormRegisterContainer = observer(() => {
 
   const onFormSubmit = async ({ email, password, username }: FormAuthValues) => {
     await authStore.register({ email, password, username });
+    await authStore.logout();
     if (!authStore.errors.register) navigate(PATHS.LOGIN);
   };
 

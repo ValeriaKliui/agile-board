@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, User } from 'firebase/auth';
 import { handleAuthError } from './handleAuthError';
 import { REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES } from './interfaces';
 import { auth } from '@config/firebase';
-import { createUserAccount } from '@utils/firebase/auth/createUserAccount';
+import { createUserAccount } from '@services/firebase/auth/createUserAccount';
 
 export const registerUser = async ({
   email,

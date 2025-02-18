@@ -1,7 +1,7 @@
 import { Header } from '@components/Header';
 import { PATHS } from '@constants/common';
-import authStore from '@store/auth/authStore';
-import userStore from '@store/user/userStore';
+import { authStore } from '@store/auth/authStore';
+import { userStore } from '@store/user/userStore';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';
 

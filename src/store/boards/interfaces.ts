@@ -9,3 +9,10 @@ export interface RoleInfo {
   label: string;
   color: string;
 }
+
+export interface BoardInfo {
+  createdAt: Date;
+  title: string;
+  owner: string;
+  members: { [key: string]: ROLES };
+}

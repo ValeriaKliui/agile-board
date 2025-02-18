@@ -1,4 +1,4 @@
-import { getEmailRules } from 'services/antd/antd';
+import { getEmailRules } from '@utils/formRules';
 import { Form, Input } from 'antd';
 
 const { Item } = Form;

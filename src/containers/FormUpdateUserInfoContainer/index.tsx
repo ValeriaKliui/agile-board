@@ -1,8 +1,8 @@
 import { FormUpdateUserInfo } from '@components/Forms/FormUpdateUserInfo';
 import { USER_PROPERTIES } from '@constants/common';
 import { User } from '@store/user/interfaces';
-import userStore from '@store/user/userStore';
-import { getUserProperties } from '@utils/common';
+import { userStore } from '@store/user/userStore';
+import { mergeUniqueArrays } from '@utils/common';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect } from 'react';
@@ -15,7 +15,7 @@ export const FormUpdateUserInfoContainer = observer(() => {
 
   const filledUserProperties = user ? Object.keys(user) : [];
   const isLoading = filledUserProperties.length === 0 || loadingUser;
-  const formFields = getUserProperties(filledUserProperties, USER_PROPERTIES);
+  const formFields = mergeUniqueArrays(filledUserProperties, USER_PROPERTIES);
 
   const onFormSubmit = useCallback(async (userData: Partial<User>) => {
     await userStore.updateUser({ userID: userStore.userID, ...userData });

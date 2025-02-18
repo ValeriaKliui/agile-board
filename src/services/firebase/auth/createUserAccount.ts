@@ -1,6 +1,6 @@
-import { USERS_DB_NAME } from '@constants/index';
+import { USERS_DB_NAME } from '@constants/common';
+import { setData } from '@services/firebase/db/setData';
 import { User } from '@store/user/interfaces';
-import { setData } from '@utils/firebase/db/setData';
 
 export const createUserAccount = async ({ userID, ...userData }: User) => {
   try {

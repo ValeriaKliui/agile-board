@@ -1,6 +1,6 @@
 import { AvatarEditorContainer } from '@containers/AvatarEditorContainer';
-import { FormUpdatePasswordContainer } from '@containers/FormUpdatePasswordContainer';
-import { FormUpdateUserInfoContainer } from '@containers/FormUpdateUserInfoContainer';
+import { FormUpdatePasswordContainer } from '@containers/FormUpdatePasswordContainer/index';
+import { FormUpdateUserInfoContainer } from '@containers/FormUpdateUserInfoContainer/index';
 import { ProfileInfoContainer } from '@containers/ProfileInfoContainer';
 import { Card, Divider, Flex } from 'antd';
 
