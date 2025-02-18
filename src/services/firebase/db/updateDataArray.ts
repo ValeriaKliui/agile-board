@@ -1,13 +1,6 @@
-import { db } from "@config/firebase";
-import { UpdateDataType } from "@utils/firebase/db/interfaces";
-import {
-  arrayUnion,
-  arrayRemove,
-  doc,
-  setDoc,
-  updateDoc,
-  getDoc,
-} from "firebase/firestore";
+import { db } from '@config/firebase';
+import { UpdateDataType } from '@utils/firebase/db/interfaces';
+import { arrayUnion, arrayRemove, doc, setDoc, updateDoc, getDoc } from 'firebase/firestore';
 
 export const updateDataArray = async <T>(
   dbName: string,
@@ -21,10 +14,10 @@ export const updateDataArray = async <T>(
     const docSnap = await getDoc(ref);
 
     if (!docSnap.exists()) {
-      if (action === "add" || action === "set") {
+      if (action === 'add' || action === 'set') {
         await setDoc(
           ref,
-          { [field]: action === "add" ? arrayUnion(value) : value },
+          { [field]: action === 'add' ? arrayUnion(value) : value },
           { merge: true },
         );
       } else {
@@ -34,17 +27,17 @@ export const updateDataArray = async <T>(
     }
 
     switch (action) {
-      case "add":
+      case 'add':
         await updateDoc(ref, { [field]: arrayUnion(value) });
         break;
-      case "remove":
+      case 'remove':
         await updateDoc(ref, { [field]: arrayRemove(value) });
         break;
-      case "set":
+      case 'set':
         await updateDoc(ref, { [field]: value });
         break;
       default:
-        throw new Error("Invalid action type");
+        throw new Error('Invalid action type');
     }
   } catch (error) {
     throw new Error(error.message);

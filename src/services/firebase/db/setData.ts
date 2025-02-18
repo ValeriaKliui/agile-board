@@ -1,5 +1,5 @@
-import { db } from "@config/firebase";
-import { doc, DocumentData, setDoc, WithFieldValue } from "firebase/firestore";
+import { db } from '@config/firebase';
+import { doc, DocumentData, setDoc, WithFieldValue } from 'firebase/firestore';
 
 export const setData = async <T extends WithFieldValue<DocumentData>>(
   dbName: string,

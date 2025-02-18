@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { handleUploadToStorage } from "@utils/cloudinary/handleUpload";
-import type { UploadRequestOption } from "rc-upload/lib/interface";
-import { UploadProps } from "antd";
+import { useEffect, useState } from 'react';
+import { handleUploadToStorage } from 'services/cloudinary/handleUpload';
+import type { UploadRequestOption } from 'rc-upload/lib/interface';
+import { UploadProps } from 'antd';
 
 interface UseUploadProps<T> {
   filesData: T[];
@@ -27,19 +27,19 @@ export const useUpload = <T extends { url?: string }>({
       const imageUrl = await handleUploadToStorage(options);
       setFileList((prevList) =>
         prevList.map((file, index) =>
-          index === prevList.length - 1 ? { ...file, url: imageUrl } : file
-        )
+          index === prevList.length - 1 ? { ...file, url: imageUrl } : file,
+        ),
       );
       onUpload(imageUrl);
     } catch (error) {
-      console.error("Upload error:", error);
-      setIsErrorUploading(error instanceof Error ? error.message : "Upload failed");
+      console.error('Upload error:', error);
+      setIsErrorUploading(error instanceof Error ? error.message : 'Upload failed');
     }
   };
 
-  const handleChange: UploadProps<T>["onChange"] = ({ fileList: updatedList, file }) => {
-    if (file.status === "removed") {
-      onRemove(file.url || "");
+  const handleChange: UploadProps<T>['onChange'] = ({ fileList: updatedList, file }) => {
+    if (file.status === 'removed') {
+      onRemove(file.url || '');
     }
     setFileList(updatedList as T[]);
   };

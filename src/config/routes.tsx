@@ -1,4 +1,4 @@
-import { ProtectedRoute } from '@components/ProtectedRoute';
+import { ProtectedRoute } from '@containers/ProtectedRoute';
 import { PATHS } from '@constants/common';
 import { AuthLayout } from '@layout/auth';
 import { DefaultLayout } from '@layout/default';

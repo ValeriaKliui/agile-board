@@ -1,39 +1,20 @@
 import { AvatarGallery } from '@components/AvatarsGallery';
 import { Flex } from '@components/AvatarsSelection/styled';
-import { AVATARS_DB_NAME } from '@constants/common';
-import { useAvatars } from '@hooks/useAvatars';
-import userStore from '@store/user/userStore';
-import { Button, Spin, UploadFile } from 'antd';
-import { useState } from 'react';
+import { Button, Spin } from 'antd';
+import { AvatarsSelectionProps } from './interfaces';
 
-export const AvatarsSelection = ({ onSave }) => {
-  const [selectedAvatar, selectAvatar] = useState<string | null>(null);
-
-  const {
-    onRemove,
-    onUpload,
-    avatars: userAvatars,
-    isAvatarsLoading: isUserAvatarsLoading,
-    errorLoading: errorUser,
-  } = useAvatars(AVATARS_DB_NAME, userStore.userID);
-
-  const {
-    avatars: defaultAvatars,
-    isAvatarsLoading: isDefaultAvatarsLoading,
-    errorLoading: errorDefault,
-  } = useAvatars(AVATARS_DB_NAME, 'default');
-
-  const handleSelection = (elem: UploadFile) => {
-    const { url = '' } = elem;
-    selectAvatar(url);
-  };
-
-  const onAvatarSave = () => {
-    onSave(selectedAvatar);
-  };
-
-  const isLoading = isDefaultAvatarsLoading || isUserAvatarsLoading;
-
+export const AvatarsSelection = ({
+  isLoading,
+  defaultAvatars,
+  userAvatars,
+  errorDefault,
+  errorUser,
+  selectedAvatar,
+  onSelect,
+  onSave,
+  onRemove,
+  onUpload,
+}: AvatarsSelectionProps) => {
   return (
     <Flex vertical gap="middle" align="flex-start">
       {isLoading ? (
@@ -44,7 +25,7 @@ export const AvatarsSelection = ({ onSave }) => {
             title="Default Avatars"
             filesData={defaultAvatars}
             error={errorDefault}
-            handleClick={handleSelection}
+            handleClick={onSelect}
             selectedAvatar={selectedAvatar}
             maxPhotoAmount={defaultAvatars.length}
             onRemove={onRemove}
@@ -53,7 +34,7 @@ export const AvatarsSelection = ({ onSave }) => {
             title="User Avatars"
             filesData={userAvatars}
             error={errorUser}
-            handleClick={handleSelection}
+            handleClick={onSelect}
             selectedAvatar={selectedAvatar}
             onRemove={onRemove}
             onUpload={onUpload}
@@ -62,8 +43,7 @@ export const AvatarsSelection = ({ onSave }) => {
           />
         </>
       )}
-
-      <Button onClick={onAvatarSave} type="primary">
+      <Button onClick={onSave} type="primary">
         Update avatar
       </Button>
     </Flex>

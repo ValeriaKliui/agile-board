@@ -1,14 +1,14 @@
-import { auth } from "@config/firebase";
-import { handleAuthError } from "@utils/firebase/auth/handleAuthError";
+import { auth } from '@config/firebase';
+import { handleAuthError } from '@utils/firebase/auth/handleAuthError';
 import {
   UPDATE_PASSWORD_ERRORS,
   UPDATE_PASSWORD_ERRORS_MESSAGES,
-} from "@utils/firebase/auth/interfaces";
+} from '@utils/firebase/auth/interfaces';
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,
   updatePassword as updatePasswordAuth,
-} from "firebase/auth";
+} from 'firebase/auth';
 
 export const updatePassword = async ({ newPassword, oldPassword }) => {
   try {
@@ -23,9 +23,6 @@ export const updatePassword = async ({ newPassword, oldPassword }) => {
       UPDATE_PASSWORD_ERRORS,
       UPDATE_PASSWORD_ERRORS_MESSAGES,
     );
-    throw new Error(
-      errorMessage ||
-        "An unexpected error occurred while resetting the password.",
-    );
+    throw new Error(errorMessage || 'An unexpected error occurred while resetting the password.');
   }
 };
