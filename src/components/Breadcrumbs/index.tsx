@@ -1,16 +1,5 @@
-import { useBreadcrumbs } from "@hooks/useBreadcrumbs";
-import { Breadcrumb } from "antd";
-import { Link } from "react-router";
+import { Breadcrumb, BreadcrumbProps } from 'antd';
 
-export const Breadcrumbs = () => {
-  const breadcrumbItems = useBreadcrumbs();
-
-  return (
-    <Breadcrumb
-      items={[
-        { key: "/", title: <Link to="/">Home</Link> },
-        ...breadcrumbItems,
-      ]}
-    />
-  );
+export const Breadcrumbs = ({ items }: BreadcrumbProps) => {
+  return <Breadcrumb items={items} />;
 };

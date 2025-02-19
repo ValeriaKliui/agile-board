@@ -1,13 +1,19 @@
-import { Button } from "@components/Button";
-import { AuthFormPropsDefault } from "@components/Forms/AuthForms/interfaces";
-import { EmailInput } from "@components/Forms/Fields/Email";
-import { PasswordInput } from "@components/Forms/Fields/Password";
-import { getConfirmPasswordRules } from "@utils/antd/antd";
-import { Alert, Form, Input, } from "antd";
+import { Button } from '@components/Button';
+import { AuthFormPropsDefault } from '@components/Forms/AuthForms/interfaces';
+import { EmailInput } from '@components/Forms/Fields/Email';
+import { PasswordInput } from '@components/Forms/Fields/Password';
+import { getConfirmPasswordRules } from '@utils/formRules';
+import { Alert, Form, Input } from 'antd';
 
-const { Item } = Form
+const { Item } = Form;
 
-export const FormRegister = <TFormValues, TForm>({ form, onFormSubmit, onFormChange, error, isLoading, }: AuthFormPropsDefault<TFormValues, TForm>) => {
+export const FormRegister = <TFormValues, TForm>({
+  form,
+  onFormSubmit,
+  onFormChange,
+  error,
+  isLoading,
+}: AuthFormPropsDefault<TFormValues, TForm>) => {
   const confirmPasswordRules = getConfirmPasswordRules();
 
   return (
@@ -27,7 +33,7 @@ export const FormRegister = <TFormValues, TForm>({ form, onFormSubmit, onFormCha
       <Item
         label="Username"
         name="username"
-        rules={[{ required: true, message: "Please input your username!" }]}
+        rules={[{ required: true, message: 'Please input your username!' }]}
       >
         <Input />
       </Item>
@@ -37,7 +43,7 @@ export const FormRegister = <TFormValues, TForm>({ form, onFormSubmit, onFormCha
       <Item
         name="confirm"
         label="Confirm Password"
-        dependencies={["password"]}
+        dependencies={['password']}
         hasFeedback
         rules={confirmPasswordRules}
       >
@@ -46,12 +52,7 @@ export const FormRegister = <TFormValues, TForm>({ form, onFormSubmit, onFormCha
 
       {error && <Alert type="error" message={error} />}
 
-      <Button
-        type="primary"
-        htmlType="submit"
-        loading={isLoading}
-        centered
-      >
+      <Button type="primary" htmlType="submit" loading={isLoading} centered>
         Register
       </Button>
     </Form>

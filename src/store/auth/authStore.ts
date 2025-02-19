@@ -1,17 +1,12 @@
-import { loginUser } from "@utils/firebase/auth/loginUser";
-import { registerUser } from "@utils/firebase/auth/registerUser";
-import { resetPassword } from "@utils/firebase/auth/resetPassword";
-import { logOutUser } from "@utils/firebase/auth/logOutUser";
-import { makeAutoObservable } from "mobx";
+import { loginUser } from '@services/firebase/auth/loginUser';
+import { registerUser } from '@services/firebase/auth/registerUser';
+import { resetPassword } from '@services/firebase/auth/resetPassword';
+import { logOutUser } from '@services/firebase/auth/logOutUser';
+import { makeAutoObservable } from 'mobx';
 
-import userStore from "../user/userStore";
-import {
-  AuthErrors,
-  ForgotPasswordParams,
-  LoginParams,
-  RegisterParams,
-} from "./interfaces";
-import { updatePassword } from "@utils/firebase/auth/updatePassword";
+import { userStore } from '../user/userStore';
+import { AuthErrors, ForgotPasswordParams, LoginParams, RegisterParams } from './interfaces';
+import { updatePassword } from '@services/firebase/auth/updatePassword';
 
 class AuthStore {
   inProgress = false;
@@ -48,12 +43,12 @@ class AuthStore {
   }
 
   async register(userData: RegisterParams) {
-    await this.performAuthAction("register", () => registerUser(userData));
+    await this.performAuthAction('register', () => registerUser(userData));
   }
 
   async login({ email, password }: LoginParams) {
     await this.performAuthAction(
-      "login",
+      'login',
       () => loginUser({ email, password }),
       async ({ uid }) => {
         userStore.setUserID(uid);
@@ -63,18 +58,18 @@ class AuthStore {
   }
 
   async logout() {
-    await this.performAuthAction("logout", logOutUser, () => {
+    await this.performAuthAction('logout', logOutUser, () => {
       logOutUser();
       userStore.forgetUser();
     });
   }
 
   async forgotPassword({ email }: ForgotPasswordParams) {
-    await this.performAuthAction("forgot", () => resetPassword({ email }));
+    await this.performAuthAction('forgot', () => resetPassword({ email }));
   }
 
   async updatePassword({ oldPassword, newPassword }) {
-    await this.performAuthAction("updatePassword", () =>
+    await this.performAuthAction('updatePassword', () =>
       updatePassword({ oldPassword, newPassword }),
     );
   }
@@ -90,4 +85,4 @@ class AuthStore {
   }
 }
 
-export default new AuthStore();
+export const authStore = new AuthStore();
