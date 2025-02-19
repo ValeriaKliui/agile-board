@@ -1,7 +1,6 @@
 import { LoginForm } from '@components/Forms/Auth/Login';
 import { PATHS } from '@constants/common';
-import { authStore } from '@store/auth/authStore';
-import { LoginParams } from '@store/auth/types';
+import { authStore, type LoginParams } from '@store/auth';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';

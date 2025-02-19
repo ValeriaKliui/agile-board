@@ -1,6 +1,4 @@
-import { getData } from '@services/firebase/db/getData';
-import { UpdateDataType } from '@services/firebase/db/types';
-import { updateDataArray } from '@services/firebase/db/updateDataArray';
+import { updateDataArray, getData, type UpdateDataType } from '@services/firebase';
 import { UploadFile } from 'antd';
 import { useFetchUploadGalleryData } from '@hooks';
 import { useCallback } from 'react';

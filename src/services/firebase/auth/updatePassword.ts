@@ -1,10 +1,10 @@
-import { auth } from '@config/firebase';
-import { handleAuthError } from '@services/firebase/auth/handleAuthError';
+import { auth } from '@config';
 import {
+  handleAuthError,
   UPDATE_PASSWORD_ERRORS,
   UPDATE_PASSWORD_ERRORS_MESSAGES,
-} from '@services/firebase/auth/types';
-import { UpdatePasswordProps } from '@store/auth/types';
+} from '@services/firebase';
+import { UpdatePasswordProps } from '@store/auth';
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,

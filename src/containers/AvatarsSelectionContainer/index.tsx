@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AvatarsSelection } from '@components/AvatarsSelection';
-import { userStore } from '@store/user/userStore';
+import { userStore } from '@store/user';
 import { UploadFile } from 'antd';
 import { AVATARS_DB_NAME } from '@constants/common';
 import { useAvatars } from '@hooks';

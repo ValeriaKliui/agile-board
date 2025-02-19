@@ -1,7 +1,7 @@
-import { ForgotPasswordHeader } from '@components/ForgotPasswordHeader';
 import { PATHS } from '@constants/common';
 import { ForgotPasswordFormContainer } from '@containers/ForgotPasswordFormContainer';
 import { Flex, Typography } from 'antd';
+import { ForgotPasswordHeader } from './components/ForgotPasswordHeader';
 
 const { Text, Link } = Typography;
 

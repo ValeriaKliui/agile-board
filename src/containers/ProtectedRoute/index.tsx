@@ -1,5 +1,5 @@
 import { useProtectedRoute } from '@hooks';
-import { userStore } from '@store/user/userStore';
+import { userStore } from '@store/user';
 import { observer } from 'mobx-react-lite';
 import { PropsWithChildren } from 'react';
 

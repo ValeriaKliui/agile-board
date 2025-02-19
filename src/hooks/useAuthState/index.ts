@@ -1,5 +1,5 @@
-import { auth } from '@config/firebase';
-import { userStore } from '@store/user/userStore';
+import { auth } from '@config';
+import { userStore } from '@store/user';
 import { useEffect } from 'react';
 
 export const useAuthState = () => {

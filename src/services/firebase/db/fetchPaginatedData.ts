@@ -1,5 +1,5 @@
 import { collection, query, limit, getDocs, startAfter, where, orderBy } from 'firebase/firestore';
-import { db } from '@config/firebase';
+import { db } from '@config';
 import { PAGE_SIZE } from '@constants/common';
 
 export const fetchPaginatedData = async ({
@@ -35,6 +35,5 @@ export const fetchPaginatedData = async ({
 
   const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
-  console.log(documents);
   return { documents, lastVisible };
 };
