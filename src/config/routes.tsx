@@ -2,11 +2,7 @@ import { PATHS } from '@constants/common';
 import { ProtectedRoute } from '@containers/ProtectedRoute';
 import { AuthLayout } from '@layout/auth';
 import { DefaultLayout } from '@layout/default';
-import { ForgotPasswordPage } from '@pages/ForgotPasswordPage';
-import { HomePage } from '@pages/HomePage';
-import { LoginPage } from '@pages/LoginPage';
-import { ProfilePage } from '@pages/ProfilePage';
-import { RegisterPage } from '@pages/RegisterPage';
+import { ForgotPasswordPage, HomePage, LoginPage, ProfilePage, RegisterPage } from '@pages';
 import { Route } from 'react-router';
 import { BrowserRouter, Routes } from 'react-router';
 

@@ -1,5 +1,5 @@
 import { getErrorMessage } from '@utils/common';
-import { EnumType } from '@utils/interfaces';
+import { EnumType } from '@utils/types';
 import { AuthError } from 'firebase/auth';
 
 export const handleAuthError = (

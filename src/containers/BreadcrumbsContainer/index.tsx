@@ -1,5 +1,5 @@
 import { Breadcrumbs } from '@components/Breadcrumbs';
-import { useBreadcrumbs } from '@hooks/useBreadcrumbs';
+import { useBreadcrumbs } from '@hooks';
 
 export const BreadcrumbsContainer = () => {
   const breadcrumbItems = useBreadcrumbs();

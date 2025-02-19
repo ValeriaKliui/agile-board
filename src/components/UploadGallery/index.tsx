@@ -1,10 +1,10 @@
-import { Alert, Button, Upload, UploadFile } from "antd";
+import { Alert, Button, Upload, UploadFile } from 'antd';
 
-import Title from "antd/es/typography/Title";
-import { PhotoGalleryProps } from "@components/UploadGallery/interfaces";
-import { useUpload } from "@hooks/useUpload";
-import "./styles.css";
-import { CheckOutlined } from "@ant-design/icons";
+import Title from 'antd/es/typography/Title';
+import { PhotoGalleryProps } from '@components/UploadGallery/types';
+import './styles.css';
+import { CheckOutlined } from '@ant-design/icons';
+import { useUpload } from '@hooks';
 
 export const UploadGallery = ({
   isEditable = false,
@@ -16,8 +16,11 @@ export const UploadGallery = ({
   onUpload,
   onRemove,
 }: PhotoGalleryProps) => {
-  const { fileList, isErrorUploading, handleChange, handleUpload } =
-    useUpload<UploadFile>({ filesData, onUpload, onRemove });
+  const { fileList, isErrorUploading, handleChange, handleUpload } = useUpload<UploadFile>({
+    filesData,
+    onUpload,
+    onRemove,
+  });
 
   const hasUploadButton = fileList.length < maxPhotoAmount;
 
@@ -34,7 +37,7 @@ export const UploadGallery = ({
         disabled={!isEditable}
         itemRender={itemRender}
         showUploadList={{
-          previewIcon: <CheckOutlined style={{ color: "white" }} />,
+          previewIcon: <CheckOutlined style={{ color: 'white' }} />,
           showRemoveIcon: isEditable,
         }}
       >

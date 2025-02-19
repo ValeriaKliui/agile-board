@@ -1,8 +1,8 @@
-import { LoginParams } from '@store/auth/interfaces';
+import { LoginParams } from '@store/auth/types';
 import { signInWithEmailAndPassword, User } from 'firebase/auth';
 
 import { handleAuthError } from './handleAuthError';
-import { LOGIN_ERRORS, LOGIN_ERRORS_MESSAGES } from './interfaces';
+import { LOGIN_ERRORS, LOGIN_ERRORS_MESSAGES } from './types';
 import { auth } from '@config/firebase';
 
 export const loginUser = async ({ email, password }: LoginParams): Promise<User> => {

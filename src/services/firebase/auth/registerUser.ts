@@ -1,8 +1,8 @@
-import { RegisterParams } from '@store/auth/interfaces';
+import { RegisterParams } from '@store/auth/types';
 import { createUserWithEmailAndPassword, User } from 'firebase/auth';
 
 import { handleAuthError } from './handleAuthError';
-import { REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES } from './interfaces';
+import { REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES } from './types';
 import { auth } from '@config/firebase';
 import { createUserAccount } from '@services/firebase/auth/createUserAccount';
 

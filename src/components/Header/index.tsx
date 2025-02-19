@@ -3,8 +3,8 @@ import { PATHS } from '@constants/common';
 import { Avatar, Flex } from 'antd';
 import { Link } from 'react-router';
 import { Header as HeaderStyled } from './styled';
-import { HeaderProps } from '@components/Header/interfaces';
 import { BreadcrumbsContainer } from '@containers/BreadcrumbsContainer';
+import { HeaderProps } from '@components/Header/types';
 
 export const Header = ({ onLogout, onLogin, avatar, username }: HeaderProps) => {
   const defaultUsername = username ?? 'Guest';

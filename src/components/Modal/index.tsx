@@ -1,7 +1,7 @@
-import { Button, Modal as ModalAntd } from "antd";
-import React from "react";
+import { Button, Modal as ModalAntd } from 'antd';
+import React from 'react';
 
-import { ModalProps } from "./interfaces";
+import { ModalProps } from './types';
 
 export const Modal: React.FC<ModalProps> = ({
   visible,

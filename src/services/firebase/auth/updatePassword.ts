@@ -3,8 +3,8 @@ import { handleAuthError } from '@services/firebase/auth/handleAuthError';
 import {
   UPDATE_PASSWORD_ERRORS,
   UPDATE_PASSWORD_ERRORS_MESSAGES,
-} from '@services/firebase/auth/interfaces';
-import { UpdatePasswordProps } from '@store/auth/interfaces';
+} from '@services/firebase/auth/types';
+import { UpdatePasswordProps } from '@store/auth/types';
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,

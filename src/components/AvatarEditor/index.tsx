@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import { AvatarEditorProps } from './interfaces';
+import { AvatarEditorProps } from './types';
 import { AvatarsSelectionContainer } from '@containers/AvatarsSelectionContainer';
 
 export const AvatarEditor = ({ isEditing, onToggleEdit, onSave }: AvatarEditorProps) => {
