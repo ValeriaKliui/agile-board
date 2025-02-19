@@ -25,16 +25,16 @@
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"],
       "@styles/*": ["./styles/*"],
       "@pages": ["./pages/index"],
-      "@layout/*": ["./layout/*"],
       "@constants/*": ["./constants/*"],
       "@hooks": ["./hooks/index"],
+      "@utils": ["./utils/index"],
       "@store/*": ["./store/*"],
-      "@config/*": ["./config/*"],
+      "@config/*": ["./config/index"],
       "@containers/*": ["./containers/*"],
-      "@services/*": ["./services/*"]
+      "@services/*": ["./services/index"],
+      "@layout/*": ["./services/layout"]
     }
   },
   "include": ["src"]

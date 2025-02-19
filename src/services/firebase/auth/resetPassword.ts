@@ -1,10 +1,10 @@
-import { auth } from '@config/firebase';
-import { ForgotPasswordParams } from '@store/auth/types';
-import { handleAuthError } from '@services/firebase/auth/handleAuthError';
+import { auth } from '@config';
+import { ForgotPasswordParams } from '@store/auth';
 import {
+  handleAuthError,
   RESET_PASSWORD_ERRORS,
   RESET_PASSWORD_ERRORS_MESSAGES,
-} from '@services/firebase/auth/types';
+} from '@services/firebase';
 import { sendPasswordResetEmail } from 'firebase/auth';
 
 export const resetPassword = async ({ email }: ForgotPasswordParams): Promise<void> => {

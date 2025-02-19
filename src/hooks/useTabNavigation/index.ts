@@ -1,5 +1,5 @@
-import { DefaultTabInfo } from '@layout/auth/types';
-import { getTabInfo } from '@utils/common';
+import { type DefaultTabInfo } from '@layout';
+import { getTabInfo } from '@utils';
 import { useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 

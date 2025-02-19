@@ -1,9 +1,8 @@
 import { USERS_DB_NAME } from '@constants/common';
-import { User } from '@store/user/types';
-import { getData } from '@services/firebase/db/getData';
-import { filterUndefinedValues } from '@utils/common';
+import { User } from '@store/user';
+import { getData, setData } from '@services/firebase';
+import { filterUndefinedValues } from '@utils';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { setData } from '@services/firebase/db/setData';
 
 class UserStore {
   user: User | null = null;

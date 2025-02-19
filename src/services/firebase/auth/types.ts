@@ -1,4 +1,4 @@
-import { User } from '@store/user/types';
+import { User } from '@store/user';
 import { Auth } from 'firebase/auth';
 
 export interface AuthUserProps {

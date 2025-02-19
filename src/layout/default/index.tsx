@@ -1,6 +1,6 @@
 import { Menu } from "antd";
 import { UserOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
-import { Content, Layout, Sider } from "@layout/default/styled";
+import { Content, Layout, Sider } from "./styled";
 import { Footer } from "@components/Footer";
 import { HeaderContainer } from "@containers/HeaderContainer";
 import { Outlet } from "react-router";

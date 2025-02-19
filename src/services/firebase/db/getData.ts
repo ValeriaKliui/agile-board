@@ -1,4 +1,4 @@
-import { db } from '@config/firebase';
+import { db } from '@config';
 import { doc, getDoc } from 'firebase/firestore';
 
 export const getData = async <T>(dbName: string, key: string): Promise<T | undefined> => {

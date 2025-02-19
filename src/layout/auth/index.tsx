@@ -1,4 +1,4 @@
-import { Card, Content, Flex, Layout } from "@layout/auth/styled";
+import { Card, Content, Flex, Layout } from "./styled";
 import { Outlet } from "react-router";
 
 export const AuthLayout = () => {
