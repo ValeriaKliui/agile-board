@@ -1,15 +1,15 @@
 import { Select } from '@components/Select';
 import { VirtualList } from '@components/VirtualList';
 import { ROLES } from '@constants/roles';
-import { MembersRolesAssigningProps } from '@containers/MembersRolesAssigning/interfaces';
+import { MembersRolesAssigningProps } from '@containers/MembersRolesAssigning/types';
 import { List, Form } from 'antd';
 
-export const MembersRolesAssigning = <T,>({ roles, members }: MembersRolesAssigningProps<T>) => {
+export const MembersRolesAssigning = ({ roles, members }: MembersRolesAssigningProps) => {
   return (
     <VirtualList
       data={members}
       itemKey={'label'}
-      onScroll={() => {}}
+      onScroll={() => { }}
       renderItem={(item: { key: string }) => {
         return (
           <List.Item key={item.key}>

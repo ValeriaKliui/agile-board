@@ -1,5 +1,5 @@
-import { DefaultTabInfo } from '@layout/auth/interfaces';
-import { EnumType, ErrorMessageProps, Option } from '@utils/interfaces';
+import { DefaultTabInfo } from '@layout/auth/types';
+import { EnumType, ErrorMessageProps, Option } from '@utils/types';
 
 export const getTabInfo = (tabsInfo: DefaultTabInfo[], key: keyof DefaultTabInfo, value: string) =>
   tabsInfo.find((tabInfo) => tabInfo[key] === value) || tabsInfo[0];

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { AvatarsSelection } from '@components/AvatarsSelection';
 import { userStore } from '@store/user/userStore';
 import { UploadFile } from 'antd';
-import { useAvatars } from '@hooks/useAvatars';
 import { AVATARS_DB_NAME } from '@constants/common';
+import { useAvatars } from '@hooks';
 
 export const AvatarsSelectionContainer = ({ onSave }) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);

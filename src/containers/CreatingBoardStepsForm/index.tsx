@@ -1,6 +1,6 @@
 import { StepPanel } from '@components/StepPanel';
 import { Form } from 'antd';
-import { StepType } from '@components/StepPanel/interfaces';
+import { StepType } from '@components/StepPanel/types';
 import { useState } from 'react';
 import { InitialInfoStep } from '@components/InitialInfoStep';
 import { AssignRolesStep } from '@components/AssignRolesStep';

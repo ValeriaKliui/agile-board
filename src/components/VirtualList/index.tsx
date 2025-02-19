@@ -1,4 +1,4 @@
-import { VirtualListProps } from '@components/VirtualList/interfaces';
+import { VirtualListProps } from '@components/VirtualList/types';
 import { List } from 'antd';
 import VirtualListLib from 'rc-virtual-list';
 

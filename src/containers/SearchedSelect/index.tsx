@@ -1,4 +1,4 @@
-import { SearchedSelectProps } from '@containers/SearchedSelect/interfaces';
+import { SearchedSelectProps } from '@containers/SearchedSelect/types';
 import { Form, Select } from 'antd';
 import { useState } from 'react';
 

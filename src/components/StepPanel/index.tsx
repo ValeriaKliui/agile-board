@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Steps } from 'antd';
-import { StepsPanelProps } from '@components/StepPanel/interfaces';
+import { StepsPanelProps } from '@components/StepPanel/types';
 
 export const StepPanel = ({ steps }: StepsPanelProps) => {
   const [activeStep, setActiveStep] = useState(0);

@@ -1,5 +1,5 @@
 import { Avatar, Flex, Typography } from 'antd';
-import { ProfileInfoProps } from './interfaces';
+import { ProfileInfoProps } from './types';
 
 const { Title, Text } = Typography;
 

@@ -11,7 +11,7 @@ import {
   LoginParams,
   RegisterParams,
   UpdatePasswordProps,
-} from './interfaces';
+} from './types';
 import { updatePassword } from '@services/firebase/auth/updatePassword';
 
 class AuthStore {

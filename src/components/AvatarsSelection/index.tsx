@@ -1,7 +1,7 @@
 import { AvatarGallery } from '@components/AvatarsGallery';
 import { Flex } from '@components/AvatarsSelection/styled';
 import { Button, Spin } from 'antd';
-import { AvatarsSelectionProps } from './interfaces';
+import { AvatarsSelectionProps } from './types';
 
 export const AvatarsSelection = ({
   isLoading,
