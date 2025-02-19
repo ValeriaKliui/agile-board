@@ -1,4 +1,5 @@
-import { Auth, User } from 'firebase/auth';
+import { User } from '@store/user/interfaces';
+import { Auth } from 'firebase/auth';
 
 export interface AuthUserProps {
   auth: Auth;
@@ -15,6 +16,7 @@ export interface AuthUserReturns {
   error?: string;
   user?: User;
 }
+export type CreateAccountProps = Omit<User, 'password'>;
 
 export interface AuthError {
   code: string;

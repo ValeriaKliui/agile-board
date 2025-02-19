@@ -1,10 +1,5 @@
 import { PropsWithChildren } from 'react';
 
-export interface FormAuthValues {
-  email: string;
-  password: string;
-}
-
 export interface FormSubmit {
   result: string;
   error?: string;
