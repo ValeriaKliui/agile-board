@@ -40,6 +40,6 @@ export const updateDataArray = async <T>(
         throw new Error('Invalid action type');
     }
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof Error) throw new Error(error.message);
   }
 };

@@ -9,6 +9,7 @@ export interface AuthErrors {
 export interface RegisterParams {
   email: string;
   password: string;
+  username: string;
 }
 
 export interface LoginParams {
@@ -18,4 +19,9 @@ export interface LoginParams {
 
 export interface ForgotPasswordParams {
   email: string;
+}
+
+export interface UpdatePasswordProps {
+  oldPassword: string;
+  newPassword: string;
 }

@@ -1,8 +1,8 @@
 import { USERS_DB_NAME } from '@constants/common';
 import { setData } from '@services/firebase/db/setData';
-import { User } from '@store/user/interfaces';
+import { CreateAccountProps } from './interfaces';
 
-export const createUserAccount = async ({ userID, ...userData }: User) => {
+export const createUserAccount = async ({ userID, ...userData }: CreateAccountProps) => {
   try {
     if (userID) await setData(USERS_DB_NAME, userID, userData);
   } catch (error) {

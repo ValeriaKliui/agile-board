@@ -1,18 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 import debounce from 'lodash.debounce';
 
-export const useDebouncedFetch = <T>(
-  fetchFunc: (value: string) => Promise<T>,
-  debounceTimeout: number = 800,
-) => {
-  const [fetching, setFetching] = useState(false);
+export const useDebouncedFetch = <T>({
+  fetchFunc,
+  debounceTimeout = 800,
+}: {
+  fetchFunc: (value: string) => Promise<T>;
+  debounceTimeout?: number;
+}) => {
+  const [isFetching, setIsFetching] = useState(false);
   const [result, setResult] = useState<T | null>(null);
   const fetchRef = useRef(0);
 
   const debounceFetcher = useRef(
     debounce(async (value: string) => {
       const currentFetchId = ++fetchRef.current;
-      setFetching(true);
+      setIsFetching(true);
 
       try {
         const result = await fetchFunc(value);
@@ -21,8 +24,9 @@ export const useDebouncedFetch = <T>(
         }
       } catch (error) {
         console.error('Error fetching options', error);
+        setResult(null);
       } finally {
-        setFetching(false);
+        setIsFetching(false);
       }
     }, debounceTimeout),
   ).current;
@@ -33,5 +37,5 @@ export const useDebouncedFetch = <T>(
     };
   }, [debounceTimeout, debounceFetcher]);
 
-  return { fetching, result, debounceFetcher };
+  return { isFetching, result, debounceFetcher };
 };

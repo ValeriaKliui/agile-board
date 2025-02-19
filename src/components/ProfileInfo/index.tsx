@@ -1,12 +1,13 @@
-import { Avatar, Flex, Typography } from "antd";
+import { Avatar, Flex, Typography } from 'antd';
+import { ProfileInfoProps } from './interfaces';
 
 const { Title, Text } = Typography;
 
-export const ProfileInfo = ({ username = "", email, avatarLink }) => {
+export const ProfileInfo = ({ username = '', email, avatar }: ProfileInfoProps) => {
   return (
     <Flex align="flex-end" gap={20}>
-      <Avatar src={avatarLink ?? null} size={64}>
-        {avatarLink ? "" : username[0]}
+      <Avatar src={avatar ?? null} size={64}>
+        {avatar ? '' : username[0]}
       </Avatar>
 
       <div>

@@ -9,8 +9,6 @@ class UserStore {
   user: User | null = null;
   loadingUser = false;
   loadingError = '';
-  updatingUser = false;
-  updatingUserErrors = null;
   userID = '';
 
   constructor() {

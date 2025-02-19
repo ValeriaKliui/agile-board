@@ -5,7 +5,13 @@ import { logOutUser } from '@services/firebase/auth/logOutUser';
 import { makeAutoObservable } from 'mobx';
 
 import { userStore } from '../user/userStore';
-import { AuthErrors, ForgotPasswordParams, LoginParams, RegisterParams } from './interfaces';
+import {
+  AuthErrors,
+  ForgotPasswordParams,
+  LoginParams,
+  RegisterParams,
+  UpdatePasswordProps,
+} from './interfaces';
 import { updatePassword } from '@services/firebase/auth/updatePassword';
 
 class AuthStore {
@@ -68,7 +74,7 @@ class AuthStore {
     await this.performAuthAction('forgot', () => resetPassword({ email }));
   }
 
-  async updatePassword({ oldPassword, newPassword }) {
+  async updatePassword({ oldPassword, newPassword }: UpdatePasswordProps) {
     await this.performAuthAction('updatePassword', () =>
       updatePassword({ oldPassword, newPassword }),
     );

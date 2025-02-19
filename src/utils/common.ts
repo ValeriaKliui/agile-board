@@ -27,7 +27,7 @@ export const filterUndefinedValues = <T>(data: Record<string, T>): Record<string
 
 export const transformObjectToOptions = (obj: Record<string, string>): Option[] => {
   return Object.entries(obj).reduce((acc, [key, value]) => {
-    acc.push({ value: key, label: value });
+    acc.push({ value, label: key });
     return acc;
   }, [] as Option[]);
 };

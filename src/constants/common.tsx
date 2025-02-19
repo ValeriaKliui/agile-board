@@ -49,4 +49,4 @@ export const BREADCRUMBS_MAP = {
   [PATHS.FORGOT_PASSWORD]: 'Forgot Password',
 };
 
-export const PAGE_SIZE = 10;
+export const ITEMS_PER_PAGE = 10;
