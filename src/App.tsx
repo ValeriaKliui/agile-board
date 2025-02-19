@@ -1,4 +1,4 @@
-import { AppRoutes } from '@config/routes';
+import { AppRoutes } from '@config';
 import { useAuthState } from '@hooks';
 
 export const App = () => {

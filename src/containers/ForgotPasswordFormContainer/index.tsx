@@ -1,8 +1,7 @@
 import { ForgotPasswordForm } from '@components/Forms/Auth/ForgotPassword';
 import { PATHS } from '@constants/common';
 import { useModal } from '@hooks';
-import { authStore } from '@store/auth/authStore';
-import { ForgotPasswordParams } from '@store/auth/types';
+import { authStore, type ForgotPasswordParams } from '@store/auth';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';

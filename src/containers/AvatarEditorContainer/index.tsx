@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { userStore } from '@store/user/userStore';
 import { AvatarEditor } from '@components/AvatarEditor';
+import { userStore } from '@store/user';
 
 export const AvatarEditorContainer = () => {
   const [isEditing, setIsEditing] = useState(false);

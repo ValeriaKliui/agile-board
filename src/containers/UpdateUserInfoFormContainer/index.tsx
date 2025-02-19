@@ -1,8 +1,7 @@
 import { UpdateUserInfoForm } from '@components/Forms/UpdateUserInfo';
 import { USER_PROPERTIES } from '@constants/common';
-import { User } from '@store/user/types';
-import { userStore } from '@store/user/userStore';
-import { mergeUniqueArrays } from '@utils/common';
+import { userStore, type User } from '@store/user';
+import { mergeUniqueArrays } from '@utils';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect } from 'react';

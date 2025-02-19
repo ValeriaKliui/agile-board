@@ -1,4 +1,4 @@
-import { getPasswordRules } from '@utils/formRules';
+import { getPasswordRules } from '@utils';
 import { Form, Input } from 'antd';
 
 const { Item } = Form;

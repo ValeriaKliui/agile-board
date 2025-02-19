@@ -1,5 +1,5 @@
 import { USERS_DB_NAME } from '@constants/common';
-import { setData } from '@services/firebase/db/setData';
+import { setData } from '@services/firebase';
 import { CreateAccountProps } from './types';
 
 export const createUserAccount = async ({ userID, ...userData }: CreateAccountProps) => {

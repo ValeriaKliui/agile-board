@@ -2,7 +2,7 @@ import { Button } from '@components/Button';
 import { AuthFormPropsDefault } from '@components/Forms/Auth/types';
 import { EmailInput } from '@components/Forms/Fields/Email';
 import { PasswordInput } from '@components/Forms/Fields/Password';
-import { getConfirmPasswordRules } from '@utils/formRules';
+import { getConfirmPasswordRules } from '@utils';
 import { Alert, Form, Input } from 'antd';
 
 const { Item } = Form;
