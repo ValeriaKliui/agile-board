@@ -6,7 +6,7 @@ export const useBreadcrumbs = () => {
   const pathSnippets = location.pathname.split('/').filter((i) => i);
 
   const breadcrumbItems = pathSnippets.map((_, index) => {
-    const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+    const url = `/${pathSnippets.slice(0, index + 1).join('/')}` as keyof typeof BREADCRUMBS_MAP;
 
     return {
       key: url,

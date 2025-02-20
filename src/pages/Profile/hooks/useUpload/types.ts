@@ -1,5 +1,5 @@
 export interface UseUploadProps<T> {
   filesData: T[];
-  onUpload: (url: string) => void;
-  onRemove: (url: string) => void;
+  onUpload?: (url: string) => Promise<void>;
+  onRemove?: (url: string) => Promise<void>;
 }

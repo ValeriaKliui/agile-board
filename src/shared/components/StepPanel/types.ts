@@ -1,9 +1,4 @@
-import { ReactNode } from 'react';
-
-export interface StepType {
-  title: string;
-  content: ReactNode;
-}
+import { StepType } from '@shared/types';
 
 export interface StepsPanelProps {
   steps: StepType[];

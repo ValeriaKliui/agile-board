@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import { useEffect,useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useDebouncedFetch = <T>({
   fetchFunc,
@@ -37,5 +37,5 @@ export const useDebouncedFetch = <T>({
     };
   }, [debounceTimeout, debounceFetcher]);
 
-  return { isFetching, result, debounceFetcher };
+  return { isFetching, result, debounceFetcher: debounceFetcher };
 };

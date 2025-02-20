@@ -1,4 +1,4 @@
-import { Button, Col, Form, Row, Spin, Typography } from 'antd';
+import { Button, Col, Form, FormInstance, Row, Spin, Typography } from 'antd';
 import { useState } from 'react';
 
 import { Input } from './styled';
@@ -7,7 +7,7 @@ import { UpdateUserInfoFormProps } from './types';
 const { Text } = Typography;
 const { Item } = Form;
 
-export const UpdateUserInfoForm = <TForm, TFormValues>({
+export const UpdateUserInfoForm = <TForm extends FormInstance<TFormValues> | undefined, TFormValues>({
   onFormSubmit,
   isLoading,
   form,

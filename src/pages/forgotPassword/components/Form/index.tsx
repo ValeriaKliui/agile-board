@@ -1,11 +1,11 @@
 import { Button, EmailField, Modal } from '@shared/components';
-import { Alert, Form } from 'antd';
+import { Alert, Form, FormInstance } from 'antd';
 
 import { ForgotPasswordFormProps } from './types';
 
 const { Item } = Form;
 
-export const ForgotPasswordForm = <TFormValues, TForm>({
+export const ForgotPasswordForm = <TFormValues, TForm extends FormInstance<TFormValues> | undefined>({
   onFormSubmit,
   onFormChange,
   error,

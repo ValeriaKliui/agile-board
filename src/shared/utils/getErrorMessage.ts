@@ -1,3 +1,5 @@
+import { EnumType, ErrorMessageProps } from '@shared/types';
+
 export const getErrorMessage = <TErrors extends EnumType, TErrorMessages extends EnumType>({
   errors,
   errorsMessages,

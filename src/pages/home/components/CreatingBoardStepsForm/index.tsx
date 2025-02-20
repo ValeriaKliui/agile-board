@@ -1,15 +1,17 @@
-import { BasicBoardInfo,MembersRolesAssigning } from '@pages/home/components';
+import { BasicBoardInfo, MembersRolesAssigning } from '@pages/home/components';
+import { StepFormValues } from '@pages/home/components/CreatingBoardStepsForm/types';
 import { StepPanel } from '@shared/components';
+import { MemberRoleType, StepType } from '@shared/types';
 import { Form } from 'antd';
 import { useState } from 'react';
 
 export const CreatingBoardStepsForm: React.FC = () => {
   const [stepForm] = Form.useForm();
-  const [membersOptions, MembersOptions] = useState([]);
+  const [membersOptions, setMembersOptions] = useState<MemberRoleType[]>([]);
 
-  const handleValuesChange = (changedValues) => {
+  const handleValuesChange = (changedValues: StepFormValues) => {
     if (changedValues.membersChoosen) {
-      MembersOptions(changedValues.membersChoosen);
+      setMembersOptions(changedValues.membersChoosen);
     }
   };
   const steps: StepType[] = [

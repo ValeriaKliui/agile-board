@@ -25,7 +25,7 @@ export const useUpload = <T extends { url?: string }>({
           index === prevList.length - 1 ? { ...file, url: imageUrl } : file,
         ),
       );
-      onUpload(imageUrl);
+      onUpload?.(imageUrl);
     } catch (error) {
       console.error('Upload error:', error);
       setIsErrorUploading(error instanceof Error ? error.message : 'Upload failed');
@@ -34,9 +34,9 @@ export const useUpload = <T extends { url?: string }>({
 
   const handleChange: UploadProps<T>['onChange'] = ({ fileList: updatedList, file }) => {
     if (file.status === 'removed') {
-      onRemove(file.url || '');
+      onRemove?.(file.url || '');
     }
-    setFileList(updatedList as T[]);
+    setFileList(updatedList as unknown as T[]);
   };
 
   return {

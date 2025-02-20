@@ -8,7 +8,7 @@ export const AvatarEditor = () => {
 
   const toggleAvatarEditing = () => setIsEditing((prev) => !prev);
 
-  const onAvatarSave = (selectedAvatar: string) => {
+  const onAvatarSave = (selectedAvatar: string | null) => {
     toggleAvatarEditing();
     userStore.updateUser({ ...userStore.user, avatar: selectedAvatar });
   };

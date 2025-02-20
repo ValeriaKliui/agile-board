@@ -1,6 +1,6 @@
-import { ROLES } from '@constants/roles';
+import { ROLES } from '@constants';
 import { Select, VirtualList } from '@shared/components';
-import { Form,List } from 'antd';
+import { Form, List } from 'antd';
 
 import { MembersRolesAssigningProps } from './types';
 

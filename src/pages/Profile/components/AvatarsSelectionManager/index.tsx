@@ -5,7 +5,10 @@ import { userStore } from '@store/user';
 import { UploadFile } from 'antd';
 import { useState } from 'react';
 
-export const AvatarsSelectionManager = ({ onSave }) => {
+import { AvatarsSelectionManagerProps } from './types';
+
+
+export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);
 
   const {

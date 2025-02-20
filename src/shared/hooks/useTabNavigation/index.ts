@@ -1,4 +1,4 @@
-import { type DefaultTabInfo } from '@shared/layout';
+import { DefaultTabInfo } from '@shared/types';
 import { getTabInfo } from '@shared/utils';
 import { useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router';

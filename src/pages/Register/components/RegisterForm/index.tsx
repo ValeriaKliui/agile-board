@@ -1,11 +1,11 @@
 import { getConfirmPasswordRules } from '@pages/register/utils';
 import { Button, EmailField, PasswordField } from '@shared/components';
 import { AuthFormPropsDefault } from '@shared/types';
-import { Alert, Form, Input } from 'antd';
+import { Alert, Form, FormInstance, Input } from 'antd';
 
 const { Item } = Form;
 
-export const RegisterForm = <TFormValues, TForm>({
+export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues> | undefined>({
   form,
   onFormSubmit,
   onFormChange,

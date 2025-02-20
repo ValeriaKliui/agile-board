@@ -1,4 +1,4 @@
-import { DefaultTabInfo } from '@shared/layout';
+import { DefaultTabInfo } from "@shared/types";
 
 const {
   VITE_AVATARS_DB_NAME,

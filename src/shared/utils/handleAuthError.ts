@@ -1,12 +1,6 @@
+import { EnumType } from '@shared/types';
 import { getErrorMessage } from '@shared/utils/getErrorMessage';
-
-export interface ErrorMessageProps<TErrors extends EnumType, TErrorsMessages extends EnumType> {
-  errors: TErrors;
-  errorsMessages: TErrorsMessages;
-  errorCode: string;
-}
-
-export type EnumType = Record<string, string | number>;
+import { AuthError } from 'firebase/auth';
 
 export const handleAuthError = (
   error: unknown,
