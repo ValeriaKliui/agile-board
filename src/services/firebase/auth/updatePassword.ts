@@ -1,9 +1,6 @@
 import { auth } from '@config';
-import {
-  handleAuthError,
-  UPDATE_PASSWORD_ERRORS,
-  UPDATE_PASSWORD_ERRORS_MESSAGES,
-} from '@services/firebase';
+import { UPDATE_PASSWORD_ERRORS, UPDATE_PASSWORD_ERRORS_MESSAGES } from '@services/firebase';
+import { handleAuthError } from '@shared/utils';
 import { UpdatePasswordProps } from '@store/auth';
 import {
   EmailAuthProvider,

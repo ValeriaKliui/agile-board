@@ -1,0 +1,11 @@
+export { AvatarEditor } from './AvatarEditor';
+export { AvatarsSelection } from './AvatarsSelection';
+export { AvatarsSelectionManager } from './AvatarsSelectionManager';
+export { ProfileInfo } from './Info';
+export { ProfileInfoManager } from './InfoManager';
+export { PhotoUploader } from './PhotoUploader';
+export { SelectableUploader } from './SelectableUploader';
+export { UpdatePasswordForm } from './UpdatePasswordForm';
+export { UpdatePasswordFormManager } from './UpdatePasswordFormManager';
+export { UpdateUserInfoForm } from './UpdateUserInfoForm';
+export { UpdateUserInfoFormManager } from './UpdateUserInfoFormManager';

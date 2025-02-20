@@ -1,11 +1,13 @@
 import {
   loginUser,
   logOutUser,
-  resetPassword,
   registerUser,
+  resetPassword,
   updatePassword,
 } from '@services/firebase';
+import { userStore } from '@store/user';
 import { makeAutoObservable } from 'mobx';
+
 import {
   AuthErrors,
   ForgotPasswordParams,
@@ -13,7 +15,6 @@ import {
   RegisterParams,
   UpdatePasswordProps,
 } from './types';
-import { userStore } from '@store/user';
 
 class AuthStore {
   inProgress = false;

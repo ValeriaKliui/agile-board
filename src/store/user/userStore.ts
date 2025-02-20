@@ -1,7 +1,7 @@
-import { USERS_DB_NAME } from '@constants/common';
-import { User } from '@store/user';
+import { USERS_DB_NAME } from '@constants';
 import { getData, setData } from '@services/firebase';
-import { filterUndefinedValues } from '@utils';
+import { filterUndefinedValues } from '@shared/utils';
+import { User } from '@store/user';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 class UserStore {

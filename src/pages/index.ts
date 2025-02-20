@@ -1,5 +1,5 @@
-export { ForgotPasswordPage } from './ForgotPassword';
-export { HomePage } from './Home';
-export { LoginPage } from './Login';
-export { ProfilePage } from './Profile';
-export { RegisterPage } from './Register';
+export { ForgotPasswordPage } from './forgotPassword';
+export { HomePage } from './home';
+export { LoginPage } from './login';
+export { ProfilePage } from './profile';
+export { RegisterPage } from './register';

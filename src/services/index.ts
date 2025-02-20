@@ -1,23 +1,20 @@
 export { handleUploadToStorage } from './cloudinary';
+export type { UpdateDataType } from './firebase';
 export {
-  handleAuthError,
-  logOutUser,
-  loginUser,
   createUserAccount,
+  fetchDataWithParams,
+  getData,
+  loginUser,
+  logOutUser,
   registerUser,
   resetPassword,
-  updatePassword,
-  fetchPaginatedData,
-  getData,
   setData,
   updateDataArray,
+  updatePassword,
 } from './firebase';
-
-export type { UpdateDataType } from './firebase';
-
 export {
-  UPDATE_PASSWORD_ERRORS,
-  UPDATE_PASSWORD_ERRORS_MESSAGES,
   RESET_PASSWORD_ERRORS,
   RESET_PASSWORD_ERRORS_MESSAGES,
+  UPDATE_PASSWORD_ERRORS,
+  UPDATE_PASSWORD_ERRORS_MESSAGES,
 } from './firebase';

@@ -1,6 +1,5 @@
-export { fetchPaginatedData } from './fetchPaginatedData';
+export { fetchDataWithParams } from './fetchDataWithParams';
 export { getData } from './getData';
 export { setData } from './setData';
-export { updateDataArray } from './updateDataArray';
-
 export { type UpdateDataType } from './types';
+export { updateDataArray } from './updateDataArray';

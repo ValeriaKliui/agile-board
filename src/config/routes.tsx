@@ -1,7 +1,7 @@
-import { ProtectedRoute } from '@containers/ProtectedRoute';
-import { AuthLayout, DefaultLayout } from '@layout';
-import { PATHS } from '@constants/common';
+import { PATHS } from '@constants';
 import { ForgotPasswordPage, HomePage, LoginPage, ProfilePage, RegisterPage } from '@pages';
+import { ProtectedRoute } from '@shared/components';
+import { AuthLayout, DefaultLayout } from '@shared/layout';
 import { Route } from 'react-router';
 import { BrowserRouter, Routes } from 'react-router';
 

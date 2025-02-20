@@ -24,17 +24,13 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@components/*": ["./components/*"],
-      "@styles/*": ["./styles/*"],
-      "@pages": ["./pages/index"],
-      "@constants/*": ["./constants/*"],
-      "@hooks": ["./hooks/index"],
-      "@utils": ["./utils/index"],
       "@store/*": ["./store/*"],
-      "@config/*": ["./config/index"],
-      "@containers/*": ["./containers/*"],
-      "@services/*": ["./services/index"],
-      "@layout/*": ["./services/layout"]
+      "@constants": ["./constants"],
+      "@services/*": ["./services"],
+      "@config": ["./config"],
+      "@shared/*": ["./shared/*"],
+      "@pages": ["./pages"],
+      "@pages/*": ["./pages/*"]
     }
   },
   "include": ["src"]

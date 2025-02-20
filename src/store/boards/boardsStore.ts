@@ -1,6 +1,6 @@
-import { db } from '@config/firebase';
-import { BOARDS_DB_NAME, USER_BOARDS_DB_NAME } from '@constants/common';
-import { setData } from '@services/firebase/db/setData';
+import { db } from '@config';
+import { BOARDS_DB_NAME, USER_BOARDS_DB_NAME } from '@constants';
+import { setData } from '@services/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 

@@ -1,5 +1,4 @@
 export { authStore } from './authStore';
-
 export type {
   ForgotPasswordParams,
   LoginParams,
