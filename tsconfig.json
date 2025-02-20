@@ -24,7 +24,6 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@pages": ["./pages/index"],
       "@hooks": ["./hooks/index"],
       "@utils": ["./utils/index"],
       "@store/*": ["./store/*"],
@@ -33,7 +32,9 @@
       "@services/*": ["./services/index"],
       "@layout": ["./layout/index"],
       "@config": ["./config/index"],
-      "@shared/*": ["./shared/*"]
+      "@shared/*": ["./shared/*"],
+      "@pages": ["./pages"],
+      "@pages/*": ["./pages/*"]
     }
   },
   "include": ["src"]

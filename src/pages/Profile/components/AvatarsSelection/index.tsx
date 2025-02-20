@@ -1,7 +1,7 @@
-import { AvatarGallery } from '../AvatarsGallery';
-import { Flex } from './styled';
 import { Button, Spin } from 'antd';
 import { AvatarsSelectionProps } from './types';
+import { Flex } from './styled';
+import { SelectableUploader } from '@pages/Profile/components';
 
 export const AvatarsSelection = ({
   isLoading,
@@ -21,7 +21,7 @@ export const AvatarsSelection = ({
         <Spin />
       ) : (
         <>
-          <AvatarGallery
+          <SelectableUploader
             title="Default Avatars"
             filesData={defaultAvatars}
             error={errorDefault}
@@ -29,8 +29,9 @@ export const AvatarsSelection = ({
             selectedAvatar={selectedAvatar}
             maxPhotoAmount={defaultAvatars.length}
             onRemove={onRemove}
+            checkIsSelected={({ url, uid }) => (url || uid) === selectedAvatar}
           />
-          <AvatarGallery
+          <SelectableUploader
             title="User Avatars"
             filesData={userAvatars}
             error={errorUser}
@@ -40,6 +41,7 @@ export const AvatarsSelection = ({
             onUpload={onUpload}
             maxPhotoAmount={4}
             isEditable
+            checkIsSelected={({ url, uid }) => (url || uid) === selectedAvatar}
           />
         </>
       )}

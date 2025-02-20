@@ -1,5 +1,5 @@
-import { AuthFormPropsDefault } from '@components/Forms/Auth/types';
 import { Button, EmailField, PasswordField } from '@shared/components';
+import { AuthFormPropsDefault } from '@shared/types';
 import { getConfirmPasswordRules } from '@utils';
 import { Alert, Form, Input } from 'antd';
 

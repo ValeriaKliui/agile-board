@@ -1,10 +1,5 @@
-import {
-  Card as CardAntd,
-  Flex as FlexAntd,
-  Layout as LayoutAntd,
-  Tabs as TabsAntd,
-} from "antd";
-import styled from "styled-components";
+import { Card as CardAntd, Flex as FlexAntd, Layout as LayoutAntd } from 'antd';
+import styled from 'styled-components';
 
 const { Content: ContentAntd } = LayoutAntd;
 
@@ -29,8 +24,4 @@ export const Card = styled(CardAntd)`
 
 export const Flex = styled(FlexAntd)`
   height: 100%;
-`;
-
-export const Tabs = styled(TabsAntd)`
-  align-items: center;
 `;

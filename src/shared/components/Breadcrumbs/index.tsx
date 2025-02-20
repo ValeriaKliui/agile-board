@@ -1,5 +1,8 @@
-import { Breadcrumb, BreadcrumbProps } from 'antd';
+import { useBreadcrumbs } from '@shared/hooks';
+import { Breadcrumb, } from 'antd';
 
-export const Breadcrumbs = ({ items }: BreadcrumbProps) => {
+export const Breadcrumbs = () => {
+  const items = useBreadcrumbs();
+
   return <Breadcrumb items={items} />;
 };

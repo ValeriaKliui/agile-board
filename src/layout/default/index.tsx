@@ -1,10 +1,9 @@
 import { Menu } from 'antd';
 import { UserOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Content, Layout, Sider } from './styled';
-import { HeaderContainer } from '@containers/HeaderContainer';
 import { Outlet } from 'react-router';
 import { useState } from 'react';
-import { Footer } from '@shared/components';
+import { Footer, HeaderManager } from '@shared/components';
 
 export const DefaultLayout = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -20,7 +19,7 @@ export const DefaultLayout = () => {
       </Sider>
 
       <Layout>
-        <HeaderContainer />
+        <HeaderManager />
         <Content>
           <Outlet />
         </Content>
