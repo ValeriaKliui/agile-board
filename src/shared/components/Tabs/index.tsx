@@ -1,4 +1,4 @@
-import { TabsStyled } from "@shared/components/Tabs/styled"
+import { TabsStyled } from "./styled"
 
 export const Tabs = ({ ...tabsProps }) => {
     return <TabsStyled {...tabsProps} />

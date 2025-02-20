@@ -1,8 +1,8 @@
 import { AUTH_TABS } from '@constants';
 import { RegisterFormManager } from '@pages/register';
+import { Tabs } from '@shared/components';
 import { useRedirectAuthorizedUsers, useTabNavigation } from '@shared/hooks';
 import { userStore } from '@store/user';
-import { Tabs } from 'antd';
 
 export const RegisterPage = () => {
   useRedirectAuthorizedUsers(userStore.isLoggedIn);

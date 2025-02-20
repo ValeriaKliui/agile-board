@@ -27,23 +27,23 @@ export const UpdateUserInfoForm = <TForm extends FormInstance<TFormValues> | und
   if (isLoading) return <Spin />;
 
   return (
-    <>
+         < >
       <Form
         form={form}
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
+        labelCol={{ xs: 24, sm: 8 }}
+        wrapperCol={{ xs: 24, sm: 16 }}
         layout="horizontal"
         disabled={!isEditing}
         onFinish={onFinish}
       >
         <Row gutter={[16, 16]}>
           {fields?.map((name) => (
-            <Col xs={24} sm={12}>
-              <Text strong className="capitalize">
+            <Col xs={24} sm={12} key={name}>
+              <Text strong className="capitalize" >
                 {name}
               </Text>
-              <Item name={name} key={name}>
-                <Input $isEditable={isEditing} />
+              <Item name={name}>
+                <Input $isEditable={isEditing}  />
               </Item>
             </Col>
           ))}

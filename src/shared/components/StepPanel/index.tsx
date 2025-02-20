@@ -2,6 +2,7 @@ import { Button, Steps } from 'antd';
 import { useState } from 'react';
 
 import { StepsPanelProps } from './types';
+import { Content } from './styled';
 
 export const StepPanel = ({ steps }: StepsPanelProps) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -21,7 +22,7 @@ export const StepPanel = ({ steps }: StepsPanelProps) => {
           <Steps.Step key={item.title} title={item.title} />
         ))}
       </Steps>
-      <div>{steps[activeStep].content}</div>
+      <Content >{steps[activeStep].content}</Content>
       <div>
         {activeStep < steps.length - 1 && (
           <Button type="primary" onClick={() => next()}>

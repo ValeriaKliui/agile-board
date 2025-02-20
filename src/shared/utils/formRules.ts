@@ -1,3 +1,4 @@
+import { MIN_PASSWORD_LENGTH } from '@constants';
 import { Rule } from 'antd/es/form';
 
 export const getEmailRules = (): Rule[] => [
@@ -15,8 +16,18 @@ export const getPasswordRules = (): Rule[] => {
   return [
     {
       required: true,
-      message: 'Please input your password!',
+      message: 'Please, input your password!',
+      validateTrigger: 'blur', 
     },
-    { min: 6, message: 'Password must be 6 symbols or more' },
+    {
+      min: MIN_PASSWORD_LENGTH,
+      message: `Password must be ${MIN_PASSWORD_LENGTH} symbols or more`,
+      validateTrigger: 'change', 
+    },
+    {
+      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+      message: 'Password must contain at least 1 lowercase and uppercase letter, 1 digit',
+      validateTrigger: 'blur', 
+    },
   ];
 };

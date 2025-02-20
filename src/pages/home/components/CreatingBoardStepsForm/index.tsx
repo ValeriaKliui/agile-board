@@ -2,7 +2,7 @@ import { BasicBoardInfo, MembersRolesAssigning } from '@pages/home/components';
 import { StepFormValues } from '@pages/home/components/CreatingBoardStepsForm/types';
 import { StepPanel } from '@shared/components';
 import { MemberRoleType, StepType } from '@shared/types';
-import { Form } from 'antd';
+import {  Form } from 'antd';
 import { useState } from 'react';
 
 export const CreatingBoardStepsForm: React.FC = () => {
@@ -24,8 +24,8 @@ export const CreatingBoardStepsForm: React.FC = () => {
   };
 
   return (
-    <Form form={stepForm} onFinish={onFinish} onValuesChange={handleValuesChange}>
-      <StepPanel steps={steps} />
+    <Form form={stepForm} onFinish={onFinish} onValuesChange={handleValuesChange} >
+      <StepPanel steps={steps}  />
     </Form>
   );
 };

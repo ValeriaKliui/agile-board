@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Selected = styled.div`
-  background: blue;
   height: 100%;
   width: 100%;
+  border: 2px solid blue
 `;

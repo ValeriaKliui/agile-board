@@ -6,7 +6,7 @@ const { Item } = Form;
 export const BasicBoardInfo = () => {
   return (
     <>
-      <Item name="title" required>
+      <Item name="title">
         <Input placeholder="My board" />
       </Item>
       <MembersSearch />
