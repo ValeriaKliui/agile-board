@@ -1,4 +1,4 @@
-import { Form, Select } from 'antd';
+import { Form, Select, Spin } from 'antd';
 import { useState } from 'react';
 
 import { SearchedSelectProps } from './types';
@@ -8,7 +8,7 @@ const { Item } = Form;
 export const SearchedSelect = <T,>({
   fetchSearchFunc,
   options,
-  notFoundContent,
+  isFetching,
   name,
   label,
   ...selectProps
@@ -17,6 +17,12 @@ export const SearchedSelect = <T,>({
 
   const fetchSearchedItems = async (searchTerm: string) => {
     await fetchSearchFunc(searchTerm);
+  };
+
+  const getAddons = () => {
+    if (isFetching) return <Spin size="small" />;
+    else if (!options) return 'Input...';
+    else if (options?.length === 0 && !isFetching) return <>Nothing was found</>;
   };
 
   return (
@@ -29,7 +35,7 @@ export const SearchedSelect = <T,>({
           labelInValue
           filterOption={false}
           onSearch={fetchSearchedItems}
-          notFoundContent={notFoundContent}
+          notFoundContent={getAddons()}
           options={options}
           {...selectProps}
         />

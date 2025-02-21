@@ -10,7 +10,7 @@ import {
 
 export const updatePassword = async ({ newPassword, oldPassword }: UpdatePasswordProps) => {
   try {
-    const user = auth.currentUser;
+    const user = auth?.currentUser;
 
     if (user && user.email) {
       const credential = EmailAuthProvider.credential(user.email, oldPassword);

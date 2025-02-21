@@ -5,7 +5,7 @@ import { VirtualListProps } from './types';
 
 export const VirtualList = <T,>({
   data,
-  height = 300,
+  height = 350,
   itemHeight = 30,
   itemKey,
   renderItem,

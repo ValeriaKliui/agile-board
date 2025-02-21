@@ -1,3 +1,4 @@
+export { Avatar } from './Avatar';
 export { Breadcrumbs } from './Breadcrumbs';
 export { Button } from './Button';
 export { type ButtonStyledProps } from './Button/types';
@@ -6,7 +7,7 @@ export { Footer } from './Footer';
 export { Header } from './Header';
 export { HeaderManager } from './HeaderManager';
 export { Modal } from './Modal';
-export type {  ModalProps ,} from './Modal/types';
+export type { ModalProps } from './Modal/types';
 export { ProtectedRoute } from './ProtectedRoute';
 export { Select } from './Select';
 export { SelectedItem } from './SelectedItem';

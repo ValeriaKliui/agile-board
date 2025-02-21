@@ -1,2 +1,2 @@
-export { UserBoardsInfo } from './components';
+export { UserBoardsCreator } from './components';
 export { HomePage } from './page';

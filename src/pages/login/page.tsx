@@ -3,8 +3,9 @@ import { LoginFormManager } from '@pages/login/components';
 import { Tabs } from '@shared/components';
 import { useRedirectAuthorizedUsers, useTabNavigation } from '@shared/hooks';
 import { userStore } from '@store/user';
+import { observer } from 'mobx-react-lite';
 
-export const LoginPage = () => {
+export const LoginPage = observer(() => {
   useRedirectAuthorizedUsers(userStore.isLoggedIn);
 
   const { onTabChange, activeTabKey } = useTabNavigation({
@@ -17,4 +18,4 @@ export const LoginPage = () => {
       <LoginFormManager />
     </>
   );
-};
+});

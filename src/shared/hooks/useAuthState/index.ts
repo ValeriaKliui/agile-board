@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 
 export const useAuthState = () => {
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth?.onAuthStateChanged((user) => {
       if (user) {
         userStore.setUserID(user.uid);
         userStore.fetchUser();
       }
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe?.();
   }, []);
 };

@@ -3,7 +3,6 @@ import { SearchedSelect } from '@pages/home/components';
 import { fetchDataWithParams } from '@services/firebase';
 import { useDebouncedFetch } from '@shared/hooks';
 import { User } from '@store/user';
-import { Spin } from 'antd';
 import { useCallback } from 'react';
 
 export const MembersSearch = () => {
@@ -19,13 +18,10 @@ export const MembersSearch = () => {
     isFetching,
   } = useDebouncedFetch<{ documents: User[] }>({ fetchFunc });
 
-  const options =
-    result?.documents?.map(({ username }: User) => ({
-      label: username,
-      value: username,
-    })) ?? [];
-
-  const notFoundContent = isFetching ? <Spin size="small" /> : null;
+  const options = result?.documents?.map(({ username }: User) => ({
+    label: username,
+    value: username,
+  }));
 
   const safeFetchSearchFunc = (searchTerm: string) => {
     return fetchSearchFunc(searchTerm) ?? Promise.resolve();
@@ -36,8 +32,8 @@ export const MembersSearch = () => {
       placeholder="Select users"
       label="Select Members"
       name="membersChoosen"
+      isFetching={isFetching}
       fetchSearchFunc={safeFetchSearchFunc}
-      notFoundContent={notFoundContent}
       options={options}
     />
   );

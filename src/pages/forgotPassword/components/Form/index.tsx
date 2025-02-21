@@ -1,11 +1,14 @@
 import { Button, EmailField, Modal } from '@shared/components';
-import { Alert, Form, FormInstance } from 'antd';
+import { Alert, Flex, Form, FormInstance } from 'antd';
 
 import { ForgotPasswordFormProps } from './types';
 
 const { Item } = Form;
 
-export const ForgotPasswordForm = <TFormValues, TForm extends FormInstance<TFormValues> | undefined>({
+export const ForgotPasswordForm = <
+  TFormValues,
+  TForm extends FormInstance<TFormValues> | undefined,
+>({
   onFormSubmit,
   onFormChange,
   error,
@@ -22,12 +25,14 @@ export const ForgotPasswordForm = <TFormValues, TForm extends FormInstance<TForm
       scrollToFirstError
     >
       <EmailField />
-      {error && <Alert type="error" message={error} />}
-      <Item>
-        <Button type="primary" htmlType="submit" loading={isLoading} centered>
-          Send new password
-        </Button>
-      </Item>
+      <Flex vertical gap="middle">
+        {error && <Alert type="error" message={error} />}
+        <Item>
+          <Button type="primary" htmlType="submit" loading={isLoading} centered>
+            Send new password
+          </Button>
+        </Item>
+      </Flex>
       <Modal {...modalProps} />
     </Form>
   );

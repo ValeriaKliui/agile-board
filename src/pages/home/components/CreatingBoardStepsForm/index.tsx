@@ -1,18 +1,24 @@
 import { BasicBoardInfo, MembersRolesAssigning } from '@pages/home/components';
-import { StepFormValues } from '@pages/home/components/CreatingBoardStepsForm/types';
 import { StepPanel } from '@shared/components';
 import { MemberRoleType, StepType } from '@shared/types';
-import {  Form } from 'antd';
+import { Form, FormInstance } from 'antd';
 import { useState } from 'react';
 
-export const CreatingBoardStepsForm: React.FC = () => {
-  const [stepForm] = Form.useForm();
+import { CreatingBoardStepsFormModal, StepFormValues } from './types';
+
+export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues> | undefined>({
+  stepForm,
+}: CreatingBoardStepsFormModal<TForm>) => {
   const [membersOptions, setMembersOptions] = useState<MemberRoleType[]>([]);
+  const [isNextAllowed, setIsNextAllowed] = useState(false);
 
   const handleValuesChange = (changedValues: StepFormValues) => {
-    if (changedValues.membersChoosen) {
+    if ('membersChoosen' in changedValues) {
       setMembersOptions(changedValues.membersChoosen);
     }
+
+    const { title, membersChoosen } = stepForm?.getFieldsValue(true) ?? {};
+    setIsNextAllowed(!!title && Array.isArray(membersChoosen) && membersChoosen.length > 0);
   };
   const steps: StepType[] = [
     { title: 'Initial info', content: <BasicBoardInfo /> },
@@ -20,12 +26,12 @@ export const CreatingBoardStepsForm: React.FC = () => {
   ];
 
   const onFinish = () => {
-    console.log(stepForm.getFieldsValue(true));
+    console.log(stepForm?.getFieldsValue(true) ?? {});
   };
 
   return (
-    <Form form={stepForm} onFinish={onFinish} onValuesChange={handleValuesChange} >
-      <StepPanel steps={steps}  />
+    <Form form={stepForm} onFinish={onFinish} onValuesChange={handleValuesChange} clearOnDestroy>
+      <StepPanel steps={steps} isNextAllowed={isNextAllowed} />
     </Form>
   );
 };

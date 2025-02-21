@@ -13,6 +13,7 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <ModalAntd
+      centered
       title={title}
       open={visible}
       onOk={onOk}

@@ -1,10 +1,10 @@
 import { Button, Steps } from 'antd';
 import { useState } from 'react';
 
-import { StepsPanelProps } from './types';
 import { Content } from './styled';
+import { StepsPanelProps } from './types';
 
-export const StepPanel = ({ steps }: StepsPanelProps) => {
+export const StepPanel = ({ steps, isNextAllowed }: StepsPanelProps) => {
   const [activeStep, setActiveStep] = useState(0);
 
   const next = () => {
@@ -22,10 +22,10 @@ export const StepPanel = ({ steps }: StepsPanelProps) => {
           <Steps.Step key={item.title} title={item.title} />
         ))}
       </Steps>
-      <Content >{steps[activeStep].content}</Content>
+      <Content>{steps[activeStep].content}</Content>
       <div>
         {activeStep < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
+          <Button type="primary" onClick={() => next()} disabled={!isNextAllowed}>
             Next
           </Button>
         )}

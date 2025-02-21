@@ -1,9 +1,9 @@
-import { UserBoardsInfo } from '@pages/home';
+import { UserBoardsCreator } from '@pages/home';
 
 export const HomePage = () => {
   return (
     <>
-      <UserBoardsInfo />
+      <UserBoardsCreator />
     </>
   );
 };

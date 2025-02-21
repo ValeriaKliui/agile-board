@@ -1,7 +1,7 @@
 import { getConfirmPasswordRules } from '@pages/register/utils';
 import { Button, EmailField, PasswordField } from '@shared/components';
 import { AuthFormPropsDefault } from '@shared/types';
-import { Alert, Form, FormInstance, Input } from 'antd';
+import { Alert, Flex, Form, FormInstance, Input } from 'antd';
 
 const { Item } = Form;
 
@@ -48,11 +48,13 @@ export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues
         <Input.Password autoComplete="password" />
       </Item>
 
-      {error && <Alert type="error" message={error} />}
+      <Flex vertical gap={'middle'}>
+        {error && <Alert type="error" message={error} />}
 
-      <Button type="primary" htmlType="submit" loading={isLoading} centered>
-        Register
-      </Button>
+        <Button type="primary" htmlType="submit" loading={isLoading} centered>
+          Register
+        </Button>
+      </Flex>
     </Form>
   );
 };

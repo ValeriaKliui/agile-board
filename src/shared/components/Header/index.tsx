@@ -1,6 +1,6 @@
 import { PATHS } from '@constants';
-import { Breadcrumbs, Button } from '@shared/components';
-import { Avatar, Flex } from 'antd';
+import { Avatar, Breadcrumbs, Button } from '@shared/components';
+import { Flex } from 'antd';
 import { Link } from 'react-router';
 
 import { Header as HeaderStyled } from './styled';

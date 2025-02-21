@@ -6,7 +6,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 
 export const resetPassword = async ({ email }: ForgotPasswordParams): Promise<void> => {
   try {
-    await sendPasswordResetEmail(auth, email);
+    if (auth) await sendPasswordResetEmail(auth, email);
   } catch (error) {
     const errorMessage = handleAuthError(
       error,

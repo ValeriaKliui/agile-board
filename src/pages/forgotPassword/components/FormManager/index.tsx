@@ -18,6 +18,7 @@ export const ForgotPasswordFormManager = observer(() => {
 
   const onFormSubmit = async ({ email }: ForgotPasswordParams) => {
     await authStore.forgotPassword({ email });
+    await authStore.logout();
     if (!authStore.errors.forgot) showModal();
   };
 
