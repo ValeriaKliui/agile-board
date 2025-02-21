@@ -1,0 +1,1 @@
+export { useUserBoardsInfo } from './useUserBoardsInfo';

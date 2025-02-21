@@ -16,8 +16,8 @@ export const UpdateUserInfoFormManager = observer(() => {
   const isLoading = filledUserProperties.length === 0 || loadingUser;
   const formFields = mergeUniqueArrays(filledUserProperties, USER_PROPERTIES);
 
-  const onFormSubmit = useCallback(async (userData: Partial<User>) => {
-    await userStore.updateUser({ userID: userStore.userID, ...userData });
+  const onSubmit = useCallback(async (userData: Partial<User>) => {
+    await userStore.updateUser(userData);
   }, []);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const UpdateUserInfoFormManager = observer(() => {
   return (
     <UpdateUserInfoForm
       form={form}
-      onFormSubmit={onFormSubmit}
+      onSubmit={onSubmit}
       isLoading={isLoading}
       fields={formFields}
     />

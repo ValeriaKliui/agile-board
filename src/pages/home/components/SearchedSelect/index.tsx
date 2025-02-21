@@ -6,7 +6,7 @@ import { SearchedSelectProps } from './types';
 const { Item } = Form;
 
 export const SearchedSelect = <T,>({
-  fetchSearchFunc,
+  fetchOptions,
   options,
   isFetching,
   name,
@@ -16,7 +16,7 @@ export const SearchedSelect = <T,>({
   const [selectedItems, selectItems] = useState<T[]>([]);
 
   const fetchSearchedItems = async (searchTerm: string) => {
-    await fetchSearchFunc(searchTerm);
+    await fetchOptions(searchTerm);
   };
 
   const getAddons = () => {
@@ -24,6 +24,7 @@ export const SearchedSelect = <T,>({
     else if (!options) return 'Input...';
     else if (options?.length === 0 && !isFetching) return <>Nothing was found</>;
   };
+
 
   return (
     <>

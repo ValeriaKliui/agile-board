@@ -1,8 +1,9 @@
 export { BasicBoardInfo } from './BasicBoardInfo';
 export { CreatingBoardStepsForm } from './CreatingBoardStepsForm';
-export { MembersRolesAssigning } from './MembersRolesAssigning';
 export { MembersRolesList } from './MembersRolesList';
 export { MembersSearch } from './MembersSearch';
 export { SearchedSelect } from './SearchedSelect';
-export type { SearchedSelectProps } from './SearchedSelect/types';
 export { UserBoardsCreator } from './UserBoardsCreator';
+export { UserBoards } from './UserBoards';
+
+export type { SearchedSelectProps } from './SearchedSelect/types';

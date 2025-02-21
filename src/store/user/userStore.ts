@@ -2,7 +2,7 @@ import { USERS_DB_NAME } from '@constants';
 import { getData, setData } from '@services/firebase';
 import { filterUndefinedValues } from '@shared/utils';
 import { User } from '@store/user';
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable, reaction, runInAction } from 'mobx';
 
 class UserStore {
   user: User | null = null;
@@ -12,6 +12,13 @@ class UserStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    reaction(
+      () => this.userID,
+      (userID) => {
+        this.fetchUser(userID);
+      },
+    );
   }
 
   private handleError(error: Error) {
@@ -24,15 +31,14 @@ class UserStore {
     return !!this.user;
   }
 
-  setUserID(uid: string) {
-    this.userID = uid;
+  setUserID(userID: string) {
+    this.userID = userID;
   }
 
-  async fetchUser() {
+  async fetchUser(userID: string) {
     this.loadingUser = true;
     try {
-      const user = await getData<User>(USERS_DB_NAME, this.userID);
-
+      const user = await getData<User>(USERS_DB_NAME, userID);
       runInAction(() => {
         if (user) {
           this.user = user;
@@ -43,16 +49,18 @@ class UserStore {
         this.handleError(error);
       }
     } finally {
-      this.loadingUser = false;
+      runInAction(() => {
+        this.loadingUser = false;
+      });
     }
   }
 
-  async updateUser({ userID = this.userID, ...userData }) {
+  async updateUser({ ...userData }) {
     try {
       this.loadingUser = true;
       const newData = filterUndefinedValues(userData);
 
-      await setData(USERS_DB_NAME, userID, newData);
+      await setData(USERS_DB_NAME, this.userID, { ...this.user, ...newData });
 
       runInAction(() => {
         if (this.user) this.user = { ...this.user, ...newData };
@@ -62,7 +70,9 @@ class UserStore {
         this.handleError(error);
       }
     } finally {
-      this.loadingUser = false;
+      runInAction(() => {
+        this.loadingUser = false;
+      });
     }
   }
 

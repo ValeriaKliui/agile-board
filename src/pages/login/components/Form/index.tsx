@@ -7,8 +7,8 @@ import Link from 'antd/es/typography/Link';
 const { Item } = Form;
 
 export const LoginForm = <TFormValues, TForm extends FormInstance<TFormValues>>({
-  onFormSubmit,
-  onFormChange,
+  onSubmit,
+  onChange,
   form,
   error,
   isLoading,
@@ -17,8 +17,8 @@ export const LoginForm = <TFormValues, TForm extends FormInstance<TFormValues>>(
     <Form
       form={form}
       name={'login'}
-      onFinish={onFormSubmit}
-      onChange={onFormChange}
+      onFinish={onSubmit}
+      onChange={onChange}
       colon={false}
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}

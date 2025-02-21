@@ -60,7 +60,6 @@ class AuthStore {
       () => loginUser({ email, password }),
       async ({ uid }) => {
         userStore.setUserID(uid);
-        await userStore.fetchUser();
       },
     );
   }

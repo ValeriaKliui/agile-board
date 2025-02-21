@@ -1,6 +1,6 @@
 import { MemberRoleType } from '@shared/types';
 
-export interface MembersRolesListProps {
-  members: MemberRoleType[];
+export interface MembersRolesItemProps {
+  item: MemberRoleType;
   roles: MemberRoleType[];
 }

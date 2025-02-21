@@ -8,9 +8,9 @@ export const AvatarEditor = () => {
 
   const toggleAvatarEditing = () => setIsEditing((prev) => !prev);
 
-  const onAvatarSave = (selectedAvatar: string | null) => {
+  const onAvatarSave = async (selectedAvatar: string | null) => {
     toggleAvatarEditing();
-    userStore.updateUser({ ...userStore.user, avatar: selectedAvatar });
+    await userStore.updateUser({ avatar: selectedAvatar });
   };
 
   return (

@@ -1,16 +1,16 @@
 import { db } from '@config';
 import { UpdateDataType } from '@services/firebase';
-import { arrayRemove, arrayUnion, doc, getDoc,setDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
 export const updateDataArray = async <T>(
-  dbName: string,
-  key: string,
+  collection: string,
+  docID: string,
   field: string,
   value: T,
   action: UpdateDataType,
 ) => {
   try {
-    const ref = doc(db, dbName, key);
+    const ref = doc(db, collection, docID);
     const docSnap = await getDoc(ref);
 
     if (!docSnap.exists()) {
@@ -21,7 +21,7 @@ export const updateDataArray = async <T>(
           { merge: true },
         );
       } else {
-        console.warn(`Document ${key} does not exist in ${dbName}`);
+        console.warn(`Document ${docID} does not exist in ${collection}`);
       }
       return;
     }

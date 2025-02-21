@@ -1,1 +1,1 @@
-// export { boardsStore } from './boardsStore';
+export { boardsStore } from './boardsStore';

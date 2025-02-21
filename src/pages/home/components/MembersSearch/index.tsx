@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 export const MembersSearch = () => {
   const fetchFunc = useCallback(
     (searchTerm: string) =>
-      fetchDataWithParams<User>({ dbName: USERS_DB_NAME, searchKey: 'username', searchTerm }),
+      fetchDataWithParams<User>({ collectionName: USERS_DB_NAME, searchKey: 'username', searchTerm }),
     [],
   );
 
@@ -18,10 +18,13 @@ export const MembersSearch = () => {
     isFetching,
   } = useDebouncedFetch<{ documents: User[] }>({ fetchFunc });
 
-  const options = result?.documents?.map(({ username }: User) => ({
-    label: username,
-    value: username,
-  }));
+  console.log(result?.documents)
+  const options = result?.documents?.map(({ username, userID }: User) => {
+    return {
+      label: username,
+      value: userID,
+    }
+  });
 
   const safeFetchSearchFunc = (searchTerm: string) => {
     return fetchSearchFunc(searchTerm) ?? Promise.resolve();
@@ -33,7 +36,7 @@ export const MembersSearch = () => {
       label="Select Members"
       name="membersChoosen"
       isFetching={isFetching}
-      fetchSearchFunc={safeFetchSearchFunc}
+      fetchOptions={safeFetchSearchFunc}
       options={options}
     />
   );

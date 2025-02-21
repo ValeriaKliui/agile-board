@@ -9,12 +9,12 @@ export const LoginFormManager = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFormSubmit = async (userValues: LoginParams) => {
+  const onSubmit = async (userValues: LoginParams) => {
     await authStore.login(userValues);
     if (!authStore.errors.login) navigate(PATHS.HOME);
   };
 
-  const onFormChange = () => authStore.resetError();
+  const onChange = () => authStore.resetError();
 
   const error = authStore.errors.login;
   const isLoading = authStore.inProgress;
@@ -22,8 +22,8 @@ export const LoginFormManager = observer(() => {
   return (
     <LoginForm
       form={form}
-      onFormSubmit={onFormSubmit}
-      onFormChange={onFormChange}
+      onSubmit={onSubmit}
+      onChange={onChange}
       error={error}
       isLoading={isLoading}
     />

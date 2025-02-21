@@ -9,8 +9,8 @@ export const ForgotPasswordForm = <
   TFormValues,
   TForm extends FormInstance<TFormValues> | undefined,
 >({
-  onFormSubmit,
-  onFormChange,
+  onSubmit,
+  onChange,
   error,
   isLoading,
   modalProps,
@@ -20,8 +20,8 @@ export const ForgotPasswordForm = <
     <Form
       form={form}
       name="forgot_password"
-      onFinish={onFormSubmit}
-      onChange={onFormChange}
+      onFinish={onSubmit}
+      onChange={onChange}
       scrollToFirstError
     >
       <EmailField />

@@ -1,4 +1,4 @@
-import { Button, Steps } from 'antd';
+import { Button, Flex, Steps } from 'antd';
 import { useState } from 'react';
 
 import { Content } from './styled';
@@ -23,7 +23,7 @@ export const StepPanel = ({ steps, isNextAllowed }: StepsPanelProps) => {
         ))}
       </Steps>
       <Content>{steps[activeStep].content}</Content>
-      <div>
+      <Flex gap='middle'>
         {activeStep < steps.length - 1 && (
           <Button type="primary" onClick={() => next()} disabled={!isNextAllowed}>
             Next
@@ -35,7 +35,7 @@ export const StepPanel = ({ steps, isNextAllowed }: StepsPanelProps) => {
           </Button>
         )}
         {activeStep > 0 && <Button onClick={() => prev()}>Previous</Button>}
-      </div>
+      </Flex>
     </>
   );
 };

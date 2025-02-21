@@ -13,4 +13,4 @@ export {
   UPDATE_PASSWORD_ERRORS_MESSAGES,
 } from './auth';
 export type { UpdateDataType } from './db';
-export { fetchDataWithParams, getData, setData, updateDataArray } from './db';
+export { fetchDataWithParams, getData, setData, updateDataArray, getCollection } from './db';

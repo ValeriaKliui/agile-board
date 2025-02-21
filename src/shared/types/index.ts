@@ -2,8 +2,8 @@ import { ReactNode } from 'react';
 
 export interface AuthFormPropsDefault<TFormValues, TForm> {
   form: TForm;
-  onFormSubmit: (values: TFormValues) => void;
-  onFormChange: () => void;
+  onSubmit: (values: TFormValues) => void;
+  onChange: () => void;
   error: string | null;
   isLoading: boolean;
 }

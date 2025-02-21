@@ -9,13 +9,13 @@ export const RegisterFormManager = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFormSubmit = async ({ email, password, username }: RegisterParams) => {
+  const onSubmit = async ({ email, password, username }: RegisterParams) => {
     await authStore.register({ email, password, username });
     await authStore.logout();
     if (!authStore.errors.register) navigate(PATHS.LOGIN);
   };
 
-  const onFormChange = () => authStore.resetError();
+  const onChange = () => authStore.resetError();
 
   const error = authStore.errors.register;
   const isLoading = authStore.inProgress;
@@ -23,8 +23,8 @@ export const RegisterFormManager = observer(() => {
   return (
     <RegisterForm
       form={form}
-      onFormSubmit={onFormSubmit}
-      onFormChange={onFormChange}
+      onSubmit={onSubmit}
+      onChange={onChange}
       error={error}
       isLoading={isLoading}
     />

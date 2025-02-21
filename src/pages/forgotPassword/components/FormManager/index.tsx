@@ -16,13 +16,13 @@ export const ForgotPasswordFormManager = observer(() => {
     navigate(PATHS.LOGIN);
   };
 
-  const onFormSubmit = async ({ email }: ForgotPasswordParams) => {
+  const onSubmit = async ({ email }: ForgotPasswordParams) => {
     await authStore.forgotPassword({ email });
     await authStore.logout();
     if (!authStore.errors.forgot) showModal();
   };
 
-  const onFormChange = () => authStore.resetError();
+  const onChange = () => authStore.resetError();
 
   const error = authStore.errors.forgot;
   const isLoading = authStore.inProgress;
@@ -30,8 +30,8 @@ export const ForgotPasswordFormManager = observer(() => {
   return (
     <ForgotPasswordForm
       form={form}
-      onFormSubmit={onFormSubmit}
-      onFormChange={onFormChange}
+      onSubmit={onSubmit}
+      onChange={onChange}
       error={error}
       isLoading={isLoading}
       modalProps={{

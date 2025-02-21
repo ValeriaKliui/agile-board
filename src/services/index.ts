@@ -11,6 +11,7 @@ export {
   setData,
   updateDataArray,
   updatePassword,
+  getCollection,
 } from './firebase';
 export {
   RESET_PASSWORD_ERRORS,

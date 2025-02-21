@@ -8,7 +8,7 @@ const { Text } = Typography;
 const { Item } = Form;
 
 export const UpdateUserInfoForm = <TForm extends FormInstance<TFormValues> | undefined, TFormValues>({
-  onFormSubmit,
+  onSubmit,
   isLoading,
   form,
   fields,
@@ -20,14 +20,14 @@ export const UpdateUserInfoForm = <TForm extends FormInstance<TFormValues> | und
   };
 
   const onFinish = (values: TFormValues) => {
-    onFormSubmit(values);
+    onSubmit(values);
     setIsEditing(false);
   };
 
   if (isLoading) return <Spin />;
 
   return (
-         < >
+    < >
       <Form
         form={form}
         labelCol={{ xs: 24, sm: 8 }}
@@ -43,7 +43,7 @@ export const UpdateUserInfoForm = <TForm extends FormInstance<TFormValues> | und
                 {name}
               </Text>
               <Item name={name}>
-                <Input $isEditable={isEditing}  />
+                <Input $isEditable={isEditing} />
               </Item>
             </Col>
           ))}

@@ -1,66 +1,66 @@
-// import { db } from '@config';
-// import { BOARDS_DB_NAME, USER_BOARDS_DB_NAME } from '@constants';
-// import { setData } from '@services/firebase';
-// import { doc, setDoc } from 'firebase/firestore';
-// import { v4 as uuidv4 } from 'uuid';
+import { db } from '@config';
+import { BOARDS_DB_NAME, USER_BOARDS_DB_NAME } from '@constants';
+import { setData } from '@services/firebase';
+import { BoardInfo } from '@store/boards/types';
+import { doc, setDoc } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
-// class BoardsStore {
-//   createBoard = async ({ title, userID, members }) => {
-//     try {
-//       const boardId = uuidv4();
+class BoardsStore {
+  createBoard = async ({ title, owner, members }: Omit<BoardInfo, 'createdAt'>) => {
+    try {
+      const boardId = uuidv4();
 
-//       await setData(BOARDS_DB_NAME, boardId, {
-//         title,
-//         createdAt: new Date(),
-//         owner: userID,
-//         members: members.reduce((acc, member) => {
-//           acc[member.userID] = member.role;
-//           return acc;
-//         }, {}),
-//       });
+      await setData(BOARDS_DB_NAME, boardId, {
+        title,
+        createdAt: new Date(),
+        owner,
+        members,
+      });
 
-//       for (const member of members) {
-//         const userBoardRef = doc(db, USER_BOARDS_DB_NAME, member.userID, BOARDS_DB_NAME, boardId);
-//         await setDoc(userBoardRef, { role: member.role });
-//       }
-//     } catch (error) {
-//       console.error('Error creating board or adding participants:', error);
-//     }
-//   };
-//   // boardsInfo = {};
-//   // loading = false;
-//   // error = null;
+      const membersArray = Object.entries(members);
 
-//   // constructor() {
-//   //   makeAutoObservable(this);
-//   // }
+      for (const [userID, role] of membersArray) {
+        const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, boardId);
+        await setDoc(userBoardRef, { role });
+      }
+    } catch (error) {
+      console.error('Error creating board or adding participants:', error);
+    }
+  };
+  // boardsInfo = {};
+  // loading = false;
+  // error = null;
 
-//   // setUserBoards = (boards) => {
-//   //   this.userBoards = boards;
-//   // };
+  // constructor() {
+  //   makeAutoObservable(this);
+  // }
 
-//   // async fetchBoardInfo(boardName) {
-//   //   this.loading = true;
-//   //   this.error = null;
+  // setUserBoards = (boards) => {
+  //   this.userBoards = boards;
+  // };
 
-//   //   try {
-//   //     const boardInfo = await getData(BOARDS_DB_NAME, boardName);
+  // async fetchBoardInfo(boardName) {
+  //   this.loading = true;
+  //   this.error = null;
 
-//   //     this.boardsInfo[boardName] = boardInfo;
-//   //   } catch (err) {
-//   //     console.log(err);
-//   //     this.error = `Не удалось загрузить информацию для доски ${boardName}`;
-//   //   } finally {
-//   //     this.loading = false;
-//   //   }
-//   // }
+  //   try {
+  //     const boardInfo = await getData(BOARDS_DB_NAME, boardName);
 
-//   // async fetchAllBoardsInfo() {
-//   //   for (const boardName in this.userBoards) {
-//   //     if (!this.boardsInfo[boardName]) {
-//   //       await this.fetchBoardInfo(boardName);
-//   //     }
-//   //   }
-//   // }
-// }
-// export const boardsStore = new BoardsStore();
+  //     this.boardsInfo[boardName] = boardInfo;
+  //   } catch (err) {
+  //     console.log(err);
+  //     this.error = `Не удалось загрузить информацию для доски ${boardName}`;
+  //   } finally {
+  //     this.loading = false;
+  //   }
+  // }
+
+  // async fetchAllBoardsInfo() {
+  //   for (const boardName in this.userBoards) {
+  //     if (!this.boardsInfo[boardName]) {
+  //       await this.fetchBoardInfo(boardName);
+  //     }
+  //   }
+  // }
+}
+export const boardsStore = new BoardsStore();

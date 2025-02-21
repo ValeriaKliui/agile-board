@@ -7,8 +7,8 @@ const { Item } = Form;
 
 export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues> | undefined>({
   form,
-  onFormSubmit,
-  onFormChange,
+  onSubmit,
+  onChange,
   error,
   isLoading,
 }: AuthFormPropsDefault<TFormValues, TForm>) => {
@@ -18,8 +18,8 @@ export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues
     <Form
       form={form}
       name="register"
-      onFinish={onFormSubmit}
-      onChange={onFormChange}
+      onFinish={onSubmit}
+      onChange={onChange}
       scrollToFirstError
       colon={false}
       labelCol={{ span: 6 }}
