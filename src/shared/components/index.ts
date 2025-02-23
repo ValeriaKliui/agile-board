@@ -9,6 +9,7 @@ export { HeaderManager } from './HeaderManager';
 export { Modal } from './Modal';
 export type { ModalProps } from './Modal/types';
 export { ProtectedRoute } from './ProtectedRoute';
+export { RadioGroup } from './RadioGroup';
 export { Select } from './Select';
 export { SelectedItem } from './SelectedItem';
 export { StepPanel } from './StepPanel';

@@ -1,18 +1,24 @@
 import { db } from '@config';
-import { doc, DocumentData, setDoc, WithFieldValue } from 'firebase/firestore';
+import { addDoc, collection, doc, DocumentData, setDoc, WithFieldValue } from 'firebase/firestore';
 
 export const setData = async <T extends WithFieldValue<DocumentData>>(
-  collection: string,
-  docID: string,
+  collectionName: string,
+  docID: string | null,
   data: T,
 ) => {
   try {
-    const docRef = doc(db, collection, docID);
-    await setDoc(docRef, data);
+    let boardId = docID;
+    if (docID) await setDoc(doc(db, collectionName, docID), data);
+    else {
+      const docRef = await addDoc(collection(db, collectionName), data);
+      boardId = docRef.id;
+    }
+    
+    return boardId;
   } catch (error) {
     if (error instanceof Error)
       throw new Error(
-        `Failed to create document in ${collection} with ID ${docID}: ${error.message}`,
+        `Failed to create document in ${collectionName} with ID ${docID}: ${error.message}`,
       );
   }
 };

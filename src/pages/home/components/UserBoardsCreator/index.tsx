@@ -1,5 +1,6 @@
 import { CreatingBoardStepsForm } from '@pages/home/components';
 import { StepFormValues } from '@pages/home/components/CreatingBoardStepsForm/types';
+import { useUserBoardsInfo } from '@pages/home/hooks';
 import { Button, Modal } from '@shared/components';
 import { useModal } from '@shared/hooks';
 import { Form } from 'antd';
@@ -8,14 +9,16 @@ import { observer } from 'mobx-react-lite';
 export const UserBoardsCreator = observer(() => {
   const { showModal, isModalOpen, closeModal } = useModal();
   const [stepForm] = Form.useForm<StepFormValues>();
+  const { onFetch } = useUserBoardsInfo()
 
   const onBoardCreate = () => {
     showModal();
   };
 
-  const onClose = () => {
+  const onClose = async () => {
     closeModal();
     stepForm.resetFields();
+    await onFetch()
   };
 
   return (

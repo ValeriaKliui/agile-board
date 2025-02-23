@@ -6,4 +6,5 @@ export interface StepFormValues {
 }
 export interface CreatingBoardStepsFormModal<TForm> {
   stepForm: TForm;
+  onSubmit: () => void;
 }

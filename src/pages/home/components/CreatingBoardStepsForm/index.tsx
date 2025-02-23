@@ -3,11 +3,11 @@ import { getRolesOptions } from '@pages/home/utils';
 import { StepPanel } from '@shared/components';
 import { MemberRoleType, StepType } from '@shared/types';
 import { boardsStore } from '@store/boards';
+import { userStore } from '@store/user';
 import { Form, FormInstance } from 'antd';
 import { useState } from 'react';
 
 import { CreatingBoardStepsFormModal, StepFormValues } from './types';
-import { userStore } from '@store/user';
 
 export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues> | undefined>({
   stepForm,
@@ -31,13 +31,13 @@ export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues
   ];
 
   const onFormSubmit = async () => {
-    const { title = '', roles } = stepForm?.getFieldsValue(true) ?? {}
-    await boardsStore.createBoard({ title, owner: userStore.userID, members: roles })
+    const { title = '', members } = stepForm?.getFieldsValue(true) ?? {}
+    await boardsStore.createBoard({ title, owner: userStore.userID, members })
     onSubmit()
   };
 
   return (
-    <Form form={stepForm} onFinish={onFormSubmit} onValuesChange={handleValuesChange} clearOnDestroy>
+    <Form form={stepForm} onFinish={onFormSubmit} onValuesChange={handleValuesChange} initialValues={{ template: 'custom' }}>
       <StepPanel steps={steps} isNextAllowed={isNextAllowed} />
     </Form>
   );

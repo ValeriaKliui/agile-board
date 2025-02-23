@@ -1,16 +1,13 @@
 import { db } from '@config';
-import { BOARDS_DB_NAME, USER_BOARDS_DB_NAME } from '@constants';
-import { setData } from '@services/firebase';
+import { BOARDS_DB_NAME, ROLES, USER_BOARDS_DB_NAME } from '@constants';
+import { getCollection, setData } from '@services/firebase';
 import { BoardInfo } from '@store/boards/types';
 import { doc, setDoc } from 'firebase/firestore';
-import { v4 as uuidv4 } from 'uuid';
 
 class BoardsStore {
-  createBoard = async ({ title, owner, members }: Omit<BoardInfo, 'createdAt'>) => {
+  async createBoard({ title, owner, members }: Omit<BoardInfo, 'createdAt'>) {
     try {
-      const boardId = uuidv4();
-
-      await setData(BOARDS_DB_NAME, boardId, {
+      const boardId = await setData(BOARDS_DB_NAME, null, {
         title,
         createdAt: new Date(),
         owner,
@@ -18,6 +15,7 @@ class BoardsStore {
       });
 
       const membersArray = Object.entries(members);
+      membersArray.push([owner, ROLES.OWNER]);
 
       for (const [userID, role] of membersArray) {
         const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, boardId);
@@ -26,7 +24,11 @@ class BoardsStore {
     } catch (error) {
       console.error('Error creating board or adding participants:', error);
     }
-  };
+  }
+  async fetchTemplates() {
+    const doc = await getCollection(['boards_templates']);
+    console.log(doc);
+  }
   // boardsInfo = {};
   // loading = false;
   // error = null;

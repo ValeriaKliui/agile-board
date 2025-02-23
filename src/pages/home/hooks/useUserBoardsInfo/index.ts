@@ -1,43 +1,31 @@
-import { BOARDS_DB_NAME, USER_BOARDS_DB_NAME } from '@constants';
+import { ROLES } from '@constants';
+import { fetchUserBoards } from '@pages/home/services';
 import { BoardInfo } from '@store/boards/types';
 import { userStore } from '@store/user';
-import { reaction } from 'mobx';
-import { useEffect, useState } from 'react';
-import { getCollection, getData } from 'services/firebase';
-
-import { UserBoard } from './types';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useUserBoardsInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [boardsInfo, setBoardsInfo] = useState<BoardInfo[]>([]);
+  const [boardsInfo, setBoardsInfo] = useState<[ROLES, BoardInfo[]]>([]);
 
-  useEffect(() => {
-    const disposer = reaction(
-      () => userStore.userID,
-      (userID) => {
-        const fetchUserBoards = async () => {
-          setIsLoading(true);
-          const userBoards = await getCollection<UserBoard>([
-            USER_BOARDS_DB_NAME,
-            userID,
-            BOARDS_DB_NAME,
-          ]);
-
-          if (userBoards) {
-            const boardsInfo = await Promise.all(
-              userBoards.map((board) => getData(BOARDS_DB_NAME, board.id)),
-            );
-            if (boardsInfo) setBoardsInfo(boardsInfo);
-          }
-          setIsLoading(false);
-        };
-
-        if (userID) fetchUserBoards();
-      },
-    );
-
-    return () => disposer();
+  const onFetch = useCallback(async () => {
+    const data = await fetchUserBoards(userStore.userID);
+    return data;
   }, []);
 
-  return { boardsInfo, isLoading };
+  useEffect(() => {
+    const loadBoards = async () => {
+      setIsLoading(true);
+      const data = await onFetch();
+      setBoardsInfo(data);
+      setIsLoading(false);
+    };
+
+    loadBoards();
+  }, [
+    // userStore.userID,
+    onFetch,
+  ]);
+
+  return { boardsInfo, isLoading, onFetch };
 };

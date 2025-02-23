@@ -11,7 +11,7 @@ export const MembersRolesItem = forwardRef(({ item, roles }: MembersRolesItemPro
     return (
         <List.Item key={key} ref={ref}>
             <List.Item.Meta title={`${label}`} />
-            <Form.Item name={['roles', key]} initialValue={ROLES.MEMBER} noStyle>
+            <Form.Item name={['members', key]} initialValue={ROLES.MEMBER} noStyle>
                 <Select options={roles} />
             </Form.Item>
         </List.Item>

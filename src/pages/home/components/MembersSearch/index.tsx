@@ -18,13 +18,10 @@ export const MembersSearch = () => {
     isFetching,
   } = useDebouncedFetch<{ documents: User[] }>({ fetchFunc });
 
-  console.log(result?.documents)
-  const options = result?.documents?.map(({ username, userID }: User) => {
-    return {
-      label: username,
-      value: userID,
-    }
-  });
+  const options = result?.documents?.map(({ username, userID }: User) => ({
+    label: username,
+    value: userID
+  }));
 
   const safeFetchSearchFunc = (searchTerm: string) => {
     return fetchSearchFunc(searchTerm) ?? Promise.resolve();

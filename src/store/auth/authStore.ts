@@ -6,7 +6,7 @@ import {
   updatePassword,
 } from '@services/firebase';
 import { userStore } from '@store/user';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 import {
   AuthErrors,
@@ -46,7 +46,7 @@ class AuthStore {
         this.errors[action] = error.message;
       }
     } finally {
-      this.inProgress = false;
+      runInAction(() => (this.inProgress = false));
     }
   }
 

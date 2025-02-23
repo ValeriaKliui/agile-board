@@ -1,9 +1,10 @@
-import { Form, Select, Spin } from 'antd';
+import { Flex, Form, Select, Spin, Typography } from 'antd';
 import { useState } from 'react';
 
 import { SearchedSelectProps } from './types';
 
 const { Item } = Form;
+const { Text } = Typography
 
 export const SearchedSelect = <T,>({
   fetchOptions,
@@ -25,10 +26,10 @@ export const SearchedSelect = <T,>({
     else if (options?.length === 0 && !isFetching) return <>Nothing was found</>;
   };
 
-
   return (
-    <>
-      <Item name={name} label={label}>
+    <Flex vertical gap='middle'>
+      <Text strong>{label}</Text>
+      <Item name={name} >
         <Select
           onChange={selectItems}
           value={selectedItems}
@@ -41,6 +42,6 @@ export const SearchedSelect = <T,>({
           {...selectProps}
         />
       </Item>
-    </>
+    </Flex>
   );
 };
