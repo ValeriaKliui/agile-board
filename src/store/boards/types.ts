@@ -14,3 +14,7 @@ export interface BoardInfo {
   members: { [user: string]: ROLES };
   userRole: ROLES_VALUES;
 }
+
+export interface BoardCreationInfo extends Omit<BoardInfo, 'createdAt' | 'userRole'> {
+  template: string;
+}

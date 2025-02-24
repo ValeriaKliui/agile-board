@@ -1,8 +1,9 @@
-import { getData, updateDataArray, type UpdateDataType } from '@services/firebase';
+import { useFetchUploadGalleryData } from '@pages/profile/hooks';
+import { updateDataArray, UpdateDataType } from '@pages/profile/services';
+import { getData } from '@shared/services/firebase';
 import { UploadFile } from 'antd';
 import { useCallback } from 'react';
 
-import { useFetchUploadGalleryData } from '../useFetchUploadGalleryData';
 import { AvatarLinks } from './types';
 
 export const useAvatars = (dbName: string, collectionKey: string) => {

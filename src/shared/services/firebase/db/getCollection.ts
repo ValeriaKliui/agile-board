@@ -1,6 +1,7 @@
 import { db } from '@config';
 import { collection, getDocs } from 'firebase/firestore';
-import { DataWithId } from 'services/firebase/db/types';
+
+import { DataWithId } from './types';
 
 export const getCollection = async <T>(path: readonly [string, ...string[]]) => {
   try {

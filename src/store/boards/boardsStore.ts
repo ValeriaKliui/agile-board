@@ -1,70 +1,27 @@
-import { db } from '@config';
-import { BOARDS_DB_NAME, ROLES, USER_BOARDS_DB_NAME } from '@constants';
-import { getCollection, setData } from '@services/firebase';
-import { BoardInfo } from '@store/boards/types';
-import { doc, setDoc } from 'firebase/firestore';
+import { addMembersToBoard, createBoard } from '@shared/services/firebase';
+import { BoardCreationInfo } from '@store/boards/types';
+import { makeAutoObservable } from 'mobx';
 
 class BoardsStore {
-  async createBoard({ title, owner, members }: Omit<BoardInfo, 'createdAt' | 'userRole'>) {
+  isLoading = false;
+  error: string | null = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  async createBoard({ title, owner, members, template }: BoardCreationInfo) {
     try {
-      const boardId = await setData(BOARDS_DB_NAME, null, {
-        title,
-        createdAt: new Date(),
-        owner,
-        members,
-      });
+      this.isLoading = false;
 
-      if (boardId) {
-        const membersArray = Object.entries(members);
-        membersArray.push([owner, ROLES.OWNER]);
+      const boardID = await createBoard({ title, owner, members, template });
 
-        for (const [userID, role] of membersArray) {
-          const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, boardId);
-          await setDoc(userBoardRef, { role });
-        }
+      if (boardID) {
+        await addMembersToBoard({ boardID, members, owner });
       }
     } catch (error) {
-      console.error('Error creating board or adding participants:', error);
+      if (error instanceof Error) this.error = 'Error creating board or adding participants';
     }
   }
-  async fetchTemplates() {
-    const doc = await getCollection(['boards_templates']);
-    console.log(doc);
-  }
-  // boardsInfo = {};
-  // loading = false;
-  // error = null;
-
-  // constructor() {
-  //   makeAutoObservable(this);
-  // }
-
-  // setUserBoards = (boards) => {
-  //   this.userBoards = boards;
-  // };
-
-  // async fetchBoardInfo(boardName) {
-  //   this.loading = true;
-  //   this.error = null;
-
-  //   try {
-  //     const boardInfo = await getData(BOARDS_DB_NAME, boardName);
-
-  //     this.boardsInfo[boardName] = boardInfo;
-  //   } catch (err) {
-  //     console.log(err);
-  //     this.error = `Не удалось загрузить информацию для доски ${boardName}`;
-  //   } finally {
-  //     this.loading = false;
-  //   }
-  // }
-
-  // async fetchAllBoardsInfo() {
-  //   for (const boardName in this.userBoards) {
-  //     if (!this.boardsInfo[boardName]) {
-  //       await this.fetchBoardInfo(boardName);
-  //     }
-  //   }
-  // }
 }
 export const boardsStore = new BoardsStore();

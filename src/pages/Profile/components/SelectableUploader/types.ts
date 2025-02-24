@@ -1,6 +1,5 @@
+import { PhotoUploaderProps } from '@pages/profile/components';
 import { UploadFile } from 'antd';
-
-import { PhotoUploaderProps } from '../PhotoUploader/types';
 
 export interface SelectableUploaderProps extends Omit<PhotoUploaderProps, 'itemRender'> {
   error: string | null;

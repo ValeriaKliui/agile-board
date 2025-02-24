@@ -1,7 +1,7 @@
 import { BOARDS_TEMPLATE_DB_NAME } from '@constants';
 import { MembersSearch } from '@pages/home/components';
-import { getCollection, } from '@services/firebase';
 import { RadioGroup } from '@shared/components';
+import { getCollection } from '@shared/services/firebase';
 import { Flex, Form, Input, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 

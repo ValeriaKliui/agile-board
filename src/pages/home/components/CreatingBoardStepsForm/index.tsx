@@ -32,8 +32,8 @@ export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues
   ];
 
   const onFormSubmit = async () => {
-    const { title = '', members } = stepForm?.getFieldsValue(true) ?? {}
-    await boardsStore.createBoard({ title, owner: userStore.userID, members })
+    const { title = '', members, template } = stepForm?.getFieldsValue(true) ?? {}
+    await boardsStore.createBoard({ title, owner: userStore.userID, members, template })
     onSubmit()
   };
 

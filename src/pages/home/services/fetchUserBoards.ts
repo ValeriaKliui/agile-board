@@ -1,6 +1,6 @@
 import { BOARDS_DB_NAME, ROLES_VALUES, USER_BOARDS_DB_NAME, USERS_DB_NAME } from '@constants';
 import { getFulfilledResults, groupArrayByValue } from '@pages/home/utils';
-import { getCollection, getData } from '@services/firebase';
+import { getCollection, getData } from '@shared/services/firebase';
 import { BoardInfo } from '@store/boards/types';
 
 import { UserBoard } from './types';

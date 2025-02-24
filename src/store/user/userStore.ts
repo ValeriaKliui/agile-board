@@ -1,5 +1,5 @@
 import { USERS_DB_NAME } from '@constants';
-import { getData, setData } from '@services/firebase';
+import { getData, setData } from '@shared/services/firebase';
 import { filterUndefinedValues } from '@shared/utils';
 import { User } from '@store/user';
 import { makeAutoObservable, reaction, runInAction } from 'mobx';

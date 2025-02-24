@@ -1,6 +1,6 @@
 import { ROLES_PERMISSIONS } from "@constants";
-import { BoardCardProps } from "@pages/home/components/BoardCard/types";
-import { formatDatetime } from "@services/firebase/db";
+import { BoardCardProps } from "@pages/home/components";
+import { formatDatetime } from "@pages/home/services";
 import { Flex, Typography } from "antd";
 
 import { CardStyled } from "./styled";

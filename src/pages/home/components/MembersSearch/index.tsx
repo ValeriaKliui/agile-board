@@ -1,6 +1,6 @@
 import { USERS_DB_NAME } from '@constants';
 import { SearchedSelect } from '@pages/home/components';
-import { fetchDataWithParams } from '@services/firebase';
+import { fetchDataWithParams } from '@pages/home/services';
 import { useDebouncedFetch } from '@shared/hooks';
 import { User } from '@store/user';
 import { useCallback } from 'react';

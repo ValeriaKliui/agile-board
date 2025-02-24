@@ -1,5 +1,5 @@
 import { auth } from '@config';
-import { RESET_PASSWORD_ERRORS, RESET_PASSWORD_ERRORS_MESSAGES } from '@services/firebase';
+import { RESET_PASSWORD_ERRORS, RESET_PASSWORD_ERRORS_MESSAGES } from '@shared/services/firebase';
 import { handleAuthError } from '@shared/utils';
 import { ForgotPasswordParams } from '@store/auth';
 import { sendPasswordResetEmail } from 'firebase/auth';

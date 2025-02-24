@@ -1,4 +1,4 @@
-import { handleUploadToStorage } from '@services/cloudinary/handleUpload';
+import { handleUploadToStorage } from '@pages/profile/services';
 import { UploadProps } from 'antd';
 import type { UploadRequestOption } from 'rc-upload/lib/interface';
 import { useEffect, useState } from 'react';

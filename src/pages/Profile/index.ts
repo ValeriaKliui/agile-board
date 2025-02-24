@@ -4,5 +4,6 @@ export {
   UpdatePasswordFormManager,
   UpdateUserInfoFormManager,
 } from './components';
+export { useFetchUploadGalleryData } from './hooks';
 export { ProfilePage } from './page';
 export { mergeUniqueArrays } from './utils';

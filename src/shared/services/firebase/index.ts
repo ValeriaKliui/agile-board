@@ -12,12 +12,4 @@ export {
   UPDATE_PASSWORD_ERRORS,
   UPDATE_PASSWORD_ERRORS_MESSAGES,
 } from './auth';
-export type { UpdateDataType } from './db';
-export {
-  fetchDataWithParams,
-  getData,
-  setData,
-  updateDataArray,
-  getCollection,
-  formatDatetime,
-} from './db';
+export { addMembersToBoard, createBoard, getCollection, getData, setData } from './db';
