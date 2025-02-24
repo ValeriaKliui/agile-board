@@ -21,8 +21,6 @@ export enum ROLES {
   GUEST = 'guest',
 }
 
-export type ROLES_VALUES = (typeof ROLES)[keyof typeof ROLES];
-
 export const ROLES_PERMISSIONS = {
   [ROLES.OWNER]: {
     permissions: [...Object.values(PERMISSIONS.boards), ...Object.values(PERMISSIONS.tasks)],
@@ -46,18 +44,4 @@ export const ROLES_PERMISSIONS = {
   },
 };
 
-// const currRole = 'guest';
-
-// const hasPermission = ({ role, permission }) => {
-//   const permissionExists = ROLES[role].permissions?.includes(
-//     (per) => permission === per
-//   );
-//   return !!permissionExists;
-// };
-
-// console.log(
-//   hasPermission({
-//     role: currRole,
-//     permission: PERMISSIONS.boards.edit,
-//   })
-// );
+export type ROLES_VALUES = (typeof ROLES)[keyof typeof ROLES];
