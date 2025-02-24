@@ -7,7 +7,7 @@ import { CardStyled } from "./styled";
 
 const { Text } = Typography
 
-export const BoardCard = ({ title, createdAt, owner, userRole }: BoardCardProps) => {
+export const BoardCard = ({ title, createdAt, owner, userRole, }: BoardCardProps) => {
     const dateTime = formatDatetime({ timestamp: createdAt })
 
     return <CardStyled hoverable title={title} style={{ background: ROLES_PERMISSIONS[userRole].color }} size="small">

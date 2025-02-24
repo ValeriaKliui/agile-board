@@ -1,4 +1,9 @@
-import { AvatarEditor, ProfileInfoManager, UpdatePasswordFormManager,UpdateUserInfoFormManager } from '@pages/profile';
+import {
+  AvatarEditor,
+  ProfileInfoManager,
+  UpdatePasswordFormManager,
+  UpdateUserInfoFormManager,
+} from '@pages/profile';
 import { Card, Divider, Flex } from 'antd';
 
 export const ProfilePage = () => {

@@ -1,2 +1,2 @@
-export { auth,db } from './firebase';
-export { AppRoutes } from './routes';
+export { auth, db } from './firebase';
+export { ROUTES } from './routes';

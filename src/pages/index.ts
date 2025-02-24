@@ -1,3 +1,4 @@
+export { BoardPage } from './board';
 export { ForgotPasswordPage } from './forgotPassword';
 export { HomePage } from './home';
 export { LoginPage } from './login';

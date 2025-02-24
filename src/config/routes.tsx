@@ -1,33 +1,57 @@
 import { PATHS } from '@constants';
-import { ForgotPasswordPage, HomePage, LoginPage, ProfilePage, RegisterPage } from '@pages';
+import {
+  BoardPage,
+  ForgotPasswordPage,
+  HomePage,
+  LoginPage,
+  ProfilePage,
+  RegisterPage,
+} from '@pages';
 import { ProtectedRoute } from '@shared/components';
 import { AuthLayout, DefaultLayout } from '@shared/layout';
-import { Route } from 'react-router';
-import { BrowserRouter, Routes } from 'react-router';
 
-export const AppRoutes = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<DefaultLayout />}>
-          <Route path="*" element={<>Path was not found</>} />
-          <Route index element={<HomePage />} />
-          <Route
-            path={PATHS.PROFILE}
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-        </Route>
-
-        <Route element={<AuthLayout />}>
-          <Route path={PATHS.LOGIN} element={<LoginPage />} />
-          <Route path={PATHS.REGISTER} element={<RegisterPage />} />
-          <Route path={PATHS.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-};
+export const ROUTES = [
+  {
+    layout: <DefaultLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: '*',
+        element: <>Page was not found</>,
+      },
+      {
+        path: PATHS.PROFILE,
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: `${PATHS.BOARD}/:boardID`,
+        element: (
+          <ProtectedRoute>
+            <BoardPage />{' '}
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+  {
+    layout: <AuthLayout />,
+    children: [
+      {
+        path: PATHS.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        path: PATHS.REGISTER,
+        element: <RegisterPage />,
+      },
+      {
+        path: PATHS.FORGOT_PASSWORD,
+        element: <ForgotPasswordPage />,
+      },
+    ],
+  },
+];

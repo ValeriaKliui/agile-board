@@ -1,5 +1,5 @@
 import { AUTH_TABS } from '@constants';
-import { LoginFormManager } from '@pages/login/components';
+import { LoginFormManager } from '@pages/login';
 import { Tabs } from '@shared/components';
 import { useRedirectAuthorizedUsers, useTabNavigation } from '@shared/hooks';
 import { userStore } from '@store/user';

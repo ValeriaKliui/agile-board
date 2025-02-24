@@ -17,6 +17,7 @@ export enum PATHS {
   REGISTER = '/register',
   FORGOT_PASSWORD = '/forgot-password',
   PROFILE = '/profile',
+  BOARD = '/board'
 }
 
 export const AUTH_TABS: DefaultTabInfo[] = [
