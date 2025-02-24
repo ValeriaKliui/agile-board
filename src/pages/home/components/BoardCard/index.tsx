@@ -1,14 +1,13 @@
 import { ROLES_PERMISSIONS } from "@constants";
+import { BoardCardProps } from "@pages/home/components/BoardCard/types";
 import { formatDatetime } from "@services/firebase/db";
-import { BoardInfo } from "@store/boards/types";
 import { Flex, Typography } from "antd";
 
 import { CardStyled } from "./styled";
 
-const { Text } =
-    Typography
+const { Text } = Typography
 
-export const BoardCard = ({ title, createdAt, owner, userRole }: BoardInfo) => {
+export const BoardCard = ({ title, createdAt, owner, userRole }: BoardCardProps) => {
     const dateTime = formatDatetime({ timestamp: createdAt })
 
     return <CardStyled hoverable title={title} style={{ background: ROLES_PERMISSIONS[userRole].color }} size="small">

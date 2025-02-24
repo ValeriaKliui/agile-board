@@ -1,4 +1,5 @@
 import { BasicBoardInfo, MembersRolesList } from '@pages/home/components';
+import { StepFormValues } from '@pages/home/types';
 import { getRolesOptions } from '@pages/home/utils';
 import { StepPanel } from '@shared/components';
 import { MemberRoleType, StepType } from '@shared/types';
@@ -7,7 +8,7 @@ import { userStore } from '@store/user';
 import { Form, FormInstance } from 'antd';
 import { useState } from 'react';
 
-import { CreatingBoardStepsFormModal, StepFormValues } from './types';
+import { CreatingBoardStepsFormModal, } from './types';
 
 export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues> | undefined>({
   stepForm,

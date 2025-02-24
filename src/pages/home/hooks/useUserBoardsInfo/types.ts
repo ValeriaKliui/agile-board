@@ -1,6 +1,4 @@
 import { ROLES } from '@constants';
+import { BoardInfo } from '@store/boards/types';
 
-export interface UserBoard {
-  id: string;
-  role: keyof typeof ROLES;
-}
+export type UserBoardsInfo = [ROLES, BoardInfo[]];

@@ -1,11 +1,15 @@
-import { UserBoards, UserBoardsCreator } from '@pages/home';
+import { UserBoards, UserBoardsCreator, useUserBoardsInfo } from '@pages/home';
+import { userStore } from '@store/user';
 import { Flex } from 'antd';
+import { observer } from 'mobx-react-lite';
 
-export const HomePage = () => {
+export const HomePage = observer(() => {
+  const { isLoading, boardsInfo, fetchBoards } = useUserBoardsInfo(userStore.userID)
+
   return (
     <Flex vertical gap='large' align='flex-start'>
-      <UserBoardsCreator />
-      <UserBoards />
+      <UserBoardsCreator fetchUserBoards={fetchBoards} />
+      <UserBoards boardsInfo={boardsInfo} isLoading={isLoading} />
     </Flex>
   );
-};
+})

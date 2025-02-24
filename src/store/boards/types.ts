@@ -1,4 +1,4 @@
-import { ROLES } from '@constants';
+import { ROLES, ROLES_VALUES } from '@constants';
 import { Timestamp } from 'firebase/firestore';
 
 export interface RoleInfo {
@@ -12,5 +12,5 @@ export interface BoardInfo {
   title: string;
   owner: string;
   members: { [user: string]: ROLES };
-  userRole: string;
+  userRole: ROLES_VALUES;
 }

@@ -21,11 +21,13 @@ export enum ROLES {
   GUEST = 'guest',
 }
 
+export type ROLES_VALUES = (typeof ROLES)[keyof typeof ROLES];
+
 export const ROLES_PERMISSIONS = {
   [ROLES.OWNER]: {
     permissions: [...Object.values(PERMISSIONS.boards), ...Object.values(PERMISSIONS.tasks)],
     label: 'Owner',
-    color: 'red',
+    color: 'rgba(0, 102, 204, 0.7)',
   },
   [ROLES.MEMBER]: {
     permissions: [
@@ -34,8 +36,8 @@ export const ROLES_PERMISSIONS = {
       PERMISSIONS.tasks.edit,
       PERMISSIONS.tasks.move,
     ],
+    color: 'rgba(230, 230, 250, 0.9)',
     label: 'Member',
-    color: 'blue',
   },
   [ROLES.GUEST]: {
     permissions: [PERMISSIONS.boards.view],

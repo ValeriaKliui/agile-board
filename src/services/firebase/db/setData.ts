@@ -13,7 +13,9 @@ export const setData = async <T extends WithFieldValue<DocumentData>>(
       const docRef = await addDoc(collection(db, collectionName), data);
       boardId = docRef.id;
     }
-    
+
+    if (!boardId) throw new Error();
+
     return boardId;
   } catch (error) {
     if (error instanceof Error)

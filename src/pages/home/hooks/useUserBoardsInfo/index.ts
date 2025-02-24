@@ -1,31 +1,28 @@
 import { ROLES } from '@constants';
 import { fetchUserBoards } from '@pages/home/services';
 import { BoardInfo } from '@store/boards/types';
-import { userStore } from '@store/user';
 import { useCallback, useEffect, useState } from 'react';
 
-export const useUserBoardsInfo = () => {
+export const useUserBoardsInfo = (userID: string) => {
+  const [error, setError] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [boardsInfo, setBoardsInfo] = useState<[ROLES, BoardInfo[]]>([]);
+  const [boardsInfo, setBoardsInfo] = useState<[ROLES, BoardInfo[]] | []>([]);
 
-  const onFetch = useCallback(async () => {
-    const data = await fetchUserBoards(userStore.userID);
-    return data;
-  }, []);
+  const fetchBoards = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const data = await fetchUserBoards(userID);
+      setBoardsInfo(data);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [userID]);
 
   useEffect(() => {
-    const loadBoards = async () => {
-      setIsLoading(true);
-      const data = await onFetch();
-      setBoardsInfo(data);
-      setIsLoading(false);
-    };
+    fetchBoards();
+  }, [fetchBoards]);
 
-    loadBoards();
-  }, [
-    // userStore.userID,
-    onFetch,
-  ]);
-
-  return { boardsInfo, isLoading, onFetch };
+  return { boardsInfo, isLoading, fetchBoards, error };
 };

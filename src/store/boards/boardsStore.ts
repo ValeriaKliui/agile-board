@@ -5,7 +5,7 @@ import { BoardInfo } from '@store/boards/types';
 import { doc, setDoc } from 'firebase/firestore';
 
 class BoardsStore {
-  async createBoard({ title, owner, members }: Omit<BoardInfo, 'createdAt'>) {
+  async createBoard({ title, owner, members }: Omit<BoardInfo, 'createdAt' | 'userRole'>) {
     try {
       const boardId = await setData(BOARDS_DB_NAME, null, {
         title,
@@ -14,12 +14,14 @@ class BoardsStore {
         members,
       });
 
-      const membersArray = Object.entries(members);
-      membersArray.push([owner, ROLES.OWNER]);
+      if (boardId) {
+        const membersArray = Object.entries(members);
+        membersArray.push([owner, ROLES.OWNER]);
 
-      for (const [userID, role] of membersArray) {
-        const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, boardId);
-        await setDoc(userBoardRef, { role });
+        for (const [userID, role] of membersArray) {
+          const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, boardId);
+          await setDoc(userBoardRef, { role });
+        }
       }
     } catch (error) {
       console.error('Error creating board or adding participants:', error);

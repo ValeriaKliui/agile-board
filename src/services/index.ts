@@ -3,6 +3,7 @@ export type { UpdateDataType } from './firebase';
 export {
   createUserAccount,
   fetchDataWithParams,
+  getCollection,
   getData,
   loginUser,
   logOutUser,
@@ -11,7 +12,7 @@ export {
   setData,
   updateDataArray,
   updatePassword,
-  getCollection,
+  formatDatetime,
 } from './firebase';
 export {
   RESET_PASSWORD_ERRORS,
