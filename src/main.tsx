@@ -7,12 +7,15 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { App } from './App';
 import GlobalStyle from './config/globalStyles';
+import { ThemeProvider } from '@config';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GlobalStyle />
     <ErrorBoundary fallback={<ErrorFallback />}>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </ErrorBoundary>
-  </StrictMode>,
+  </StrictMode >,
 );

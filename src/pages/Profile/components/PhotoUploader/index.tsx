@@ -31,7 +31,7 @@ export const PhotoUploader = ({
       {isErrorUploading && <Alert type="error" message={isErrorUploading} />}
       <Upload
         customRequest={handleUpload}
-        listType="picture-card"
+        listType="picture-circle"
         fileList={fileList}
         onPreview={handleClick}
         onChange={handleChange}
