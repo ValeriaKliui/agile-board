@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router';
 export const ForgotPasswordFormManager = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const { isModalOpen, showModal, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const handleModalClose = () => {
     closeModal();
@@ -19,7 +19,7 @@ export const ForgotPasswordFormManager = observer(() => {
   const onSubmit = async ({ email }: ForgotPasswordParams) => {
     await authStore.forgotPassword({ email });
     await authStore.logout();
-    if (!authStore.errors.forgot) showModal();
+    if (!authStore.errors.forgot) openModal();
   };
 
   const onChange = () => authStore.resetError();

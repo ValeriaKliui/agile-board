@@ -8,11 +8,11 @@ import { observer } from 'mobx-react-lite';
 import { UserBoardsCreatorProps } from './types';
 
 export const UserBoardsCreator = observer(({ fetchUserBoards }: UserBoardsCreatorProps) => {
-  const { showModal, isModalOpen, closeModal } = useModal();
+  const { openModal, isModalOpen, closeModal } = useModal();
   const [stepForm] = Form.useForm<StepFormValues>();
 
   const onBoardCreate = () => {
-    showModal();
+    openModal();
   };
 
   const onClose = async () => {

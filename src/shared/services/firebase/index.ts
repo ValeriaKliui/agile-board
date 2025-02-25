@@ -12,4 +12,11 @@ export {
   UPDATE_PASSWORD_ERRORS,
   UPDATE_PASSWORD_ERRORS_MESSAGES,
 } from './auth';
-export { addMembersToBoard, createBoard, getCollection, getData, setData } from './db';
+export {
+  addMembersToBoard,
+  createBoard,
+  getCollection,
+  getData,
+  setData,
+  addColumnToBoard,
+} from './db';

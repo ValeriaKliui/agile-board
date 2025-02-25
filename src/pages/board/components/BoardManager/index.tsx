@@ -1,22 +1,27 @@
-import { BoardHeader } from "@pages/board/components"
+import { BoardHeader, Board } from "@pages/board/components"
 import { boardsStore } from "@store/boards"
 import { observer } from "mobx-react-lite"
 import { useCallback, useEffect } from "react"
 
 import { BoardManagerProps } from "./types"
+import { Flex, Spin } from "antd"
 
-export const BoardManager = observer(({ boardID }: BoardManagerProps) => {
-    const { title } = boardsStore.currentBoardInfo ?? {}
+export const BoardManager = observer(({ id }: BoardManagerProps) => {
+    const { title, } = boardsStore.currentBoardInfo ?? {}
 
     const fetchCurrentBoard = useCallback(async () => {
-        await boardsStore.fetchCurrentBoard({ boardID })
-    }, [boardID])
+        if (id) await boardsStore.fetchCurrentBoard({ id })
+    }, [id])
 
     useEffect(() => {
         fetchCurrentBoard()
     }, [fetchCurrentBoard])
 
-    return <>
-        <BoardHeader title={title} />
-    </>
+    if (boardsStore.isLoading)
+        return <Spin />
+
+    return <Flex vertical gap='middle'>
+        {title && <BoardHeader title={title} />}
+        <Board />
+    </Flex>
 })

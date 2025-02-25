@@ -25,7 +25,8 @@ export const ROLES_PERMISSIONS = {
   [ROLES.OWNER]: {
     permissions: [...Object.values(PERMISSIONS.boards), ...Object.values(PERMISSIONS.tasks)],
     label: 'Owner',
-    color: 'rgba(0, 102, 204, 0.7)',
+    color: 'rgba(255, 215, 0, 1)',
+    // icon: CrownTwoTone
   },
   [ROLES.MEMBER]: {
     permissions: [
@@ -36,11 +37,13 @@ export const ROLES_PERMISSIONS = {
     ],
     color: 'rgba(230, 230, 250, 0.9)',
     label: 'Member',
+    // icon: <TeamOutlined />,
   },
   [ROLES.GUEST]: {
     permissions: [PERMISSIONS.boards.view],
     label: 'Guest',
     color: 'gray',
+    // icon: <UserOutlined />,
   },
 };
 

@@ -8,7 +8,7 @@ import { NavLink } from 'react-router';
 
 export const UserBoards = observer(({ boardsInfo, isLoading }: UserBoardsProps) => {
     if (isLoading) return <Spin />;
-    if (boardsInfo.length === 0) return false;
+    if (!boardsInfo || boardsInfo.length === 0) return false;
 
     return (
         <>
@@ -21,7 +21,7 @@ export const UserBoards = observer(({ boardsInfo, isLoading }: UserBoardsProps) 
                         {boards.map(({ title, createdAt, owner, userRole, id }) => (
                             <>
                                 <NavLink to={`board/${id}`}>
-                                    <BoardCard key={title} title={title} createdAt={createdAt} owner={owner} userRole={userRole} />
+                                    <BoardCard key={id} id={id} title={title} createdAt={createdAt} owner={owner} userRole={userRole} />
                                 </NavLink>
                             </>
                         ))}

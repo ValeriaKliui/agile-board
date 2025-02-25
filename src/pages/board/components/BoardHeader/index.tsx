@@ -1,23 +1,25 @@
+import { PERMISSIONS } from '@constants';
+import { hasPermission } from '@pages/board/utils';
+import { InputEditable } from '@shared/components/InputEditable';
+import { boardsStore } from '@store/boards';
+import { BoardInfo } from '@store/boards/types';
+import { Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 
-export const BoardHeader = observer(({ title }) => {
+const { Text } = Typography
+
+export const BoardHeader = observer(({ title }: Pick<BoardInfo, 'title'>) => {
+    const onEdit = async (title: string) => {
+        if (boardsStore.currentBoardID) await boardsStore.updateBoard({ id: boardsStore.currentBoardID, boardData: { title } })
+    }
+
     return (
         <header>
-            {title}
-            {/* {hasPermission({ permission: PERMISSIONS.boards.edit }) ? (
-                <Text
-                    editable={{
-                        onChange: setText,
-                        icon: <EditOutlined />,
-                        tooltip: 'Edit text',
-                        enterIcon: null,
-                    }}
-                >
-                    {text}
-                </Text>
+            {hasPermission({ permission: PERMISSIONS.boards.edit }) ? (
+                <InputEditable strong defaultValue={title} onFinishEdit={onEdit} />
             ) : (
-                <Text>{text}</Text>
-            )} */}
+                <Text strong>{title}</Text>
+            )}
         </header>
     );
 })
