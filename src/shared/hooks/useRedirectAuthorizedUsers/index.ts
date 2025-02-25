@@ -1,11 +1,13 @@
 import { PATHS } from '@constants';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export const useRedirectAuthorizedUsers = (isLoggedIn: boolean) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || PATHS.HOME; 
 
   useEffect(() => {
-    if (isLoggedIn) navigate(PATHS.HOME);
-  }, [navigate, isLoggedIn]);
+    if (isLoggedIn) navigate(from, { replace: true });
+  }, [navigate, isLoggedIn,from]);
 };

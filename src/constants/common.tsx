@@ -1,4 +1,4 @@
-import { DefaultTabInfo } from "@shared/types";
+import { DefaultTabInfo } from '@shared/types';
 
 const {
   VITE_AVATARS_DB_NAME,
@@ -8,7 +8,7 @@ const {
   VITE_AVATARS_PATH,
   VITE_BOARDS_DB_NAME,
   VITE_USER_BOARDS_DB_NAME,
-  VITE_BOARDS_TEMPLATE_DB_NAME
+  VITE_BOARDS_TEMPLATE_DB_NAME,
 } = import.meta.env;
 
 export enum PATHS {
@@ -17,7 +17,7 @@ export enum PATHS {
   REGISTER = '/register',
   FORGOT_PASSWORD = '/forgot-password',
   PROFILE = '/profile',
-  BOARD = '/board'
+  BOARD = '/board',
 }
 
 export const AUTH_TABS: DefaultTabInfo[] = [
@@ -50,8 +50,9 @@ export const BREADCRUMBS_MAP = {
   [PATHS.LOGIN]: 'Login',
   [PATHS.REGISTER]: 'Register',
   [PATHS.FORGOT_PASSWORD]: 'Forgot Password',
+  [PATHS.BOARD]: 'Board',
 };
 
 export const ITEMS_PER_PAGE = 10;
 
-export const MIN_PASSWORD_LENGTH = 8
+export const MIN_PASSWORD_LENGTH = 8;

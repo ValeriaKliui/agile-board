@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 
 export const useAuthState = () => {
   useEffect(() => {
-    const unsubscribe = auth?.onAuthStateChanged((user) => {
+    const unsubscribe = auth?.onAuthStateChanged(async (user) => {
       if (user) {
-        userStore.setUserID(user.uid);
+        await userStore.fetchUser(user.uid)
       }
     });
 

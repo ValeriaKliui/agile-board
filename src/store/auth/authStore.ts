@@ -59,7 +59,7 @@ class AuthStore {
       'login',
       () => loginUser({ email, password }),
       async ({ uid }) => {
-        userStore.setUserID(uid);
+        await userStore.fetchUser(uid)
       },
     );
   }
