@@ -6,6 +6,7 @@ export { EmailField, PasswordField } from './FieldsForm';
 export { Footer } from './Footer';
 export { Header } from './Header';
 export { HeaderManager } from './HeaderManager';
+export { Icon } from './Icon';
 export { Modal } from './Modal';
 export type { ModalProps } from './Modal/types';
 export { ProtectedRoute } from './ProtectedRoute';

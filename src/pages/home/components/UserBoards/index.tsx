@@ -1,3 +1,4 @@
+import { PATHS } from '@constants';
 import { BoardCard } from '@pages/home/components';
 import { Boards } from '@pages/home/components/UserBoards/styled';
 import { UserBoardsProps } from '@pages/home/components/UserBoards/types';
@@ -13,17 +14,22 @@ export const UserBoards = observer(({ boardsInfo, isLoading }: UserBoardsProps) 
     return (
         <>
             {boardsInfo.map(([role, boards]) => (
-                <div>
+                <div style={{ width: '100%' }}>
                     <Title level={5} className="capitalize">
                         {role}
                     </Title>
                     <Boards>
                         {boards.map(({ title, createdAt, owner, userRole, id }) => (
-                            <>
-                                <NavLink to={`board/${id}`}>
-                                    <BoardCard key={id} id={id} title={title} createdAt={createdAt} owner={owner} userRole={userRole} />
-                                </NavLink>
-                            </>
+                            <NavLink to={`${PATHS.BOARD}/${id}`} key={id}>
+                                <BoardCard
+                                    key={id}
+                                    id={id}
+                                    title={title}
+                                    createdAt={createdAt}
+                                    owner={owner}
+                                    userRole={userRole}
+                                />
+                            </NavLink>
                         ))}
                     </Boards>
                 </div>
@@ -31,4 +37,3 @@ export const UserBoards = observer(({ boardsInfo, isLoading }: UserBoardsProps) 
         </>
     );
 });
-

@@ -2,6 +2,7 @@ import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
 import { ROLES_PERMISSIONS } from '@constants';
 import { BoardCardProps } from '@pages/home/components';
 import { formatDatetime } from '@pages/home/services';
+import { Icon } from '@shared/components';
 import { Flex, Typography } from 'antd';
 
 import { CardStyled, TextStyled } from './styled';
@@ -19,7 +20,7 @@ export const BoardCard = ({ title, createdAt, owner, userRole }: BoardCardProps)
             variant="borderless"
             title={
                 <TextStyled >
-                    <IconComponent twoToneColor={color} />
+                    <Icon icon={IconComponent} color={color} />
                     {title}
                 </TextStyled>
             }

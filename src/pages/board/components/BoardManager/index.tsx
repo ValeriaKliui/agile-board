@@ -4,14 +4,20 @@ import { observer } from "mobx-react-lite"
 import { useCallback, useEffect } from "react"
 
 import { BoardManagerProps } from "./types"
-import { Flex, Spin } from "antd"
+import { Flex, Spin, Typography } from "antd"
+import { formatDatetime } from "@pages/home/services"
+import { MembersList } from "@pages/board/components/MembersList"
+
+const { Text } = Typography
 
 export const BoardManager = observer(({ id }: BoardManagerProps) => {
-    const { title, } = boardsStore.currentBoardInfo ?? {}
+    const { title, createdAt, members } = boardsStore.currentBoardInfo ?? {}
+    const creationDate = formatDatetime({ timestamp: createdAt })
 
     const fetchCurrentBoard = useCallback(async () => {
         if (id) await boardsStore.fetchCurrentBoard({ id })
     }, [id])
+
 
     useEffect(() => {
         fetchCurrentBoard()
@@ -21,7 +27,14 @@ export const BoardManager = observer(({ id }: BoardManagerProps) => {
         return <Spin />
 
     return <Flex vertical gap='middle'>
-        {title && <BoardHeader title={title} />}
+        <Flex justify="space-between">
+            <Flex>
+                {title && <BoardHeader title={title} />}
+                <MembersList members={members} />
+            </Flex>
+            {creationDate && <Text>Created at: {creationDate}</Text>}
+        </Flex>
+
         <Board />
     </Flex>
 })

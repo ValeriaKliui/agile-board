@@ -1,7 +1,7 @@
-import { UserBoards, UserBoardsCreator, useUserBoardsInfo, } from '@pages/home';
+import { UserBoards, UserBoardsCreator, useUserBoardsInfo } from '@pages/home';
+import { ResultStyled } from './styled';
 import { userStore } from '@store/user';
 import { Flex, } from 'antd';
-import Title from 'antd/es/typography/Title';
 import { observer } from 'mobx-react-lite';
 
 export const HomePage = observer(() => {
@@ -9,14 +9,15 @@ export const HomePage = observer(() => {
   const noBoards = boardsInfo.length === 0;
 
   return (
-    <>
-      <Flex vertical gap="large" align="flex-start" >
-        {noBoards && (
-          <Title level={2}>Create new board</Title>
-        )}
-        <UserBoardsCreator fetchUserBoards={fetchBoards} />
-        <UserBoards boardsInfo={boardsInfo} isLoading={isLoading} />
-      </Flex>
-    </>
+    <Flex vertical align={noBoards ? 'center' : 'flex-start'}>
+      {noBoards ?
+        <ResultStyled
+          status="404"
+          title="You don't have any boards yet"
+          subTitle="Create new!"
+          extra={<UserBoardsCreator fetchUserBoards={fetchBoards} />}
+        /> : <UserBoardsCreator fetchUserBoards={fetchBoards} />}
+      <UserBoards boardsInfo={boardsInfo} isLoading={isLoading} />
+    </Flex>
   );
 });
