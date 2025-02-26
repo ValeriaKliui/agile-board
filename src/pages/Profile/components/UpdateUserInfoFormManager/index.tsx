@@ -1,7 +1,6 @@
-import { USER_PROPERTIES } from '@constants';
+import { USER_PROPERTIES_TO_UPDATE } from '@constants';
 import { UpdateUserInfoForm } from '@pages/profile/components';
-import { mergeUniqueArrays } from '@pages/profile/utils';
-import { type User, userStore } from '@store/user';
+import { type User, userStore } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect } from 'react';
@@ -11,10 +10,6 @@ export const UpdateUserInfoFormManager = observer(() => {
 
   const loadingUser = userStore.loadingUser;
   const user = userStore.user;
-
-  const filledUserProperties = user ? Object.keys(user) : [];
-  const isLoading = filledUserProperties.length === 0 || loadingUser;
-  const formFields = mergeUniqueArrays(filledUserProperties, USER_PROPERTIES);
 
   const onSubmit = useCallback(async (userData: Partial<User>) => {
     await userStore.updateUser(userData);
@@ -30,8 +25,8 @@ export const UpdateUserInfoFormManager = observer(() => {
     <UpdateUserInfoForm
       form={form}
       onSubmit={onSubmit}
-      isLoading={isLoading}
-      fields={formFields}
+      isLoading={loadingUser}
+      fields={USER_PROPERTIES_TO_UPDATE}
     />
   );
 });

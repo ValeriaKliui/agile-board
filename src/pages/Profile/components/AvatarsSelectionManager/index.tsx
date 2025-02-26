@@ -1,7 +1,7 @@
 import { AVATARS_DB_NAME } from '@constants';
 import { AvatarsSelection } from '@pages/profile/components';
 import { useAvatars } from '@pages/profile/hooks';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { UploadFile } from 'antd';
 import { useState } from 'react';
 

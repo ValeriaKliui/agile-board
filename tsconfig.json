@@ -24,7 +24,7 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@store/*": ["./store/*"],
+      "@store": ["./store"],
       "@constants": ["./constants"],
       "@services/*": ["./services"],
       "@config": ["./config"],

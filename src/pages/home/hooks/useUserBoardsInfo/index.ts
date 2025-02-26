@@ -1,6 +1,6 @@
 import { ROLES } from '@constants';
 import { fetchUserBoards } from '@pages/home/services';
-import { BoardInfo } from '@store/boards/types';
+import { BoardInfo } from '@store';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useUserBoardsInfo = (userID: string) => {

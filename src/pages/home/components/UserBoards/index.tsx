@@ -1,20 +1,19 @@
 import { PATHS } from '@constants';
 import { BoardCard } from '@pages/home/components';
-import { Boards } from '@pages/home/components/UserBoards/styled';
-import { UserBoardsProps } from '@pages/home/components/UserBoards/types';
-import { Spin } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router';
 
-export const UserBoards = observer(({ boardsInfo, isLoading }: UserBoardsProps) => {
-    if (isLoading) return <Spin />;
+import { Boards, Container } from './styled';
+import { UserBoardsProps } from './types';
+
+export const UserBoards = observer(({ boardsInfo, }: UserBoardsProps) => {
     if (!boardsInfo || boardsInfo.length === 0) return false;
 
     return (
         <>
             {boardsInfo.map(([role, boards]) => (
-                <div style={{ width: '100%' }}>
+                <Container>
                     <Title level={5} className="capitalize">
                         {role}
                     </Title>
@@ -32,7 +31,7 @@ export const UserBoards = observer(({ boardsInfo, isLoading }: UserBoardsProps) 
                             </NavLink>
                         ))}
                     </Boards>
-                </div>
+                </Container>
             ))}
         </>
     );

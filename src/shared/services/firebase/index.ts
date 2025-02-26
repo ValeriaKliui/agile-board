@@ -13,10 +13,13 @@ export {
   UPDATE_PASSWORD_ERRORS_MESSAGES,
 } from './auth';
 export {
+  addColumnToBoard,
   addMembersToBoard,
   createBoard,
+  fetchBoard,
+  formatDatetime,
   getCollection,
   getData,
   setData,
-  addColumnToBoard,
+  updateData,
 } from './db';

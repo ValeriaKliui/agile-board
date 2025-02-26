@@ -1,6 +1,6 @@
-import { CreatingBoardStepsForm } from '@pages/home/components';
+import { CreatingBoardStepsForm, UserBoardsCreatorModal } from '@pages/home/components';
 import { StepFormValues } from '@pages/home/types';
-import { Button, Modal } from '@shared/components';
+import { Button, } from '@shared/components';
 import { useModal } from '@shared/hooks';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
@@ -24,9 +24,10 @@ export const UserBoardsCreator = observer(({ fetchUserBoards }: UserBoardsCreato
   return (
     <>
       <Button onClick={onBoardCreate} type='primary'> Create board</Button>
-      <Modal visible={isModalOpen} footer={false} onClose={onClose} onCancel={onClose}>
+      <UserBoardsCreatorModal isModalOpen={isModalOpen} onClose={closeModal}>
         <CreatingBoardStepsForm stepForm={stepForm} onSubmit={onClose} />
-      </Modal>
+      </UserBoardsCreatorModal>
     </>
   );
 });
+

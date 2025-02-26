@@ -1,7 +1,7 @@
 import { BOARDS_DB_NAME, ROLES_VALUES, USER_BOARDS_DB_NAME, USERS_DB_NAME } from '@constants';
 import { getFulfilledResults, groupArrayByValue } from '@pages/home/utils';
-import { getCollection, getData } from '@shared/services/firebase';
-import { BoardInfo } from '@store/boards/types';
+import { fetchBoard, getCollection, getData } from '@shared/services/firebase';
+import { BoardInfo } from '@store';
 
 import { UserBoard } from './types';
 
@@ -14,9 +14,8 @@ export const fetchUserBoards = async (
 
   if (!userBoards?.length) return [];
 
-  const boardDataPromises = userBoards.map(({ id }) =>
-    getData<BoardInfo | null>(BOARDS_DB_NAME, id),
-  );
+  const boardDataPromises = userBoards.map(({ id }) => fetchBoard({ id }));
+
   const boardsInfo = await getFulfilledResults(boardDataPromises);
 
   const boardsWithRoles = boardsInfo.map((board, index) => ({

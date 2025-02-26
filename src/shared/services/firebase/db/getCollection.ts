@@ -10,6 +10,7 @@ export const getCollection = async <T>(path: readonly [string, ...string[]]) => 
     const querySnapshot = await getDocs(collectionRef);
 
     const data: DataWithId<T>[] = [];
+
     querySnapshot.forEach((doc) => {
       const docData = doc.data();
       data.push({ id: doc.id, ...docData } as DataWithId<T>);

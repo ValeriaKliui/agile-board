@@ -1,6 +1,9 @@
+export { addColumnToBoard } from './addColumnToBoard';
 export { addMembersToBoard } from './addMembersToBoard';
 export { createBoard } from './createBoard';
+export { fetchBoard } from './fetchBoard';
+export { formatDatetime } from './formatDatetime';
 export { getCollection } from './getCollection';
 export { getData } from './getData';
 export { setData } from './setData';
-export { addColumnToBoard } from './addColumnToBoard';
+export { updateData } from './updateData';

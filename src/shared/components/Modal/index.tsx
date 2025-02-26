@@ -4,7 +4,7 @@ import React from 'react';
 import { ModalProps } from './types';
 
 export const Modal: React.FC<ModalProps> = ({
-  visible,
+  isModalOpen,
   title,
   onOk,
   onCancel,
@@ -15,7 +15,7 @@ export const Modal: React.FC<ModalProps> = ({
     <ModalAntd
       centered
       title={title}
-      open={visible}
+      open={isModalOpen}
       onOk={onOk}
       onCancel={onCancel}
       footer={[

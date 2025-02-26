@@ -1,13 +1,13 @@
 import { db } from '@config';
 import { BOARDS_DB_NAME } from '@constants';
-import { BoardInfo } from '@store/boards/types';
-import { doc, setDoc } from 'firebase/firestore';
+import { BoardInfo } from '@store';
+import { addDoc, collection } from 'firebase/firestore';
 
 export const addColumnToBoard = async ({ id, columns }: Pick<BoardInfo, 'columns' | 'id'>) => {
   try {
-    const batchPromises = columns?.map((column) =>
-      setDoc(doc(db, BOARDS_DB_NAME, id, 'columns', column.id), column),
-    );
+    const batchPromises = columns?.map((column) => {
+      addDoc(collection(db, BOARDS_DB_NAME, id, 'columns'), column);
+    });
 
     if (batchPromises) await Promise.all(batchPromises);
   } catch (error) {

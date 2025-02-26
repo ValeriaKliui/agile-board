@@ -3,8 +3,7 @@ import { StepFormValues } from '@pages/home/types';
 import { getRolesOptions } from '@pages/home/utils';
 import { StepPanel } from '@shared/components';
 import { MemberRoleType, StepType } from '@shared/types';
-import { boardsStore } from '@store/boards';
-import { userStore } from '@store/user';
+import { boardStore, userStore } from '@store';
 import { Form, FormInstance } from 'antd';
 import { useState } from 'react';
 
@@ -33,7 +32,7 @@ export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues
 
   const onFormSubmit = async () => {
     const { title = '', members, template } = stepForm?.getFieldsValue(true) ?? {}
-    await boardsStore.createBoard({ title, owner: userStore.userID, members, template })
+    await boardStore.createBoard({ title, owner: userStore.userID, members, template })
     onSubmit()
   };
 

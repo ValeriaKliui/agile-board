@@ -1,21 +1,18 @@
-import { BoardHeader, Board } from "@pages/board/components"
-import { boardsStore } from "@store/boards"
+import { Board, BoardHeader, MembersListManager } from "@pages/board/components"
+import { boardStore } from "@store"
+import { Flex, Spin, Typography } from "antd"
 import { observer } from "mobx-react-lite"
 import { useCallback, useEffect } from "react"
 
 import { BoardManagerProps } from "./types"
-import { Flex, Spin, Typography } from "antd"
-import { formatDatetime } from "@pages/home/services"
-import { MembersList } from "@pages/board/components/MembersList"
 
 const { Text } = Typography
 
 export const BoardManager = observer(({ id }: BoardManagerProps) => {
-    const { title, createdAt, members } = boardsStore.currentBoardInfo ?? {}
-    const creationDate = formatDatetime({ timestamp: createdAt })
+    const { title, createdAt, members } = boardStore.currentBoardInfo ?? {}
 
     const fetchCurrentBoard = useCallback(async () => {
-        if (id) await boardsStore.fetchCurrentBoard({ id })
+        if (id) await boardStore.fetchCurrentBoard({ id })
     }, [id])
 
 
@@ -23,16 +20,16 @@ export const BoardManager = observer(({ id }: BoardManagerProps) => {
         fetchCurrentBoard()
     }, [fetchCurrentBoard])
 
-    if (boardsStore.isLoading)
+    if (boardStore.isLoading)
         return <Spin />
 
     return <Flex vertical gap='middle'>
         <Flex justify="space-between">
             <Flex>
                 {title && <BoardHeader title={title} />}
-                <MembersList members={members} />
+                <MembersListManager members={members} />
             </Flex>
-            {creationDate && <Text>Created at: {creationDate}</Text>}
+            <Text>Created at: {createdAt}</Text>
         </Flex>
 
         <Board />

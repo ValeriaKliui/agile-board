@@ -6,8 +6,14 @@ import { doc, setDoc } from 'firebase/firestore';
 export const addMembersToBoard = async ({ id, members }: AddingMembersProps) => {
   const membersArray = Object.entries(members);
 
-  for (const [userID, role] of membersArray) {
-    const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, id);
-    await setDoc(userBoardRef, { role });
+  try {
+    const membersPromises = membersArray.map(([userID, role]) => {
+      const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, id);
+      return setDoc(userBoardRef, { role });
+    });
+
+    await Promise.all(membersPromises);
+  } catch (error) {
+    if (error instanceof Error) throw new Error('Failed to add members to board');
   }
 };

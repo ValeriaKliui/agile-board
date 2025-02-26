@@ -1,7 +1,7 @@
 import { PATHS } from '@constants';
 import { ForgotPasswordForm } from '@pages/forgotPassword/components';
 import { useModal } from '@shared/hooks';
-import { authStore, type ForgotPasswordParams } from '@store/auth';
+import { authStore, type ForgotPasswordParams } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';
@@ -35,7 +35,7 @@ export const ForgotPasswordFormManager = observer(() => {
       error={error}
       isLoading={isLoading}
       modalProps={{
-        visible: isModalOpen,
+        isModalOpen: isModalOpen,
         title: 'Link Sent!',
         onOk: handleModalClose,
         onCancel: handleModalClose,

@@ -3,7 +3,9 @@ import { Tooltip } from '@pages/board/components';
 import { Avatar } from '@shared/components';
 import { Col, Row, } from 'antd';
 
-export const MembersList = ({ members }) => {
+import { MembersListManagerProps } from './types';
+
+export const MembersListManager = ({ members }: MembersListManagerProps) => {
     return (
         <Row gutter={5} align="middle">
             {members &&

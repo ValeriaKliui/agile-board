@@ -1,8 +1,9 @@
 import { useDraggable } from '@dnd-kit/core';
-import { CardStyled } from './styled';
 import { Modal } from '@shared/components';
 import { useModal } from '@shared/hooks';
-import { Task as TaskProps } from '@store/boards/types';
+import { Task as TaskProps } from '@store';
+
+import { CardStyled } from './styled';
 
 export const Task = ({ title, id }: TaskProps) => {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
@@ -26,7 +27,7 @@ export const Task = ({ title, id }: TaskProps) => {
             >
                 {title}
             </CardStyled>
-            <Modal visible={isModalOpen} onOk={closeModal} onClose={closeModal} onCancel={closeModal}>
+            <Modal isModalOpen={isModalOpen} onOk={closeModal} onClose={closeModal} onCancel={closeModal}>
                 OPENED
             </Modal>
         </>

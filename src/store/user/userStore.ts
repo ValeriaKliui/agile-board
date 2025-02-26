@@ -1,8 +1,8 @@
 import { USERS_DB_NAME } from '@constants';
 import { getData, setData } from '@shared/services/firebase';
 import { filterUndefinedValues } from '@shared/utils';
-import { User } from '@store/user';
-import { makeAutoObservable, reaction, runInAction } from 'mobx';
+import { User } from '@store';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 class UserStore {
   user: User | null = null;
@@ -12,13 +12,6 @@ class UserStore {
 
   constructor() {
     makeAutoObservable(this);
-
-    reaction(
-      () => this.userID,
-      (userID) => {
-        this.fetchUser(userID);
-      },
-    );
   }
 
   private handleError(error: Error) {
@@ -31,16 +24,14 @@ class UserStore {
     return !!this.user;
   }
 
-  setUserID(userID: string) {
-    this.userID = userID;
-  }
-
   async fetchUser(userID: string) {
     this.loadingUser = true;
     try {
       const user = await getData<User>(USERS_DB_NAME, userID);
+
       runInAction(() => {
         if (user) {
+          this.userID = userID;
           this.user = user;
         }
       });

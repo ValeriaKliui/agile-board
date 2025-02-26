@@ -8,4 +8,5 @@ export { SearchedSelect } from './SearchedSelect';
 export type { SearchedSelectProps } from './SearchedSelect/types';
 export { UserBoards } from './UserBoards';
 export { UserBoardsCreator } from './UserBoardsCreator';
+export { UserBoardsCreatorModal } from './UserBoardsCreatorModal';
 export { WelcomeComponent } from './WelcomeComponent';

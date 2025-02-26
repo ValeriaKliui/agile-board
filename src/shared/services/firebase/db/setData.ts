@@ -14,7 +14,7 @@ export const setData = async <T extends WithFieldValue<DocumentData>>(
       id = docRef.id;
     }
 
-    if (!id) throw new Error();
+    if (!id) throw new Error('Doc wasn`t created');
 
     return id;
   } catch (error) {

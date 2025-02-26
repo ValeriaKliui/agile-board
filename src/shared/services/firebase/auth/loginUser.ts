@@ -1,6 +1,6 @@
 import { auth } from '@config';
 import { handleAuthError } from '@shared/utils';
-import { LoginParams } from '@store/auth';
+import { LoginParams } from '@store';
 import { signInWithEmailAndPassword, User } from 'firebase/auth';
 
 import { LOGIN_ERRORS, LOGIN_ERRORS_MESSAGES } from './types';

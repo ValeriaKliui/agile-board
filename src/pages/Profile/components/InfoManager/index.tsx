@@ -1,5 +1,5 @@
 import { ProfileInfo } from '@pages/profile/components';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { observer } from 'mobx-react-lite';
 
 export const ProfileInfoManager = observer(() => {

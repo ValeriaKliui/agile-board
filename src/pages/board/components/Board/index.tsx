@@ -1,11 +1,15 @@
+import { PERMISSIONS } from '@constants';
 import { DndContext, DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { Column } from '@pages/board/components';
-import { ColStyled, RowStyled } from '@pages/board/components/Board/styled';
-import { boardsStore } from '@store/boards';
+import { Column, ColumnCreator } from '@pages/board/components';
+import { hasPermission } from '@pages/board/utils';
+import { columnsStore } from '@store';
 import { observer } from 'mobx-react-lite';
 
+import { ColStyled, RowStyled } from './styled';
+
 export const Board = observer(() => {
-    const { columns } = boardsStore.currentBoardInfo ?? {};
+    const columns = columnsStore.columns
+    const lastColumnOrder = columns.at(-1)?.order ?? 0;
 
     const onDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
@@ -31,11 +35,13 @@ export const Board = observer(() => {
                 gutter={16}
                 justify="start"
             >
-                {columns?.map(({ id, title, order }) => (
-                    <ColStyled key={id}>
+                {columns?.map(({ id, title, order }) => {
+                    return <ColStyled key={order}>
                         <Column id={id} title={title} order={order} />
                     </ColStyled>
-                ))}
+                }
+                )}
+                {hasPermission({ permission: PERMISSIONS.boards.edit }) && <ColumnCreator lastColumnOrder={lastColumnOrder} />}
             </RowStyled>
         </DndContext>
     );

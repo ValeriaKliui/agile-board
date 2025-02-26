@@ -2,7 +2,7 @@ import { USERS_DB_NAME } from '@constants';
 import { SearchedSelect } from '@pages/home/components';
 import { fetchDataWithParams } from '@pages/home/services';
 import { useDebouncedFetch } from '@shared/hooks';
-import { User } from '@store/user';
+import { User } from '@store';
 import { useCallback } from 'react';
 
 export const MembersSearch = () => {
