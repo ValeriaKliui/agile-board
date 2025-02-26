@@ -1,9 +1,12 @@
 import { Tooltip } from "@pages/board/components"
-import { MemberItemProps } from "./types"
 import { Avatar } from "@shared/components"
 
-export const MemberItem = ({ username, color }: MemberItemProps) => {
+import { MemberItemType } from "./types"
+
+export const MemberItem = ({ username, color }: MemberItemType) => {
     return <Tooltip title={username} placement="top">
-        <Avatar color={color} size={40} />
+        <Avatar color={color} size={40}  >
+            {username[0]}
+        </Avatar>
     </Tooltip>
 }

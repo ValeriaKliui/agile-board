@@ -1,23 +1,45 @@
 import { ROLES_PERMISSIONS } from '@constants';
-import { Tooltip } from '@pages/board/components';
-import { Avatar } from '@shared/components';
-import { Col, Row, } from 'antd';
+import { MemberItem, MemberItemType } from '@pages/board/components';
+import { getUsersByIDs } from '@pages/board/services/getUserByIDs';
+import { Col, Row } from 'antd';
+import { useEffect, useState } from 'react';
 
 import { MembersListManagerProps } from './types';
 
 export const MembersListManager = ({ members }: MembersListManagerProps) => {
+    const [membersData, setMembersData] = useState<MemberItemType[]>([]);
+
+    useEffect(() => {
+        const fetchUsernames = async () => {
+            if (members) {
+                const membersIDs = Object.keys(members);
+                const users = await getUsersByIDs({ IDs: membersIDs });
+
+                const membersData = users.map((user) => {
+                    const role = members[user.id];
+                    return {
+                        role,
+                        username: user.username,
+                        color: ROLES_PERMISSIONS[role]?.color
+                    };
+                });
+
+                setMembersData(membersData);
+            }
+        };
+
+        fetchUsernames();
+    }, [members]);
+
     return (
         <Row gutter={5} align="middle">
-            {members &&
-                Object.entries(members).map(([id, role]) => {
-                    return (
-                        <Col key={id}>
-                            <Tooltip title={role} placement="top">
-                                <Avatar color={ROLES_PERMISSIONS[role].color} src={role} size={40} />
-                            </Tooltip>
-                        </Col>
-                    );
-                })}
+            {membersData.map(({ color, username }) => {
+                return (
+                    <Col key={username}>
+                        <MemberItem color={color} username={username} />
+                    </Col>
+                );
+            })}
         </Row>
     );
 };

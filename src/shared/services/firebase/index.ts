@@ -21,5 +21,6 @@ export {
   getCollection,
   getData,
   setData,
+  getDocumentsByIds,
   updateData,
 } from './db';

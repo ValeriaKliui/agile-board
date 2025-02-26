@@ -5,6 +5,8 @@ export { Column } from './Column';
 export { ColumnCreator } from './ColumnCreator';
 export { ColumnCreatorForm } from './ColumnCreatorForm';
 export { ColumnCreatorModal } from './ColumnCreatorModal';
+export { MemberItem } from './MemberItem';
+export type { MemberItemType } from './MemberItem/types';
 export { MembersListManager } from './MembersListManager';
 export { Task } from './Task';
 export { Tooltip } from './Tooltip';

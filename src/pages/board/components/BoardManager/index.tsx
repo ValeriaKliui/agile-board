@@ -25,7 +25,7 @@ export const BoardManager = observer(({ id }: BoardManagerProps) => {
 
     return <Flex vertical gap='middle'>
         <Flex justify="space-between">
-            <Flex>
+            <Flex gap='large' align="center">
                 {title && <BoardHeader title={title} />}
                 <MembersListManager members={members} />
             </Flex>

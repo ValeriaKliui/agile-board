@@ -7,3 +7,4 @@ export { getCollection } from './getCollection';
 export { getData } from './getData';
 export { setData } from './setData';
 export { updateData } from './updateData';
+export { getDocumentsByIds } from './getDocumentsByIds';
