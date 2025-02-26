@@ -17,17 +17,19 @@ export const getPasswordRules = (): Rule[] => {
     {
       required: true,
       message: 'Please, input your password!',
-      validateTrigger: 'blur', 
     },
     {
       min: MIN_PASSWORD_LENGTH,
-      message: `Password must be ${MIN_PASSWORD_LENGTH} symbols or more`,
-      validateTrigger: 'change', 
+      message: `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`,
+      validateTrigger: 'blur',
     },
     {
       pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
       message: 'Password must contain at least 1 lowercase and uppercase letter, 1 digit',
-      validateTrigger: 'blur', 
+    },
+    {
+      pattern: /^\S*$/,
+      message: 'Password must not contain spaces',
     },
   ];
 };
