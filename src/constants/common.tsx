@@ -33,7 +33,13 @@ export const AUTH_TABS: DefaultTabInfo[] = [
   },
 ];
 
-export const USER_PROPERTIES = ['username', 'email', 'city', 'occupation'];
+export const USER_PROPERTIES_TO_UPDATE = [
+  'username',
+  'location',
+  'occupation',
+  'education',
+  'gender',
+];
 
 export const AVATARS_DB_NAME = VITE_AVATARS_DB_NAME;
 export const USERS_DB_NAME = VITE_USERS_DB_NAME;

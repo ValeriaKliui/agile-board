@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const { Text } = Typography;
 
-export const TitleStyled = styled(Text)`
+export const TextStyled = styled(Text)`
   display: flex;
   gap: 8px;
   align-items: center;
@@ -11,5 +11,4 @@ export const TitleStyled = styled(Text)`
 `;
 export const CardStyled = styled(Card)`
   width: 100%;
-  max-width: 300px;
 `;

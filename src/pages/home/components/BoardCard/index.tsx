@@ -1,31 +1,44 @@
-import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
-import { ROLES_PERMISSIONS } from "@constants";
-import { BoardCardProps } from "@pages/home/components";
-import { formatDatetime } from "@pages/home/services";
-import { Flex, Typography } from "antd";
+import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
+import { ROLES_PERMISSIONS } from '@constants';
+import { BoardCardProps } from '@pages/home/components';
+import { formatDatetime } from '@pages/home/services';
+import { Icon } from '@shared/components';
+import { Flex, Typography } from 'antd';
 
-import { CardStyled, TitleStyled } from "./styled";
+import { CardStyled, TextStyled } from './styled';
 
-const { Text, } = Typography
+const { Text } = Typography;
 
-export const BoardCard = ({ title, createdAt, owner, userRole, }: BoardCardProps) => {
-    const { icon: IconComponent, color } = ROLES_PERMISSIONS[userRole]
+export const BoardCard = ({ title, createdAt, owner, userRole }: BoardCardProps) => {
+  const { icon: IconComponent, color } = ROLES_PERMISSIONS[userRole];
 
-    const dateTime = formatDatetime({ timestamp: createdAt })
+  const dateTime = formatDatetime({ timestamp: createdAt });
 
-    return <CardStyled hoverable variant="borderless" title={<TitleStyled level={5}>
-        <IconComponent twoToneColor={color} />
-        {title}
-    </TitleStyled>} >
-        <Flex vertical gap='small'>
-            <Flex gap='small'>
-                <CalendarOutlined />
-                <Text><strong>Created:</strong> {dateTime}</Text>
-            </Flex>
-            <Flex gap='small'>
-                <UserOutlined />
-                <Text><strong>Owner:</strong> {owner}</Text>
-            </Flex>
+  return (
+    <CardStyled
+      hoverable
+      variant="borderless"
+      title={
+        <TextStyled>
+          <Icon icon={IconComponent} color={color} />
+          {title}
+        </TextStyled>
+      }
+    >
+      <Flex vertical gap="small">
+        <Flex gap="small">
+          <CalendarOutlined />
+          <Text>
+            <strong>Created:</strong> {dateTime}
+          </Text>
         </Flex>
+        <Flex gap="small">
+          <UserOutlined />
+          <Text>
+            <strong>Owner:</strong> {owner}
+          </Text>
+        </Flex>
+      </Flex>
     </CardStyled>
+  );
 };
