@@ -33,7 +33,7 @@ export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues
         name="username"
         rules={[{ required: true, message: 'Please input your username!' }]}
       >
-        <Input />
+        <Input placeholder="Nickname" />
       </Item>
 
       <PasswordField />

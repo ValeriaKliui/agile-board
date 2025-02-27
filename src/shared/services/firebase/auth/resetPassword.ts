@@ -6,13 +6,10 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 
 export const resetPassword = async ({ email }: ForgotPasswordParams): Promise<void> => {
   try {
-    if (auth) await sendPasswordResetEmail(auth, email);
+    await sendPasswordResetEmail(auth, email);
   } catch (error) {
-    const errorMessage = handleAuthError(
-      error,
-      RESET_PASSWORD_ERRORS,
-      RESET_PASSWORD_ERRORS_MESSAGES,
-    );
-    throw new Error(errorMessage || 'An unexpected error occurred while resetting the password.');
+    const errorMessage = handleAuthError(error, RESET_PASSWORD_ERRORS, RESET_PASSWORD_ERRORS_MESSAGES) || 'An unexpected error occurred while resetting the password.';
+    console.error('Password reset error:', errorMessage); 
+    throw new Error(errorMessage);  
   }
 };

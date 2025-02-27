@@ -5,29 +5,27 @@ import { Link } from 'react-router';
 
 import { Header as HeaderStyled } from './styled';
 import { HeaderProps } from './types';
+import { memo } from 'react';
 
-export const Header = ({ onLogout, onLogin, avatar, username }: HeaderProps) => {
+export const Header = memo(({ onLogout, onLogin, avatar, username }: HeaderProps) => {
   const defaultUsername = username ?? 'Guest';
+  const isAuthenticated = Boolean(username);
+  const buttonText = isAuthenticated ? 'Log out' : 'Log in';
+  const buttonHandler = isAuthenticated ? onLogout : onLogin;
 
   return (
     <HeaderStyled>
       <Breadcrumbs />
-      <Flex gap={'middle'} align="center">
+      <Flex gap="middle" align="center">
         <Link to={PATHS.PROFILE}>
-          <Avatar size={40} src={avatar ?? null}>
-            {!avatar && defaultUsername?.[0]}
+          <Avatar size={40} src={avatar}>
+            {!avatar && defaultUsername[0]}
           </Avatar>
         </Link>
-        {username ? (
-          <Button cursor="pointer" onClick={onLogout}>
-            Log out
-          </Button>
-        ) : (
-          <Button cursor="pointer" onClick={onLogin}>
-            Log in
-          </Button>
-        )}
+        <Button cursor="pointer" onClick={buttonHandler}>
+          {buttonText}
+        </Button>
       </Flex>
     </HeaderStyled>
   );
-};
+});

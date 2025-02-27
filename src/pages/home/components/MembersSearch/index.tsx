@@ -1,4 +1,4 @@
-import { USERS_DB_NAME } from '@constants';
+import { USERS_COLLECTION_NAME } from '@constants';
 import { SearchedSelect } from '@pages/home/components';
 import { fetchDataWithParams } from '@pages/home/services';
 import { useDebouncedFetch } from '@shared/hooks';
@@ -8,7 +8,11 @@ import { useCallback } from 'react';
 export const MembersSearch = () => {
   const fetchFunc = useCallback(
     (searchTerm: string) =>
-      fetchDataWithParams<User>({ collectionName: USERS_DB_NAME, searchKey: 'username', searchTerm }),
+      fetchDataWithParams<User>({
+        collectionName: USERS_COLLECTION_NAME,
+        searchKey: 'username',
+        searchTerm,
+      }),
     [],
   );
 
@@ -20,7 +24,7 @@ export const MembersSearch = () => {
 
   const options = result?.documents?.map(({ username, userID }: User) => ({
     label: username,
-    value: userID
+    value: userID,
   }));
 
   const safeFetchSearchFunc = (searchTerm: string) => {

@@ -10,7 +10,8 @@ export const loginUser = async ({ email, password }: LoginParams): Promise<User>
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     return user;
   } catch (error) {
-    const errorMessage = handleAuthError(error, LOGIN_ERRORS, LOGIN_ERRORS_MESSAGES);
-    throw new Error(errorMessage || 'An unexpected error occurred during login.');
+    const errorMessage = handleAuthError(error, LOGIN_ERRORS, LOGIN_ERRORS_MESSAGES) || 'An unexpected error occurred during login.';
+    console.error('Login error:', errorMessage);  
+    throw new Error(errorMessage);  
   }
 };

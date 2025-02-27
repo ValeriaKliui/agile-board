@@ -1,14 +1,11 @@
 import { RoleIconProps } from './types';
 
-export const Icon = ({ icon: Icon, color, size = 20 }: RoleIconProps) => {
-  if (!Icon) return null;
+export const Icon = ({ icon: IconComponent, color, size = 20 }: RoleIconProps) => {
+  if (!IconComponent) return null;
 
-  const isTwoTone = Icon.displayName?.includes('TwoTone');
+  const isTwoTone = IconComponent.displayName?.startsWith('TwoTone');
 
-  return (
-    <Icon
-      {...(isTwoTone ? { twoToneColor: color } : { style: { color } })}
-      style={{ fontSize: size }}
-    />
-  );
+  const iconProps = isTwoTone ? { twoToneColor: color } : { style: { color, fontSize: size } };
+
+  return <IconComponent {...iconProps} />;
 };

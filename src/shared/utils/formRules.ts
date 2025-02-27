@@ -12,24 +12,22 @@ export const getEmailRules = (): Rule[] => [
   },
 ];
 
-export const getPasswordRules = (): Rule[] => {
-  return [
-    {
-      required: true,
-      message: 'Please, input your password!',
-    },
-    {
-      min: MIN_PASSWORD_LENGTH,
-      message: `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`,
-      validateTrigger: 'blur',
-    },
-    {
-      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-      message: 'Password must contain at least 1 lowercase and uppercase letter, 1 digit',
-    },
-    {
-      pattern: /^\S*$/,
-      message: 'Password must not contain spaces',
-    },
-  ];
+export const validatePassword = (_, value:string) => {
+  if (!value) {
+    return Promise.reject('Please, input your password');
+  }
+
+  if (value.length < MIN_PASSWORD_LENGTH) {
+    return Promise.reject(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long`);
+  }
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+  if (!passwordRegex.test(value)) {
+    return Promise.reject(
+      'Password must contain at least 1 lowercase and uppercase letter, 1 digit',
+    );
+  }
+
+  return Promise.resolve();
 };
+

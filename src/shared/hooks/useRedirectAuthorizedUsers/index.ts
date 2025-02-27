@@ -11,3 +11,4 @@ export const useRedirectAuthorizedUsers = (isLoggedIn: boolean) => {
     if (isLoggedIn) navigate(from, { replace: true });
   }, [navigate, isLoggedIn,from]);
 };
+
