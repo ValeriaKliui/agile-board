@@ -11,14 +11,15 @@ export const createBoard = async ({ title, owner, members }: BoardCreationParams
       owner,
       members,
     };
-    const id = await setData(BOARDS_COLLECTION_NAME, null, boardData);
-    if (!id) throw new Error('Board wasn`t created');
+    const boardID = await setData(BOARDS_COLLECTION_NAME, null, boardData);
+
+    if (!boardID) throw new Error('Board wasn`t created');
 
     const formattedData = formatDatetime({ timestamp: boardData.createdAt });
 
-    await addMembersToBoard({ id, members, owner });
+    await addMembersToBoard({ boardID, members, owner });
 
-    return { id, boardData: { ...boardData, createdAt: formattedData } };
+    return { boardID, boardData: { ...boardData, createdAt: formattedData } };
   } catch (error) {
     throw new Error(
       `Error creating board: ${error instanceof Error ? error.message : 'Unknown error'}`,

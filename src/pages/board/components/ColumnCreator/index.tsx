@@ -17,7 +17,8 @@ export const ColumnCreator = observer(({ lastColumnOrder }: ColumnCreatorProps) 
 
     const createColumn = async () => {
         const newColumn = form.getFieldsValue()
-        await columnsStore.addColumns({ boardID: boardStore.currentBoardInfo?.id, columns: [newColumn] })
+        const boardID = boardStore.currentBoardInfo?.boardID
+        if (boardID) await columnsStore.addColumns({ boardID, columns: [newColumn] })
         closeModal()
     }
 

@@ -10,6 +10,41 @@ import { BoardInfo } from '@store';
 
 import { UserBoard } from './types';
 
+const fetchBoardsWithRoles = async (userBoards: UserBoard[]) => {
+  try {
+    const boardDataPromises = userBoards.map(({ id }) => fetchBoard({ boardID: id }));
+    const boardsInfo = await getFulfilledResults(boardDataPromises);
+
+    return boardsInfo.map((board, index) => ({
+      ...board,
+      userRole: userBoards[index].role,
+    }));
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message);
+    return [];
+  }
+};
+
+const fetchBoardsWithOwners = async (boards: BoardInfo[]) => {
+  try {
+    const ownerDataPromises = boards.map(async (board) => {
+      const ownerData = board.owner
+        ? await getData<{ username: string } | null>(USERS_COLLECTION_NAME, board.owner)
+        : null;
+
+      return {
+        ...board,
+        owner: (ownerData?.username || 'Unknown') as ROLES_VALUES,
+      };
+    });
+
+    return getFulfilledResults(ownerDataPromises);
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message);
+    return [];
+  }
+};
+
 export const fetchUserBoards = async (
   userID: string | null,
 ): Promise<[ROLES_VALUES, BoardInfo[]][]> => {
@@ -23,22 +58,10 @@ export const fetchUserBoards = async (
 
   if (!userBoards?.length) return [];
 
-  const boardDataPromises = userBoards.map(({ id }) => fetchBoard({ id }));
+  const boardsWithRoles = await fetchBoardsWithRoles(userBoards);
+  const boardsWithOwners = await fetchBoardsWithOwners(boardsWithRoles);
 
-  const boardsInfo = await getFulfilledResults(boardDataPromises);
+  const boardsWithIDs = boardsWithOwners.map((board) => ({ ...board, boardID: board.id }));
 
-  const boardsWithRoles = boardsInfo.map((board, index) => ({
-    ...board,
-    userRole: userBoards[index].role,
-  }));
-
-  const ownerDataPromises = boardsWithRoles.map(async (board) => {
-    const ownerData = board.owner
-      ? await getData<{ username: string } | null>(USERS_COLLECTION_NAME, board.owner)
-      : null;
-    return { ...board, owner: (ownerData?.username || 'Unknown') as ROLES_VALUES };
-  });
-
-  const boardsInfoWithOwners = await getFulfilledResults(ownerDataPromises);
-  return Object.entries(groupArrayByValue<Partial<BoardInfo>>(boardsInfoWithOwners, 'userRole'));
+  return Object.entries(groupArrayByValue<Partial<BoardInfo>>(boardsWithIDs, 'userRole'));
 };

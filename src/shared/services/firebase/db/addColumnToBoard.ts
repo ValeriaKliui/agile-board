@@ -1,16 +1,25 @@
 import { db } from '@config';
 import { BOARDS_COLLECTION_NAME } from '@constants';
-import { BoardInfo } from '@store';
+import { getCollection } from '@shared/services/firebase/db/getCollection';
+import { AddColumnsProps, Column } from '@store';
 import { addDoc, collection } from 'firebase/firestore';
 
-export const addColumnToBoard = async ({ id, columns }: Pick<BoardInfo, 'columns' | 'id'>) => {
+export const addColumnToBoard = async ({ boardID, columns }: AddColumnsProps) => {
   try {
-    const batchPromises = columns?.map((column) => {
-      addDoc(collection(db, BOARDS_COLLECTION_NAME, id, 'columns'), column);
+    columns?.map(async (column) => {
+      const id = await addDoc(collection(db, BOARDS_COLLECTION_NAME, boardID, 'columns'), column);
+      return { id, ...column };
     });
 
-    if (batchPromises) await Promise.all(batchPromises);
+    const updatedColumns = await getCollection<Column>([
+      BOARDS_COLLECTION_NAME,
+      boardID,
+      'columns',
+    ]);
+
+    return updatedColumns;
   } catch (error) {
-    if (error instanceof Error) throw new Error(error.message);
+    console.error('Error adding columns:', error);
+    throw new Error(error instanceof Error ? error.message : 'Unknown error');
   }
 };

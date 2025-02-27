@@ -5,6 +5,7 @@ export { fetchBoard } from './fetchBoard';
 export { formatDatetime } from './formatDatetime';
 export { getCollection } from './getCollection';
 export { getData } from './getData';
+export { getDocumentsByIds } from './getDocumentsByIds';
 export { setData } from './setData';
 export { updateData } from './updateData';
-export { getDocumentsByIds } from './getDocumentsByIds';
+export { fetchColumns } from './fetchColumns';

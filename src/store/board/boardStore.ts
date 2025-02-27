@@ -1,6 +1,5 @@
-import { BOARDS_COLLECTION_NAME, BOARDS_TEMPLATE_COLLECTION_NAME, ROLES } from '@constants';
+import { BOARDS_COLLECTION_NAME, BOARDS_TEMPLATE_COLLECTION_NAME } from '@constants';
 import { createBoard, fetchBoard, getCollection, updateData } from '@shared/services/firebase';
-import { WithId } from '@shared/types';
 import { type Column, columnsStore, userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
@@ -10,7 +9,6 @@ class BoardStore {
   isLoading = false;
   error: string | null = null;
   currentBoardInfo: BoardInfo | null = null;
-  boards: BoardInfo[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -19,26 +17,22 @@ class BoardStore {
   async createBoard({ title, owner, members, template }: BoardCreationInfo) {
     this.isLoading = true;
     this.error = null;
-    members[owner] = ROLES.OWNER;
 
     try {
-      const { id, boardData } = await createBoard({
+      const { boardID, boardData } = await createBoard({
         title,
         owner,
         members,
       });
 
-      if (template) {
-        const columns = await getCollection<Column>([
-          BOARDS_TEMPLATE_COLLECTION_NAME,
-          template,
-          'columns',
-        ]);
-        columnsStore.addColumns({ boardID: id, columns });
+      const columns = template ? await this.fetchTemplateColumns({ template }) : [];
+
+      if (columns.length > 0) {
+        await columnsStore.addColumns({ boardID, columns });
       }
 
       runInAction(() => {
-        this.currentBoardInfo = { id, ...boardData };
+        this.currentBoardInfo = { boardID, ...boardData };
       });
     } catch (error) {
       if (error instanceof Error) this.error = error.message;
@@ -47,32 +41,34 @@ class BoardStore {
     }
   }
 
-  async updateBoard({ id, boardData }: UpdateBoardInfo) {
+  private async fetchTemplateColumns({ template }: Pick<BoardCreationInfo, 'template'>) {
     this.isLoading = true;
-    const boardID = id ?? this.currentBoardInfo.id;
+    this.error = null;
+
+    try {
+      const columns = await getCollection<Column>([
+        BOARDS_TEMPLATE_COLLECTION_NAME,
+        template,
+        'columns',
+      ]);
+
+      return columns?.map(({ id: _, ...column }) => column) || [];
+    } catch (error) {
+      if (error instanceof Error) this.error = error.message;
+      return [];
+    }
+  }
+
+  async updateBoard({ boardID, boardData }: UpdateBoardInfo) {
+    this.isLoading = true;
+    this.error = null;
 
     try {
       await updateData(BOARDS_COLLECTION_NAME, boardID, boardData);
 
-      runInAction(() => (this.currentBoardInfo = { ...this.currentBoardInfo, ...boardData }));
-    } catch (error) {
-      if (error instanceof Error) this.error = error.message;
-    } finally {
-      runInAction(() => (this.isLoading = false));
-    }
-  }
-
-  async fetchCurrentBoard({ id }: WithId) {
-    this.isLoading = true;
-
-    try {
-      const boardInfo = await fetchBoard({ id });
-      await columnsStore.fetchColumns({ boardID: id });
-
       runInAction(() => {
-        if (boardInfo) {
-          this.currentBoardInfo = boardInfo;
-        }
+        if (this.currentBoardInfo)
+          this.currentBoardInfo = { ...this.currentBoardInfo, ...boardData };
       });
     } catch (error) {
       if (error instanceof Error) this.error = error.message;
@@ -81,28 +77,22 @@ class BoardStore {
     }
   }
 
-  //   async fetchTasksForColumn({ id }: WithId) {
-  //     try {
-  //       if (this.currentBoardID) {
-  //         const tasks = await getCollection<Task>([
-  //           BOARDS_COLLECTION_NAME,
-  //           this.currentBoardID,
-  //           'columns',
-  //           id,
-  //           'tasks',
-  //         ]);
+  async fetchCurrentBoard({ boardID }: Pick<BoardInfo, 'boardID'>) {
+    this.isLoading = true;
 
-  //         return tasks;
-  //       }
+    try {
+      const boardInfo = await fetchBoard({ boardID });
+      await columnsStore.fetchColumns({ boardID });
 
-  //       return [];
-  //     } catch (error) {
-  //       if (error instanceof Error) this.error = error.message;
-  //     } finally {
-  //       runInAction(() => (this.isLoading = false));
-  //     }
-  //   }
-
+      runInAction(() => {
+        if (boardInfo) this.currentBoardInfo = boardInfo;
+      });
+    } catch (error) {
+      if (error instanceof Error) this.error = error.message;
+    } finally {
+      runInAction(() => (this.isLoading = false));
+    }
+  }
   get currentRole() {
     return this.currentBoardInfo?.members[userStore.userID] || null;
   }

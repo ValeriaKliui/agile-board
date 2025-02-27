@@ -1,5 +1,5 @@
-import { BOARDS_COLLECTION_NAME } from '@constants';
-import { addColumnToBoard, getCollection } from '@shared/services/firebase';
+import { addColumnToBoard, fetchColumns } from '@shared/services/firebase';
+import { tasksStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import type { AddColumnsProps, BoardColumnProps, Column } from './types';
@@ -15,10 +15,13 @@ class ColumnsStore {
 
   async addColumns({ boardID, columns }: AddColumnsProps) {
     this.isLoading = true;
-    try {
-      await addColumnToBoard({ id: boardID, columns });
 
-      runInAction(() => (this.columns = [...this.columns, ...columns]));
+    try {
+      const newColumns = await addColumnToBoard({ boardID, columns });
+
+      runInAction(() => {
+        if (newColumns) this.columns = newColumns;
+      });
     } catch (error) {
       if (error instanceof Error) this.error = error.message;
     } finally {
@@ -28,10 +31,13 @@ class ColumnsStore {
 
   async fetchColumns({ boardID }: BoardColumnProps) {
     try {
-      const columns = await getCollection<Column>([BOARDS_COLLECTION_NAME, boardID, 'columns']);
+      const columns = await fetchColumns({ boardID });
 
       runInAction(() => {
-        if (columns) this.columns = columns;
+        if (columns) {
+          this.columns = columns;
+          columns.forEach(({ columnID }) => tasksStore.fetchTasks({ columnID, boardID }));
+        }
       });
     } catch (error) {
       if (error instanceof Error) throw new Error(error.message);

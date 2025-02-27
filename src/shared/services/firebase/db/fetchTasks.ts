@@ -1,0 +1,22 @@
+import { BOARDS_COLLECTION_NAME } from '@constants';
+import { getCollection } from '@shared/services/firebase';
+import { BoardInfo, Column, Task } from '@store';
+
+export const fetchTasks = async ({
+  boardID,
+  columnID,
+}: Pick<BoardInfo, 'boardID'> & Pick<Column, 'columnID'>) => {
+  try {
+    const tasks = await getCollection<Task>([
+      BOARDS_COLLECTION_NAME,
+      boardID,
+      'columns',
+      columnID,
+      'tasks',
+    ]);
+
+    return tasks?.map(({ id, ...task }) => ({ ...task, taskID: id }));
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message);
+  }
+};

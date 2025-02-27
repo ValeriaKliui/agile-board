@@ -9,8 +9,9 @@ const { Text } = Typography
 
 export const BoardHeader = observer(({ title }: Pick<BoardInfo, 'title'>) => {
     const onEdit = async (title: string) => {
-        const boardID = boardStore.currentBoardInfo.id
-        if (boardID) await boardStore.updateBoard({ id: boardID, boardData: { title } })
+        const boardID = boardStore.currentBoardInfo?.boardID
+        
+        if (boardID) await boardStore.updateBoard({ boardID, boardData: { title } })
     }
 
     return (

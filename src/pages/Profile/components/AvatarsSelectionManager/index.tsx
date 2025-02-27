@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 import { AvatarsSelectionManagerProps } from './types';
 
-
 export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);
 

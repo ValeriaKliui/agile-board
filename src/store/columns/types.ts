@@ -1,12 +1,13 @@
-import { WithId } from '@shared/types';
+import { BoardInfo } from 'store/board';
 
-export type BoardColumnProps = { boardID: string };
+export type BoardColumnProps = Pick<BoardInfo, 'boardID'>;
 
-export type AddColumnsProps = BoardColumnProps & {
+export type AddColumnsProps = Pick<BoardInfo, 'boardID'> & {
   columns: Column[];
 };
 
-export interface Column extends WithId {
+export interface Column {
+  columnID: string;
   order: number;
   title: string;
 }

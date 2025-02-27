@@ -5,8 +5,8 @@ import { Task as TaskProps } from '@store';
 
 import { CardStyled } from './styled';
 
-export const Task = ({ title, id }: TaskProps) => {
-    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
+export const Task = ({ title, taskID }: TaskProps) => {
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: taskID });
 
     const { x = 0, y = 0 } = transform ?? {}
 

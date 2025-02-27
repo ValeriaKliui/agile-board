@@ -18,11 +18,10 @@ export const UserBoards = observer(({ boardsInfo, }: UserBoardsProps) => {
                         {role}
                     </Title>
                     <Boards>
-                        {boards.map(({ title, createdAt, owner, userRole, id }) => (
-                            <NavLink to={`${PATHS.BOARD}/${id}`} key={id}>
+                        {boards.map(({ title, createdAt, owner, userRole, boardID }) => (
+                            <NavLink to={`${PATHS.BOARD}/${boardID}`} key={boardID}>
                                 <BoardCard
-                                    key={id}
-                                    id={id}
+                                    boardID={boardID}
                                     title={title}
                                     createdAt={createdAt}
                                     owner={owner}

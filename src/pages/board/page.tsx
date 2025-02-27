@@ -4,5 +4,5 @@ import { useParams } from "react-router"
 export const BoardPage = () => {
     const params = useParams()
 
-    return <><BoardManager id={params.boardID} /></>
+    return <BoardManager boardID={params.boardID} />
 }
