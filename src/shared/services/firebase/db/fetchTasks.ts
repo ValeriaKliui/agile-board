@@ -1,4 +1,4 @@
-import { BOARDS_COLLECTION_NAME } from '@constants';
+import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
 import { getCollection } from '@shared/services/firebase';
 import { BoardInfo, Column, Task } from '@store';
 
@@ -10,7 +10,7 @@ export const fetchTasks = async ({
     const tasks = await getCollection<Task>([
       BOARDS_COLLECTION_NAME,
       boardID,
-      'columns',
+      COLUMNS_COLLECTION_NAME,
       columnID,
       'tasks',
     ]);

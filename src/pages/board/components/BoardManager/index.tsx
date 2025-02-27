@@ -1,15 +1,26 @@
+import { PATHS } from '@constants';
 import { Board, BoardHeader, MembersListManager } from '@pages/board/components';
+import { Button } from '@shared/components';
 import { boardStore } from '@store';
 import { Flex, Spin, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 import { BoardManagerProps } from './types';
 
 const { Text } = Typography;
 
 export const BoardManager = observer(({ boardID }: BoardManagerProps) => {
+    const navigate = useNavigate()
     const { title, createdAt, members } = boardStore.currentBoardInfo ?? {};
+
+    const onDelete = useCallback(async () => {
+        if (boardID) {
+            await boardStore.deleteBoard({ boardID })
+            navigate(PATHS.HOME)
+        }
+    }, [boardID, navigate])
 
     const fetchCurrentBoard = useCallback(async () => {
         if (boardID) await boardStore.fetchCurrentBoard({ boardID });
@@ -28,7 +39,10 @@ export const BoardManager = observer(({ boardID }: BoardManagerProps) => {
                     {title && <BoardHeader title={title} />}
                     <MembersListManager members={members} />
                 </Flex>
-                <Text>Created at: {createdAt}</Text>
+                <Flex gap='small' align='center'>
+                    <Text><strong>Created:</strong> {createdAt}</Text>
+                    <Button type='dashed' onClick={onDelete}>Delete board</Button>
+                </Flex>
             </Flex>
             <Board />
         </Flex>

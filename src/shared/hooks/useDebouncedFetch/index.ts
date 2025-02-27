@@ -23,7 +23,7 @@ export const useDebouncedFetch = <T>({
           setResult(result);
         }
       } catch (error) {
-        console.error('Error fetching options', error);
+        console.error('Error fetching', error);
         setResult(null);
       } finally {
         setIsFetching(false);

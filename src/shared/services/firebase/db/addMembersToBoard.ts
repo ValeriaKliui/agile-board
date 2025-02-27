@@ -1,11 +1,11 @@
 import { db } from '@config';
-import { BOARDS_COLLECTION_NAME, ROLES, USER_BOARDS_COLLECTION_NAME } from '@constants';
+import { BOARDS_COLLECTION_NAME, USER_BOARDS_COLLECTION_NAME } from '@constants';
 import { doc, setDoc } from 'firebase/firestore';
 
 import { AddingMembersProps } from './types';
 
-export const addMembersToBoard = async ({ boardID, members, owner }: AddingMembersProps) => {
-  const membersArray = [...Object.entries(members), [owner, ROLES.OWNER]];
+export const addMembersToBoard = async ({ boardID, members }: AddingMembersProps) => {
+  const membersArray = Object.entries(members);
 
   try {
     const membersPromises = membersArray.map(([userID, role]) => {

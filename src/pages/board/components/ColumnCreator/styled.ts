@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const ColumnStyled = styled(Card)`
   height: 100%;
-  height: 100%;
   min-height: 400px;
   display: flex;
   align-items: center;

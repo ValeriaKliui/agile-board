@@ -15,4 +15,5 @@ export const ColStyled = styled(Col)`
   max-width: unset;
   flex: 1;
   margin-bottom: 16px;
+  max-width: 280px;
 `;

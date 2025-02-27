@@ -1,5 +1,10 @@
-import { BOARDS_COLLECTION_NAME, BOARDS_TEMPLATE_COLLECTION_NAME } from '@constants';
+import {
+  BOARDS_COLLECTION_NAME,
+  BOARDS_TEMPLATE_COLLECTION_NAME,
+  COLUMNS_COLLECTION_NAME,
+} from '@constants';
 import { createBoard, fetchBoard, getCollection, updateData } from '@shared/services/firebase';
+import { deleteData } from '@shared/services/firebase/db/deleteData';
 import { type Column, columnsStore, userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
@@ -49,7 +54,7 @@ class BoardStore {
       const columns = await getCollection<Column>([
         BOARDS_TEMPLATE_COLLECTION_NAME,
         template,
-        'columns',
+        COLUMNS_COLLECTION_NAME,
       ]);
 
       return columns?.map(({ id: _, ...column }) => column) || [];
@@ -93,6 +98,19 @@ class BoardStore {
       runInAction(() => (this.isLoading = false));
     }
   }
+
+  async deleteBoard({ boardID }: Pick<BoardInfo, 'boardID'>) {
+    try {
+      await deleteData(BOARDS_COLLECTION_NAME, boardID);
+
+      runInAction(() => (this.currentBoardInfo = null));
+    } catch (error) {
+      if (error instanceof Error) this.error = error.message;
+    } finally {
+      runInAction(() => (this.isLoading = false));
+    }
+  }
+
   get currentRole() {
     return this.currentBoardInfo?.members[userStore.userID] || null;
   }

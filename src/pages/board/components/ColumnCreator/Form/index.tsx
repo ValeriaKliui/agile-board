@@ -10,18 +10,23 @@ export const ColumnCreatorForm = <
 >({
     form,
     order,
-    onFinish
+    onFinish,
 }: ColumnCreatorFormProps<TForm, TFormValues>) => {
     return (
         <Form form={form} onFinish={onFinish}>
             <Item name="order" initialValue={order} hidden>
                 <Input />
             </Item>
-            <Item name='title' label='Column name' rules={[{ required: true, message: 'Please input column title' }]}
+            <Item
+                name="title"
+                label="Column name"
+                rules={[{ required: true, message: 'Please input column title' }]}
             >
-                <Input placeholder='Column name' />
+                <Input placeholder="Column name" />
             </Item>
-            <Button htmlType='submit' type='primary'>Create</Button>
+            <Button htmlType="submit" type="primary">
+                Create
+            </Button>
         </Form>
     );
 };

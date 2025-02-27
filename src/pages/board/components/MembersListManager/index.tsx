@@ -31,6 +31,7 @@ export const MembersListManager = ({ members }: MembersListManagerProps) => {
         fetchUsernames();
     }, [members]);
 
+
     return (
         <Row gutter={5} align="middle">
             {membersData.map(({ color, username }) => {
