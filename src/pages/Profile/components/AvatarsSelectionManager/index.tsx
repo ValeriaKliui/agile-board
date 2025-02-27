@@ -1,4 +1,4 @@
-import { AVATARS_DB_NAME } from '@constants';
+import { AVATARS_COLLECTION_NAME } from '@constants';
 import { AvatarsSelection } from '@pages/profile/components';
 import { useAvatars } from '@pages/profile/hooks';
 import { userStore } from '@store';
@@ -17,13 +17,13 @@ export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps
     avatars: userAvatars,
     isAvatarsLoading: isUserAvatarsLoading,
     errorLoading: errorUser,
-  } = useAvatars(AVATARS_DB_NAME, userStore.userID);
+  } = useAvatars(AVATARS_COLLECTION_NAME, userStore.userID);
 
   const {
     avatars: defaultAvatars,
     isAvatarsLoading: isDefaultAvatarsLoading,
     errorLoading: errorDefault,
-  } = useAvatars(AVATARS_DB_NAME, 'default');
+  } = useAvatars(AVATARS_COLLECTION_NAME, 'default');
 
   const handleSelection = (elem: UploadFile) => {
     selectAvatar(elem.url || '');

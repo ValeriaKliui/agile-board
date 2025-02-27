@@ -1,4 +1,4 @@
-import { BOARDS_TEMPLATE_DB_NAME } from '@constants';
+import { BOARDS_TEMPLATE_COLLECTION_NAME } from '@constants';
 import { MembersSearch } from '@pages/home/components';
 import { RadioGroup } from '@shared/components';
 import { getCollection } from '@shared/services/firebase';
@@ -20,7 +20,7 @@ export const BasicBoardInfo = () => {
 
   useEffect(() => {
     const fetchTemplates = async () => {
-      const templates = await getCollection<Template>([BOARDS_TEMPLATE_DB_NAME])
+      const templates = await getCollection<Template>([BOARDS_TEMPLATE_COLLECTION_NAME])
       if (templates) setTemplates([{ id: 'custom', title: 'Custom' }, ...templates,])
     }
 

@@ -22,7 +22,10 @@ export const registerUser = async ({
 
     return user;
   } catch (error) {
-    const errorMessage = handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES);
-    throw new Error(errorMessage || 'An unexpected error occurred during registration.');
+    const errorMessage =
+      handleAuthError(error, REGISTER_ERRORS, REGISTER_ERRORS_MESSAGES) ||
+      'An unexpected error occurred during registration.';
+    console.error('Registration error:', errorMessage);
+    throw new Error(errorMessage);
   }
 };

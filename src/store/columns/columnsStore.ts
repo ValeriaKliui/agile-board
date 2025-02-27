@@ -1,4 +1,4 @@
-import { BOARDS_DB_NAME } from '@constants';
+import { BOARDS_COLLECTION_NAME } from '@constants';
 import { addColumnToBoard, getCollection } from '@shared/services/firebase';
 import { makeAutoObservable, runInAction } from 'mobx';
 
@@ -28,7 +28,7 @@ class ColumnsStore {
 
   async fetchColumns({ boardID }: BoardColumnProps) {
     try {
-      const columns = await getCollection<Column>([BOARDS_DB_NAME, boardID, 'columns']);
+      const columns = await getCollection<Column>([BOARDS_COLLECTION_NAME, boardID, 'columns']);
 
       runInAction(() => {
         if (columns) this.columns = columns;

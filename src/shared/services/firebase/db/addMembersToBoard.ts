@@ -1,14 +1,14 @@
 import { db } from '@config';
-import { BOARDS_DB_NAME, USER_BOARDS_DB_NAME } from '@constants';
-import { AddingMembersProps } from '@shared/services/firebase/db/types';
+import { BOARDS_COLLECTION_NAME, ROLES, USER_BOARDS_COLLECTION_NAME } from '@constants';
+import { AddingMembersProps } from './types';
 import { doc, setDoc } from 'firebase/firestore';
 
-export const addMembersToBoard = async ({ id, members }: AddingMembersProps) => {
-  const membersArray = Object.entries(members);
+export const addMembersToBoard = async ({ id, members, owner }: AddingMembersProps) => {
+  const membersArray = [...Object.entries(members), [owner, ROLES.OWNER]];
 
   try {
     const membersPromises = membersArray.map(([userID, role]) => {
-      const userBoardRef = doc(db, USER_BOARDS_DB_NAME, userID, BOARDS_DB_NAME, id);
+      const userBoardRef = doc(db, USER_BOARDS_COLLECTION_NAME, userID, BOARDS_COLLECTION_NAME, id);
       return setDoc(userBoardRef, { role });
     });
 

@@ -2,13 +2,14 @@ import { PATHS } from '@constants';
 import { Header } from '@shared/components';
 import { authStore, userStore } from '@store';
 import { observer } from 'mobx-react-lite';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 
 export const HeaderManager = observer(() => {
   const navigate = useNavigate();
 
-  const onLogin = () => navigate(PATHS.LOGIN);
-  const onLogout = () => authStore.logout();
+  const onLogin = useCallback(() => navigate(PATHS.LOGIN), [navigate]);
+  const onLogout = useCallback(() => authStore.logout(), []);
 
   return (
     <Header

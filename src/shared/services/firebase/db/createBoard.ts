@@ -1,5 +1,5 @@
-import { BOARDS_DB_NAME } from '@constants';
-import { addMembersToBoard, formatDatetime,setData } from '@shared/services/firebase';
+import { BOARDS_COLLECTION_NAME } from '@constants';
+import { addMembersToBoard, formatDatetime, setData } from '@shared/services/firebase';
 import { BoardCreationParams } from '@store';
 import { Timestamp } from 'firebase/firestore';
 
@@ -11,12 +11,12 @@ export const createBoard = async ({ title, owner, members }: BoardCreationParams
       owner,
       members,
     };
-    const id = await setData(BOARDS_DB_NAME, null, boardData);
+    const id = await setData(BOARDS_COLLECTION_NAME, null, boardData);
     if (!id) throw new Error('Board wasn`t created');
 
     const formattedData = formatDatetime({ timestamp: boardData.createdAt });
 
-    await addMembersToBoard({ id, members });
+    await addMembersToBoard({ id, members, owner });
 
     return { id, boardData: { ...boardData, createdAt: formattedData } };
   } catch (error) {

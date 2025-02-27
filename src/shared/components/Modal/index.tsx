@@ -1,34 +1,31 @@
 import { Button, Modal as ModalAntd } from 'antd';
-import React from 'react';
+import { memo } from 'react';
 
 import { ModalProps } from './types';
 
-export const Modal: React.FC<ModalProps> = ({
-  isModalOpen,
-  title,
-  onOk,
-  onCancel,
-  children,
-  ...modalProps
-}) => {
-  return (
-    <ModalAntd
-      centered
-      title={title}
-      open={isModalOpen}
-      onOk={onOk}
-      onCancel={onCancel}
-      footer={[
-        <Button key="back" onClick={onCancel}>
-          Cancel
-        </Button>,
-        <Button key="submit" type="primary" onClick={onOk}>
-          OK
-        </Button>,
-      ]}
-      {...modalProps}
-    >
-      {children}
-    </ModalAntd>
-  );
-};
+export const Modal = memo(
+  ({ isModalOpen, title, onOk, onCancel, children, ...modalProps }: ModalProps) => {
+    const defaultFooter = [
+      <Button key="back" onClick={onCancel}>
+        Cancel
+      </Button>,
+      <Button key="submit" type="primary" onClick={onOk}>
+        OK
+      </Button>,
+    ];
+
+    return (
+      <ModalAntd
+        centered
+        title={title}
+        open={isModalOpen}
+        onOk={onOk}
+        onCancel={onCancel}
+        footer={modalProps.footer ?? defaultFooter}
+        {...modalProps}
+      >
+        {children}
+      </ModalAntd>
+    );
+  },
+);

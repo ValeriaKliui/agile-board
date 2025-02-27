@@ -8,7 +8,7 @@ export const EmailField = () => {
 
   return (
     <Item name="email" label="E-mail" rules={emailRules}>
-      <Input autoComplete="email" />
+      <Input autoComplete="email" placeholder="example@gmail.com" />
     </Item>
   );
 };

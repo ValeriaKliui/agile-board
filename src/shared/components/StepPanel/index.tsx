@@ -1,5 +1,5 @@
 import { Button, Flex, Steps } from 'antd';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Content } from './styled';
 import { StepsPanelProps } from './types';
@@ -7,25 +7,22 @@ import { StepsPanelProps } from './types';
 export const StepPanel = ({ steps, isNextAllowed }: StepsPanelProps) => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const next = () => {
-    setActiveStep((curr) => curr + 1);
-  };
+  const handleNext = useCallback(() => setActiveStep((curr) => curr + 1), []);
+  const handlePrev = useCallback(() => setActiveStep((curr) => curr - 1), []);
 
-  const prev = () => {
-    setActiveStep((curr) => curr - 1);
-  };
+  const stepsList = useMemo(
+    () => steps.map((item) => <Steps.Step key={item.title} title={item.title} />),
+    [steps],
+  );
 
   return (
     <>
-      <Steps current={activeStep} style={{ width: 400 }}>
-        {steps.map((item) => (
-          <Steps.Step key={item.title} title={item.title} />
-        ))}
-      </Steps>
+      <Steps current={activeStep}>{stepsList}</Steps>
+
       <Content>{steps[activeStep].content}</Content>
       <Flex gap='middle'>
         {activeStep < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()} disabled={!isNextAllowed}>
+          <Button type="primary" onClick={handleNext} disabled={!isNextAllowed}>
             Next
           </Button>
         )}
@@ -34,7 +31,7 @@ export const StepPanel = ({ steps, isNextAllowed }: StepsPanelProps) => {
             Submit
           </Button>
         )}
-        {activeStep > 0 && <Button onClick={() => prev()}>Previous</Button>}
+        {activeStep > 0 && <Button onClick={handlePrev}>Previous</Button>}
       </Flex>
     </>
   );

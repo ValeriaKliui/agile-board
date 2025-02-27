@@ -1,4 +1,4 @@
-import { BOARDS_DB_NAME, BOARDS_TEMPLATE_DB_NAME, ROLES } from '@constants';
+import { BOARDS_COLLECTION_NAME, BOARDS_TEMPLATE_COLLECTION_NAME, ROLES } from '@constants';
 import { createBoard, fetchBoard, getCollection, updateData } from '@shared/services/firebase';
 import { WithId } from '@shared/types';
 import { type Column, columnsStore, userStore } from '@store';
@@ -29,7 +29,11 @@ class BoardStore {
       });
 
       if (template) {
-        const columns = await getCollection<Column>([BOARDS_TEMPLATE_DB_NAME, template, 'columns']);
+        const columns = await getCollection<Column>([
+          BOARDS_TEMPLATE_COLLECTION_NAME,
+          template,
+          'columns',
+        ]);
         columnsStore.addColumns({ boardID: id, columns });
       }
 
@@ -48,11 +52,9 @@ class BoardStore {
     const boardID = id ?? this.currentBoardInfo.id;
 
     try {
-      await updateData(BOARDS_DB_NAME, boardID, boardData);
+      await updateData(BOARDS_COLLECTION_NAME, boardID, boardData);
 
       runInAction(() => (this.currentBoardInfo = { ...this.currentBoardInfo, ...boardData }));
-      //   await addColumnToBoard({ id: boardID, columns });
-      //   await boardsStore.fetchCurrentBoard({ id: boardID });
     } catch (error) {
       if (error instanceof Error) this.error = error.message;
     } finally {
@@ -83,7 +85,7 @@ class BoardStore {
   //     try {
   //       if (this.currentBoardID) {
   //         const tasks = await getCollection<Task>([
-  //           BOARDS_DB_NAME,
+  //           BOARDS_COLLECTION_NAME,
   //           this.currentBoardID,
   //           'columns',
   //           id,

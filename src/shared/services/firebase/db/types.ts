@@ -1,6 +1,6 @@
 import { BoardCreationInfo } from '@store';
 
-export type AddingMembersProps = Pick<BoardCreationInfo, 'members' | 'id'>;
+export type AddingMembersProps = Pick<BoardCreationInfo, 'members' | 'id' | 'owner'>;
 
 export type DataWithId<T> = T & {
   id: string;
