@@ -1,4 +1,4 @@
-import { BOARDS_TEMPLATE_COLLECTION_NAME, USERS_COLLECTION_NAME } from '@constants';
+import { BOARDS_TEMPLATE_COLLECTION_NAME, USERS_COLLECTION_NAME, } from '@constants';
 import { MembersSearch } from '@pages/home/components';
 import { getCollection } from '@pages/home/services';
 import { RadioGroup } from '@shared/components';

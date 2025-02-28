@@ -1,5 +1,6 @@
 import { db } from '@config';
 import { collection, getDocs, limit, orderBy, query, where } from 'firebase/firestore';
+
 import { CollectionWithParams, DataWithId } from './types';
 
 export const getCollection = async<T>({

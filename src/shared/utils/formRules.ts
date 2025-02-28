@@ -1,4 +1,4 @@
-import { MIN_PASSWORD_LENGTH } from '@constants';
+import { MIN_PASSWORD_LENGTH } from '@shared/constants/ui';
 import { Rule } from 'antd/es/form';
 
 export const getEmailRules = (): Rule[] => [
@@ -30,4 +30,3 @@ export const validatePassword = (_: unknown, value: string) => {
 
   return Promise.resolve();
 };
-

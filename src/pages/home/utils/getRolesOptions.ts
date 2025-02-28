@@ -1,5 +1,5 @@
-import { ROLES } from '@constants';
 import { transformObjectToOptions } from '@pages/home/utils';
+import { ROLES } from '@shared/constants';
 
 export const getRolesOptions = () => {
   return transformObjectToOptions(ROLES)

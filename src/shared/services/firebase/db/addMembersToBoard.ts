@@ -2,7 +2,6 @@ import { db } from '@config';
 import { BOARDS_COLLECTION_NAME, USER_BOARDS_COLLECTION_NAME } from '@constants';
 import { doc, setDoc } from 'firebase/firestore';
 
-
 import { AddingMembersProps } from './types';
 
 export const addMembersToBoard = async ({ boardID, members }: AddingMembersProps) => {
@@ -22,6 +21,7 @@ export const addMembersToBoard = async ({ boardID, members }: AddingMembersProps
 
     await Promise.all(membersPromises);
   } catch (error) {
+    console.error(error);
     if (error instanceof Error) throw new Error('Failed to add members to board');
   }
 };

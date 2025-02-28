@@ -1,4 +1,5 @@
-import { ROLES } from '@constants';
+import { ROLES } from '@shared/constants';
+import { User } from '@store';
 import { Timestamp } from 'firebase/firestore';
 
 export interface RoleInfo {
@@ -25,4 +26,8 @@ export type BoardCreationInfo = Omit<BoardInfo, 'boardID' | 'createdAt'> & { tem
 
 export interface UpdateBoardInfo extends Pick<BoardInfo, 'boardID'> {
   boardData: Partial<BoardInfo>;
+}
+
+export interface Member extends User {
+  userRole: ROLES;
 }

@@ -34,3 +34,8 @@ export interface MemberRoleType {
 export interface WithId {
   id: string;
 }
+
+export interface Option {
+  value: string;
+  label: string;
+}

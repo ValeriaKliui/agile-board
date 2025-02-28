@@ -1,4 +1,4 @@
-import { ROLES_PERMISSIONS } from '@constants';
+import { ROLES_PERMISSIONS } from '@shared/constants';
 import { boardStore } from '@store';
 
 import { PermissionType } from './types';

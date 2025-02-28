@@ -52,7 +52,12 @@ class UserStore {
       const newData = filterUndefinedValues(userData);
 
       const userID = this.user?.userID;
-      if (userID) await updateData(USERS_COLLECTION_NAME, userID, newData);
+      if (userID)
+        await updateData({
+          collectionPaths: [USERS_COLLECTION_NAME],
+          docID: userID,
+          data: newData,
+        });
 
       runInAction(() => {
         if (this.user) this.user = { ...this.user, ...newData };

@@ -1,11 +1,11 @@
 import { PATHS } from '@constants';
 import { Avatar, Breadcrumbs, Button } from '@shared/components';
 import { Flex, theme } from 'antd';
+import { memo } from 'react';
 import { Link } from 'react-router';
 
 import { Header as HeaderStyled } from './styled';
 import { HeaderProps } from './types';
-import { memo } from 'react';
 
 const { useToken } = theme;
 

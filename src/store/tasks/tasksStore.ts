@@ -1,8 +1,8 @@
 import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
-import { fetchTasks, setData } from '@shared/services/firebase';
+import { fetchTasks, setData, updateData } from '@shared/services/firebase';
 import { moveDocument } from '@shared/services/firebase/db/moveDocument';
 import { defineColumnForTask } from '@shared/utils';
-import { makeAutoObservable, runInAction, toJS } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { BoardInfo, boardStore } from 'store/board';
 import { Column } from 'store/columns';
 
@@ -72,8 +72,8 @@ class TasksStore {
       this.tasks[columnID] = this.tasks[columnID].filter(
         ({ taskID: movedID }) => movedID !== taskID,
       );
-      this.tasks[newColumnID] = [...this.tasks[newColumnID], currTask];
-      console.log(toJS(this.tasks[newColumnID]));
+      if (this.tasks[newColumnID]) this.tasks[newColumnID] = [...this.tasks[newColumnID], currTask];
+      else this.tasks[newColumnID] = [currTask];
     });
 
     await moveDocument({
@@ -81,6 +81,25 @@ class TasksStore {
       docID: taskID,
       targetCollectionPaths: ['boards', boardID, 'columns', newColumnID, 'tasks'],
     });
+  }
+  async updateTask({ taskID, boardID, task }) {
+    try {
+      const columnID = defineColumnForTask(this.tasks, taskID);
+
+      runInAction(() => {
+        this.tasks[columnID] = this.tasks[columnID].map(({ taskID: updatedID, ...taskData }) => {
+          if (updatedID === taskID) return { taskID: updatedID, ...task };
+          return { taskID: updatedID, ...taskData };
+        });
+      });
+
+      await updateData({
+        collectionPaths: ['boards', boardID, 'columns', columnID, 'tasks', taskID],
+        data: task,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 

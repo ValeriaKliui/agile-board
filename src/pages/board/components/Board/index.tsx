@@ -1,8 +1,9 @@
-import { PERMISSIONS } from '@constants';
-import { DndContext, DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext } from '@dnd-kit/core';
 import { Column, ColumnCreator } from '@pages/board/components';
+import { useTaskDnD } from '@pages/board/hooks';
 import { hasPermission } from '@pages/board/utils';
-import { boardStore, columnsStore, tasksStore } from '@store';
+import { PERMISSIONS } from '@shared/constants';
+import { columnsStore } from '@store';
 import { observer } from 'mobx-react-lite';
 
 import { ColStyled, RowStyled } from './styled';
@@ -11,23 +12,7 @@ export const Board = observer(() => {
     const columns = columnsStore.columns;
     const lastColumnOrder = columns.at(-1)?.order ?? 0;
 
-    const onTaskMove = async (event: DragEndEvent) => {
-        const { active, over, } = event;
-
-        if (!over) return;
-        const taskID = active.id as string;
-        const newColumnID = over.id as string;
-
-        await tasksStore.moveTask({ taskID, newColumnID, boardID: boardStore.currentBoardInfo?.boardID })
-    };
-
-    const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 8,
-            },
-        }),
-    );
+    const { onTaskMove, sensors } = useTaskDnD();
 
     return (
         <DndContext onDragEnd={onTaskMove} sensors={sensors}>

@@ -6,7 +6,7 @@ import { InputEditableProps } from './types';
 
 export const InputEditable = ({ onFinishEdit, strong, ...inputProps }: InputEditableProps) => {
     const onFinish = (event: FormEvent<HTMLInputElement>) => {
-        onFinishEdit(event.currentTarget.value);
+        onFinishEdit?.(event.currentTarget.value);
     };
 
     return (

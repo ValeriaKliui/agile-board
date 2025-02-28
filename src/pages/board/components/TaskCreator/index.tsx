@@ -1,6 +1,7 @@
+import { useTaskCreator } from '@pages/board/hooks';
 import { Button, CreatorModal } from '@shared/components';
 import { useModal } from '@shared/hooks';
-import { boardStore, Column, Task, tasksStore, userStore } from '@store';
+import { Column, Task, } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 
@@ -10,17 +11,7 @@ export const TaskCreator = observer(({ columnID }: Pick<Column, 'columnID'>) => 
   const [form] = Form.useForm<Task>();
   const { isModalOpen, closeModal, openModal } = useModal();
 
-  const onFinish = async () => {
-    const taskData: Task = form.getFieldsValue(true);
-    const userID = userStore.user?.userID;
-
-    if (userID) {
-      const task = { ...taskData, author: userID };
-      await tasksStore.addTask({ columnID, task });
-    }
-  };
-
-  const members = boardStore.currentBoardInfo?.members;
+  const { onFinish, membersOptions, priorityOptions } = useTaskCreator(form, columnID, closeModal);
 
   return (
     <div>
@@ -28,7 +19,12 @@ export const TaskCreator = observer(({ columnID }: Pick<Column, 'columnID'>) => 
         New task
       </Button>
       <CreatorModal isModalOpen={isModalOpen} onClose={closeModal}>
-        <TaskCreatorForm form={form} columnID={columnID} onFinish={onFinish} members={members} />
+        <TaskCreatorForm
+          form={form}
+          onFinish={onFinish}
+          membersOptions={membersOptions}
+          priorityOptions={priorityOptions}
+        />
       </CreatorModal>
     </div>
   );

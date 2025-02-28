@@ -1,5 +1,5 @@
-import { ROLES } from '@constants';
 import { fetchUserBoards } from '@pages/home/services';
+import { ROLES } from '@shared/constants';
 import { BoardInfo } from '@store';
 import { useCallback, useEffect, useState } from 'react';
 

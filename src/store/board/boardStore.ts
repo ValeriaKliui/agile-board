@@ -5,28 +5,35 @@ import {
   USER_BOARDS_COLLECTION_NAME,
 } from '@constants';
 import { getCollection } from '@pages/home/services';
-import { createBoard, fetchBoard, updateData } from '@shared/services/firebase';
-import { deleteData } from '@shared/services/firebase/db/deleteData';
+import {
+  createBoard,
+  deleteCollection,
+  deleteData,
+  fetchBoard,
+  fetchMembersData,
+  updateData,
+} from '@shared/services/firebase';
 import { type Column, columnsStore, userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import { BoardCreationInfo, BoardInfo, UpdateBoardInfo } from './types';
-import { deleteCollection } from '@shared/services/firebase/db/deleteCollection';
+import { BoardCreationInfo, BoardInfo, Member, UpdateBoardInfo } from './types';
 
 class BoardStore {
   isLoading = false;
   error: string | null = null;
   currentBoardInfo: BoardInfo | null = null;
+  membersInfo: Member[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
-
   async createBoard({ title, owner, members, template }: BoardCreationInfo) {
     this.isLoading = true;
     this.error = null;
 
     try {
+      members[owner] = ROLES.OWNER;
+
       const { boardID, boardData } = await createBoard({
         title,
         owner,
@@ -49,7 +56,7 @@ class BoardStore {
     }
   }
 
-  private async fetchTemplateColumns({ template }: Pick<BoardCreationInfo, 'template'>) {
+  async fetchTemplateColumns({ template }: Pick<BoardCreationInfo, 'template'>) {
     this.isLoading = true;
     this.error = null;
 
@@ -70,7 +77,10 @@ class BoardStore {
     this.error = null;
 
     try {
-      await updateData(BOARDS_COLLECTION_NAME, boardID, boardData);
+      await updateData({
+        collectionPaths: [BOARDS_COLLECTION_NAME, boardID],
+        data: boardData,
+      });
 
       runInAction(() => {
         if (this.currentBoardInfo)
@@ -88,10 +98,12 @@ class BoardStore {
 
     try {
       const boardInfo = await fetchBoard({ boardID });
+      const membersInfo = await fetchMembersData({ members: boardInfo?.members });
       await columnsStore.fetchColumns({ boardID });
 
       runInAction(() => {
         if (boardInfo) this.currentBoardInfo = boardInfo;
+        this.membersInfo = membersInfo;
       });
     } catch (error) {
       if (error instanceof Error) this.error = error.message;

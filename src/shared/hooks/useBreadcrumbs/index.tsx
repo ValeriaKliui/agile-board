@@ -1,4 +1,5 @@
-import { BREADCRUMBS_MAP, PATHS } from '@constants';
+import { PATHS } from '@constants';
+import { BREADCRUMBS_MAP } from '@shared/constants/ui';
 import { Link, useLocation } from 'react-router';
 
 export const useBreadcrumbs = () => {

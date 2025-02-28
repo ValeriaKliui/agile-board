@@ -1,46 +1,32 @@
-import { ROLES_PERMISSIONS } from '@constants';
-import { MemberItem, MemberItemType } from '@pages/board/components';
-import { getUsersByIDs } from '@pages/board/services/getUserByIDs';
+import { AddMembersModal,MemberItem } from '@pages/board/components';
+import { hasPermission } from '@pages/board/utils';
+import { Button } from '@shared/components';
+import { PERMISSIONS } from '@shared/constants';
+import { useModal } from '@shared/hooks';
+import { boardStore } from '@store';
 import { Col, Row } from 'antd';
-import { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 
-import { MembersListManagerProps } from './types';
-
-export const MembersListManager = ({ members }: MembersListManagerProps) => {
-    const [membersData, setMembersData] = useState<MemberItemType[]>([]);
-
-    useEffect(() => {
-        const fetchUsernames = async () => {
-            if (members) {
-                const membersIDs = Object.keys(members);
-                const users = await getUsersByIDs({ IDs: membersIDs });
-
-                const membersData = users.map((user) => {
-                    const role = members[user.id];
-                    return {
-                        role,
-                        username: user.username,
-                        color: ROLES_PERMISSIONS[role]?.color
-                    };
-                });
-
-                setMembersData(membersData);
-            }
-        };
-
-        fetchUsernames();
-    }, [members]);
-
+export const MembersListManager = observer(() => {
+    const membersInfo = boardStore.membersInfo;
+    const { openModal, isModalOpen, closeModal } = useModal()
 
     return (
-        <Row gutter={5} align="middle">
-            {membersData.map(({ color, username }) => {
-                return (
-                    <Col key={username}>
-                        <MemberItem color={color} username={username} />
-                    </Col>
-                );
-            })}
-        </Row>
+        <>
+            <Row gutter={5} align="middle">
+                {membersInfo.map(({ color, username }) => {
+                    return (
+                        <Col key={username}>
+                            <MemberItem color={color} username={username} />
+                        </Col>
+                    );
+                })}
+                <Col >
+                    {hasPermission({ permission: PERMISSIONS.boards.invite_users }) && <Button type='primary' onClick={openModal}>Invite</Button>}
+                </Col>
+            </Row>
+            <AddMembersModal isModalOpen={isModalOpen} onClose={closeModal} />
+        </>
     );
-};
+}
+)

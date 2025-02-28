@@ -1,7 +1,8 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { useColumnCreator } from '@pages/board/hooks';
 import { CreatorModal, Icon } from '@shared/components';
 import { useModal } from '@shared/hooks';
-import { boardStore, type Column, columnsStore } from '@store';
+import { type Column, } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 
@@ -10,19 +11,10 @@ import { ColumnStyled } from './styled';
 import { ColumnCreatorProps } from './types';
 
 export const ColumnCreator = observer(({ lastColumnOrder }: ColumnCreatorProps) => {
-    const { openModal, isModalOpen, closeModal } = useModal()
-    const [form] = Form.useForm<Column>()
+    const { openModal, isModalOpen, closeModal } = useModal();
+    const [form] = Form.useForm<Column>();
 
-    const newColumnOrder = lastColumnOrder + 1
-
-    const createColumn = async () => {
-        const newColumn = form.getFieldsValue()
-        const boardID = boardStore.currentBoardInfo?.boardID
-
-        if (boardID) await columnsStore.addColumns({ boardID, columns: [newColumn] })
-        form.resetFields()
-        closeModal()
-    }
+    const { createColumn, newColumnOrder } = useColumnCreator(form, closeModal, lastColumnOrder);
 
     return (
         <>
@@ -34,4 +26,4 @@ export const ColumnCreator = observer(({ lastColumnOrder }: ColumnCreatorProps) 
             </CreatorModal>
         </>
     );
-})
+});

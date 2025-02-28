@@ -1,12 +1,16 @@
 export { addColumnToBoard } from './addColumnToBoard';
 export { addMembersToBoard } from './addMembersToBoard';
 export { createBoard } from './createBoard';
+export { deleteCollection } from './deleteCollection';
+export { deleteData } from './deleteData';
 export { fetchBoard } from './fetchBoard';
 export { fetchColumns } from './fetchColumns';
+export { fetchMembersData } from './fetchMembersData';
 export { fetchTasks } from './fetchTasks';
 export { formatDatetime } from './formatDatetime';
+export { getCollection } from './getCollection';
 export { getData } from './getData';
 export { getDocumentsByIds } from './getDocumentsByIds';
 export { setData } from './setData';
+export type { DataParams } from './types';
 export { updateData } from './updateData';
-export { getCollection } from './getCollection';

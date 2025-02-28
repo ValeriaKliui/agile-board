@@ -1,16 +1,16 @@
 import { db } from '@config';
 import { addDoc, collection, doc, DocumentData, setDoc, WithFieldValue } from 'firebase/firestore';
 
-import { SetDataParams } from './types';
+import { DataParams } from './types';
 
-export const setData = async <T extends WithFieldValue<DocumentData>>(
-  {
-    docID, data,collectionPaths
-  }:SetDataParams<T>
-) => {
+export const setData = async <T extends WithFieldValue<DocumentData>>({
+  docID,
+  data,
+  collectionPaths,
+}: DataParams<T>) => {
   try {
     let id = docID;
-    
+
     if (docID) await setDoc(doc(db, ...collectionPaths, docID), data);
     else {
       const docRef = await addDoc(collection(db, ...collectionPaths), data);

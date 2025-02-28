@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { ModalProps } from './types';
 
 export const Modal = memo(
-  ({ isModalOpen, title, onOk, onCancel, children, ...modalProps }: ModalProps) => {
+  ({ isModalOpen, title, onOk, onCancel, children, footer = false, ...modalProps }: ModalProps) => {
     const defaultFooter = [
       <Button key="back" onClick={onCancel}>
         Cancel
@@ -21,7 +21,7 @@ export const Modal = memo(
         open={isModalOpen}
         onOk={onOk}
         onCancel={onCancel}
-        footer={modalProps.footer ?? defaultFooter}
+        footer={footer ?? defaultFooter}
         {...modalProps}
       >
         {children}

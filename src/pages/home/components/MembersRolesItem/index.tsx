@@ -1,5 +1,5 @@
-import { ROLES } from '@constants';
 import { Select, } from '@shared/components';
+import { ROLES } from '@shared/constants';
 import { Form, List } from 'antd';
 import { ForwardedRef, forwardRef } from 'react';
 

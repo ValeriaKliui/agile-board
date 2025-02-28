@@ -1,7 +1,7 @@
 import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
-import { ROLES_PERMISSIONS } from '@constants';
 import { BoardCardProps } from '@pages/home/components';
 import { Icon } from '@shared/components';
+import { ROLES_PERMISSIONS } from '@shared/constants';
 import { Flex, Typography } from 'antd';
 
 import { CardStyled, TextStyled } from './styled';
