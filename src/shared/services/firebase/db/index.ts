@@ -9,3 +9,4 @@ export { getData } from './getData';
 export { getDocumentsByIds } from './getDocumentsByIds';
 export { setData } from './setData';
 export { updateData } from './updateData';
+export { getCollection } from './getCollection';

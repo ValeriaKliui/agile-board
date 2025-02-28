@@ -13,7 +13,11 @@ export const createBoard = async ({ title, owner, members }: BoardCreationParams
       owner,
       members,
     };
-    const boardID = await setData(BOARDS_COLLECTION_NAME, null, boardData);
+
+    const boardID = await setData({
+      collectionPaths: [BOARDS_COLLECTION_NAME],
+      data: boardData,
+    });
 
     if (!boardID) throw new Error('Board wasn`t created');
 

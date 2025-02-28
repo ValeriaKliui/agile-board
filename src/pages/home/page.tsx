@@ -1,4 +1,4 @@
-import { UserBoards, UserBoardsCreator, useUserBoardsInfo } from '@pages/home';
+import { UserBoards, UserBoardsCreator, useUserBoardsInfo, WelcomeComponent } from '@pages/home';
 import { userStore } from '@store';
 import { Flex, Spin } from 'antd';
 import { observer } from 'mobx-react-lite';
@@ -7,6 +7,7 @@ import { ResultStyled } from './styled';
 
 export const HomePage = observer(() => {
   const userID = userStore.user?.userID;
+  const isLoggedIn = userStore.isLoggedIn
   const { isLoading, boardsInfo, fetchBoards } = useUserBoardsInfo(userID);
 
   if (isLoading) {
@@ -18,6 +19,10 @@ export const HomePage = observer(() => {
   }
 
   const noBoards = boardsInfo.length === 0;
+
+  if (!isLoggedIn) {
+    return <WelcomeComponent />;
+  }
 
   return (
     <Flex vertical align={noBoards ? 'center' : 'start'}>

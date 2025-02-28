@@ -1,7 +1,7 @@
 import { PATHS } from '@constants';
 import { Board, BoardHeader, MembersListManager } from '@pages/board/components';
 import { Button } from '@shared/components';
-import { boardStore } from '@store';
+import { boardStore, userStore } from '@store';
 import { Flex, Spin, Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect } from 'react';
@@ -16,8 +16,9 @@ export const BoardManager = observer(({ boardID }: BoardManagerProps) => {
     const { title, createdAt, members } = boardStore.currentBoardInfo ?? {};
 
     const onDelete = useCallback(async () => {
-        if (boardID) {
-            await boardStore.deleteBoard({ boardID })
+        const userID = userStore.user?.userID
+        if (boardID && userID) {
+            await boardStore.deleteBoard({ boardID, userID })
             navigate(PATHS.HOME)
         }
     }, [boardID, navigate])

@@ -1,5 +1,5 @@
 import { USERS_COLLECTION_NAME } from '@constants';
-import { getData,  updateData } from '@shared/services/firebase';
+import { getData, updateData } from '@shared/services/firebase';
 import { filterUndefinedValues } from '@shared/utils';
 import { User } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
@@ -14,7 +14,7 @@ class UserStore {
   }
 
   private handleError(error: Error) {
-    console.error('Error auth', error.message)
+    console.error('Error auth', error.message);
 
     runInAction(() => {
       this.loadingError = error.message;
@@ -51,7 +51,7 @@ class UserStore {
       this.loadingUser = true;
       const newData = filterUndefinedValues(userData);
 
-      const userID = this.user?.userID
+      const userID = this.user?.userID;
       if (userID) await updateData(USERS_COLLECTION_NAME, userID, newData);
 
       runInAction(() => {

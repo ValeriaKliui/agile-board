@@ -5,10 +5,10 @@ import {
   USERS_COLLECTION_NAME,
 } from '@constants';
 import { getFulfilledResults, groupArrayByValue } from '@pages/home/utils';
-import { fetchBoard,  getData } from '@shared/services/firebase';
+import { fetchBoard, getData } from '@shared/services/firebase';
+import { getCollection } from '@shared/services/firebase';
 import { BoardInfo } from '@store';
 
-import { getCollection } from '../../../shared/services/firebase/db/getCollection';
 import { UserBoard } from './types';
 
 const fetchBoardsWithRoles = async (userBoards: UserBoard[]) => {
@@ -23,7 +23,6 @@ const fetchBoardsWithRoles = async (userBoards: UserBoard[]) => {
   } catch (error) {
     console.error('FetchingBoards error:', error);
     if (error instanceof Error) throw new Error(error.message);
-    return [];
   }
 };
 
@@ -33,7 +32,6 @@ const fetchBoardsWithOwners = async (boards: BoardInfo[]) => {
       const ownerData = board.owner
         ? await getData<{ username: string } | null>(USERS_COLLECTION_NAME, board.owner)
         : null;
-        console.log(ownerData)
 
       return {
         ...board,
@@ -55,16 +53,10 @@ export const fetchUserBoards = async (
   if (!userID) return [];
 
   const userBoards = await getCollection<UserBoard>({
-    collectionPaths: [
-      USER_BOARDS_COLLECTION_NAME,
-      userID,
-      BOARDS_COLLECTION_NAME,
-    ]
-  }
-    );
+    collectionPaths: [USER_BOARDS_COLLECTION_NAME, userID, BOARDS_COLLECTION_NAME],
+  });
 
   if (!userBoards?.length) return [];
-
 
   const boardsWithRoles = await fetchBoardsWithRoles(userBoards);
   const boardsWithOwners = await fetchBoardsWithOwners(boardsWithRoles);

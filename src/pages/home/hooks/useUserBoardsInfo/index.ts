@@ -11,13 +11,12 @@ export const useUserBoardsInfo = (userID?: string) => {
   const fetchBoards = useCallback(async () => {
     setIsLoading(true);
     try {
-      if (userID)
-   {
-    const data = await fetchUserBoards(userID);
-    setBoardsInfo(data);
-   }
+      if (userID) {
+        const data = await fetchUserBoards(userID);
+        setBoardsInfo(data);
+      }
     } catch (error) {
-    console.error('FetchBoards error:', error);
+      console.error('FetchBoards error:', error);
       if (error instanceof Error) setError(error.message);
     } finally {
       setIsLoading(false);

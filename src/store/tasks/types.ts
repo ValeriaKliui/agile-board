@@ -6,6 +6,7 @@ export enum TASK_PRIORITY {
 }
 
 export interface Task {
+  taskID: string;
   title: string;
   description?: string;
   createdAt: number;
@@ -13,3 +14,4 @@ export interface Task {
   author: string;
   priority: TASK_PRIORITY;
 }
+export type Tasks = Record<string, Task[]>;

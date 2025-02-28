@@ -8,13 +8,19 @@ import { setData } from './setData';
 export const addColumnToBoard = async ({ boardID, columns }: AddColumnsProps) => {
   try {
     columns?.map(async (column) => {
-      const id  = await setData({collectionPaths:[BOARDS_COLLECTION_NAME, boardID, COLUMNS_COLLECTION_NAME],data: column })
-      return { id, ...column };
+      const id = await setData({
+        collectionPaths: [BOARDS_COLLECTION_NAME, boardID, COLUMNS_COLLECTION_NAME],
+        data: column,
+      });
+      return { ...column, id };
     });
 
     const updatedColumns =
-      (await getCollection<Column>({collectionPaths:[BOARDS_COLLECTION_NAME, boardID, COLUMNS_COLLECTION_NAME]})) ??
-      [];
+      (
+        await getCollection<Column>({
+          collectionPaths: [BOARDS_COLLECTION_NAME, boardID, COLUMNS_COLLECTION_NAME],
+        })
+      )?.map(({ id, ...column }) => ({ ...column, columnID: id })) ?? [];
 
     return sortArrByKey(updatedColumns, 'order');
   } catch (error) {

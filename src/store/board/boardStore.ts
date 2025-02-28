@@ -2,14 +2,16 @@ import {
   BOARDS_COLLECTION_NAME,
   BOARDS_TEMPLATE_COLLECTION_NAME,
   COLUMNS_COLLECTION_NAME,
+  USER_BOARDS_COLLECTION_NAME,
 } from '@constants';
 import { getCollection } from '@pages/home/services';
-import { createBoard, fetchBoard,  updateData } from '@shared/services/firebase';
+import { createBoard, fetchBoard, updateData } from '@shared/services/firebase';
 import { deleteData } from '@shared/services/firebase/db/deleteData';
 import { type Column, columnsStore, userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import { BoardCreationInfo, BoardInfo, UpdateBoardInfo } from './types';
+import { deleteCollection } from '@shared/services/firebase/db/deleteCollection';
 
 class BoardStore {
   isLoading = false;
@@ -52,11 +54,9 @@ class BoardStore {
     this.error = null;
 
     try {
-      const columns = await getCollection<Column>({collectionPaths:[
-        BOARDS_TEMPLATE_COLLECTION_NAME,
-        template,
-        COLUMNS_COLLECTION_NAME,
-      ]});
+      const columns = await getCollection<Column>({
+        collectionPaths: [BOARDS_TEMPLATE_COLLECTION_NAME, template, COLUMNS_COLLECTION_NAME],
+      });
 
       return columns?.map(({ id: _, ...column }) => column) || [];
     } catch (error) {
@@ -100,9 +100,13 @@ class BoardStore {
     }
   }
 
-  async deleteBoard({ boardID }: Pick<BoardInfo, 'boardID'>) {
+  async deleteBoard({ boardID, userID }: Pick<BoardInfo, 'boardID'>) {
     try {
       await deleteData(BOARDS_COLLECTION_NAME, boardID);
+      await deleteCollection({
+        collectionPaths: [USER_BOARDS_COLLECTION_NAME, userID, BOARDS_COLLECTION_NAME],
+        docID: boardID,
+      });
 
       runInAction(() => (this.currentBoardInfo = null));
     } catch (error) {
@@ -113,9 +117,9 @@ class BoardStore {
   }
 
   get currentRole() {
-    const userID = userStore.user?.userID
-    if (userID)    return this.currentBoardInfo?.members[userID] 
-  return  null;
+    const userID = userStore.user?.userID;
+    if (userID) return this.currentBoardInfo?.members[userID];
+    return null;
   }
 }
 export const boardStore = new BoardStore();

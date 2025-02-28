@@ -5,11 +5,12 @@ import { User } from '@store';
 export const MembersSearch = ({ fetchFunc, name }) => {
   const {
     debounceFetcher: fetchSearchFunc,
-    result,
+    result: members,
     isFetching,
-  } = useDebouncedFetch<{ documents: User[] }>({ fetchFunc });
+  } = useDebouncedFetch<
+    User[]>({ fetchFunc });
 
-  const options = result?.documents?.map(({ username, userID }: User) => ({
+  const options = members?.map(({ username, userID }: User) => ({
     label: username,
     value: userID,
   }));

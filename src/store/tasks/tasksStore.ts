@@ -1,15 +1,15 @@
-import { db } from '@config';
 import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
 import { fetchTasks, setData } from '@shared/services/firebase';
-import { addDoc, collection } from 'firebase/firestore';
-import { makeAutoObservable, runInAction } from 'mobx';
+import { moveDocument } from '@shared/services/firebase/db/moveDocument';
+import { defineColumnForTask } from '@shared/utils';
+import { makeAutoObservable, runInAction, toJS } from 'mobx';
 import { BoardInfo, boardStore } from 'store/board';
 import { Column } from 'store/columns';
 
-import { Task } from './types';
+import { Task, Tasks } from './types';
 
 class TasksStore {
-  tasks: Record<string, Task[]> = {};
+  tasks: Tasks = {};
   isLoading = false;
   error: string | null = null;
 
@@ -41,16 +41,46 @@ class TasksStore {
     try {
       const boardID = boardStore.currentBoardInfo?.boardID;
 
-     if (boardID) await setData({collectionPaths: [BOARDS_COLLECTION_NAME, boardID, COLUMNS_COLLECTION_NAME,columnID, 'tasks'], data:task})
+      if (boardID)
+        await setData({
+          collectionPaths: [
+            BOARDS_COLLECTION_NAME,
+            boardID,
+            COLUMNS_COLLECTION_NAME,
+            columnID,
+            'tasks',
+          ],
+          data: task,
+        });
 
       runInAction(() => {
         const currentTasks = this.tasks[columnID];
-        this.tasks[columnID] = [...currentTasks, task];
+        if (currentTasks) this.tasks[columnID] = [...currentTasks, task];
+        else this.tasks[columnID] = [task];
       });
     } catch (error) {
       console.error(error);
       if (error instanceof Error) this.error = error.message;
     }
+  }
+  async moveTask({ taskID, newColumnID, boardID }) {
+    const columnID = defineColumnForTask(this.tasks, taskID);
+
+    runInAction(() => {
+      const currTask = this.tasks[columnID].find(({ taskID: prevID }) => taskID === prevID);
+
+      this.tasks[columnID] = this.tasks[columnID].filter(
+        ({ taskID: movedID }) => movedID !== taskID,
+      );
+      this.tasks[newColumnID] = [...this.tasks[newColumnID], currTask];
+      console.log(toJS(this.tasks[newColumnID]));
+    });
+
+    await moveDocument({
+      collectionPaths: ['boards', boardID, 'columns', columnID, 'tasks', taskID],
+      docID: taskID,
+      targetCollectionPaths: ['boards', boardID, 'columns', newColumnID, 'tasks'],
+    });
   }
 }
 
