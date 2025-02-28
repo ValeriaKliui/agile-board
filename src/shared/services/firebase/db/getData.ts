@@ -7,7 +7,7 @@ export const getData = async <T>(collection: string, docID: string): Promise<T |
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      return { id: docSnap.id, ...docSnap.data() } as T;
+      return docSnap.data() as T;
     }
 
     return null;

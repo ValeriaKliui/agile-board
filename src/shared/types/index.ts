@@ -30,3 +30,7 @@ export interface MemberRoleType {
   value: string;
   key: string;
 }
+
+export interface WithId {
+  id: string;
+}

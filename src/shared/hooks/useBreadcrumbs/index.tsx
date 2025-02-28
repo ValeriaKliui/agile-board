@@ -10,7 +10,7 @@ export const useBreadcrumbs = () => {
 
     return {
       key: url,
-      title: <Link to={url}>{BREADCRUMBS_MAP[url] || url}</Link>,
+      title: BREADCRUMBS_MAP[url] && <Link to={url}>{BREADCRUMBS_MAP[url]}</Link>,
     };
   });
 

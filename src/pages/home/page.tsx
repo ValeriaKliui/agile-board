@@ -1,25 +1,39 @@
-import { UserBoards, UserBoardsCreator, useUserBoardsInfo, WelcomeComponent } from '@pages/home';
-import { userStore } from '@store/user';
-import { Flex } from 'antd';
-import Title from 'antd/es/typography/Title';
+import { UserBoards, UserBoardsCreator, useUserBoardsInfo } from '@pages/home';
+import { userStore } from '@store';
+import { Flex, Spin } from 'antd';
 import { observer } from 'mobx-react-lite';
 
+import { ResultStyled } from './styled';
+
 export const HomePage = observer(() => {
-  const isLoggedIn = userStore.isLoggedIn;
-  const { isLoading, boardsInfo, fetchBoards } = useUserBoardsInfo(userStore.userID);
+  const userID = userStore.user?.userID;
+  const { isLoading, boardsInfo, fetchBoards } = useUserBoardsInfo(userID);
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" align="center" style={{ height: '100vh' }}>
+        <Spin size="large" />
+      </Flex>
+    );
+  }
+
   const noBoards = boardsInfo.length === 0;
 
   return (
-    <>
-      {isLoggedIn ? (
-        <Flex vertical gap="large" align="flex-start">
-          {noBoards && <Title level={2}>Create new board</Title>}
-          <UserBoardsCreator fetchUserBoards={fetchBoards} />
-          <UserBoards boardsInfo={boardsInfo} isLoading={isLoading} />
-        </Flex>
+    <Flex vertical align={noBoards ? 'center' : 'start'}>
+      {noBoards ? (
+        <ResultStyled
+          status="404"
+          title="You don't have any boards yet"
+          subTitle="Create new!"
+          extra={<UserBoardsCreator fetchUserBoards={fetchBoards} />}
+        />
       ) : (
-        <WelcomeComponent />
+        <>
+          <UserBoardsCreator fetchUserBoards={fetchBoards} />
+          <UserBoards boardsInfo={boardsInfo} />
+        </>
       )}
-    </>
+    </Flex>
   );
 });

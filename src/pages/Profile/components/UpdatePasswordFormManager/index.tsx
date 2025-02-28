@@ -1,5 +1,5 @@
 import { UpdatePasswordForm } from '@pages/profile/components';
-import { authStore, type UpdatePasswordProps } from '@store/auth';
+import { authStore, type UpdatePasswordProps } from '@store';
 import { Button, Flex, Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';

@@ -1,6 +1,11 @@
+export { addColumnToBoard } from './addColumnToBoard';
 export { addMembersToBoard } from './addMembersToBoard';
 export { createBoard } from './createBoard';
-export { getCollection } from './getCollection';
-export {} from './getCollection'
+export { fetchBoard } from './fetchBoard';
+export { fetchColumns } from './fetchColumns';
+export { fetchTasks } from './fetchTasks';
+export { formatDatetime } from './formatDatetime';
 export { getData } from './getData';
+export { getDocumentsByIds } from './getDocumentsByIds';
 export { setData } from './setData';
+export { updateData } from './updateData';

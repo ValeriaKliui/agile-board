@@ -1,15 +1,16 @@
-import { AVATARS_DB_NAME } from '@constants';
+import { AVATARS_COLLECTION_NAME } from '@constants';
 import { AvatarsSelection } from '@pages/profile/components';
 import { useAvatars } from '@pages/profile/hooks';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { UploadFile } from 'antd';
 import { useState } from 'react';
 
 import { AvatarsSelectionManagerProps } from './types';
 
-
 export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);
+
+  const userID = userStore.user?.userID ?? '';
 
   const {
     onRemove,
@@ -17,13 +18,13 @@ export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps
     avatars: userAvatars,
     isAvatarsLoading: isUserAvatarsLoading,
     errorLoading: errorUser,
-  } = useAvatars(AVATARS_DB_NAME, userStore.userID);
+  } = useAvatars(AVATARS_COLLECTION_NAME, userID);
 
   const {
     avatars: defaultAvatars,
     isAvatarsLoading: isDefaultAvatarsLoading,
     errorLoading: errorDefault,
-  } = useAvatars(AVATARS_DB_NAME, 'default');
+  } = useAvatars(AVATARS_COLLECTION_NAME, 'default');
 
   const handleSelection = (elem: UploadFile) => {
     selectAvatar(elem.url || '');

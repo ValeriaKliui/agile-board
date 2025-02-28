@@ -1,20 +1,21 @@
 import { USERS_COLLECTION_NAME } from '@constants';
-import { getData, setData } from '@shared/services/firebase';
+import { getData,  updateData } from '@shared/services/firebase';
 import { filterUndefinedValues } from '@shared/utils';
-import { User } from '@store/user';
-import { makeAutoObservable,  runInAction } from 'mobx';
+import { User } from '@store';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 class UserStore {
   user: User | null = null;
   loadingUser = false;
   loadingError = '';
-  userID = '';
 
   constructor() {
     makeAutoObservable(this);
   }
 
   private handleError(error: Error) {
+    console.error('Error auth', error.message)
+
     runInAction(() => {
       this.loadingError = error.message;
     });
@@ -28,7 +29,7 @@ class UserStore {
     this.loadingUser = true;
     try {
       const user = await getData<User>(USERS_COLLECTION_NAME, userID);
-      this.userID = userID
+
       runInAction(() => {
         if (user) {
           this.user = user;
@@ -50,7 +51,8 @@ class UserStore {
       this.loadingUser = true;
       const newData = filterUndefinedValues(userData);
 
-      await setData(USERS_COLLECTION_NAME, this.userID, { ...this.user, ...newData });
+      const userID = this.user?.userID
+      if (userID) await updateData(USERS_COLLECTION_NAME, userID, newData);
 
       runInAction(() => {
         if (this.user) this.user = { ...this.user, ...newData };
@@ -68,7 +70,6 @@ class UserStore {
 
   forgetUser() {
     this.user = null;
-    this.userID = '';
   }
 }
 

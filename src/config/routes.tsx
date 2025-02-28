@@ -31,7 +31,7 @@ export const ROUTES = [
         path: `${PATHS.BOARD}/:boardID`,
         element: (
           <ProtectedRoute>
-            <BoardPage />{' '}
+            <BoardPage />
           </ProtectedRoute>
         ),
       },

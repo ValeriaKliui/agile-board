@@ -1,7 +1,7 @@
 import { Footer, HeaderManager } from '@shared/components';
 import { Outlet } from 'react-router';
 
-import { Content, Layout } from './styled';
+import { Content, Layout, } from './styled';
 
 export const DefaultLayout = () => {
   return (

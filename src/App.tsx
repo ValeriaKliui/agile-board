@@ -5,9 +5,17 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 export const App = () => {
   useAuthState();
 
-  return <BrowserRouter>
-    <Routes>{ROUTES.map(({ layout, children }) => <Route element={layout}>
-      {children.map(({ path, element, index }) => <Route index={index} path={path} element={element} />)}
-    </Route>)}</Routes>
-  </BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        {ROUTES.map(({ layout, children }, id) => (
+          <Route element={layout} key={id}>
+            {children.map(({ path, element, index }, id) => (
+              <Route key={id} index={index} path={path} element={element} />
+            ))}
+          </Route>
+        ))}
+      </Routes>
+    </BrowserRouter>
+  );
 };

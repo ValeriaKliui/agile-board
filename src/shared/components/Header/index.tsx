@@ -1,11 +1,13 @@
 import { PATHS } from '@constants';
 import { Avatar, Breadcrumbs, Button } from '@shared/components';
-import { Flex } from 'antd';
+import { Flex, theme } from 'antd';
 import { Link } from 'react-router';
 
 import { Header as HeaderStyled } from './styled';
 import { HeaderProps } from './types';
 import { memo } from 'react';
+
+const { useToken } = theme;
 
 export const Header = memo(({ onLogout, onLogin, avatar, username }: HeaderProps) => {
   const defaultUsername = username ?? 'Guest';
@@ -13,13 +15,15 @@ export const Header = memo(({ onLogout, onLogin, avatar, username }: HeaderProps
   const buttonText = isAuthenticated ? 'Log out' : 'Log in';
   const buttonHandler = isAuthenticated ? onLogout : onLogin;
 
+  const { token } = useToken();
+
   return (
     <HeaderStyled>
       <Breadcrumbs />
       <Flex gap="middle" align="center">
         <Link to={PATHS.PROFILE}>
-          <Avatar size={40} src={avatar}>
-            {!avatar && defaultUsername[0]}
+          <Avatar size={40} src={avatar} color={token.colorPrimary}>
+            {!avatar && defaultUsername?.[0]}
           </Avatar>
         </Link>
         <Button cursor="pointer" onClick={buttonHandler}>

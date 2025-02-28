@@ -20,6 +20,7 @@ export const handleUploadToStorage = async ({ file, onSuccess }: UploadRequestOp
     onSuccess?.({});
     return imageUrl;
   } catch (error) {
+    console.error('Error uploading to storage', error)
     if (error instanceof Error) throw new Error(error.message);
   }
 };

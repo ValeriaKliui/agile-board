@@ -1,6 +1,6 @@
 import { AvatarsSelectionManager } from '@pages/profile/components';
 import { Button } from '@shared/components';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { useState } from 'react';
 
 export const AvatarEditor = () => {

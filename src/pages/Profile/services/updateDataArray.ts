@@ -41,6 +41,7 @@ export const updateDataArray = async <T>(
         throw new Error('Invalid action type');
     }
   } catch (error) {
+    console.error('Error updating array', error)
     if (error instanceof Error) throw new Error(error.message);
   }
 };

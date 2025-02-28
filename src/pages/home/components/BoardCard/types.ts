@@ -1,3 +1,4 @@
-import { BoardInfo } from '@store/boards/types';
+import { ROLES } from '@constants';
+import { BoardInfo } from '@store';
 
-export type BoardCardProps = Omit<BoardInfo, 'members'>;
+export type BoardCardProps = Omit<BoardInfo, 'members'> & { userRole: ROLES };

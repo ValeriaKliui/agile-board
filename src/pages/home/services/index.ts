@@ -1,3 +1,2 @@
-export { fetchDataWithParams } from './fetchDataWithParams';
+export { getCollection } from '../../../shared/services/firebase/db/getCollection';
 export { fetchUserBoards } from './fetchUserBoards';
-export { formatDatetime } from './formatDatetime';

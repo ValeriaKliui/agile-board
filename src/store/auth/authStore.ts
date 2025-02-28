@@ -5,7 +5,7 @@ import {
   resetPassword,
   updatePassword,
 } from '@shared/services/firebase';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import {
@@ -59,7 +59,7 @@ class AuthStore {
       'login',
       () => loginUser({ email, password }),
       async ({ uid }) => {
-        await userStore.fetchUser(uid)
+        await userStore.fetchUser(uid);
       },
     );
   }

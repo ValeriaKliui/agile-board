@@ -1,6 +1,6 @@
 import { USER_PROPERTIES_TO_UPDATE } from '@constants';
 import { UpdateUserInfoForm } from '@pages/profile/components';
-import { type User, userStore } from '@store/user';
+import { type User, userStore } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect } from 'react';

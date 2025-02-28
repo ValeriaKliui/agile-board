@@ -12,7 +12,7 @@ export const getEmailRules = (): Rule[] => [
   },
 ];
 
-export const validatePassword = (_, value:string) => {
+export const validatePassword = (_: unknown, value: string) => {
   if (!value) {
     return Promise.reject('Please, input your password');
   }

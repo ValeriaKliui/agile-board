@@ -1,22 +1,35 @@
 import { db } from '@config';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, limit, orderBy, query, where } from 'firebase/firestore';
+import { CollectionWithParams, DataWithId } from './types';
 
-import { DataWithId } from './types';
-
-export const getCollection = async <T>(path: readonly [string, ...string[]]) => {
+export const getCollection = async<T>({
+  itemsAmount, 
+  collectionPaths,
+  searchTerm,
+  searchKey
+}:CollectionWithParams) =>{
   try {
-    const collectionRef = collection(db, ...path);
+    let q = query(collection(db, ...collectionPaths));
 
-    const querySnapshot = await getDocs(collectionRef);
+    if (itemsAmount ){
+      query(q, limit(itemsAmount))
+    }
 
-    const data: DataWithId<T>[] = [];
-    querySnapshot.forEach((doc) => {
-      const docData = doc.data();
-      data.push({ id: doc.id, ...docData } as DataWithId<T>);
-    });
+    if (searchTerm && searchKey) {
+      q = query(
+        q,
+        where(searchKey, '>=', searchTerm),
+        where(searchKey, '<=', searchTerm + '\uf8ff'),
+        orderBy(searchKey),
+      );
+    }
 
-    return data;
+    const querySnapshot = await getDocs(q);
+    const documents = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as DataWithId<T>[];
+
+    return documents;
   } catch (error) {
-    if (error instanceof Error) throw new Error(error.message);
+    console.error('Error Firestore:', error);
+   if (error instanceof Error)  throw new Error(error.message)
   }
 };

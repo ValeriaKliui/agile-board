@@ -1,3 +1,3 @@
-import { type User } from '@store/user';
+import { type User } from '@store';
 
 export type ProfileInfoProps = Pick<User, 'avatar' | 'email' | 'username'>;
