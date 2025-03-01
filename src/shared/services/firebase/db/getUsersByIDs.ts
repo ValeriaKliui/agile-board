@@ -1,7 +1,8 @@
 import { USERS_COLLECTION_NAME } from '@constants';
-import { UserByIDsParams } from '@pages/board/services/types';
 import { getDocumentsByIds } from '@shared/services/firebase';
 import { User } from '@store';
+
+import { UserByIDsParams } from './types';
 
 export const getUsersByIDs = async ({ IDs }: UserByIDsParams) => {
   try {

@@ -10,9 +10,13 @@ export const App = () => {
       <Routes>
         {ROUTES.map(({ layout, children }, id) => (
           <Route element={layout} key={id}>
-            {children.map(({ path, element, index }, id) => (
-              <Route key={id} index={index} path={path} element={element} />
-            ))}
+            {children.map(({ path, element, index }, id) =>
+              index ? (
+                <Route key={id} index element={element} />
+              ) : (
+                <Route key={id} path={path} element={element} />
+              )
+            )}
           </Route>
         ))}
       </Routes>

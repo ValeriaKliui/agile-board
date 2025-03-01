@@ -2,7 +2,7 @@ export { Board } from './Board';
 export { BoardHeader } from './BoardHeader';
 export { BoardManager } from './BoardManager';
 export { Column } from './Column';
-export { ColumnCreator } from './ColumnCreator';
+export { ColumnCreator } from './Column/Creator';
 export { BoardDetails } from './Details';
 export { MemberItem } from './MemberItem';
 export type { MemberItemType } from './MemberItem/types';

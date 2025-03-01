@@ -14,3 +14,4 @@ export { getDocumentsByIds } from './getDocumentsByIds';
 export { setData } from './setData';
 export type { DataParams } from './types';
 export { updateData } from './updateData';
+export { getUsersByIDs } from './getUsersByIDs';

@@ -16,7 +16,6 @@ export const AddMembersModal = observer(
         const [membersOptions, setMembersOptions] = useState<MemberRoleType[]>([]);
         const rolesOptions = getRolesOptions();
 
-
         const handleValuesChange = (changedValues) => {
             if ('membersChoosen' in changedValues) {
                 setMembersOptions(changedValues.membersChoosen);

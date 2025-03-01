@@ -1,13 +1,12 @@
 import './config/firebase';
 
-import { ThemeProvider } from '@config';
-import { ErrorFallback } from '@shared/components/ErrorFallback';
+import { GlobalStyle, ThemeProvider } from '@config';
+import { ErrorFallback } from '@shared/components';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { App } from './App';
-import GlobalStyle from './config/globalStyles';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -1,5 +1,5 @@
-import { getUsersByIDs } from '@pages/board/services/getUserByIDs';
 import { ROLES_PERMISSIONS } from '@shared/constants';
+import { getUsersByIDs } from '@shared/services/firebase';
 
 export const fetchMembersData = async ({ members }) => {
   const membersData = await getUsersByIDs({ IDs: Object.keys(members) });

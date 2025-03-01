@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const styled = { createGlobalStyle };
 
-const GlobalStyle = styled.createGlobalStyle`
+export const GlobalStyle = styled.createGlobalStyle`
   html,
   body,
   #root {
@@ -13,5 +13,3 @@ const GlobalStyle = styled.createGlobalStyle`
     text-transform: capitalize;
   }
 `;
-
-export default GlobalStyle;

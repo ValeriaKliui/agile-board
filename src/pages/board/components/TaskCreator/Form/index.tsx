@@ -1,7 +1,7 @@
 import { Button, RadioGroup, Select } from '@shared/components';
+import { TASK_PRIORITY } from '@store';
 import { Flex, Form, FormInstance, Input, Typography } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import { TASK_PRIORITY } from 'store/tasks/types';
 
 import { TaskCreatorFormProps } from './types';
 

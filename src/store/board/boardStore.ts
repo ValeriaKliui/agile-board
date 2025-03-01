@@ -5,6 +5,7 @@ import {
   USER_BOARDS_COLLECTION_NAME,
 } from '@constants';
 import { getCollection } from '@pages/home/services';
+import { ROLES } from '@shared/constants';
 import {
   createBoard,
   deleteCollection,

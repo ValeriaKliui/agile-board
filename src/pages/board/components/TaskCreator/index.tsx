@@ -1,7 +1,7 @@
 import { useTaskCreator } from '@pages/board/hooks';
 import { Button, CreatorModal } from '@shared/components';
 import { useModal } from '@shared/hooks';
-import { Column, Task, } from '@store';
+import { Column, Task } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 

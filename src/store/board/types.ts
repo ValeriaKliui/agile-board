@@ -30,4 +30,5 @@ export interface UpdateBoardInfo extends Pick<BoardInfo, 'boardID'> {
 
 export interface Member extends User {
   userRole: ROLES;
+  color: string;
 }

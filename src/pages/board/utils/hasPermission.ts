@@ -1,13 +1,12 @@
 import { ROLES_PERMISSIONS } from '@shared/constants';
 import { boardStore } from '@store';
 
-import { PermissionType } from './types';
-
-export const hasPermission = ({ permission }: { permission: PermissionType }) => {
+export const hasPermission = ({ permission }: { permission: string }) => {
   const currentRole = boardStore.currentRole;
 
   if (currentRole) {
-    const rolePermissions = ROLES_PERMISSIONS[currentRole]?.permissions || [];
+    const rolePermissions = (ROLES_PERMISSIONS[currentRole]?.permissions || []) as string[];
+
     return rolePermissions.includes(permission);
   }
 

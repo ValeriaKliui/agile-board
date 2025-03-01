@@ -23,7 +23,7 @@ export enum ROLES {
   GUEST = 'guest',
 }
 
-export const ROLES_PERMISSIONS = {
+export const ROLES_PERMISSIONS = Object.freeze({
   [ROLES.OWNER]: {
     permissions: [...Object.values(PERMISSIONS.boards), ...Object.values(PERMISSIONS.tasks)],
     label: 'Owner',
@@ -42,6 +42,6 @@ export const ROLES_PERMISSIONS = {
     color: 'gray',
     icon: UserOutlined,
   },
-};
+});
 
 export type ROLES_VALUES = (typeof ROLES)[keyof typeof ROLES];

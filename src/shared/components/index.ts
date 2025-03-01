@@ -17,3 +17,5 @@ export { SelectedItem } from './SelectedItem';
 export { StepPanel } from './StepPanel';
 export { Tabs } from './Tabs';
 export { VirtualList } from './VirtualList';
+export { ErrorFallback } from './ErrorFallback';
+export { InputEditable } from './InputEditable';
