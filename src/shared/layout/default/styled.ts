@@ -1,15 +1,29 @@
-import { Layout as LayoutAntd } from "antd";
-import { Content as ContentAntd } from "antd/es/layout/layout";
-import SiderAntd from "antd/es/layout/Sider";
-import styled from "styled-components";
+import { MEDIA } from '@config';
+import { Layout as LayoutAntd } from 'antd';
+import { Content as ContentAntd } from 'antd/es/layout/layout';
+import SiderAntd from 'antd/es/layout/Sider';
+import styled from 'styled-components';
 
 export const Layout = styled(LayoutAntd)`
   min-height: 100vh;
+`;
+export const Wrapper = styled.div`
+  margin: 0 auto;
+  max-width: 2000px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 export const Content = styled(ContentAntd)`
   padding: 20px;
   background: #f5f5f5;
+  margin: 0 auto;
+  width: 100%;
+  ${MEDIA.xlarge} {
+    padding: 20px 0;
+  }
 `;
 export const Sider = styled(SiderAntd)`
   background: rgba(161, 210, 255, 0.4);

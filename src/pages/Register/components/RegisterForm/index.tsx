@@ -46,7 +46,7 @@ export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues
         hasFeedback
         rules={confirmPasswordRules}
       >
-        <Input.Password autoComplete="password" />
+        <Input.Password autoComplete="password" placeholder='Confirm Password' />
       </Item>
 
       <Flex vertical gap={'middle'}>

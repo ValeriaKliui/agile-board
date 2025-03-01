@@ -1,3 +1,4 @@
+import { MEDIA } from 'config/styles/media';
 import { createGlobalStyle } from 'styled-components';
 
 const styled = { createGlobalStyle };
@@ -8,6 +9,16 @@ export const GlobalStyle = styled.createGlobalStyle`
   #root {
     min-height: 100vh;
     margin: 0;
+  }
+
+  body {
+    ${MEDIA.large} {
+      font-size: 16px;
+    }
+
+    ${MEDIA.xlarge} {
+      font-size: 18px;
+    }
   }
   .capitalize {
     text-transform: capitalize;
