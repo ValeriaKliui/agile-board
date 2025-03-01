@@ -1,7 +1,9 @@
-import { fetchTasks, moveDocument, updateData } from '@shared/services';
-import { defineColumnForTask } from '@shared/utils';
+import { fetchTasks, moveDocument } from '@shared/services';
+import { defineColumnForTask, updateDataWithID } from '@shared/utils';
 import { BoardInfo, Column, Tasks } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { UpdateTaskParams } from 'store/tasks/services/types';
+import { updateTask } from 'store/tasks/services/updateTask';
 
 import { addTask, AddTaskParams } from './services';
 
@@ -27,6 +29,23 @@ class TasksStore {
       runInAction(() => {
         this.tasks[columnID] = [...(this.tasks[columnID] || []), taskCreated];
       });
+    } catch (error) {
+      this.handleError(error);
+    } finally {
+      runInAction(() => (this.isLoading = false));
+    }
+  }
+
+  async updateTask({ taskID, boardID, ...task }: UpdateTaskParams) {
+    try {
+      this.isLoading = true;
+      const columnID = defineColumnForTask(this.tasks, taskID);
+
+      runInAction(() => {
+        this.tasks[columnID] = updateDataWithID(this.tasks[columnID], 'taskID', taskID, task);
+      });
+
+      await updateTask({ ...task, boardID, columnID, taskID });
     } catch (error) {
       this.handleError(error);
     } finally {
@@ -68,26 +87,6 @@ class TasksStore {
       docID: taskID,
       targetCollectionPaths: ['boards', boardID, 'columns', newColumnID, 'tasks'],
     });
-  }
-  async updateTask({ taskID, boardID, task }) {
-    try {
-      const columnID = defineColumnForTask(this.tasks, taskID);
-
-      runInAction(() => {
-        this.tasks[columnID] = this.tasks[columnID].map(({ taskID: updatedID, ...taskData }) => {
-          if (updatedID === taskID) return { taskID: updatedID, ...taskData };
-
-          return { taskID: updatedID, ...taskData };
-        });
-      });
-
-      await updateData({
-        collectionPaths: ['boards', boardID, 'columns', columnID, 'tasks', taskID],
-        data: task,
-      });
-    } catch (error) {
-      this.handleError(error);
-    }
   }
 }
 

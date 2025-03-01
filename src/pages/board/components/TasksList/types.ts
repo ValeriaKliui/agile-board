@@ -1,4 +1,4 @@
-import { Task } from "@store";
+import { Task } from '@store';
 
 export interface TaskListProps {
   tasks: Task[];

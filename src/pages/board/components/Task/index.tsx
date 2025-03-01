@@ -1,16 +1,16 @@
 import { useTaskDraggable } from '@pages/board/hooks';
 import { Modal } from '@shared/components';
 import { useModal } from '@shared/hooks';
-import { Task as TaskProps } from '@store';
 import { observer } from 'mobx-react-lite';
 
 import { TaskCard } from './Card';
 import { TaskContent } from './Content';
+import { TaskWithUser } from './types';
 
 export const Task = observer(({
     taskID,
     ...task
-}: TaskProps) => {
+}: TaskWithUser) => {
     const { attributes, listeners, setNodeRef, x, y } = useTaskDraggable(taskID);
     const { isModalOpen, closeModal, openModal } = useModal();
 

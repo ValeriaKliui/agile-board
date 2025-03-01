@@ -1,4 +1,4 @@
-import { ROLES_VALUES } from '@constants';
+import { ROLES_VALUES } from '@shared/constants';
 
 export interface UserBoard {
   id: string;

@@ -1,15 +1,17 @@
+export { BoardActions } from './Actions';
 export { Board } from './Board';
 export { BoardHeader } from './BoardHeader';
 export { BoardManager } from './BoardManager';
 export { Column } from './Column';
 export { ColumnCreator } from './Column/Creator';
 export { BoardDetails } from './Details';
+export { InfoRow } from './InfoRow';
 export { MemberItem } from './MemberItem';
 export type { MemberItemType } from './MemberItem/types';
 export { MembersListManager } from './MembersListManager';
 export { AddMembersModal } from './MembersListManager/AddModal';
 export { Task } from './Task';
+export type { TaskWithUser } from './Task/types';
 export { TaskCreatorModal } from './TaskCreatorModal';
 export { TasksList } from './TasksList';
 export { Tooltip } from './Tooltip';
-export { BoardActions } from './Actions';

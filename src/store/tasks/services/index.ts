@@ -1,2 +1,2 @@
 export { addTask } from './addTask';
-export type { TaskInitial, AddTaskParams } from './types';
+export type { AddTaskParams,TaskInitial } from './types';

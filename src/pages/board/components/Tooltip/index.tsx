@@ -1,6 +1,7 @@
-import { TooltipTrigger } from './Trigger';
 import { Tooltip as TooltipAntd, TooltipProps } from 'antd';
 import { PropsWithChildren } from 'react';
+
+import { TooltipTrigger } from './Trigger';
 
 export const Tooltip = ({ children, ...tooltipProps }: PropsWithChildren<TooltipProps>) => {
     return (

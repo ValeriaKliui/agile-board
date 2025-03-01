@@ -4,3 +4,4 @@ export * from './formRules';
 export { getTabInfo } from './getTabInfo';
 export { handleAuthError } from './handleAuthError';
 export { sortArrByKey } from './sortArrByKey';
+export { updateDataWithID } from './updateDataWithID';

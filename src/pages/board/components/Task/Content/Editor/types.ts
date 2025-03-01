@@ -1,4 +1,8 @@
-import { BoardInfo, Task } from '@store';
+import { TaskWithUser } from '@pages/board/components';
+import { BoardInfo } from '@store';
 
-export type TaskEditorProps = Pick<Task, 'taskID' | 'title' | 'description'> &
-  Partial<Pick<BoardInfo, 'boardID'>>;
+export type TaskEditorProps = Omit<TaskWithUser, 'author'> &
+  Partial<Pick<BoardInfo, 'boardID'>> & {
+    isEditing: boolean;
+    onEditFinish: () => void;
+  };

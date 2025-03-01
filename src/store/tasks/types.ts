@@ -1,5 +1,3 @@
-import { User } from '@store';
-
 export enum TASK_PRIORITY {
   LOW = 'low',
   MEDIUM = 'medium',
@@ -12,8 +10,8 @@ export interface Task {
   title: string;
   description?: string;
   createdAt: string;
-  assignedTo: User;
-  author: User;
+  assignedTo: string;
+  author: string;
   priority: TASK_PRIORITY;
   executionDate: string;
 }

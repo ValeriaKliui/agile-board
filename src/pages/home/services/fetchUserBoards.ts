@@ -1,10 +1,10 @@
 import {
   BOARDS_COLLECTION_NAME,
-  ROLES_VALUES,
   USER_BOARDS_COLLECTION_NAME,
   USERS_COLLECTION_NAME,
 } from '@constants';
 import { getFulfilledResults, groupArrayByValue } from '@pages/home/utils';
+import { ROLES_VALUES } from '@shared/constants';
 import { fetchBoard, getData } from '@shared/services';
 import { getCollection } from '@shared/services';
 import { BoardInfo } from '@store';

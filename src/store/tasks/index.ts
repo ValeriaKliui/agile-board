@@ -1,3 +1,3 @@
+export * from './services/types';
 export { tasksStore } from './tasksStore';
-export type { Task, Tasks, TaskInitial } from './types';
-export { TASK_PRIORITY } from './types';
+export * from './types';

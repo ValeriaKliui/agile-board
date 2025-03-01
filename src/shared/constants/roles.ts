@@ -31,7 +31,12 @@ export const ROLES_PERMISSIONS = Object.freeze({
     icon: CrownTwoTone,
   },
   [ROLES.MEMBER]: {
-    permissions: [PERMISSIONS.boards.view, PERMISSIONS.tasks.create, PERMISSIONS.tasks.move],
+    permissions: [
+      PERMISSIONS.boards.view,
+      PERMISSIONS.tasks.create,
+      PERMISSIONS.tasks.edit,
+      PERMISSIONS.tasks.move,
+    ],
     color: 'rgba(230, 230, 250, 0.9)',
     label: 'Member',
     icon: TeamOutlined,

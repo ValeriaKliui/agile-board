@@ -1,41 +1,27 @@
 import { CalendarOutlined, ClockCircleOutlined, CrownOutlined, UserOutlined } from "@ant-design/icons";
-import { Task } from "@store"
+import { InfoRow, TaskWithUser } from "@pages/board/components";
 import { Flex, Typography } from "antd";
 
-const { Text, Title } = Typography;
+const { Title, Text } = Typography;
 
-
-export const TaskViewer = ({ title, description, createdAt, assignedTo, author, executionDate }: Task) => {
-    return <Flex justify="space-between">
+export const TaskViewer = ({
+    title,
+    description,
+    createdAt,
+    assignedTo,
+    author,
+    executionDate,
+}: TaskWithUser) => (
+    <Flex justify="space-between">
         <Flex vertical>
             <Title level={4}>{title}</Title>
             <Text>{description}</Text>
         </Flex>
         <Flex vertical>
-            <Flex gap="small">
-                <CalendarOutlined />
-                <Text>
-                    <strong>Created:</strong> {createdAt}
-                </Text>
-            </Flex>
-            <Flex gap="small">
-                <ClockCircleOutlined />
-                <Text>
-                    <strong>Execute:</strong> {executionDate}
-                </Text>
-            </Flex>
-            <Flex gap="small">
-                <CrownOutlined />
-                <Text>
-                    <strong>Author:</strong> {author?.username}
-                </Text>
-            </Flex>
-            <Flex gap="small">
-                <UserOutlined />
-                <Text>
-                    <strong>Assigned to:</strong> {assignedTo?.username}
-                </Text>
-            </Flex>
+            <InfoRow Icon={CalendarOutlined} label="Created" value={createdAt} />
+            <InfoRow Icon={ClockCircleOutlined} label="Execute" value={executionDate} />
+            <InfoRow Icon={CrownOutlined} label="Author" value={author?.username} />
+            <InfoRow Icon={UserOutlined} label="Assigned to" value={assignedTo?.username} />
         </Flex>
     </Flex>
-}
+);
