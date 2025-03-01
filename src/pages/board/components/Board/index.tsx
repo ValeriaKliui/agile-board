@@ -9,7 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { ColStyled, RowStyled } from './styled';
 
 export const Board = observer(() => {
-    const columns = columnsStore.columns;
+    const { columns } = columnsStore;
     const lastColumnOrder = columns.at(-1)?.order ?? 0;
     const canEdit = hasPermission(PERMISSIONS.boards.edit)
 

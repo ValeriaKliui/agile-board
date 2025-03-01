@@ -1,7 +1,6 @@
 import { BOARDS_TEMPLATE_COLLECTION_NAME, USERS_COLLECTION_NAME, } from '@constants';
-import { MembersSearch } from '@pages/home/components';
-import { getCollection } from '@pages/home/services';
-import { RadioGroup } from '@shared/components';
+import { MembersSearch, RadioGroup } from '@shared/components';
+import { getCollection } from '@shared/services';
 import { User } from '@store';
 import { Flex, Form, Input, Typography } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
@@ -51,7 +50,7 @@ export const BasicBoardInfo = () => {
           <RadioGroup options={templateOptions} />
         </Item>
       </Flex>
-      <MembersSearch fetchFunc={fetchFunc} name={'membersChoosen'} />
+      <MembersSearch fetchFunc={fetchFunc} name={'selectedMembers'} />
     </>
   );
 };

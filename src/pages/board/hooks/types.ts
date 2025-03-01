@@ -1,7 +1,12 @@
-import { BoardInfo, Column, TaskInitial } from '@store';
+import { FormInstance } from 'antd';
 
-export type UseTaskCreatorParams = Pick<Column, 'columnID'> &
-  Partial<Pick<BoardInfo, 'boardID'>> & {
-    onSuccess: () => void;
-    getTaskData: () => TaskInitial;
-  };
+export type UseTaskCreatorParams = {
+  form: FormInstance;
+  columnID: string;
+  onSuccess: () => void;
+};
+export type UseColumnCreatorParams = {
+  form: FormInstance;
+  lastColumnOrder: number;
+  onSuccess: () => void;
+};

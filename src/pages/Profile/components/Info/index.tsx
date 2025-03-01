@@ -4,7 +4,7 @@ import { ProfileInfoProps } from './types';
 
 const { Title, Text } = Typography;
 
-export const ProfileInfo = ({ username = '', email, avatar }: ProfileInfoProps) => {
+export const ProfileInfo = ({ username, email, avatar }: ProfileInfoProps) => {
   return (
     <Flex align="flex-end" gap={20}>
       <Avatar src={avatar ?? null} size={64}>

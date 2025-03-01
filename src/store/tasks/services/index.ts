@@ -1,2 +1,5 @@
 export { addTask } from './addTask';
-export type { AddTaskParams,TaskInitial } from './types';
+export { fetchTasks } from './fetchTasks';
+export { moveTask } from './moveTask';
+export type * from './types';
+export { updateTask } from './updateTask';

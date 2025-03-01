@@ -10,7 +10,7 @@ import { AvatarsSelectionManagerProps } from './types';
 export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);
 
-  const userID = userStore.user?.userID ?? '';
+  const { userID = '' } = userStore.user ?? {}
 
   const {
     onRemove,

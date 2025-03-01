@@ -5,4 +5,5 @@ export interface SearchedSelectProps<T> extends SelectProps {
   options?: { label: string; value: string }[];
   label: string;
   isFetching: boolean;
+  name?: string;
 }

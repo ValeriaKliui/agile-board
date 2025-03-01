@@ -1,2 +1,3 @@
 export { columnsStore } from './columnsStore';
-export type { AddColumnsProps, BoardColumnProps,Column } from './types';
+export * from './services';
+export type { AddColumnsProps, BoardColumnProps, Column } from './types';

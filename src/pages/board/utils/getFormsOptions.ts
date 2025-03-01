@@ -1,7 +1,4 @@
-import { TASK_PRIORITY, User } from '@store';
-
-export const getMembersOptions = (membersInfo: User[]) =>
-  membersInfo.map(({ userID, username }) => ({ label: username, value: userID }));
+import { TASK_PRIORITY } from '@store';
 
 export const getPriorityOptions = () =>
   Object.values(TASK_PRIORITY).map((value) => ({ value, label: value }));

@@ -1,5 +1,5 @@
-import { getMembersOptions } from "@pages/board/utils";
 import { Button, Select } from "@shared/components";
+import { getMembersOptions } from "@shared/utils";
 import { boardStore, tasksStore } from "@store";
 import { Flex, Form, Input } from "antd";
 import { observer } from "mobx-react-lite";
@@ -11,7 +11,7 @@ const { Item } = Form
 
 export const TaskEditor = observer(({ isEditing, onEditFinish, taskID, title, description, assignedTo }: TaskEditorProps) => {
     const [form] = Form.useForm()
-    const boardID = boardStore.currentBoardInfo?.boardID
+    const { boardID } = boardStore.currentBoardInfo ?? {}
     const membersOptions = useMemo(() => getMembersOptions(boardStore.membersInfo), []);
     const assignedUser = assignedTo?.userID
     const isUpdating = tasksStore.isLoading

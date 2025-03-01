@@ -1,58 +1,33 @@
-import { USERS_COLLECTION_NAME } from "@constants";
-import { MembersRolesList, MembersSearch } from "@pages/home/components";
-import { getCollection } from "@pages/home/services";
-import { getRolesOptions } from "@pages/home/utils";
-import { Button, Modal, ModalProps } from "@shared/components";
-import { addMembersToBoard } from "@shared/services";
-import { MemberRoleType } from "@shared/types";
-import { boardStore, User } from "@store";
-import { Form } from "antd";
-import { observer } from "mobx-react-lite";
-import { useCallback, useState } from "react";
+import { AddMembersForm } from '@pages/board/components';
+import { useAddMembersToBoard } from '@pages/board/hooks';
+import { Modal, ModalProps } from '@shared/components';
+import { MemberRoleType } from '@shared/types';
+import { Form } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
 
-const { Item } = Form
 
-export const AddMembersModal = observer(
-    ({ isModalOpen, onClose }: ModalProps) => {
-        const [membersOptions, setMembersOptions] = useState<MemberRoleType[]>([]);
-        const rolesOptions = getRolesOptions();
+export const MembersAddModal = observer(({ isModalOpen, onClose: onSuccess }: ModalProps) => {
+    const [form] = Form.useForm();
+    const [selectedMembers, setSelectedMembers] = useState<MemberRoleType[]>([]);
 
-        const handleValuesChange = (changedValues) => {
-            if ('membersChoosen' in changedValues) {
-                setMembersOptions(changedValues.membersChoosen);
-            }
+    const { handleFormSubmit, isAdding } = useAddMembersToBoard({ form, onSuccess });
+
+    const handleValuesChange = ({ selectedMembers }) => {
+        if (selectedMembers) {
+            setSelectedMembers(selectedMembers);
         }
+    };
 
-        const [form] = Form.useForm()
-        const fetchFunc = useCallback(
-            (searchTerm: string) =>
-                getCollection<User>({
-                    collectionPaths: [USERS_COLLECTION_NAME],
-                    searchKey: 'username',
-                    searchTerm,
-                    filterKey: 'userID',
-                    filterValues: Object.keys(boardStore.currentBoardInfo?.members)
-                }),
-            [],
-        );
-
-        const onFinish = async () => {
-            const { members } = form.getFieldsValue()
-
-            await addMembersToBoard({ boardID: boardStore.currentBoardInfo?.boardID, members });
-
-            await boardStore.updateBoard({ boardID: boardStore.currentBoardInfo?.boardID, boardData: { members: { ...boardStore.currentBoardInfo?.members, ...members } } })
-            onClose?.()
-        }
-
-        return <Modal isModalOpen={isModalOpen} onCancel={onClose} onClose={onClose}>
-            <Form form={form} onFinish={onFinish} onValuesChange={handleValuesChange}>
-                <MembersSearch fetchFunc={fetchFunc} name='membersChoosen' />
-                <Item >
-                    <Button htmlType="submit">Add!</Button>
-                </Item>
-                <MembersRolesList members={membersOptions} roles={rolesOptions} />
-            </Form>
+    return (
+        <Modal isModalOpen={isModalOpen} onCancel={onSuccess} onClose={onSuccess}>
+            <AddMembersForm
+                form={form}
+                selectedMembers={selectedMembers}
+                onValuesChange={handleValuesChange}
+                onFinish={handleFormSubmit}
+                loading={isAdding}
+            />
         </Modal>
-    }
-)
+    );
+});

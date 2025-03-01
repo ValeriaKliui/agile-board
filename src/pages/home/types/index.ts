@@ -1,7 +1,7 @@
 import { MemberRoleType } from '@shared/types';
 
 export interface StepFormValues {
-  membersChoosen: MemberRoleType[];
+  selectedMembers: MemberRoleType[];
   title: string;
   template: string;
 }

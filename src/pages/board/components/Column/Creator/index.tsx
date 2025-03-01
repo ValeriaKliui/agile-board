@@ -14,7 +14,9 @@ export const ColumnCreator = observer(({ lastColumnOrder }: ColumnCreatorProps) 
     const { openModal, isModalOpen, closeModal } = useModal();
     const [form] = Form.useForm<Column>();
 
-    const { createColumn, newColumnOrder } = useColumnCreator(form, closeModal, lastColumnOrder);
+    const { createColumn, newColumnOrder, isLoading } = useColumnCreator({
+        form, onSuccess: closeModal, lastColumnOrder
+    });
 
     return (
         <>
@@ -22,7 +24,7 @@ export const ColumnCreator = observer(({ lastColumnOrder }: ColumnCreatorProps) 
                 <Icon icon={PlusCircleOutlined} size={30} />
             </ColumnStyled>
             <CreatorModal isModalOpen={isModalOpen} onClose={closeModal}>
-                <ColumnCreatorForm form={form} order={newColumnOrder} onFinish={createColumn} />
+                <ColumnCreatorForm form={form} isCreating={isLoading} order={newColumnOrder} onFinish={createColumn} />
             </CreatorModal>
         </>
     );

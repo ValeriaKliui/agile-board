@@ -1,11 +1,16 @@
-import { fetchTasks, moveDocument } from '@shared/services';
 import { defineColumnForTask, updateDataWithID } from '@shared/utils';
-import { BoardInfo, Column, Tasks } from '@store';
+import {
+  addTask,
+  AddTaskParams,
+  FetchTaskParams,
+  fetchTasks,
+  moveTask,
+  MoveTaskParams,
+  Tasks,
+  updateTask,
+  UpdateTaskParams,
+} from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { UpdateTaskParams } from 'store/tasks/services/types';
-import { updateTask } from 'store/tasks/services/updateTask';
-
-import { addTask, AddTaskParams } from './services';
 
 class TasksStore {
   tasks: Tasks = {};
@@ -21,71 +26,70 @@ class TasksStore {
     this.error = error instanceof Error ? error.message : 'An unknown error occurred';
   }
 
-  async addTask({ columnID, task, boardID }: AddTaskParams) {
-    this.isLoading = true;
-    try {
-      const taskCreated = await addTask({ boardID, columnID, task });
+  private setLoadingState(state: boolean) {
+    runInAction(() => {
+      this.isLoading = state;
+    });
+  }
 
+  private async performTaskOperation(taskOperation: () => Promise<void>) {
+    try {
+      this.error = null;
+      this.setLoadingState(true);
+      await taskOperation();
+    } catch (error) {
+      this.handleError(error);
+    } finally {
+      this.setLoadingState(false);
+    }
+  }
+
+  private getTaskByID(taskID: string) {
+    const columnID = defineColumnForTask(this.tasks, taskID);
+
+    return this.tasks[columnID]?.find(({ taskID: prevID }) => taskID === prevID);
+  }
+
+  async addTask({ columnID, task, boardID }: AddTaskParams) {
+    await this.performTaskOperation(async () => {
+      const taskCreated = await addTask({ boardID, columnID, task });
       runInAction(() => {
         this.tasks[columnID] = [...(this.tasks[columnID] || []), taskCreated];
       });
-    } catch (error) {
-      this.handleError(error);
-    } finally {
-      runInAction(() => (this.isLoading = false));
-    }
+    });
   }
 
   async updateTask({ taskID, boardID, ...task }: UpdateTaskParams) {
-    try {
-      this.isLoading = true;
+    await this.performTaskOperation(async () => {
       const columnID = defineColumnForTask(this.tasks, taskID);
-
+      await updateTask({ ...task, boardID, columnID, taskID });
       runInAction(() => {
         this.tasks[columnID] = updateDataWithID(this.tasks[columnID], 'taskID', taskID, task);
       });
-
-      await updateTask({ ...task, boardID, columnID, taskID });
-    } catch (error) {
-      this.handleError(error);
-    } finally {
-      runInAction(() => (this.isLoading = false));
-    }
+    });
   }
 
-  async fetchTasks({ columnID, boardID }: Pick<BoardInfo, 'boardID'> & Pick<Column, 'columnID'>) {
-    this.isLoading = true;
-
-    try {
+  async fetchTasks({ columnID, boardID }: FetchTaskParams) {
+    await this.performTaskOperation(async () => {
       const tasks = await fetchTasks({ columnID, boardID });
-
       runInAction(() => {
         if (tasks) this.tasks[columnID] = tasks;
       });
-    } catch (error) {
-      this.handleError(error);
-    } finally {
-      runInAction(() => (this.isLoading = false));
-    }
+    });
   }
 
-  async moveTask({ taskID, newColumnID, boardID }) {
-    const columnID = defineColumnForTask(this.tasks, taskID);
+  async moveTask({ taskID, newColumnID, boardID }: MoveTaskParams) {
+    await this.performTaskOperation(async () => {
+      const columnID = defineColumnForTask(this.tasks, taskID);
+      const currTask = this.getTaskByID(taskID);
 
-    runInAction(() => {
-      const currTask = this.tasks[columnID].find(({ taskID: prevID }) => taskID === prevID);
+      runInAction(() => {
+        this.tasks[columnID] =
+          this.tasks[columnID]?.filter(({ taskID: movedID }) => movedID !== taskID) || [];
+        if (currTask) this.tasks[newColumnID] = [...(this.tasks[newColumnID] || []), currTask];
+      });
 
-      this.tasks[columnID] = this.tasks[columnID].filter(
-        ({ taskID: movedID }) => movedID !== taskID,
-      );
-      if (this.tasks[newColumnID]) this.tasks[newColumnID] = [...this.tasks[newColumnID], currTask];
-      else this.tasks[newColumnID] = [currTask];
-    });
-
-    await moveDocument({
-      collectionPaths: ['boards', boardID, 'columns', columnID, 'tasks', taskID],
-      docID: taskID,
-      targetCollectionPaths: ['boards', boardID, 'columns', newColumnID, 'tasks'],
+      await moveTask({ boardID, columnID, taskID, newColumnID });
     });
   }
 }

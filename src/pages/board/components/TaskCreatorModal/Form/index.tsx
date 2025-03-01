@@ -1,7 +1,7 @@
 import { useTaskCreator } from '@pages/board/hooks';
-import { getMembersOptions, getPriorityOptions } from '@pages/board/utils';
+import {  getPriorityOptions } from '@pages/board/utils';
 import { Button, RadioGroup, Select } from '@shared/components';
-import { setRequiredRule } from '@shared/utils';
+import { getMembersOptions, setRequiredRule } from '@shared/utils';
 import { boardStore, TASK_PRIORITY, TaskInitial } from '@store';
 import { DatePicker, Flex, Form, Input, Typography } from 'antd';
 import TextArea from 'antd/es/input/TextArea';

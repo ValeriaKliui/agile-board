@@ -10,7 +10,8 @@ import { TaskEditor } from './Editor';
 import { TaskViewer } from './Viewer';
 
 export const TaskContent = observer(({ author, ...task }: TaskWithUser) => {
-    const isAuthorOfTask = userStore.user?.userID === author?.userID
+    const { userID } = userStore.user ?? {}
+    const isAuthorOfTask = userID === author?.userID
     const canEdit = hasPermission(PERMISSIONS.tasks.edit) && isAuthorOfTask;
 
     const [isEditing, setIsEditing] = useState(false);

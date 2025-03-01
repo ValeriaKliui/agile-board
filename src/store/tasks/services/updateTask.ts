@@ -1,6 +1,6 @@
-import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
+import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME, TASKS_COLLECTION_NAME } from '@constants';
 import { updateData } from '@shared/services';
-import { UpdateTaskParams } from 'store/tasks/services/types';
+import { UpdateTaskParams } from '@store';
 
 export const updateTask = async ({ boardID, columnID, taskID, ...task }: UpdateTaskParams) => {
   try {
@@ -10,7 +10,7 @@ export const updateTask = async ({ boardID, columnID, taskID, ...task }: UpdateT
         boardID,
         COLUMNS_COLLECTION_NAME,
         columnID,
-        'tasks',
+        TASKS_COLLECTION_NAME,
         taskID,
       ],
       data: task,

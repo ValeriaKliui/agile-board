@@ -4,7 +4,6 @@ import { doc, DocumentData, updateDoc, WithFieldValue } from 'firebase/firestore
 
 export const updateData = async <T extends WithFieldValue<DocumentData>>({
   collectionPaths,
-  docID,
   data,
 }: DataParams<T>) => {
   try {
@@ -15,7 +14,7 @@ export const updateData = async <T extends WithFieldValue<DocumentData>>({
     console.error(error);
     if (error instanceof Error)
       throw new Error(
-        `Failed to update document in ${collectionPaths.toString()} with ID ${docID}: ${error.message}`,
+        `Failed to update document in ${collectionPaths.toString()}: ${error.message}`,
       );
   }
 };

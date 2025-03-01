@@ -24,9 +24,7 @@ export type BoardCreationParams = Pick<BoardInfo, 'title' | 'owner' | 'members'>
 
 export type BoardCreationInfo = Omit<BoardInfo, 'boardID' | 'createdAt'> & { template: string };
 
-export interface UpdateBoardInfo extends Pick<BoardInfo, 'boardID'> {
-  boardData: Partial<BoardInfo>;
-}
+export type UpdateBoardInfo = Pick<BoardInfo, 'boardID'> & Partial<BoardInfo>;
 
 export interface Member extends User {
   userRole: ROLES;

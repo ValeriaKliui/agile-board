@@ -1,8 +1,11 @@
-import { SearchedSelect } from '@pages/home/components';
+import { SearchedSelect } from '@shared/components';
 import { useDebouncedFetch } from '@shared/hooks';
+import { getMembersOptions } from '@shared/utils';
 import { User } from '@store';
 
-export const MembersSearch = ({ fetchFunc, name }) => {
+import { MembersSearchProps } from './types';
+
+export const MembersSearch = ({ fetchFunc, name }: MembersSearchProps) => {
   const {
     debounceFetcher: fetchSearchFunc,
     result: members,
@@ -10,10 +13,7 @@ export const MembersSearch = ({ fetchFunc, name }) => {
   } = useDebouncedFetch<
     User[]>({ fetchFunc });
 
-  const options = members?.map(({ username, userID }: User) => ({
-    label: username,
-    value: userID,
-  }));
+  const membersOptions = getMembersOptions(members)
 
   const safeFetchSearchFunc = (searchTerm: string) => {
     return fetchSearchFunc(searchTerm) ?? Promise.resolve();
@@ -27,7 +27,7 @@ export const MembersSearch = ({ fetchFunc, name }) => {
       label="Select Members"
       isFetching={isFetching}
       fetchOptions={safeFetchSearchFunc}
-      options={options}
+      options={membersOptions}
     />
   );
 };

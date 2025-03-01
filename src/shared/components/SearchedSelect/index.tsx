@@ -20,10 +20,10 @@ export const SearchedSelect = <T,>({
     await fetchOptions(searchTerm);
   };
 
-  const getAddons = () => {
+  const getNotFoundContent = () => {
     if (isFetching) return <Spin size="small" />;
-    else if (!options) return 'Input...';
-    else if (options?.length === 0 && !isFetching) return <>Nothing was found</>;
+    if (!options?.length) return <>Nothing was found</>;
+    return 'Input...';
   };
 
   return (
@@ -37,7 +37,7 @@ export const SearchedSelect = <T,>({
           labelInValue
           filterOption={false}
           onSearch={fetchSearchedItems}
-          notFoundContent={getAddons()}
+          notFoundContent={getNotFoundContent()}
           options={options}
           {...selectProps}
         />

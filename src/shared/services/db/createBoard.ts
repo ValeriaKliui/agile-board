@@ -1,9 +1,12 @@
 import { BOARDS_COLLECTION_NAME } from '@constants';
+import { ROLES } from '@shared/constants';
 import { addMembersToBoard, formatDatetime, setData } from '@shared/services';
 import { BoardCreationParams } from '@store';
 
 export const createBoard = async ({ title, owner, members }: BoardCreationParams) => {
   try {
+    members[owner] = ROLES.OWNER;
+
     const boardData = {
       title,
       createdAt: new Date(),

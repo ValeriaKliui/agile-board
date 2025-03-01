@@ -28,7 +28,7 @@ export const BoardManager = observer(({ boardID }: BoardManagerProps) => {
 
     return (
         <Flex vertical gap="middle">
-            {boardID && <BoardDetails boardID={boardID} />}
+            <BoardDetails />
             <Board />
         </Flex>
     );

@@ -21,11 +21,14 @@ export type DataWithId<T> = T & {
 };
 export interface DataParams<T> {
   collectionPaths: CollectionPaths;
-  docID?: string | null;
   data: T;
 }
 
 export interface UserByIDsParams {
   IDs: string[];
   extractKey?: keyof User;
+}
+export interface MoveTocumentParams {
+  collectionPaths: CollectionPaths;
+  targetCollectionPaths: CollectionPaths;
 }

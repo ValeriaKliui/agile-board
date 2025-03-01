@@ -1,7 +1,7 @@
-import { BasicBoardInfo, MembersRolesList } from '@pages/home/components';
+import { BasicBoardInfo, } from '@pages/home/components';
 import { StepFormValues } from '@pages/home/types';
 import { getRolesOptions } from '@pages/home/utils';
-import { StepPanel } from '@shared/components';
+import { MembersRolesList, StepPanel } from '@shared/components';
 import { MemberRoleType, StepType } from '@shared/types';
 import { boardStore, userStore } from '@store';
 import { Form, FormInstance } from 'antd';
@@ -18,12 +18,12 @@ export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues
   const rolesOptions = getRolesOptions();
 
   const handleValuesChange = (changedValues: StepFormValues) => {
-    if ('membersChoosen' in changedValues) {
-      setMembersOptions(changedValues.membersChoosen);
+    if ('selectedMembers' in changedValues) {
+      setMembersOptions(changedValues.selectedMembers);
     }
 
-    const { title, membersChoosen } = stepForm?.getFieldsValue(true) ?? {};
-    setIsNextAllowed(!!title && Array.isArray(membersChoosen) && membersChoosen.length > 0);
+    const { title, selectedMembers } = stepForm?.getFieldsValue(true) ?? {};
+    setIsNextAllowed(!!title && Array.isArray(selectedMembers) && selectedMembers.length > 0);
   };
   const steps: StepType[] = [
     { title: 'Initial info', content: <BasicBoardInfo /> },
@@ -35,8 +35,8 @@ export const CreatingBoardStepsForm = <TForm extends FormInstance<StepFormValues
 
   const onFormSubmit = async () => {
     const { title = '', members, template } = stepForm?.getFieldsValue(true) ?? {};
-    const userID = userStore.user?.userID;
-    
+    const { userID } = userStore.user ?? {};
+
     if (userID) {
       await boardStore.createBoard({ title, owner: userID, members, template });
       onSubmit();

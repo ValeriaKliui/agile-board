@@ -11,9 +11,9 @@ export const BoardHeader = observer(({ title }: Pick<BoardInfo, 'title'>) => {
     const isEditable = hasPermission(PERMISSIONS.boards.edit);
 
     const onEdit = async (title: string) => {
-        const boardID = boardStore.currentBoardInfo?.boardID
+        const { boardID } = boardStore.currentBoardInfo ?? {}
 
-        if (boardID) await boardStore.updateBoard({ boardID, boardData: { title } })
+        if (boardID) await boardStore.updateBoard({ boardID, title })
     }
 
     return (

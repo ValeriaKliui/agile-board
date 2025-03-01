@@ -6,9 +6,9 @@ import { observer } from 'mobx-react-lite';
 import { ResultStyled } from './styled';
 
 export const HomePage = observer(() => {
-   const userID = userStore.user?.userID;
-  const isLoggedIn = userStore.isLoggedIn  
- const { isLoading, boardsInfo, fetchBoards } = useUserBoardsInfo(userID);
+  const { userID } = userStore.user ?? {};
+  const isLoggedIn = userStore.isLoggedIn
+  const { isLoading, boardsInfo, fetchBoards } = useUserBoardsInfo(userID);
 
   const noBoards = boardsInfo.length === 0;
 

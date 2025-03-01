@@ -1,0 +1,1 @@
+export { fetchNewUsers } from './fetchNewUsers';

@@ -5,16 +5,18 @@ import { useCallback } from 'react';
 export const useTaskDnD = () => {
   const onTaskMove = useCallback(async (event: DragEndEvent) => {
     const { active, over } = event;
+    const { boardID } = boardStore.currentBoardInfo ?? {};
 
     if (!over) return;
     const taskID = active.id as string;
     const newColumnID = over.id as string;
 
-    await tasksStore.moveTask({
-      taskID,
-      newColumnID,
-      boardID: boardStore.currentBoardInfo?.boardID,
-    });
+    if (boardID)
+      await tasksStore.moveTask({
+        taskID,
+        newColumnID,
+        boardID,
+      });
   }, []);
 
   const sensors = useSensors(

@@ -38,7 +38,7 @@ export const getCollection = async <T>({
 
     return documents;
   } catch (error) {
-    console.error('Error Firestore:', error);
+    console.error('Error getting collection:', error);
     if (error instanceof Error) throw new Error(error.message);
   }
 };

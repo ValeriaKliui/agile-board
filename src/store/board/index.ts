@@ -1,4 +1,5 @@
 export { boardStore } from './boardStore';
+export * from './services';
 export type {
   BoardCreationInfo,
   BoardCreationParams,

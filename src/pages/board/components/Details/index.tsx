@@ -1,10 +1,11 @@
 import { BoardActions, BoardHeader, MembersListManager } from '@pages/board/components';
 import { boardStore, } from '@store';
 import { Flex, Typography } from 'antd';
+import { observer } from 'mobx-react-lite';
 
 const { Text } = Typography;
 
-export const BoardDetails = () => {
+export const BoardDetails = observer(() => {
     const { title, createdAt, members } = boardStore.currentBoardInfo ?? {};
 
     return (
@@ -21,4 +22,4 @@ export const BoardDetails = () => {
             </Flex>
         </Flex>
     );
-};
+})

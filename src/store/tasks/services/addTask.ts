@@ -1,6 +1,5 @@
-import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
-import { formatDatetime } from '@shared/services/db/formatDatetime';
-import { setData } from '@shared/services/db/setData';
+import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME, TASKS_COLLECTION_NAME } from '@constants';
+import { formatDatetime, setData } from '@shared/services';
 
 import { AddTaskParams, TaskInitial } from './types';
 
@@ -21,7 +20,7 @@ export const addTask = async ({ boardID, columnID, task }: AddTaskParams) => {
         boardID,
         COLUMNS_COLLECTION_NAME,
         columnID,
-        'tasks',
+        TASKS_COLLECTION_NAME,
       ],
       data: taskWithDates,
     });

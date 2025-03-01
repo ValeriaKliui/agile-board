@@ -11,8 +11,8 @@ export const BoardActions = observer(() => {
     const navigate = useNavigate();
 
     const onDelete = useCallback(async () => {
-        const boardID = boardStore.currentBoardInfo?.boardID
-        const userID = userStore.user?.userID;
+        const { boardID } = boardStore.currentBoardInfo ?? {}
+        const { userID } = userStore.user ?? {}
 
         if (boardID && userID) {
             await boardStore.deleteBoard({ boardID, userID });

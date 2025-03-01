@@ -1,18 +1,11 @@
+import { UseTaskCreatorParams } from '@pages/board/hooks/types';
 import { boardStore, tasksStore, userStore } from '@store';
-import { FormInstance } from 'antd';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
-export const useTaskCreator = ({
-  form,
-  columnID,
-  onSuccess,
-}: {
-  form: FormInstance;
-  columnID: string;
-  onSuccess: () => void;
-}) => {
-  const boardID = useMemo(() => boardStore.currentBoardInfo?.boardID, []);
-  const userID = useMemo(() => userStore.user?.userID, []);
+export const useTaskCreator = ({ form, columnID, onSuccess }: UseTaskCreatorParams) => {
+  const { boardID } = boardStore.currentBoardInfo ?? {};
+  const { userID } = userStore.user ?? {};
+
   const isCreating = tasksStore.isLoading;
 
   const onFinish = useCallback(async () => {

@@ -1,20 +1,19 @@
-import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
-import { getCollection } from '@pages/home/services';
-import { formatDatetime } from '@shared/services/db/formatDatetime';
-import { BoardInfo, Column, Task } from '@store';
+import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME, TASKS_COLLECTION_NAME } from '@constants';
+import { formatDatetime, getCollection } from '@shared/services';
+import { BoardInfo, Column, TaskResponse } from '@store';
 
 export const fetchTasks = async ({
   boardID,
   columnID,
 }: Pick<BoardInfo, 'boardID'> & Pick<Column, 'columnID'>) => {
   try {
-    const tasks = await getCollection<Task>({
+    const tasks = await getCollection<TaskResponse>({
       collectionPaths: [
         BOARDS_COLLECTION_NAME,
         boardID,
         COLUMNS_COLLECTION_NAME,
         columnID,
-        'tasks',
+        TASKS_COLLECTION_NAME,
       ],
     });
 
