@@ -1,5 +1,5 @@
 import { USERS_COLLECTION_NAME } from '@constants';
-import { setData } from '@shared/services/firebase';
+import { setData } from '@shared/services';
 
 import { CreateAccountProps } from './types';
 

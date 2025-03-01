@@ -1,10 +1,8 @@
+import { setRequiredRule } from '@shared/utils';
 import { Rule } from 'antd/es/form';
 
 export const getConfirmPasswordRules = (): Rule[] => [
-  {
-    required: true,
-    message: 'Please confirm your password!',
-  },
+  ...setRequiredRule('password confirmation'),
   ({ getFieldValue }) => ({
     validator(_, value) {
       if (!value || getFieldValue('password') === value) {

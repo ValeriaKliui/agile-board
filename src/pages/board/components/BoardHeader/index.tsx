@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 const { Text } = Typography
 
 export const BoardHeader = observer(({ title }: Pick<BoardInfo, 'title'>) => {
-    const isEditable = hasPermission({ permission: PERMISSIONS.boards.edit });
+    const isEditable = hasPermission(PERMISSIONS.boards.edit);
 
     const onEdit = async (title: string) => {
         const boardID = boardStore.currentBoardInfo?.boardID

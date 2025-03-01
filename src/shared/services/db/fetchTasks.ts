@@ -1,5 +1,6 @@
 import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
 import { getCollection } from '@pages/home/services';
+import { formatDatetime } from '@shared/services/db/formatDatetime';
 import { BoardInfo, Column, Task } from '@store';
 
 export const fetchTasks = async ({
@@ -8,17 +9,25 @@ export const fetchTasks = async ({
 }: Pick<BoardInfo, 'boardID'> & Pick<Column, 'columnID'>) => {
   try {
     const tasks = await getCollection<Task>({
-      collectionPaths:[
+      collectionPaths: [
         BOARDS_COLLECTION_NAME,
         boardID,
         COLUMNS_COLLECTION_NAME,
         columnID,
         'tasks',
-      ]
+      ],
     });
 
-    return tasks?.map(({ id, ...task }) => ({ ...task, taskID: id }));
+    return tasks?.map(({ id, createdAt, executionDate, ...task }) => {
+      return {
+        ...task,
+        taskID: id,
+        executionDate: formatDatetime({ timestamp: executionDate }),
+        createdAt: formatDatetime({ timestamp: createdAt }),
+      };
+    });
   } catch (error) {
+    console.error(error);
     if (error instanceof Error) throw new Error(error.message);
   }
 };

@@ -1,5 +1,5 @@
 import { USERS_COLLECTION_NAME } from '@constants';
-import { getData, updateData } from '@shared/services/firebase';
+import { getData, updateData } from '@shared/services';
 import { filterUndefinedValues } from '@shared/utils';
 import { User } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
@@ -54,8 +54,7 @@ class UserStore {
       const userID = this.user?.userID;
       if (userID)
         await updateData({
-          collectionPaths: [USERS_COLLECTION_NAME],
-          docID: userID,
+          collectionPaths: [USERS_COLLECTION_NAME, userID],
           data: newData,
         });
 

@@ -4,7 +4,7 @@ import {
   registerUser,
   resetPassword,
   updatePassword,
-} from '@shared/services/firebase';
+} from '@shared/services';
 import { userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 

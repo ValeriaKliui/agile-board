@@ -1,5 +1,5 @@
 import { BOARDS_COLLECTION_NAME } from '@constants';
-import { formatDatetime, getData } from '@shared/services/firebase';
+import { formatDatetime, getData } from '@shared/services';
 import { BoardInfo, BoardInfoResponse } from '@store';
 
 export const fetchBoard = async ({ boardID }: Pick<BoardInfo, 'boardID'>) => {

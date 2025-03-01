@@ -1,3 +1,5 @@
+import { User } from '@store';
+
 export enum TASK_PRIORITY {
   LOW = 'low',
   MEDIUM = 'medium',
@@ -9,9 +11,10 @@ export interface Task {
   taskID: string;
   title: string;
   description?: string;
-  createdAt: number;
-  assignedTo: string;
-  author: string;
+  createdAt: string;
+  assignedTo: User;
+  author: User;
   priority: TASK_PRIORITY;
+  executionDate: string;
 }
 export type Tasks = Record<string, Task[]>;

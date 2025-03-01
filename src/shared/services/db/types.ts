@@ -5,7 +5,7 @@ export type AddingMembersProps = Pick<BoardInfo, 'members' | 'boardID'>;
 export type CollectionPaths = readonly [string, ...string[]];
 
 export interface DateTimeParams {
-  timestamp?: Timestamp;
+  timestamp?: Timestamp | Date;
   format?: string;
 }
 export interface CollectionWithParams {
@@ -13,6 +13,8 @@ export interface CollectionWithParams {
   collectionPaths: CollectionPaths;
   searchTerm?: string;
   searchKey?: string;
+  filterKey?: string;
+  filterValues?: string[];
 }
 export type DataWithId<T> = T & {
   id: string;

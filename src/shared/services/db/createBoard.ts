@@ -1,13 +1,12 @@
 import { BOARDS_COLLECTION_NAME } from '@constants';
-import { addMembersToBoard, formatDatetime, setData } from '@shared/services/firebase';
+import { addMembersToBoard, formatDatetime, setData } from '@shared/services';
 import { BoardCreationParams } from '@store';
-import { Timestamp } from 'firebase/firestore';
 
 export const createBoard = async ({ title, owner, members }: BoardCreationParams) => {
   try {
     const boardData = {
       title,
-      createdAt: Timestamp.fromDate(new Date()),
+      createdAt: new Date(),
       owner,
       members,
     };

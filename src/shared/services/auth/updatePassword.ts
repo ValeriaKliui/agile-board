@@ -1,5 +1,5 @@
 import { auth } from '@config';
-import { UPDATE_PASSWORD_ERRORS, UPDATE_PASSWORD_ERRORS_MESSAGES } from '@shared/services/firebase';
+import { UPDATE_PASSWORD_ERRORS, UPDATE_PASSWORD_ERRORS_MESSAGES } from '@shared/services';
 import { handleAuthError } from '@shared/utils';
 import { UpdatePasswordProps } from '@store';
 import {

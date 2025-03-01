@@ -9,6 +9,7 @@ export type { MemberItemType } from './MemberItem/types';
 export { MembersListManager } from './MembersListManager';
 export { AddMembersModal } from './MembersListManager/AddModal';
 export { Task } from './Task';
-export { TaskCreator } from './TaskCreator';
+export { TaskCreatorModal } from './TaskCreatorModal';
 export { TasksList } from './TasksList';
 export { Tooltip } from './Tooltip';
+export { BoardActions } from './Actions';

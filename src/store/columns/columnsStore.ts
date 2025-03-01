@@ -1,4 +1,4 @@
-import { addColumnToBoard, fetchColumns } from '@shared/services/firebase';
+import { addColumnToBoard, fetchColumns } from '@shared/services';
 import { tasksStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 

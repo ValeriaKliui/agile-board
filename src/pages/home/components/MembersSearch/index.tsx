@@ -22,6 +22,7 @@ export const MembersSearch = ({ fetchFunc, name }) => {
   return (
     <SearchedSelect
       name={name}
+      onClick={() => fetchSearchFunc()}
       placeholder="Select users"
       label="Select Members"
       isFetching={isFetching}

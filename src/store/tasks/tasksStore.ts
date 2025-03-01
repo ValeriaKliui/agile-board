@@ -1,12 +1,9 @@
-import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
-import { fetchTasks, setData, updateData } from '@shared/services/firebase';
-import { moveDocument } from '@shared/services/firebase/db/moveDocument';
+import { fetchTasks, moveDocument, updateData } from '@shared/services';
 import { defineColumnForTask } from '@shared/utils';
+import { BoardInfo, Column, Tasks } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { BoardInfo, boardStore } from 'store/board';
-import { Column } from 'store/columns';
 
-import { Task, Tasks } from './types';
+import { addTask, AddTaskParams } from './services';
 
 class TasksStore {
   tasks: Tasks = {};
@@ -15,6 +12,26 @@ class TasksStore {
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  handleError(error: unknown) {
+    console.error(error);
+    this.error = error instanceof Error ? error.message : 'An unknown error occurred';
+  }
+
+  async addTask({ columnID, task, boardID }: AddTaskParams) {
+    this.isLoading = true;
+    try {
+      const taskCreated = await addTask({ boardID, columnID, task });
+
+      runInAction(() => {
+        this.tasks[columnID] = [...(this.tasks[columnID] || []), taskCreated];
+      });
+    } catch (error) {
+      this.handleError(error);
+    } finally {
+      runInAction(() => (this.isLoading = false));
+    }
   }
 
   async fetchTasks({ columnID, boardID }: Pick<BoardInfo, 'boardID'> & Pick<Column, 'columnID'>) {
@@ -27,42 +44,12 @@ class TasksStore {
         if (tasks) this.tasks[columnID] = tasks;
       });
     } catch (error) {
-      runInAction(() => (this.error = error instanceof Error ? error.message : 'Unknown error'));
+      this.handleError(error);
     } finally {
-      this.isLoading = false;
+      runInAction(() => (this.isLoading = false));
     }
   }
-  async addTask({
-    columnID,
-    task,
-  }: Pick<Column, 'columnID'> & {
-    task: Task;
-  }) {
-    try {
-      const boardID = boardStore.currentBoardInfo?.boardID;
 
-      if (boardID)
-        await setData({
-          collectionPaths: [
-            BOARDS_COLLECTION_NAME,
-            boardID,
-            COLUMNS_COLLECTION_NAME,
-            columnID,
-            'tasks',
-          ],
-          data: task,
-        });
-
-      runInAction(() => {
-        const currentTasks = this.tasks[columnID];
-        if (currentTasks) this.tasks[columnID] = [...currentTasks, task];
-        else this.tasks[columnID] = [task];
-      });
-    } catch (error) {
-      console.error(error);
-      if (error instanceof Error) this.error = error.message;
-    }
-  }
   async moveTask({ taskID, newColumnID, boardID }) {
     const columnID = defineColumnForTask(this.tasks, taskID);
 
@@ -88,7 +75,8 @@ class TasksStore {
 
       runInAction(() => {
         this.tasks[columnID] = this.tasks[columnID].map(({ taskID: updatedID, ...taskData }) => {
-          if (updatedID === taskID) return { taskID: updatedID, ...task };
+          if (updatedID === taskID) return { taskID: updatedID, ...taskData };
+
           return { taskID: updatedID, ...taskData };
         });
       });
@@ -98,7 +86,7 @@ class TasksStore {
         data: task,
       });
     } catch (error) {
-      console.error(error);
+      this.handleError(error);
     }
   }
 }

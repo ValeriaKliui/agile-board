@@ -1,5 +1,5 @@
 import { USERS_COLLECTION_NAME } from '@constants';
-import { getDocumentsByIds } from '@shared/services/firebase';
+import { getDocumentsByIds } from '@shared/services';
 import { User } from '@store';
 
 import { UserByIDsParams } from './types';

@@ -1,8 +1,9 @@
+import { USERS_COLLECTION_NAME } from "@constants";
 import { MembersRolesList, MembersSearch } from "@pages/home/components";
 import { getCollection } from "@pages/home/services";
 import { getRolesOptions } from "@pages/home/utils";
 import { Button, Modal, ModalProps } from "@shared/components";
-import { addMembersToBoard } from "@shared/services/firebase";
+import { addMembersToBoard } from "@shared/services";
 import { MemberRoleType } from "@shared/types";
 import { boardStore, User } from "@store";
 import { Form } from "antd";
@@ -29,6 +30,8 @@ export const AddMembersModal = observer(
                     collectionPaths: [USERS_COLLECTION_NAME],
                     searchKey: 'username',
                     searchTerm,
+                    filterKey: 'userID',
+                    filterValues: Object.keys(boardStore.currentBoardInfo?.members)
                 }),
             [],
         );

@@ -11,6 +11,7 @@ export const UpdatePasswordFormManager = observer(() => {
   const onSubmit = async ({ oldPassword, newPassword }: UpdatePasswordProps) => {
     await authStore.updatePassword({ oldPassword, newPassword });
     if (!authStore.errors.updatePassword) setIsEditing(false);
+    form.resetFields()
   };
 
   const isError = authStore.errors.updatePassword;

@@ -1,5 +1,5 @@
 import { db } from '@config';
-import { DataParams } from '@shared/services/firebase';
+import { DataParams } from '@shared/services';
 import { doc, DocumentData, updateDoc, WithFieldValue } from 'firebase/firestore';
 
 export const updateData = async <T extends WithFieldValue<DocumentData>>({

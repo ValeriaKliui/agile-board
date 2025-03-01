@@ -1,7 +1,7 @@
 import { ROLES_PERMISSIONS } from '@shared/constants';
 import { boardStore } from '@store';
 
-export const hasPermission = ({ permission }: { permission: string }) => {
+export const hasPermission = (permission: string) => {
   const currentRole = boardStore.currentRole;
 
   if (currentRole) {

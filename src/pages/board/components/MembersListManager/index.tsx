@@ -22,7 +22,7 @@ export const MembersListManager = observer(() => {
                     );
                 })}
                 <Col>
-                    {hasPermission({ permission: PERMISSIONS.boards.invite_users }) && (
+                    {hasPermission(PERMISSIONS.boards.invite_users) && (
                         <Button type="primary" onClick={openModal}>
                             Invite
                         </Button>

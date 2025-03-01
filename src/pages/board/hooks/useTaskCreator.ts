@@ -1,25 +1,36 @@
-import { getMembersOptions, getPriorityOptions } from '@pages/board/utils';
 import { boardStore, tasksStore, userStore } from '@store';
 import { FormInstance } from 'antd';
 import { useCallback, useMemo } from 'react';
 
-export const useTaskCreator = (form: FormInstance, columnID: string, closeModal: () => void) => {
+export const useTaskCreator = ({
+  form,
+  columnID,
+  onSuccess,
+}: {
+  form: FormInstance;
+  columnID: string;
+  onSuccess: () => void;
+}) => {
+  const boardID = useMemo(() => boardStore.currentBoardInfo?.boardID, []);
+  const userID = useMemo(() => userStore.user?.userID, []);
+  const isCreating = tasksStore.isLoading;
+
   const onFinish = useCallback(async () => {
-    const taskData = form.getFieldsValue(true);
-    const userID = userStore.user?.userID;
+    try {
+      const taskData = form.getFieldsValue(true);
+      const executionDate = taskData.executionDate?.toDate?.();
+      if (!userID || !boardID) throw new Error('User ID or Board ID is missing');
 
-    if (userID) {
-      await tasksStore.addTask({ columnID, task: { ...taskData, author: userID } });
-      closeModal();
+      await tasksStore.addTask({
+        columnID,
+        boardID,
+        task: { ...taskData, executionDate, author: userID },
+      });
+      onSuccess();
+    } catch (error) {
+      console.error('Task creation failed:', error);
     }
-  }, [closeModal, columnID, form]);
+  }, [columnID, boardID, userID, form, onSuccess]);
 
-  const membersOptions = useMemo(() => getMembersOptions(boardStore.membersInfo), []);
-  const priorityOptions = useMemo(() => getPriorityOptions(), []);
-
-  return {
-    onFinish,
-    membersOptions,
-    priorityOptions,
-  };
+  return { onFinish, isCreating };
 };

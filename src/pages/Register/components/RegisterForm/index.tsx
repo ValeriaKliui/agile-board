@@ -1,6 +1,7 @@
 import { getConfirmPasswordRules } from '@pages/register/utils';
 import { Button, EmailField, PasswordField } from '@shared/components';
 import { AuthFormPropsDefault } from '@shared/types';
+import { setRequiredRule } from '@shared/utils';
 import { Alert, Flex, Form, FormInstance, Input } from 'antd';
 
 const { Item } = Form;
@@ -31,7 +32,7 @@ export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues
       <Item
         label="Username"
         name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={setRequiredRule('username')}
       >
         <Input placeholder="Nickname" />
       </Item>

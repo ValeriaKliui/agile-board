@@ -1,5 +1,5 @@
 import { db } from '@config';
-import { setData } from '@shared/services/firebase';
+import { setData } from '@shared/services';
 import { deleteDoc, doc, getDoc } from 'firebase/firestore';
 
 export const moveDocument = async ({ collectionPaths, targetCollectionPaths }) => {

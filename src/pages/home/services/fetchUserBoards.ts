@@ -5,8 +5,8 @@ import {
   USERS_COLLECTION_NAME,
 } from '@constants';
 import { getFulfilledResults, groupArrayByValue } from '@pages/home/utils';
-import { fetchBoard, getData } from '@shared/services/firebase';
-import { getCollection } from '@shared/services/firebase';
+import { fetchBoard, getData } from '@shared/services';
+import { getCollection } from '@shared/services';
 import { BoardInfo } from '@store';
 
 import { UserBoard } from './types';

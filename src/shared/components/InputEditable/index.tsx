@@ -4,14 +4,14 @@ import { FormEvent } from 'react';
 
 import { InputEditableProps } from './types';
 
-export const InputEditable = ({ onFinishEdit, strong, ...inputProps }: InputEditableProps) => {
+export const InputEditable = ({ onFinishEdit, isEditing, strong, ...inputProps }: InputEditableProps) => {
     const onFinish = (event: FormEvent<HTMLInputElement>) => {
         onFinishEdit?.(event.currentTarget.value);
     };
 
     return (
         <InputStyled
-            suffix={<EditOutlined />}
+            suffix={isEditing ? <EditOutlined /> : <span />}
             onPressEnter={onFinish}
             onBlur={onFinish}
             variant="underlined"

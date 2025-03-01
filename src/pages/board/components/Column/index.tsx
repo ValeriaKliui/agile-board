@@ -1,5 +1,5 @@
 import { useDroppable } from '@dnd-kit/core';
-import { TaskCreator, TasksList } from '@pages/board/components';
+import { TaskCreatorModal, TasksList } from '@pages/board/components';
 import { hasPermission } from '@pages/board/utils';
 import { PERMISSIONS } from '@shared/constants';
 import { Column as ColumnType, tasksStore } from '@store';
@@ -12,13 +12,13 @@ export const Column = observer(({ columnID, title, order }: ColumnType) => {
     const { setNodeRef } = useDroppable({ id: columnID });
     const tasks = tasksStore.tasks?.[columnID];
 
-    const canCreateNew = order === 1 && hasPermission({ permission: PERMISSIONS.tasks.create });
+    const canCreateNew = order === 1 && hasPermission(PERMISSIONS.tasks.create);
 
     return (
         <CardStyled ref={setNodeRef} size="small" title={title}>
             <Flex vertical gap="middle">
                 <TasksList tasks={tasks} />
-                {canCreateNew && <TaskCreator columnID={columnID} />}
+                {canCreateNew && <TaskCreatorModal columnID={columnID} />}
             </Flex>
         </CardStyled>
     );

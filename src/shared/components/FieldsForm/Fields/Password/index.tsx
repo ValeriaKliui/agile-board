@@ -1,4 +1,4 @@
-import { validatePassword } from '@shared/utils';
+import { setRequiredRule, validatePassword } from '@shared/utils';
 import { Form, Input } from 'antd';
 import { KeyboardEvent } from 'react';
 
@@ -15,7 +15,7 @@ export const PasswordField = ({ name = 'password', label = 'Password' }) => {
     <Item
       name={name}
       label={label}
-      rules={[{ validator: validatePassword, required: true }]}
+      rules={[{ validator: validatePassword, ...setRequiredRule(name) }]}
       hasFeedback
     >
       <Input.Password onKeyDown={handleKeyDown} autoComplete={name} placeholder="Your password" />

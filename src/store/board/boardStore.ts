@@ -13,7 +13,7 @@ import {
   fetchBoard,
   fetchMembersData,
   updateData,
-} from '@shared/services/firebase';
+} from '@shared/services';
 import { type Column, columnsStore, userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 

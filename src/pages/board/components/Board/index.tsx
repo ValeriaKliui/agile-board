@@ -11,7 +11,7 @@ import { ColStyled, RowStyled } from './styled';
 export const Board = observer(() => {
     const columns = columnsStore.columns;
     const lastColumnOrder = columns.at(-1)?.order ?? 0;
-    const canEdit = hasPermission({ permission: PERMISSIONS.boards.edit })
+    const canEdit = hasPermission(PERMISSIONS.boards.edit)
 
     const { onTaskMove, sensors } = useTaskDnD();
 

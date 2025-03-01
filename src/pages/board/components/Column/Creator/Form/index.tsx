@@ -1,3 +1,4 @@
+import { setRequiredRule } from '@shared/utils';
 import { Button, Form, FormInstance, Input } from 'antd';
 
 import { ColumnCreatorFormProps } from './types';
@@ -12,6 +13,8 @@ export const ColumnCreatorForm = <
     order,
     onFinish,
 }: ColumnCreatorFormProps<TForm, TFormValues>) => {
+    const rules = setRequiredRule('column title')
+
     return (
         <Form form={form} onFinish={onFinish}>
             <Item name="order" initialValue={order} hidden>
@@ -20,7 +23,7 @@ export const ColumnCreatorForm = <
             <Item
                 name="title"
                 label="Column name"
-                rules={[{ required: true, message: 'Please input column title' }]}
+                rules={rules}
             >
                 <Input placeholder="Column name" />
             </Item>

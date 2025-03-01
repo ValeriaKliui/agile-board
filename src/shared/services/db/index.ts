@@ -15,3 +15,4 @@ export { setData } from './setData';
 export type { DataParams } from './types';
 export { updateData } from './updateData';
 export { getUsersByIDs } from './getUsersByIDs';
+export { moveDocument } from './moveDocument';

@@ -12,8 +12,8 @@ export const UserBoards = observer(({ boardsInfo, }: UserBoardsProps) => {
 
     return (
         <>
-            {boardsInfo.map(([role, boards]) => (
-                <Container>
+            {boardsInfo.map(([role, boards],) => (
+                <Container key={role}>
                     <Title level={5} className="capitalize">
                         {role}
                     </Title>

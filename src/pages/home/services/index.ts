@@ -1,2 +1,2 @@
-export { getCollection } from '../../../shared/services/firebase/db/getCollection';
+export { getCollection } from '../../../shared/services/db/getCollection';
 export { fetchUserBoards } from './fetchUserBoards';
