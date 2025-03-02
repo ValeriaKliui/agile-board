@@ -5,7 +5,7 @@ export const useDebouncedFetch = <T>({
   fetchFunc,
   debounceTimeout = 800,
 }: {
-  fetchFunc: (value?: string) => Promise<T>;
+  fetchFunc: (value?: string) => Promise<T | undefined>;
   debounceTimeout?: number;
 }) => {
   const [isFetching, setIsFetching] = useState(false);

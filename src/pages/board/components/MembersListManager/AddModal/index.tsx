@@ -6,13 +6,15 @@ import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 
+import { MembersFormValues } from './types';
+
 export const MembersAddModal = observer(({ isModalOpen, onClose: onSuccess }: ModalProps) => {
-    const [form] = Form.useForm();
+    const [form] = Form.useForm<MembersFormValues>();
     const [selectedMembers, setSelectedMembers] = useState<MemberRoleType[]>([]);
 
     const { handleFormSubmit, isAdding } = useAddMembersToBoard({ form, onSuccess });
 
-    const handleValuesChange = ({ selectedMembers }) => {
+    const handleValuesChange = ({ selectedMembers }: MembersFormValues) => {
         if (selectedMembers) {
             setSelectedMembers(selectedMembers);
         }

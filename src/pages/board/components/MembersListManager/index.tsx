@@ -1,4 +1,4 @@
-import { MemberItem, MembersAddModal } from '@pages/board/components';
+import { MembersAddModal, MembersList } from '@pages/board/components';
 import { hasPermission } from '@pages/board/utils';
 import { Button } from '@shared/components';
 import { PERMISSIONS } from '@shared/constants';
@@ -8,16 +8,14 @@ import { Col, Row } from 'antd';
 import { observer } from 'mobx-react-lite';
 
 export const MembersListManager = observer(() => {
-    const membersInfo = boardStore.membersInfo;
+    const members = boardStore.membersInfo;
     const { openModal, isModalOpen, closeModal } = useModal();
     const canInvite = hasPermission(PERMISSIONS.boards.invite_users);
 
     return (
         <>
             <Row gutter={5} align="middle">
-                {membersInfo.map(({ color, username }) => <Col key={username}>
-                            <MemberItem color={color} username={username} />
-                        </Col>)}
+                <MembersList members={members} />
                 <Col>
                     {canInvite && (
                         <Button type="primary" onClick={openModal}>

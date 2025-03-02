@@ -1,4 +1,4 @@
-import { UseTaskCreatorParams } from '@pages/board/hooks/types';
+import { UseTaskCreatorParams } from './types';
 import { boardStore, tasksStore, userStore } from '@store';
 import { useCallback } from 'react';
 

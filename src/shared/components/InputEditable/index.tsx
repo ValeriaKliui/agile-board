@@ -1,7 +1,7 @@
 import { EditOutlined } from '@ant-design/icons';
-import { InputStyled } from '@shared/components/InputEditable/styled';
 import { FormEvent } from 'react';
 
+import { InputStyled } from './styled';
 import { InputEditableProps } from './types';
 
 export const InputEditable = ({ onFinishEdit, isEditing, strong, ...inputProps }: InputEditableProps) => {

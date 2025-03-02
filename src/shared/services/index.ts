@@ -1,5 +1,3 @@
-export { deleteCollection } from './deleteCollection';
-export { deleteData } from './deleteData';
 export { formatDatetime } from './formatDatetime';
 export { getCollection } from './getCollection';
 export { getData } from './getData';

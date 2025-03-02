@@ -1,8 +1,6 @@
-import { USERS_COLLECTION_NAME } from '@constants';
-import { getData, updateData } from '@shared/services';
-import { filterUndefinedValues } from '@shared/utils';
-import { User } from '@store';
+import { fetchUser, User } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { updateUser } from 'store/user/services/updateUser';
 
 class UserStore {
   user: User | null = null;
@@ -14,7 +12,7 @@ class UserStore {
   }
 
   private handleError(error: Error) {
-    console.error('Error auth', error.message);
+    console.error('Error user', error.message);
 
     runInAction(() => {
       this.loadingError = error.message;
@@ -28,7 +26,7 @@ class UserStore {
   async fetchUser(userID: string) {
     this.loadingUser = true;
     try {
-      const user = await getData<User>(USERS_COLLECTION_NAME, userID);
+      const user = await fetchUser({ userID });
 
       runInAction(() => {
         if (user) {
@@ -46,20 +44,13 @@ class UserStore {
     }
   }
 
-  async updateUser({ ...userData }) {
+  async updateUser(user: Partial<User>) {
+    this.loadingUser = true;
     try {
-      this.loadingUser = true;
-      const newData = filterUndefinedValues(userData);
-
-      const userID = this.user?.userID;
-      if (userID)
-        await updateData({
-          collectionPaths: [USERS_COLLECTION_NAME, userID],
-          data: newData,
-        });
+      await updateUser({ userID: this.user?.userID, ...user });
 
       runInAction(() => {
-        if (this.user) this.user = { ...this.user, ...newData };
+        if (this.user) this.user = { ...this.user, ...user };
       });
     } catch (error) {
       if (error instanceof Error) {

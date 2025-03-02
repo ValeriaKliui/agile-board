@@ -1,10 +1,8 @@
 export { addMembersToBoard } from './addMembersToBoard';
 export { createBoard } from './createBoard';
-export { deleteBoard } from './deleteBoard';
 export { fetchBoard } from './fetchBoard';
 export { fetchBoardInfo } from './fetchBoardInfo';
 export { fetchMembersData } from './fetchMembersData';
 export { fetchTemplateBoard } from './fetchTemplateBoard';
 export { getUsersByIDs } from './getUsersByIDs';
-export type { DeleteBoard } from './types';
 export { updateBoard } from './updateBoard';

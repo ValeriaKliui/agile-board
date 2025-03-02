@@ -13,6 +13,7 @@ export interface BoardInfo {
   title: string;
   owner: string;
   members: { [user: string]: ROLES };
+  userRole?: string;
 }
 
 export interface BoardInfoResponse extends Omit<BoardInfo, 'createdAt' | 'boardID'> {

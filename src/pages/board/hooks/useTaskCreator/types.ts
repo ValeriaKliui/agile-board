@@ -5,8 +5,3 @@ export type UseTaskCreatorParams = {
   columnID: string;
   onSuccess: () => void;
 };
-export type UseColumnCreatorParams = {
-  form: FormInstance;
-  lastColumnOrder: number;
-  onSuccess: () => void;
-};

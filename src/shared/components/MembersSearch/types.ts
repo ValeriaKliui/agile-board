@@ -1,6 +1,6 @@
 import { User } from '@store';
 
 export interface MembersSearchProps {
-  fetchFunc: () => Promise<User[]>;
+  fetchFunc: (values: string) => Promise<User[] | undefined>;
   name: string;
 }

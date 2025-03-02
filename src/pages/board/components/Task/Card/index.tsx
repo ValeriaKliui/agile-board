@@ -1,10 +1,10 @@
 import { CalendarOutlined, ClockCircleOutlined, CrownTwoTone, UserOutlined } from '@ant-design/icons';
 import { TASK_PRIORITY_COLORS } from '@pages/board/constants';
+import { InfoRow } from '@shared/components';
 import { ROLES, ROLES_PERMISSIONS } from '@shared/constants';
 import { Flex, } from 'antd';
 import { forwardRef } from 'react';
 
-import { InfoRow } from '../../InfoRow';
 import { CardStyled } from './styled';
 import { TaskCardProps } from './types';
 

@@ -1,8 +1,6 @@
 import {
   columnsStore,
   createBoard,
-  DeleteBoard,
-  deleteBoard,
   fetchBoardInfo,
   fetchTemplateBoard,
   updateBoard,
@@ -107,23 +105,6 @@ class BoardStore {
         this.membersInfo = membersInfo;
       });
     } catch (error) {
-      this.handleError(error);
-    } finally {
-      this.setLoading(false);
-    }
-  }
-
-  async deleteBoard({ boardID, userID }: DeleteBoard) {
-    this.setLoading(true);
-
-    try {
-      await deleteBoard({ boardID, userID });
-
-      runInAction(() => {
-        this.currentBoardInfo = null;
-      });
-    } catch (error) {
-      console.error(error);
       this.handleError(error);
     } finally {
       this.setLoading(false);

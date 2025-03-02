@@ -1,5 +1,5 @@
 import { hasPermission } from '@pages/board/utils';
-import { InputEditable } from '@shared/components/InputEditable';
+import { InputEditable } from '@shared/components';
 import { PERMISSIONS } from '@shared/constants';
 import { type BoardInfo, boardStore, } from '@store';
 import { Typography } from 'antd';

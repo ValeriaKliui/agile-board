@@ -9,6 +9,7 @@ export { Footer } from './Footer';
 export { Header } from './Header';
 export { HeaderManager } from './HeaderManager';
 export { Icon } from './Icon';
+export { InfoRow } from './InfoRow';
 export { InputEditable } from './InputEditable';
 export { MembersRolesList } from './MembersRolesList';
 export { MembersSearch } from './MembersSearch';

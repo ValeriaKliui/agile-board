@@ -1,7 +1,10 @@
 export { BasicBoardInfo } from './BasicBoardInfo';
 export { BoardCard } from './BoardCard';
 export type { BoardCardProps } from './BoardCard/types';
-export { CreatingBoardStepsForm } from './CreatingBoardStepsForm';
+export { CreatingBoardStepsForm } from './CreatingBoard';
+export { CreatingBoardSteps } from './CreatingBoard/Steps';
+export { TemplateSelector } from './TemplateSelector';
 export { UserBoards } from './UserBoards';
 export { UserBoardsCreator } from './UserBoardsCreator';
 export { WelcomeComponent } from './WelcomeComponent';
+export type { Template } from './TemplateSelector/types';

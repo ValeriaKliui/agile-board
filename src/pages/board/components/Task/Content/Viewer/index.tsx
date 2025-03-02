@@ -1,5 +1,6 @@
 import { CalendarOutlined, ClockCircleOutlined, CrownOutlined, UserOutlined } from "@ant-design/icons";
-import { InfoRow, TaskWithUser } from "@pages/board/components";
+import { TaskWithUser } from "@pages/board/components";
+import { InfoRow } from "@shared/components";
 import { Flex, Typography } from "antd";
 
 const { Title, Text } = Typography;

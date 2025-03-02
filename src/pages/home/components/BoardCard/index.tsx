@@ -1,40 +1,28 @@
 import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
 import { BoardCardProps } from '@pages/home/components';
-import { Icon } from '@shared/components';
-import { ROLES_PERMISSIONS } from '@shared/constants';
-import { Flex, Typography } from 'antd';
+import { Icon, InfoRow } from '@shared/components';
+import { ROLES, ROLES_PERMISSIONS } from '@shared/constants';
+import { Flex, } from 'antd';
 
 import { CardStyled, TextStyled } from './styled';
 
-const { Text } = Typography;
-
 export const BoardCard = ({ title, createdAt, owner, userRole }: BoardCardProps) => {
-    const { icon: IconComponent, color } = ROLES_PERMISSIONS[userRole];
+    const { icon: IconComponent, color } = ROLES_PERMISSIONS[userRole as ROLES] ?? {};
 
     return (
         <CardStyled
             hoverable
             variant="borderless"
             title={
-                <TextStyled >
+                <TextStyled>
                     <Icon icon={IconComponent} color={color} />
                     {title}
                 </TextStyled>
             }
         >
             <Flex vertical gap="small">
-                <Flex gap="small">
-                    <CalendarOutlined />
-                    <Text>
-                        <strong>Created:</strong> {createdAt}
-                    </Text>
-                </Flex>
-                <Flex gap="small">
-                    <UserOutlined />
-                    <Text>
-                        <strong>Owner:</strong> {owner}
-                    </Text>
-                </Flex>
+                <InfoRow Icon={CalendarOutlined} label="Created" value={createdAt} />
+                <InfoRow Icon={UserOutlined} label="Owner:" value={owner} />
             </Flex>
         </CardStyled>
     );

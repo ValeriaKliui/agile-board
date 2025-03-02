@@ -10,7 +10,7 @@ export const AvatarEditor = () => {
 
   const onAvatarSave = async (selectedAvatar: string | null) => {
     toggleAvatarEditing();
-    await userStore.updateUser({ avatar: selectedAvatar });
+    if (selectedAvatar) await userStore.updateUser({ avatar: selectedAvatar });
   };
 
   return (

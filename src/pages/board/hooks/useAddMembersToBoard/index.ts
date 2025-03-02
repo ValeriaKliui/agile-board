@@ -1,7 +1,7 @@
 import { addMembersToBoard, boardStore } from '@store';
 import { useState } from 'react';
 
-export const useAddMembersToBoard = ({ form, onSuccess }) => {
+export const useAddMembersToBoard = ({ form, onSuccess }: UseAddMembersToBoardProps) => {
   const [isAdding, setIsAdding] = useState(false);
 
   const handleFormSubmit = async () => {
