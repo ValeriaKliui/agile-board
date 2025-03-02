@@ -1,7 +1,5 @@
-import { BoardInfo, User } from '@store';
 import { Timestamp } from 'firebase/firestore';
 
-export type AddingMembersProps = Pick<BoardInfo, 'members' | 'boardID'>;
 export type CollectionPaths = readonly [string, ...string[]];
 
 export interface DateTimeParams {
@@ -22,12 +20,9 @@ export type DataWithId<T> = T & {
 export interface DataParams<T> {
   collectionPaths: CollectionPaths;
   data: T;
+  docID?: string;
 }
 
-export interface UserByIDsParams {
-  IDs: string[];
-  extractKey?: keyof User;
-}
 export interface MoveTocumentParams {
   collectionPaths: CollectionPaths;
   targetCollectionPaths: CollectionPaths;

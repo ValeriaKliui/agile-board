@@ -15,13 +15,9 @@ export const MembersListManager = observer(() => {
     return (
         <>
             <Row gutter={5} align="middle">
-                {membersInfo.map(({ color, username }) => {
-                    return (
-                        <Col key={username}>
+                {membersInfo.map(({ color, username }) => <Col key={username}>
                             <MemberItem color={color} username={username} />
-                        </Col>
-                    );
-                })}
+                        </Col>)}
                 <Col>
                     {canInvite && (
                         <Button type="primary" onClick={openModal}>

@@ -6,7 +6,6 @@ import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 
-
 export const MembersAddModal = observer(({ isModalOpen, onClose: onSuccess }: ModalProps) => {
     const [form] = Form.useForm();
     const [selectedMembers, setSelectedMembers] = useState<MemberRoleType[]>([]);
@@ -26,7 +25,7 @@ export const MembersAddModal = observer(({ isModalOpen, onClose: onSuccess }: Mo
                 selectedMembers={selectedMembers}
                 onValuesChange={handleValuesChange}
                 onFinish={handleFormSubmit}
-                loading={isAdding}
+                isAdding={isAdding}
             />
         </Modal>
     );

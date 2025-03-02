@@ -30,3 +30,4 @@ export interface Member extends User {
   userRole: ROLES;
   color: string;
 }
+export type TemplatedBoard = Pick<BoardInfo, 'boardID'> & Pick<BoardCreationInfo, 'template'>;

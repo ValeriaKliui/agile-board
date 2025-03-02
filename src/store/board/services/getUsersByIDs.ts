@@ -11,6 +11,6 @@ export const getUsersByIDs = async ({ IDs }: UserByIDsParams) => {
     return users;
   } catch (error) {
     console.error('Getting IDs error:', error);
-    if (error instanceof Error) return new Error(error.message);
+    if (error instanceof Error) throw new Error(error.message);
   }
 };

@@ -5,9 +5,8 @@ import {
 } from '@constants';
 import { getFulfilledResults, groupArrayByValue } from '@pages/home/utils';
 import { ROLES_VALUES } from '@shared/constants';
-import { fetchBoard, getData } from '@shared/services';
-import { getCollection } from '@shared/services';
-import { BoardInfo } from '@store';
+import { getCollection, getData } from '@shared/services';
+import { BoardInfo, fetchBoard } from '@store';
 
 import { UserBoard } from './types';
 

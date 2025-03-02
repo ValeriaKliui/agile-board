@@ -1,9 +1,16 @@
-import { BOARDS_TEMPLATE_COLLECTION_NAME, COLUMNS_COLLECTION_NAME } from '@constants';
-import { createBoard, fetchBoard, fetchMembersData, getCollection } from '@shared/services';
-import { type Column, columnsStore, DeleteBoard, deleteBoard, userStore } from '@store';
+import {
+  columnsStore,
+  createBoard,
+  DeleteBoard,
+  deleteBoard,
+  fetchBoardInfo,
+  fetchTemplateBoard,
+  updateBoard,
+  userStore,
+} from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import { BoardCreationInfo, BoardInfo, Member, UpdateBoardInfo } from './types';
+import { BoardCreationInfo, BoardInfo, Member, TemplatedBoard, UpdateBoardInfo } from './types';
 
 class BoardStore {
   isLoading = false;
@@ -17,96 +24,111 @@ class BoardStore {
 
   get currentRole() {
     const { userID } = userStore.user ?? {};
-    if (userID) return this.currentBoardInfo?.members[userID];
-    return null;
+    return userID ? this.currentBoardInfo?.members[userID] : null;
+  }
+
+  private setLoading(state: boolean) {
+    runInAction(() => {
+      this.isLoading = state;
+    });
+  }
+
+  private handleError(error: unknown) {
+    if (error instanceof Error) {
+      runInAction(() => {
+        this.error = error.message;
+      });
+    }
   }
 
   async createBoard({ title, owner, members, template }: BoardCreationInfo) {
-    this.isLoading = true;
+    this.setLoading(true);
 
     try {
-      const { boardID, boardData } = await createBoard({
-        title,
-        owner,
-        members,
-      });
+      const { boardID, boardData } = await createBoard({ title, owner, members });
 
-      const columns = template ? await this.fetchTemplatedBoard({ template }) : [];
-
-      if (columns.length > 0) {
-        await columnsStore.addColumns({ boardID, columns });
+      if (template) {
+        await this.createTemplatedBoard({ template, boardID });
       }
 
       runInAction(() => {
         this.currentBoardInfo = { boardID, ...boardData };
       });
     } catch (error) {
-      if (error instanceof Error) this.error = error.message;
+      this.handleError(error);
     } finally {
-      runInAction(() => (this.isLoading = false));
+      this.setLoading(false);
     }
   }
 
-  private async fetchTemplatedBoard({ template }: Pick<BoardCreationInfo, 'template'>) {
-    this.isLoading = true;
-    this.error = null;
+  private async createTemplatedBoard({ template, boardID }: TemplatedBoard) {
+    this.setLoading(true);
 
     try {
-      const columns = await getCollection<Column>({
-        collectionPaths: [BOARDS_TEMPLATE_COLLECTION_NAME, template, COLUMNS_COLLECTION_NAME],
-      });
+      const columns = await fetchTemplateBoard({ template });
 
-      return columns?.map(({ id: _, ...column }) => column) || [];
+      if (columns.length > 0) {
+        await columnsStore.addColumns({ boardID, columns });
+      }
     } catch (error) {
-      if (error instanceof Error) this.error = error.message;
-      return [];
+      this.handleError(error);
+    } finally {
+      this.setLoading(false);
     }
   }
 
-  async updateBoard(boardData: UpdateBoardInfo) {
-    this.isLoading = true;
+  async updateBoard(board: UpdateBoardInfo) {
+    this.setLoading(true);
 
     try {
+      await updateBoard({ board });
+
       runInAction(() => {
-        if (this.currentBoardInfo)
-          this.currentBoardInfo = { ...this.currentBoardInfo, ...boardData };
+        if (this.currentBoardInfo) {
+          this.currentBoardInfo = { ...this.currentBoardInfo, ...board };
+        }
       });
     } catch (error) {
-      if (error instanceof Error) this.error = error.message;
+      this.handleError(error);
     } finally {
-      runInAction(() => (this.isLoading = false));
+      this.setLoading(false);
     }
   }
 
   async fetchCurrentBoard({ boardID }: Pick<BoardInfo, 'boardID'>) {
-    this.isLoading = true;
+    this.setLoading(true);
 
     try {
-      const boardInfo = await fetchBoard({ boardID });
-      const membersInfo = await fetchMembersData({ members: boardInfo?.members });
+      const { boardInfo, membersInfo } = await fetchBoardInfo({ boardID });
       await columnsStore.fetchColumns({ boardID });
 
       runInAction(() => {
-        if (boardInfo) this.currentBoardInfo = boardInfo;
+        this.currentBoardInfo = boardInfo;
         this.membersInfo = membersInfo;
       });
     } catch (error) {
-      if (error instanceof Error) this.error = error.message;
+      this.handleError(error);
     } finally {
-      runInAction(() => (this.isLoading = false));
+      this.setLoading(false);
     }
   }
 
   async deleteBoard({ boardID, userID }: DeleteBoard) {
+    this.setLoading(true);
+
     try {
       await deleteBoard({ boardID, userID });
 
-      runInAction(() => (this.currentBoardInfo = null));
+      runInAction(() => {
+        this.currentBoardInfo = null;
+      });
     } catch (error) {
-      if (error instanceof Error) this.error = error.message;
+      console.error(error);
+      this.handleError(error);
     } finally {
-      runInAction(() => (this.isLoading = false));
+      this.setLoading(false);
     }
   }
 }
+
 export const boardStore = new BoardStore();

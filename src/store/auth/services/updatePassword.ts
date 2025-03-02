@@ -1,5 +1,4 @@
 import { auth } from '@config';
-import { UPDATE_PASSWORD_ERRORS, UPDATE_PASSWORD_ERRORS_MESSAGES } from '@shared/services';
 import { handleAuthError } from '@shared/utils';
 import { UpdatePasswordProps } from '@store';
 import {
@@ -7,6 +6,8 @@ import {
   reauthenticateWithCredential,
   updatePassword as updatePasswordAuth,
 } from 'firebase/auth';
+
+import { UPDATE_PASSWORD_ERRORS, UPDATE_PASSWORD_ERRORS_MESSAGES } from './types';
 
 export const updatePassword = async ({ newPassword, oldPassword }: UpdatePasswordProps) => {
   try {

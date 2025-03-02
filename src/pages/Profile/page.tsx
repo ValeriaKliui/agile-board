@@ -1,6 +1,7 @@
 import { AvatarEditor, ProfileInfoManager, UpdatePasswordFormManager, UpdateUserInfoFormManager } from '@pages/profile';
-import { AvatarEditorContainer } from './styled';
 import { Card, Divider, Flex } from 'antd';
+
+import { AvatarEditorContainer } from './styled';
 
 export const ProfilePage = () => {
   return (

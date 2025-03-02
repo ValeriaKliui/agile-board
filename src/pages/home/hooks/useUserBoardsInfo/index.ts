@@ -13,6 +13,7 @@ export const useUserBoardsInfo = (userID?: string) => {
     try {
       if (userID) {
         const data = await fetchUserBoards(userID);
+
         setBoardsInfo(data);
       }
     } catch (error) {

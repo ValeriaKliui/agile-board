@@ -1,6 +1,6 @@
 import { auth } from '@config';
-import { createUserAccount } from '@shared/services';
 import { handleAuthError } from '@shared/utils';
+import { createUserAccount } from '@store';
 import { RegisterParams } from '@store';
 import { createUserWithEmailAndPassword, User } from 'firebase/auth';
 

@@ -10,15 +10,15 @@ export const AddMembersForm = ({
     selectedMembers,
     onValuesChange,
     onFinish,
-    loading,
+    isAdding,
 }) => {
     const rolesOptions = getRolesOptions();
 
     return <Form form={form} onFinish={onFinish} onValuesChange={onValuesChange}>
         <AddSearchMembers />
         <Item>
-            <Button htmlType="submit" loading={loading}>
-                Add
+            <Button htmlType="submit" type='primary' loading={isAdding}>
+                Invite
             </Button>
         </Item>
         <MembersRolesList members={selectedMembers} roles={rolesOptions} />

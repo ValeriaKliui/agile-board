@@ -1,4 +1,3 @@
-import { TaskWithUserIDs } from '@pages/board/components';
 import { Member } from '@store';
 
 export const mapTasksWithUsers = (tasks: TaskWithUserIDs[], membersInfo: Member[]) =>
