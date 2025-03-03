@@ -15,10 +15,12 @@ export const PasswordField = ({ name = 'password', label = 'Password' }) => {
     <Item
       name={name}
       label={label}
-      rules={[{ validator: validatePassword, ...setRequiredRule(name) }]}
+      rules={[{ validator: validatePassword, ...setRequiredRule(name), required: true }]}
       hasFeedback
+      labelAlign='left'
     >
-      <Input.Password onKeyDown={handleKeyDown} autoComplete={name} placeholder="Your password" />
+      <Input.Password onKeyDown={handleKeyDown} autoComplete={name} placeholder="Your password"
+      />
     </Item>
   );
 };

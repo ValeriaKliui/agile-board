@@ -44,6 +44,7 @@ export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues
         label="Confirm Password"
         dependencies={['password']}
         hasFeedback
+        labelAlign='left'
         rules={confirmPasswordRules}
       >
         <Input.Password autoComplete="password" placeholder='Confirm Password' />

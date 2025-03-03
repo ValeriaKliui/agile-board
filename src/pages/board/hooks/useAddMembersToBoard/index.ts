@@ -1,6 +1,8 @@
 import { addMembersToBoard, boardStore } from '@store';
 import { useState } from 'react';
 
+import { UseAddMembersToBoardProps } from './types';
+
 export const useAddMembersToBoard = ({ form, onSuccess }: UseAddMembersToBoardProps) => {
   const [isAdding, setIsAdding] = useState(false);
 

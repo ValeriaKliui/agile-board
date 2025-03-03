@@ -11,4 +11,5 @@ export interface AvatarsSelectionProps {
   onSave: () => void;
   onRemove: (imgUrl: string) => Promise<void>;
   onUpload?: (imgUrl: string) => Promise<void>;
+  isUpdating: boolean;
 }

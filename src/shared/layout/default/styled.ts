@@ -18,12 +18,12 @@ export const Wrapper = styled.div`
 
 export const Content = styled(ContentAntd)`
   padding: 20px;
-  background: #f5f5f5;
   margin: 0 auto;
   width: 100%;
   ${MEDIA.xlarge} {
     padding: 20px 0;
   }
+  min-height: 100%;
 `;
 export const Sider = styled(SiderAntd)`
   background: rgba(161, 210, 255, 0.4);

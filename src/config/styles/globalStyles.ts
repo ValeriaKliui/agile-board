@@ -20,6 +20,9 @@ export const GlobalStyle = styled.createGlobalStyle`
       font-size: 18px;
     }
   }
+  h4 {
+    margin-top: 0.5em;
+  }
   .capitalize {
     text-transform: capitalize;
   }

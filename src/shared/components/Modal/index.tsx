@@ -1,6 +1,7 @@
 import { Button, Modal as ModalAntd } from 'antd';
 import { memo } from 'react';
 
+import { ModalContent } from './styled';
 import { ModalProps } from './types';
 
 export const Modal = memo(
@@ -24,7 +25,9 @@ export const Modal = memo(
         footer={footer ?? defaultFooter}
         {...modalProps}
       >
-        {children}
+        <ModalContent>
+          {children}
+        </ModalContent>
       </ModalAntd>
     );
   },

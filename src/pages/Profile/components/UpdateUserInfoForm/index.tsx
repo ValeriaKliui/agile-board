@@ -1,7 +1,7 @@
-import { Button, Col, Form, FormInstance, Row, Spin, Typography } from 'antd';
-import { useState } from 'react';
+import { Button } from '@shared/components';
+import { Col, Flex, Form, FormInstance, Input, Row, Spin, Typography } from 'antd';
 
-import { Input } from './styled';
+import { Container, } from './styled';
 import { UpdateUserInfoFormProps } from './types';
 
 const { Text } = Typography;
@@ -16,54 +16,40 @@ export const UpdateUserInfoForm = <
   form,
   fields,
 }: UpdateUserInfoFormProps<TForm, TFormValues>) => {
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEditing = () => {
-    setIsEditing((prev) => !prev);
-  };
-
   const onFinish = (values: TFormValues) => {
     onSubmit(values);
-    setIsEditing(false);
   };
 
   if (isLoading) return <Spin />;
 
   return (
-    <>
+    <Container vertical align='center' >
       <Form
+        variant='underlined'
         form={form}
         labelCol={{ xs: 24, sm: 8 }}
-        wrapperCol={{ xs: 24, sm: 16 }}
+        wrapperCol={{ xs: 24, sm: 22 }}
         layout="horizontal"
-        disabled={!isEditing}
         onFinish={onFinish}
       >
-        <Row gutter={[16, 16]}>
+        <Row gutter={[16, 16]} >
           {fields?.map((name) => (
             <Col xs={24} sm={12} key={name}>
-              <Text strong className="capitalize">
-                {name}
-              </Text>
-              <Item name={name}>
-                <Input $isEditable={isEditing} placeholder={isEditing ? '' : '-'} />
-              </Item>
+              <Flex vertical gap='small'>
+                <Text strong className="capitalize">
+                  {name}
+                </Text>
+                <Item name={name}   >
+                  <Input />
+                </Item>
+              </Flex>
             </Col>
           ))}
         </Row>
-
-        {!isEditing && (
-          <Button type="dashed" onClick={toggleEditing} disabled={false} htmlType="submit">
-            Update Info
-          </Button>
-        )}
-
-        {isEditing && (
-          <Button type="primary" htmlType="submit">
-            Save Info
-          </Button>
-        )}
+        <Button type="primary" centered size='large' htmlType="submit">
+          Save Info
+        </Button>
       </Form>
-    </>
+    </Container >
   );
 };

@@ -1,16 +1,11 @@
-import { PATHS } from '@constants';
-import {
-  BoardPage,
-  ForgotPasswordPage,
-  HomePage,
-  LoginPage,
-  ProfilePage,
-  RegisterPage,
-} from '@pages';
-import { ProtectedRoute } from '@shared/components';
-import { AuthLayout, DefaultLayout } from '@shared/layout';
+import { PATHS } from "@constants";
+import { BoardPage, ForgotPasswordPage, HomePage, LoginPage, ProfilePage, RegisterPage } from "@pages";
+import { ProtectedRoute } from "@shared/components";
+import { AuthLayout, DefaultLayout } from "@shared/layout";
 
-const defaultLayoutRoutes = [
+import { AppRoute, LayoutRoute } from "./types";
+
+const defaultLayoutRoutes: AppRoute[] = [
   { index: true, element: <HomePage /> },
   {
     path: '*',
@@ -34,7 +29,7 @@ const defaultLayoutRoutes = [
   },
 ];
 
-const authLayoutRoutes = [
+const authLayoutRoutes: AppRoute[] = [
   {
     path: PATHS.LOGIN,
     element: <LoginPage />,
@@ -49,7 +44,8 @@ const authLayoutRoutes = [
   },
 ];
 
-export const ROUTES = [
+
+export const ROUTES: LayoutRoute[] = [
   {
     layout: <DefaultLayout />,
     children: defaultLayoutRoutes,

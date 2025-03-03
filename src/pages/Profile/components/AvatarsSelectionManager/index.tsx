@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import { AvatarsSelectionManagerProps } from './types';
 
-export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps) => {
+export const AvatarsSelectionManager = ({ onSave, isUpdating }: AvatarsSelectionManagerProps) => {
   const [selectedAvatar, selectAvatar] = useState<string | null>(null);
 
   const { userID = '' } = userStore.user ?? {}
@@ -37,6 +37,7 @@ export const AvatarsSelectionManager = ({ onSave }: AvatarsSelectionManagerProps
   return (
     <AvatarsSelection
       isLoading={isDefaultAvatarsLoading || isUserAvatarsLoading}
+      isUpdating={isUpdating}
       defaultAvatars={defaultAvatars}
       userAvatars={userAvatars}
       errorDefault={errorDefault}

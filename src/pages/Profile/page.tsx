@@ -1,24 +1,22 @@
-import { AvatarEditor, ProfileInfoManager, UpdatePasswordFormManager, UpdateUserInfoFormManager } from '@pages/profile';
-import { Card, Divider, Flex } from 'antd';
+import { ProfileInfoEditor, ProfileInfoHeader, UpdateUserInfoFormManager } from '@pages/profile';
+import { Divider, Flex } from 'antd';
 
-import { AvatarEditorContainer } from './styled';
+import { ContentCard, ProfileInfoContainer } from './styled';
 
 export const ProfilePage = () => {
   return (
     <>
-      <Card style={{ width: '100%', height: '100%' }}>
+      <ContentCard >
         <Flex vertical gap="large">
-          <AvatarEditorContainer vertical gap="large" align="flex-start">
-            <ProfileInfoManager />
-            <AvatarEditor />
-          </AvatarEditorContainer>
+          <ProfileInfoContainer vertical gap="large" align="center" justify='center'>
+            <ProfileInfoHeader />
+            <ProfileInfoEditor />
+          </ProfileInfoContainer>
 
           <Divider />
           <UpdateUserInfoFormManager />
-          <Divider />
-          <UpdatePasswordFormManager />
         </Flex>
-      </Card>
+      </ContentCard>
     </>
   );
 };
