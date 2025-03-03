@@ -1,6 +1,6 @@
 import { useFetchUploadGalleryData } from '@pages/profile/hooks';
 import { updateDataArray, UpdateDataType } from '@pages/profile/services';
-import { getData } from '@shared/services/firebase';
+import { getData } from '@shared/services';
 import { UploadFile } from 'antd';
 import { useCallback } from 'react';
 

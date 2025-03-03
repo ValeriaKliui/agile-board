@@ -1,6 +1,6 @@
 import { PATHS } from '@constants';
 import { RegisterForm } from '@pages/register/components';
-import { authStore, type RegisterParams } from '@store/auth';
+import { authStore, type RegisterParams } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';

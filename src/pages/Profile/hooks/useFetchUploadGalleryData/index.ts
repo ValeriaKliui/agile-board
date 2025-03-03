@@ -33,6 +33,7 @@ export const useFetchUploadGalleryData = <
           })) as TFileType[],
         );
       } catch (error) {
+        console.error('Error while uploading', error)
         const errorMessage =
           error instanceof Error ? error.message : 'An unexpected error occurred';
         setErrorMessage(errorMessage);

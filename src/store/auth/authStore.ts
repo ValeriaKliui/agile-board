@@ -1,11 +1,5 @@
-import {
-  loginUser,
-  logOutUser,
-  registerUser,
-  resetPassword,
-  updatePassword,
-} from '@shared/services/firebase';
-import { userStore } from '@store/user';
+import { loginUser, logOutUser, registerUser, resetPassword, updatePassword } from '@store';
+import { userStore } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import {
@@ -43,7 +37,7 @@ class AuthStore {
       successCallback?.(result);
     } catch (error) {
       if (error instanceof Error) {
-        this.errors[action] = error.message;
+        runInAction(() => (this.errors[action] = error.message));
       }
     } finally {
       runInAction(() => (this.inProgress = false));
@@ -59,7 +53,7 @@ class AuthStore {
       'login',
       () => loginUser({ email, password }),
       async ({ uid }) => {
-        await userStore.fetchUser(uid)
+        await userStore.fetchUser(uid);
       },
     );
   }

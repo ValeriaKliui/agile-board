@@ -1,3 +1,4 @@
+import { MEDIA } from '@config';
 import { Card as CardAntd, Flex as FlexAntd, Layout as LayoutAntd } from 'antd';
 import styled from 'styled-components';
 
@@ -18,8 +19,12 @@ export const Content = styled(ContentAntd)`
 
 export const Card = styled(CardAntd)`
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  ${MEDIA.xlarge} {
+    transform: scale(2);
+  }
 `;
 
 export const Flex = styled(FlexAntd)`

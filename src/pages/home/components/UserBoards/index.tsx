@@ -1,34 +1,37 @@
+import { PATHS } from '@constants';
 import { BoardCard } from '@pages/home/components';
-import { Boards } from '@pages/home/components/UserBoards/styled';
-import { UserBoardsProps } from '@pages/home/components/UserBoards/types';
-import { Spin } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router';
 
-export const UserBoards = observer(({ boardsInfo, isLoading }: UserBoardsProps) => {
-    if (isLoading) return <Spin />;
-    if (boardsInfo.length === 0) return false;
+import { Boards, Container } from './styled';
+import { UserBoardsProps } from './types';
+
+export const UserBoards = observer(({ boardsInfo, }: UserBoardsProps) => {
+    if (!boardsInfo || boardsInfo.length === 0) return false;
 
     return (
         <>
-            {boardsInfo.map(([role, boards]) => (
-                <div>
+            {boardsInfo.map(([role, boards],) => (
+                <Container key={role}>
                     <Title level={5} className="capitalize">
                         {role}
                     </Title>
                     <Boards>
-                        {boards.map(({ title, createdAt, owner, userRole, id }) => (
-                            <>
-                                <NavLink to={`board/${id}`}>
-                                    <BoardCard key={title} title={title} createdAt={createdAt} owner={owner} userRole={userRole} />
-                                </NavLink>
-                            </>
+                        {boards.map(({ title, createdAt, owner, userRole, boardID }) => (
+                            <NavLink to={`${PATHS.BOARD}/${boardID}`} key={boardID}>
+                                <BoardCard
+                                    boardID={boardID}
+                                    title={title}
+                                    createdAt={createdAt}
+                                    owner={owner}
+                                    userRole={userRole}
+                                />
+                            </NavLink>
                         ))}
                     </Boards>
-                </div>
+                </Container>
             ))}
         </>
     );
 });
-

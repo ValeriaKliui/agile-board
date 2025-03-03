@@ -1,6 +1,6 @@
-import { CreatingBoardStepsForm } from '@pages/home/components';
+import { CreatingBoardStepsForm, } from '@pages/home/components';
 import { StepFormValues } from '@pages/home/types';
-import { Button, Modal } from '@shared/components';
+import { Button, CreatorModal, } from '@shared/components';
 import { useModal } from '@shared/hooks';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
@@ -8,11 +8,11 @@ import { observer } from 'mobx-react-lite';
 import { UserBoardsCreatorProps } from './types';
 
 export const UserBoardsCreator = observer(({ fetchUserBoards }: UserBoardsCreatorProps) => {
-  const { showModal, isModalOpen, closeModal } = useModal();
+  const { openModal, isModalOpen, closeModal } = useModal();
   const [stepForm] = Form.useForm<StepFormValues>();
 
   const onBoardCreate = () => {
-    showModal();
+    openModal();
   };
 
   const onClose = async () => {
@@ -23,10 +23,11 @@ export const UserBoardsCreator = observer(({ fetchUserBoards }: UserBoardsCreato
 
   return (
     <>
-      <Button onClick={onBoardCreate} type='primary'>Create board</Button>
-      <Modal visible={isModalOpen} footer={false} onClose={onClose} onCancel={onClose}>
+      <Button onClick={onBoardCreate} type='primary'> Create board</Button>
+      <CreatorModal isModalOpen={isModalOpen} onClose={closeModal}>
         <CreatingBoardStepsForm stepForm={stepForm} onSubmit={onClose} />
-      </Modal>
+      </CreatorModal>
     </>
   );
 });
+

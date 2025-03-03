@@ -5,7 +5,7 @@ export const useDebouncedFetch = <T>({
   fetchFunc,
   debounceTimeout = 800,
 }: {
-  fetchFunc: (value: string) => Promise<T>;
+  fetchFunc: (value?: string) => Promise<T | undefined>;
   debounceTimeout?: number;
 }) => {
   const [isFetching, setIsFetching] = useState(false);
@@ -13,7 +13,7 @@ export const useDebouncedFetch = <T>({
   const fetchRef = useRef(0);
 
   const debounceFetcher = useRef(
-    debounce(async (value: string) => {
+    debounce(async (value?: string) => {
       const currentFetchId = ++fetchRef.current;
       setIsFetching(true);
 
@@ -23,7 +23,7 @@ export const useDebouncedFetch = <T>({
           setResult(result);
         }
       } catch (error) {
-        console.error('Error fetching options', error);
+        console.error('Error debounce fetching', error);
         setResult(null);
       } finally {
         setIsFetching(false);

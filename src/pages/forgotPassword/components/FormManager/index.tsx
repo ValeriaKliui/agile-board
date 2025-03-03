@@ -1,7 +1,7 @@
 import { PATHS } from '@constants';
 import { ForgotPasswordForm } from '@pages/forgotPassword/components';
 import { useModal } from '@shared/hooks';
-import { authStore, type ForgotPasswordParams } from '@store/auth';
+import { authStore, type ForgotPasswordParams } from '@store';
 import { Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router';
 export const ForgotPasswordFormManager = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const { isModalOpen, showModal, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const handleModalClose = () => {
     closeModal();
@@ -19,7 +19,7 @@ export const ForgotPasswordFormManager = observer(() => {
   const onSubmit = async ({ email }: ForgotPasswordParams) => {
     await authStore.forgotPassword({ email });
     await authStore.logout();
-    if (!authStore.errors.forgot) showModal();
+    if (!authStore.errors.forgot) openModal();
   };
 
   const onChange = () => authStore.resetError();
@@ -35,7 +35,7 @@ export const ForgotPasswordFormManager = observer(() => {
       error={error}
       isLoading={isLoading}
       modalProps={{
-        visible: isModalOpen,
+        isModalOpen: isModalOpen,
         title: 'Link Sent!',
         onOk: handleModalClose,
         onCancel: handleModalClose,

@@ -1,7 +1,5 @@
-import { Radio, RadioGroupProps, } from "antd"
+import { Radio, RadioGroupProps } from 'antd';
 
 export const RadioGroup = (radioGroupProps: RadioGroupProps) => {
-    return <Radio.Group
-        {...radioGroupProps}
-    />
-}
+    return <Radio.Group {...radioGroupProps} />;
+};

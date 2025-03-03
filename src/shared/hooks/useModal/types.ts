@@ -1,5 +1,5 @@
 export interface UseModalReturns {
   isModalOpen: boolean;
-  showModal: () => void;
+  openModal: () => void;
   closeModal: () => void;
 }

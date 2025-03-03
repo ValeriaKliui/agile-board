@@ -30,3 +30,12 @@ export interface MemberRoleType {
   value: string;
   key: string;
 }
+
+export interface WithId {
+  id: string;
+}
+
+export interface Option {
+  value: string;
+  label: string;
+}

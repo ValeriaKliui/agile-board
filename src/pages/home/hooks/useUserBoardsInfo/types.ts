@@ -1,4 +1,3 @@
-import { ROLES } from '@constants';
-import { BoardInfo } from '@store/boards/types';
+import { BoardInfo } from '@store';
 
-export type UserBoardsInfo = [ROLES, BoardInfo[]];
+export type UserBoardsInfo = [string, BoardInfo[]];

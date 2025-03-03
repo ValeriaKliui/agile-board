@@ -18,6 +18,7 @@ export const StepPanel = ({ steps, isNextAllowed }: StepsPanelProps) => {
   return (
     <>
       <Steps current={activeStep}>{stepsList}</Steps>
+
       <Content>{steps[activeStep].content}</Content>
       <Flex gap="middle">
         {activeStep < steps.length - 1 && (

@@ -1,18 +1,24 @@
-import { MIN_PASSWORD_LENGTH } from '@constants';
+import { MIN_PASSWORD_LENGTH } from '@shared/constants/ui';
 import { Rule } from 'antd/es/form';
+
+export const setRequiredRule = (fieldName: string) => {
+  return [
+    {
+      required: true,
+      message: `Please, input ${fieldName}.`,
+    },
+  ];
+};
 
 export const getEmailRules = (): Rule[] => [
   {
     type: 'email',
     message: 'The input is not valid E-mail!',
   },
-  {
-    required: true,
-    message: 'Please input your E-mail!',
-  },
+  ...setRequiredRule('email'),
 ];
 
-export const validatePassword = (_, value:string) => {
+export const validatePassword = (_: unknown, value: string) => {
   if (!value) {
     return Promise.reject('Please, input your password');
   }
@@ -30,4 +36,3 @@ export const validatePassword = (_, value:string) => {
 
   return Promise.resolve();
 };
-

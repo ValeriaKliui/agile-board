@@ -1,3 +1,2 @@
-export { fetchDataWithParams } from './fetchDataWithParams';
+export { fetchTemplates } from './fetchTemplates';
 export { fetchUserBoards } from './fetchUserBoards';
-export { formatDatetime } from './formatDatetime';

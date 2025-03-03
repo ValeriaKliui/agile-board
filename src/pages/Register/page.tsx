@@ -1,8 +1,8 @@
-import { AUTH_TABS } from '@constants';
 import { RegisterFormManager } from '@pages/register';
 import { Tabs } from '@shared/components';
+import { AUTH_TABS } from '@shared/constants/ui';
 import { useRedirectAuthorizedUsers, useTabNavigation } from '@shared/hooks';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { observer } from 'mobx-react-lite';
 
 export const RegisterPage = observer(() => {

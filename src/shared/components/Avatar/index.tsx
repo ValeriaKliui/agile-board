@@ -1,7 +1,6 @@
-import { AvatarProps } from 'antd';
-
 import { Avatar as AvatarStyled } from './styled';
+import { AvatarProps } from './types';
 
-export const Avatar = (avatarProps: AvatarProps) => {
-  return <AvatarStyled {...avatarProps} />;
+export const Avatar = ({ color, ...avatarProps }: AvatarProps) => {
+  return <AvatarStyled $color={color} {...avatarProps} />;
 };

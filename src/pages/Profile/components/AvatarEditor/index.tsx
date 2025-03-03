@@ -1,6 +1,6 @@
 import { AvatarsSelectionManager } from '@pages/profile/components';
 import { Button } from '@shared/components';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { useState } from 'react';
 
 export const AvatarEditor = () => {
@@ -10,7 +10,7 @@ export const AvatarEditor = () => {
 
   const onAvatarSave = async (selectedAvatar: string | null) => {
     toggleAvatarEditing();
-    await userStore.updateUser({ avatar: selectedAvatar });
+    if (selectedAvatar) await userStore.updateUser({ avatar: selectedAvatar });
   };
 
   return (

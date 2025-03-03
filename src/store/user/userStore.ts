@@ -1,20 +1,19 @@
-import { USERS_COLLECTION_NAME } from '@constants';
-import { getData, setData } from '@shared/services/firebase';
-import { filterUndefinedValues } from '@shared/utils';
-import { User } from '@store/user';
-import { makeAutoObservable,  runInAction } from 'mobx';
+import { fetchUser, User } from '@store';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { updateUser } from 'store/user/services/updateUser';
 
 class UserStore {
   user: User | null = null;
   loadingUser = false;
   loadingError = '';
-  userID = '';
 
   constructor() {
     makeAutoObservable(this);
   }
 
   private handleError(error: Error) {
+    console.error('Error user', error.message);
+
     runInAction(() => {
       this.loadingError = error.message;
     });
@@ -27,8 +26,8 @@ class UserStore {
   async fetchUser(userID: string) {
     this.loadingUser = true;
     try {
-      const user = await getData<User>(USERS_COLLECTION_NAME, userID);
-      this.userID = userID
+      const user = await fetchUser({ userID });
+
       runInAction(() => {
         if (user) {
           this.user = user;
@@ -45,15 +44,13 @@ class UserStore {
     }
   }
 
-  async updateUser({ ...userData }) {
+  async updateUser(user: Partial<User>) {
+    this.loadingUser = true;
     try {
-      this.loadingUser = true;
-      const newData = filterUndefinedValues(userData);
-
-      await setData(USERS_COLLECTION_NAME, this.userID, { ...this.user, ...newData });
+      await updateUser({ userID: this.user?.userID, ...user });
 
       runInAction(() => {
-        if (this.user) this.user = { ...this.user, ...newData };
+        if (this.user) this.user = { ...this.user, ...user };
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -68,7 +65,6 @@ class UserStore {
 
   forgetUser() {
     this.user = null;
-    this.userID = '';
   }
 }
 

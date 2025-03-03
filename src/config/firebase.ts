@@ -4,6 +4,10 @@ import { getFirestore } from 'firebase/firestore';
 
 const { VITE_API_KEY, VITE_AUTH_DOMAIN, VITE_PROJECT_ID } = import.meta.env;
 
+if (!VITE_API_KEY || !VITE_AUTH_DOMAIN || !VITE_PROJECT_ID) {
+  throw new Error('Missing Firebase configuration in environment variables');
+}
+
 const firebaseConfig = {
   apiKey: VITE_API_KEY,
   authDomain: VITE_AUTH_DOMAIN,

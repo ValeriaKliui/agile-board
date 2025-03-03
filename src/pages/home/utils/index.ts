@@ -1,4 +1,4 @@
 export { getFulfilledResults } from './getFulfilledResults';
-export { getRolesOptions } from './getRolesOptions';
+export { getTemplateOptions } from './getTemplateOptions';
 export { groupArrayByValue } from './groupArrayByValue';
 export { transformObjectToOptions } from './transformObjectToOptions';

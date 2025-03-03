@@ -1,11 +1,9 @@
 import { ProfileInfo } from '@pages/profile/components';
-import { userStore } from '@store/user';
+import { userStore } from '@store';
 import { observer } from 'mobx-react-lite';
 
 export const ProfileInfoManager = observer(() => {
-  const username = userStore.user?.username ?? '';
-  const avatar = userStore.user?.avatar;
-  const email = userStore.user?.email ?? '';
+  const { username = '', avatar = '', email = '' } = userStore.user ?? {};
 
   return <ProfileInfo username={username} avatar={avatar} email={email} />;
 });

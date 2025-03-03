@@ -1,7 +1,6 @@
 import { PATHS } from '@constants';
+import { Button } from '@shared/components';
 import { Result } from 'antd';
-
-import { Button } from '../Button';
 
 export const ErrorFallback = () => {
   return (

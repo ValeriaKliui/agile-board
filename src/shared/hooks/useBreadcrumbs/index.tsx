@@ -1,4 +1,5 @@
-import { BREADCRUMBS_MAP, PATHS } from '@constants';
+import { PATHS } from '@constants';
+import { BREADCRUMBS_MAP } from '@shared/constants/ui';
 import { Link, useLocation } from 'react-router';
 
 export const useBreadcrumbs = () => {
@@ -10,7 +11,7 @@ export const useBreadcrumbs = () => {
 
     return {
       key: url,
-      title: <Link to={url}>{BREADCRUMBS_MAP[url] || url}</Link>,
+      title: BREADCRUMBS_MAP[url] && <Link to={url}>{BREADCRUMBS_MAP[url]}</Link>,
     };
   });
 

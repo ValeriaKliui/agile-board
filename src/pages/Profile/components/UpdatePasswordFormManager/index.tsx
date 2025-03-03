@@ -1,5 +1,5 @@
 import { UpdatePasswordForm } from '@pages/profile/components';
-import { authStore, type UpdatePasswordProps } from '@store/auth';
+import { authStore, type UpdatePasswordProps } from '@store';
 import { Button, Flex, Form } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ export const UpdatePasswordFormManager = observer(() => {
   const onSubmit = async ({ oldPassword, newPassword }: UpdatePasswordProps) => {
     await authStore.updatePassword({ oldPassword, newPassword });
     if (!authStore.errors.updatePassword) setIsEditing(false);
+    form.resetFields()
   };
 
   const isError = authStore.errors.updatePassword;
