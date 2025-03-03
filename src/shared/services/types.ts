@@ -12,7 +12,7 @@ export interface CollectionWithParams {
   searchTerm?: string;
   searchKey?: string;
   filterKey?: string;
-  filterValues?: string[];
+  filterValues?: string[]|null;
 }
 export type DataWithId<T> = T & {
   id: string;

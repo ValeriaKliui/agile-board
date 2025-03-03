@@ -1,4 +1,4 @@
-import { MEDIA } from 'config/styles/media';
+import { MEDIA } from '@config';
 import { createGlobalStyle } from 'styled-components';
 
 const styled = { createGlobalStyle };

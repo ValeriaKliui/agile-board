@@ -20,6 +20,7 @@ export const useTaskCreator = ({ form, columnID, onSuccess }: UseTaskCreatorPara
         task: { ...taskData, executionDate, author: userID },
       });
       onSuccess();
+      form.resetFields()
     } catch (error) {
       console.error('Task creation failed:', error);
     }

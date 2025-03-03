@@ -7,7 +7,7 @@ const { Title, Text } = Typography;
 export const ProfileInfo = ({ username, email, avatar }: ProfileInfoProps) => {
   return (
     <Flex align="flex-end" gap={20}>
-      <Avatar src={avatar ?? null} size={64}>
+      <Avatar src={avatar} size={64}>
         {avatar ? '' : username[0]}
       </Avatar>
 

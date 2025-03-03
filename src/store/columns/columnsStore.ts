@@ -50,7 +50,7 @@ class ColumnsStore {
       runInAction(() => {
         if (columns) {
           this.columns = columns;
-          columns.forEach(({ columnID }) => tasksStore.fetchTasks({ columnID, boardID }));
+          columns.forEach(async({ columnID }) => await tasksStore.fetchTasks({ columnID, boardID }));
         }
       });
     });

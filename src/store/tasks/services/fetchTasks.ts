@@ -16,6 +16,7 @@ export const fetchTasks = async ({
         TASKS_COLLECTION_NAME,
       ],
     });
+  
 
     return tasks?.map(({ id, createdAt, executionDate, ...task }) => {
       return {

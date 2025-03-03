@@ -1,3 +1,4 @@
-export { GlobalStyle } from './globalStyles';
+/* eslint-disable simple-import-sort/exports */
 export { MEDIA } from './media';
+export { GlobalStyle } from './globalStyles';
 export { ThemeProvider } from './themeProvider';

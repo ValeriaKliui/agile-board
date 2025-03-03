@@ -48,7 +48,6 @@ const fetchBoardsWithOwners = async (boards: BoardInfo[]) => {
 
 export const fetchUserBoards = async (userID: string | null): Promise<[string, BoardInfo[]][]> => {
   if (!userID) return [];
-  console.log(userID);
   const userBoards = await getCollection<UserBoard>({
     collectionPaths: [USER_BOARDS_COLLECTION_NAME, userID, BOARDS_COLLECTION_NAME],
   });
