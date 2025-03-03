@@ -9,7 +9,7 @@ const defaultLayoutRoutes: AppRoute[] = [
   { index: true, element: <HomePage /> },
   {
     path: '*',
-    element: <>Page was not found</>,
+    element: <HomePage />,
   },
   {
     path: PATHS.PROFILE,

@@ -27,6 +27,7 @@
   "devDependencies": {
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",
+    "@dnd-kit/modifiers": "^9.0.0",
     "@eslint/js": "^9.20.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
@@ -44,6 +45,7 @@
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "lint-staged": "^15.4.3",
+    "polished": "^4.3.1",
     "prettier": "3.5.0",
     "rc-virtual-list": "^3.18.2",
     "terser": "^5.39.0",

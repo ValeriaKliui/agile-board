@@ -1,22 +1,27 @@
-import { PATHS } from '@constants';
-import { BREADCRUMBS_MAP } from '@shared/constants/ui';
-import { Link, useLocation } from 'react-router';
+import { PATHS } from "@constants";
+import { BREADCRUMBS_MAP } from "@shared/constants/ui";
+import { Link, useLocation } from "react-router";
 
 export const useBreadcrumbs = () => {
   const location = useLocation();
-  const pathSnippets = location.pathname.split('/').filter(Boolean);
+  const pathSnippets = location.pathname.split("/").filter(Boolean);
 
-  const breadcrumbItems = pathSnippets.map((_, index) => {
-    const url = `/${pathSnippets.slice(0, index + 1).join('/')}` as keyof typeof BREADCRUMBS_MAP;
+  const breadcrumbItems = pathSnippets
+    .map((_, index) => {
+      const url = `/${pathSnippets.slice(0, index + 1).join("/")}` as keyof typeof BREADCRUMBS_MAP;
 
-    return {
-      key: url,
-      title: BREADCRUMBS_MAP[url] && <Link to={url}>{BREADCRUMBS_MAP[url]}</Link>,
-    };
-  });
+      if (!BREADCRUMBS_MAP[url]) return null;
+
+      return {
+        title: <Link to={url}>{BREADCRUMBS_MAP[url]}</Link>,
+      };
+    })
+    .filter(Boolean);
 
   return [
-    { key: PATHS.HOME, title: <Link to={PATHS.HOME}>{BREADCRUMBS_MAP[PATHS.HOME]}</Link> },
+    {
+      title: <Link to={PATHS.HOME}>{BREADCRUMBS_MAP[PATHS.HOME]}</Link>,
+    },
     ...breadcrumbItems,
   ];
 };

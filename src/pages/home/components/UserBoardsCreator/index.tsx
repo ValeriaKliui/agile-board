@@ -23,7 +23,7 @@ export const UserBoardsCreator = observer(({ fetchUserBoards }: UserBoardsCreato
 
   return (
     <>
-      <Button onClick={onBoardCreate} type='primary'> Create board</Button>
+      <Button size='large' onClick={onBoardCreate} type='primary'> Create board</Button>
       <CreatorModal isModalOpen={isModalOpen} onClose={closeModal}>
         <CreatingBoardStepsForm stepForm={stepForm} onSubmit={onClose} />
       </CreatorModal>

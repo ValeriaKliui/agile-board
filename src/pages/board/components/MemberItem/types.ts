@@ -1,5 +1,5 @@
-import { User } from '@store';
+import { Member } from '@store';
 
-export interface MemberItemType extends Pick<User, 'username'> {
+export interface MemberItemType extends Pick<Member, 'username' | 'userRole'> {
   color: string;
 }

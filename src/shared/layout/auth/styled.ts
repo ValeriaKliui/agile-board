@@ -19,10 +19,12 @@ export const Content = styled(ContentAntd)`
 
 export const Card = styled(CardAntd)`
   width: 100%;
-  max-width: 450px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
-  ${MEDIA.xlarge} {
+  ${MEDIA.s} {
+    max-width: 450px;
+  }
+  ${MEDIA.xl} {
     transform: scale(2);
   }
 `;

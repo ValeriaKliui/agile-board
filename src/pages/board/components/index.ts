@@ -1,4 +1,5 @@
 export { Board } from './Board';
+export { BoardColumns } from './BoardColumns';
 export { BoardHeader } from './BoardHeader';
 export { BoardManager } from './BoardManager';
 export { Column } from './Column';

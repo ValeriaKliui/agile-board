@@ -1,7 +1,8 @@
 export const MEDIA = {
-  small: '@media (max-width: 600px)',
-  medium: '@media (min-width: 600px) and (max-width: 1200px)',
-  large: '@media (min-width: 1200px)',
-  xlarge: '@media (min-width: 2000px)',
-  xxlarge: '@media (min-width: 4000px)',
+  xxs: '@media (min-width:0px)',
+  s: '@media (min-width: 600px)',
+  m: '@media (min-width: 768px)',
+  l: '@media (min-width: 1024px)',
+  xl: '@media (min-width: 1440px)',
+  xxl: '@media (min-width: 1920px)',
 };

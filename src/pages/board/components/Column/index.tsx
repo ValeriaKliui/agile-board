@@ -3,10 +3,10 @@ import { TaskCreatorModal, TasksList } from '@pages/board/components';
 import { hasPermission } from '@pages/board/utils';
 import { PERMISSIONS } from '@shared/constants';
 import { Column as ColumnType, tasksStore } from '@store';
-import { Flex } from 'antd';
+import { Divider, Flex } from 'antd';
 import { observer } from 'mobx-react-lite';
 
-import { CardStyled } from './styled';
+import { Container, TitleStyled } from './styled';
 
 export const Column = observer(({ columnID, title, order }: ColumnType) => {
     const { setNodeRef } = useDroppable({ id: columnID });
@@ -15,11 +15,13 @@ export const Column = observer(({ columnID, title, order }: ColumnType) => {
     const canCreateNew = order === 1 && hasPermission(PERMISSIONS.tasks.create);
 
     return (
-        <CardStyled ref={setNodeRef} size="small" title={title}>
+        <Container ref={setNodeRef}>
+            <TitleStyled level={5}>{title}</TitleStyled>
+            <Divider />
             <Flex vertical gap="middle">
                 <TasksList tasks={tasks} />
                 {canCreateNew && <TaskCreatorModal columnID={columnID} />}
             </Flex>
-        </CardStyled>
+        </Container>
     );
 });

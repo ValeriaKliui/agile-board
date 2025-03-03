@@ -2,12 +2,14 @@ import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
 import { BoardCardProps } from '@pages/home/components';
 import { Icon, InfoRow } from '@shared/components';
 import { ROLES, ROLES_PERMISSIONS } from '@shared/constants';
+import { formatDatetime } from '@shared/utils';
 import { Flex } from 'antd';
 
 import { CardStyled, TextStyled } from './styled';
 
 export const BoardCard = ({ title, createdAt, owner, userRole }: BoardCardProps) => {
   const { icon: IconComponent, color } = ROLES_PERMISSIONS[userRole as ROLES] ?? {};
+  const createDate = formatDatetime(createdAt)
 
   return (
     <CardStyled
@@ -21,7 +23,7 @@ export const BoardCard = ({ title, createdAt, owner, userRole }: BoardCardProps)
       }
     >
       <Flex vertical gap="small">
-        <InfoRow Icon={CalendarOutlined} label="Created" value={createdAt} />
+        <InfoRow Icon={CalendarOutlined} label="Created" value={createDate} />
         <InfoRow Icon={UserOutlined} label="Owner" value={owner} />
       </Flex>
     </CardStyled>

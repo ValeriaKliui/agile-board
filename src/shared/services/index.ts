@@ -1,4 +1,4 @@
-export { formatDatetime } from './formatDatetime';
+export { formatFromTmstpToDate } from './formatFromTmstpToDate';
 export { getCollection } from './getCollection';
 export { getData } from './getData';
 export { getDocumentsByIds } from './getDocumentsByIds';

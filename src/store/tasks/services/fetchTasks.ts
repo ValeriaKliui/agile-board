@@ -1,5 +1,5 @@
 import { BOARDS_COLLECTION_NAME, COLUMNS_COLLECTION_NAME, TASKS_COLLECTION_NAME } from '@constants';
-import { formatDatetime, getCollection } from '@shared/services';
+import { formatFromTmstpToDate, getCollection } from '@shared/services';
 import { BoardInfo, Column, TaskResponse } from '@store';
 
 export const fetchTasks = async ({
@@ -16,14 +16,13 @@ export const fetchTasks = async ({
         TASKS_COLLECTION_NAME,
       ],
     });
-  
 
     return tasks?.map(({ id, createdAt, executionDate, ...task }) => {
       return {
         ...task,
         taskID: id,
-        executionDate: formatDatetime({ timestamp: executionDate }),
-        createdAt: formatDatetime({ timestamp: createdAt }),
+        executionDate: formatFromTmstpToDate(executionDate),
+        createdAt: formatFromTmstpToDate(createdAt),
       };
     });
   } catch (error) {

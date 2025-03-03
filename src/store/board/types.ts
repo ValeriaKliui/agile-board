@@ -9,7 +9,7 @@ export interface RoleInfo {
 }
 export interface BoardInfo {
   boardID: string;
-  createdAt: string;
+  createdAt: Date;
   title: string;
   owner: string;
   members: { [user: string]: ROLES };

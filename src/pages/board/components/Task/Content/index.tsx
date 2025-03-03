@@ -3,6 +3,7 @@ import { hasPermission } from '@pages/board/utils';
 import { Button } from '@shared/components';
 import { PERMISSIONS, ROLES } from '@shared/constants';
 import { boardStore, userStore } from '@store';
+import { Flex } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 
@@ -21,18 +22,18 @@ export const TaskContent = observer(({ author, ...task }: TaskWithUser) => {
   const onEditFinish = () => setIsEditing(false);
 
   return (
-    <>
-      {canEdit && !isEditing && (
-        <Button type="primary" onClick={toggleEditing}>
-          Edit
-        </Button>
-      )}
-
+    <Flex vertical gap='middle' align='flex-start'>
       {canEdit && isEditing ? (
         <TaskEditor onEditFinish={onEditFinish} isEditing={isEditing} {...task} />
       ) : (
         <TaskViewer author={author} {...task} />
       )}
-    </>
+      {canEdit && !isEditing && (
+        <Button type="primary" onClick={toggleEditing} size='large'>
+          Edit
+        </Button>
+      )}
+
+    </Flex>
   );
 });

@@ -1,7 +1,8 @@
 import { AvatarEditorModal, PasswordEditorModal } from '@pages/profile/components';
 import { Button } from '@shared/components';
 import { useModal } from '@shared/hooks';
-import { Flex } from 'antd';
+
+import { ProfileActions } from './styled';
 
 export const ProfileInfoEditor = () => {
   const { openModal: openAvatarEditor, isModalOpen: isEditingAvatar, closeModal: closeAvatarEditor } = useModal()
@@ -9,14 +10,14 @@ export const ProfileInfoEditor = () => {
 
   return (
     <>
-      <Flex gap='middle'>
+      <ProfileActions vertical gap='middle'>
         <Button type="dashed" size='large' onClick={openAvatarEditor}>
           Update avatar
         </Button>
         <Button type="dashed" size='large' onClick={openPasswordEditor}>
           Change password
         </Button>
-      </Flex>
+      </ProfileActions>
       <AvatarEditorModal isModalOpen={isEditingAvatar} onClose={closeAvatarEditor} />
       <PasswordEditorModal isModalOpen={isChangingPassword} onClose={closePasswordEditor} />
     </>

@@ -7,4 +7,6 @@ export { TemplateSelector } from './TemplateSelector';
 export type { Template } from './TemplateSelector/types';
 export { UserBoards } from './UserBoards';
 export { UserBoardsCreator } from './UserBoardsCreator';
+export { UserBoardsHeader } from './UserBoardsHeader';
+export { UserBoardsList } from './UserBoardsList';
 export { WelcomeComponent } from './WelcomeComponent';

@@ -9,10 +9,10 @@ export interface Task {
   taskID: string;
   title: string;
   description?: string;
-  createdAt: string;
-  assignedTo: string;
+  createdAt: Date;
+  assignedTo: Date;
   author: string;
   priority: TASK_PRIORITY;
-  executionDate: string;
+  executionDate: Date;
 }
 export type Tasks = Record<string, Task[]>;

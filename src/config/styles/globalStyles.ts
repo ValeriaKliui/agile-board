@@ -12,15 +12,17 @@ export const GlobalStyle = styled.createGlobalStyle`
   }
 
   body {
-    ${MEDIA.large} {
+    ${MEDIA.l} {
       font-size: 16px;
     }
 
-    ${MEDIA.xlarge} {
+    ${MEDIA.xl} {
       font-size: 18px;
     }
   }
-  h4 {
+  h3,
+  h4,
+  h5 {
     margin-top: 0.5em;
   }
   .capitalize {

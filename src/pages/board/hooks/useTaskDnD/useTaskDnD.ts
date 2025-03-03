@@ -1,4 +1,6 @@
 import { DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { hasPermission } from '@pages/board/utils';
+import { PERMISSIONS } from '@shared/constants';
 import { boardStore, tasksStore } from '@store';
 import { useCallback } from 'react';
 
@@ -7,7 +9,7 @@ export const useTaskDnD = () => {
     const { active, over } = event;
     const { boardID } = boardStore.currentBoardInfo ?? {};
 
-    if (!over) return;
+    if (!over || !hasPermission(PERMISSIONS.tasks.move)) return;
     const taskID = active.id as string;
     const newColumnID = over.id as string;
 

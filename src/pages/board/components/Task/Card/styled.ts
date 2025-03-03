@@ -6,8 +6,11 @@ export const CardStyled = styled(Card)<{
   $transformY: number;
   $color: string;
 }>`
-  transform: translate(${(p) => p.$transformX}px, ${(p) => p.$transformY}px);
+  transform: translate(
+    ${({ $transformX }) => $transformX}px,
+    ${({ $transformY }) => $transformY}px
+  );
   z-index: 400;
   user-select: none;
-  box-shadow: 2px 2px 2px ${(p) => p.$color};
+  box-shadow: 2px 2px 2px ${({ $color }) => $color};
 `;

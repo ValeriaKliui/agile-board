@@ -1,9 +1,12 @@
 export { defineColumnForTask } from './defineColumnForTask';
 export { filterUndefinedValues } from './filterUndefinedValues';
+export { formatDatetime } from './formatDatetime';
 export * from './formRules';
 export { getMembersOptions } from './getMembersOptions';
 export { getRolesOptions } from './getRolesOptions';
 export { getTabInfo } from './getTabInfo';
+export { getTimeDistance } from './getTimeDistance';
 export { handleAuthError } from './handleAuthError';
 export { sortArrByKey } from './sortArrByKey';
+export { transformObjectToOptions } from './transformObjectToOptions';
 export { updateDataWithID } from './updateDataWithID';

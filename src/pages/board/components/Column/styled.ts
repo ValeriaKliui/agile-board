@@ -1,7 +1,10 @@
-import { Card } from 'antd';
+import Title from 'antd/es/typography/Title';
 import styled from 'styled-components';
 
-export const CardStyled = styled(Card)`
+export const Container = styled.div`
   height: 100%;
-  min-height: 400px;
+  min-height: 440px;
+`;
+export const TitleStyled = styled(Title)`
+  text-align: center;
 `;

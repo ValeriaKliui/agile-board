@@ -24,17 +24,19 @@ export const LoginForm = <TFormValues, TForm extends FormInstance<TFormValues>>(
       wrapperCol={{ span: 18 }}
       labelWrap
     >
-      <EmailField />
-      <PasswordField />
-      <Flex vertical gap="middle">
-        {error && <Alert type="error" message={error} />}
-        <Flex justify="space-evenly" align="baseline">
-          <Item>
-            <Button type="primary" htmlType="submit" loading={isLoading}>
-              Log in
-            </Button>
-          </Item>
-          <Link href={PATHS.FORGOT_PASSWORD}>Forgot password?</Link>
+      <Flex vertical gap='small'>
+        <EmailField />
+        <PasswordField />
+        <Flex vertical gap="middle">
+          {error && <Alert type="error" message={error} />}
+          <Flex justify="space-evenly" align="baseline">
+            <Item>
+              <Button type="primary" htmlType="submit" loading={isLoading}>
+                Log in
+              </Button>
+            </Item>
+            <Link href={PATHS.FORGOT_PASSWORD}>Forgot password?</Link>
+          </Flex>
         </Flex>
       </Flex>
     </Form>

@@ -11,4 +11,5 @@ export const TextStyled = styled(Text)`
 `;
 export const CardStyled = styled(Card)`
   width: 100%;
+  height: 100%;
 `;

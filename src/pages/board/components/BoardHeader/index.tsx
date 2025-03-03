@@ -5,7 +5,7 @@ import { type BoardInfo, boardStore, } from '@store';
 import { Typography } from 'antd';
 import { observer } from 'mobx-react-lite';
 
-const { Text } = Typography
+const { Title } = Typography
 
 export const BoardHeader = observer(({ title }: Pick<BoardInfo, 'title'>) => {
     const isEditable = hasPermission(PERMISSIONS.boards.edit);
@@ -21,7 +21,7 @@ export const BoardHeader = observer(({ title }: Pick<BoardInfo, 'title'>) => {
             {isEditable ? (
                 <InputEditable strong defaultValue={title} onFinishEdit={onEdit} />
             ) : (
-                <Text strong>{title}</Text>
+                <Title level={3}>{title}</Title>
             )}
         </header>
     );

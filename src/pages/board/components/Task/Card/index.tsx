@@ -2,6 +2,7 @@ import { CalendarOutlined, ClockCircleOutlined, CrownTwoTone, UserOutlined } fro
 import { TASK_PRIORITY_COLORS } from '@pages/board/constants';
 import { InfoRow } from '@shared/components';
 import { ROLES, ROLES_PERMISSIONS } from '@shared/constants';
+import { formatDatetime } from '@shared/utils';
 import { Flex, } from 'antd';
 import { forwardRef } from 'react';
 
@@ -9,8 +10,11 @@ import { CardStyled } from './styled';
 import { TaskCardProps } from './types';
 
 export const TaskCard = forwardRef<HTMLDivElement, TaskCardProps>(
-    ({ x, y, priority, executionDate, author = {}, assignedTo = {}, createdAt, ...cardProps }, ref) => (
-        <CardStyled
+    ({ x, y, priority, executionDate, author = {}, assignedTo = {}, createdAt, ...cardProps }, ref) => {
+        const createdData = formatDatetime(createdAt)
+        const executionData = formatDatetime(executionDate)
+
+        return <CardStyled
             size="small"
             hoverable
             ref={ref}
@@ -20,8 +24,8 @@ export const TaskCard = forwardRef<HTMLDivElement, TaskCardProps>(
             {...cardProps}
         >
             <Flex vertical gap="small">
-                <InfoRow Icon={CalendarOutlined} label="Created" value={createdAt} />
-                <InfoRow Icon={ClockCircleOutlined} label="Execute" value={executionDate} />
+                <InfoRow Icon={CalendarOutlined} label="Created" value={createdData} />
+                <InfoRow Icon={ClockCircleOutlined} label="Execute" value={executionData} />
                 <InfoRow
                     Icon={CrownTwoTone}
                     label="Author"
@@ -31,5 +35,5 @@ export const TaskCard = forwardRef<HTMLDivElement, TaskCardProps>(
                 <InfoRow Icon={UserOutlined} label="Assigned to" value={assignedTo.username} />
             </Flex>
         </CardStyled>
-    )
+    }
 );

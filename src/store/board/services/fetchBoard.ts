@@ -1,5 +1,5 @@
 import { BOARDS_COLLECTION_NAME } from '@constants';
-import { formatDatetime, getData } from '@shared/services';
+import { formatFromTmstpToDate, getData } from '@shared/services';
 import { BoardInfo, BoardInfoResponse } from '@store';
 
 export const fetchBoard = async ({ boardID }: Pick<BoardInfo, 'boardID'>) => {
@@ -8,9 +8,9 @@ export const fetchBoard = async ({ boardID }: Pick<BoardInfo, 'boardID'>) => {
 
     if (!board) throw new Error('board wasnt found');
 
-    const formattedData = formatDatetime({ timestamp: board?.createdAt });
+    const formattedDate = formatFromTmstpToDate(board.createdAt);
 
-    return { ...board, boardID, createdAt: formattedData };
+    return { ...board, boardID, createdAt: formattedDate };
   } catch (error) {
     console.error(error);
     if (error instanceof Error) throw new Error(error.message);

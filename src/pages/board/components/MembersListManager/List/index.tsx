@@ -5,9 +5,9 @@ import { MemberListProps } from './types';
 
 export const MembersList = ({ members }: MemberListProps) => (
     <>
-        {members.map(({ color, username }) => (
+        {members.map(({ color, username, role }) => (
             <Col key={username}>
-                <MemberItem color={color} username={username} />
+                <MemberItem color={color} username={username} role={role} />
             </Col>
         ))}
     </>

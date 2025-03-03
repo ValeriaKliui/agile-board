@@ -6,7 +6,8 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => (
     theme={{
       token: {
         colorPrimary: '#722ed1',
-        fontSize: 16
+        fontSize: 16,
+        colorBorderSecondary: 'rgba(206, 206, 206, 0.8)'
       },
     }}
   >

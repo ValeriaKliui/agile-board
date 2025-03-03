@@ -1,4 +1,3 @@
-import { MEDIA } from '@config';
 import { Layout as LayoutAntd } from 'antd';
 import { Content as ContentAntd } from 'antd/es/layout/layout';
 import SiderAntd from 'antd/es/layout/Sider';
@@ -17,12 +16,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled(ContentAntd)`
-  padding: 20px;
+  padding: 40px;
   margin: 0 auto;
   width: 100%;
-  ${MEDIA.xlarge} {
-    padding: 20px 0;
-  }
+  max-width: 1400px;
   min-height: 100%;
 `;
 export const Sider = styled(SiderAntd)`

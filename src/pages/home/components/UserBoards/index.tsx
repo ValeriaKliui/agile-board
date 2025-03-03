@@ -1,37 +1,25 @@
-import { PATHS } from '@constants';
-import { BoardCard } from '@pages/home/components';
-import Title from 'antd/es/typography/Title';
-import { observer } from 'mobx-react-lite';
-import { NavLink } from 'react-router';
+import { UserBoardsHeader, UserBoardsList } from "@pages/home/components";
+import { useUserBoardsInfo } from "@pages/home/hooks";
+import { userStore } from "@store";
+import { Flex, Spin } from "antd";
+import { observer } from "mobx-react-lite";
 
-import { Boards, Container } from './styled';
-import { UserBoardsProps } from './types';
+export const UserBoards = observer(() => {
+    const { userID } = userStore.user ?? {};
+    const { isLoading, boardsInfo, fetchBoards } = useUserBoardsInfo(userID);
 
-export const UserBoards = observer(({ boardsInfo, }: UserBoardsProps) => {
-    if (!boardsInfo || boardsInfo.length === 0) return false;
 
-    return (
-        <>
-            {boardsInfo.map(([role, boards],) => (
-                <Container key={role}>
-                    <Title level={5} className="capitalize">
-                        {role}
-                    </Title>
-                    <Boards>
-                        {boards.map(({ title, createdAt, owner, userRole, boardID }) => (
-                            <NavLink to={`${PATHS.BOARD}/${boardID}`} key={boardID}>
-                                <BoardCard
-                                    boardID={boardID}
-                                    title={title}
-                                    createdAt={createdAt}
-                                    owner={owner}
-                                    userRole={userRole}
-                                />
-                            </NavLink>
-                        ))}
-                    </Boards>
-                </Container>
-            ))}
-        </>
-    );
-});
+    if (isLoading) {
+        return (
+            <Flex justify="center" align="center" style={{ height: '100vh' }}>
+                <Spin size="large" />
+            </Flex>
+        );
+    }
+
+    return <>
+        {boardsInfo.length > 0 && <UserBoardsHeader fetchBoards={fetchBoards} />}
+        <UserBoardsList boardsInfo={boardsInfo} fetchBoards={fetchBoards} />
+    </>
+
+})

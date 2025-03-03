@@ -8,7 +8,7 @@ export const ContentCard = styled(Card)`
   padding-bottom: 20px;
 `;
 export const ProfileInfoContainer = styled(Flex)`
-  ${MEDIA.small} {
+  ${MEDIA.s} {
     align-items: center;
   }
 `;

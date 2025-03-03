@@ -1,5 +1,6 @@
+import { Avatar } from '@shared/components';
 import { userStore } from '@store';
-import { Avatar, Flex, Typography, } from 'antd';
+import { Flex, Typography, } from 'antd';
 import { observer } from 'mobx-react-lite';
 
 import { AvatarText } from './styled';
