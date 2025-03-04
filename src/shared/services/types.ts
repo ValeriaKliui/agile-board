@@ -20,4 +20,5 @@ export interface DataParams<T> {
 export interface MoveTocumentParams {
   collectionPaths: CollectionPaths;
   targetCollectionPaths: CollectionPaths;
+  docID?: string;
 }

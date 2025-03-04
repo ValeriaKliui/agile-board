@@ -9,6 +9,7 @@ export const Container = styled.div`
   }
   ${MEDIA.l} {
     grid-template-columns: 0.7fr 0.3fr;
+    width: 100%;
   }
 `;
 export const DividerStyled = styled(Divider)`
