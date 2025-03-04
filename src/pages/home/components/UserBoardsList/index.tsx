@@ -2,12 +2,13 @@ import { PATHS } from '@constants';
 import { BoardCard, UserBoardsCreator, } from '@pages/home/components';
 import { BOARDS_TITLES } from '@pages/home/constants';
 import { Divider } from 'antd';
-import Title from 'antd/es/typography/Title';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router';
-
 import { Boards, Container, ResultStyled } from './styled';
 import { UserBoardsProps } from './types';
+import { Typography } from 'antd';
+
+const {Title } = Typography
 
 export const UserBoardsList = observer(({ boardsInfo, fetchBoards }: UserBoardsProps) => {
     if (!boardsInfo || boardsInfo.length === 0) return <ResultStyled

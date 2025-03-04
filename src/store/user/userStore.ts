@@ -1,6 +1,6 @@
 import { fetchUser, User } from '@store';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { updateUser } from 'store/user/services/updateUser';
+import { updateUser } from '@store';
 
 class UserStore {
   user: User | null = null;

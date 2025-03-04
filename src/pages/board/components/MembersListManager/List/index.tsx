@@ -1,7 +1,7 @@
 import { MemberItem, } from '@pages/board/components';
-import { Col, } from 'antd';
 
 import { MemberListProps } from './types';
+import { Col } from 'antd';
 
 export const MembersList = ({ members }: MemberListProps) => (
     <>

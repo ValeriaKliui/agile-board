@@ -4,7 +4,6 @@ import { Button, RadioGroup, Select } from '@shared/components';
 import { getMembersOptions, setRequiredRule } from '@shared/utils';
 import { boardStore, TASK_PRIORITY, TaskInitial } from '@store';
 import { DatePicker, Flex, Form, Input, Typography } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
 import { observer } from 'mobx-react-lite';
 import { useMemo } from 'react';
 
@@ -13,6 +12,7 @@ import { TaskCreatorFormProps } from './types';
 
 const { Item } = Form;
 const { Text } = Typography;
+const{TextArea} = Input
 
 export const TaskCreatorForm = observer(({ onSuccess, columnID }: TaskCreatorFormProps) => {
     const [form] = Form.useForm<TaskInitial>();

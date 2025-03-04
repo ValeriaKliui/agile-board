@@ -1,7 +1,7 @@
 import { Layout as LayoutAntd } from 'antd';
-import { Content as ContentAntd } from 'antd/es/layout/layout';
-import SiderAntd from 'antd/es/layout/Sider';
 import styled from 'styled-components';
+
+const {Content: ContentAntd,Sider:SiderAntd } = LayoutAntd
 
 export const Layout = styled(LayoutAntd)`
   min-height: 100vh;

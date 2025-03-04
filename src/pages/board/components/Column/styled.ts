@@ -1,5 +1,7 @@
-import Title from 'antd/es/typography/Title';
+import { Typography } from 'antd';
 import styled from 'styled-components';
+
+const {Title} = Typography
 
 export const Container = styled.div`
   height: 100%;

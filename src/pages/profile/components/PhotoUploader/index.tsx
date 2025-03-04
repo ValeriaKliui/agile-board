@@ -3,9 +3,11 @@ import './styles.css';
 import { CheckOutlined } from '@ant-design/icons';
 import { useUpload } from '@pages/profile/hooks';
 import { Alert, Button, Upload, UploadFile } from 'antd';
-import Title from 'antd/es/typography/Title';
 
 import { PhotoUploaderProps } from './types';
+import { Typography } from 'antd';
+
+const {Title } = Typography
 
 export const PhotoUploader = ({
   isEditable = false,

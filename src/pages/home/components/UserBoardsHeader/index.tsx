@@ -1,8 +1,10 @@
 import { UserBoardsCreator } from '@pages/home/components';
-import Title from 'antd/es/typography/Title';
 
 import { FlexStyled } from './styled';
 import { UserBoardsHeaderProps } from './types';
+import { Typography } from 'antd';
+
+const {Title } = Typography
 
 export const UserBoardsHeader = ({ fetchBoards }: UserBoardsHeaderProps) => {
   return (

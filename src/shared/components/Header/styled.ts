@@ -1,5 +1,10 @@
-import { Header as HeaderAntd } from 'antd/es/layout/layout';
+import { Layout } from 'antd';
+
 import styled from 'styled-components';
+
+const {
+  Header:HeaderAntd
+} = Layout
 
 export const Header = styled(HeaderAntd)`
   height: fit-content;

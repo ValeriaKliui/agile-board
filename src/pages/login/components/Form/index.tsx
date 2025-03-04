@@ -2,9 +2,11 @@ import { PATHS } from '@constants';
 import { Button, EmailField, PasswordField } from '@shared/components';
 import { AuthFormPropsDefault } from '@shared/types';
 import { Alert, Flex, Form, FormInstance } from 'antd';
-import Link from 'antd/es/typography/Link';
+import { Typography } from 'antd';
 
 const { Item } = Form;
+const {Link} = Typography
+
 
 export const LoginForm = <TFormValues, TForm extends FormInstance<TFormValues>>({
   onSubmit,
