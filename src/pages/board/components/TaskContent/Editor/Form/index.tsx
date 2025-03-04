@@ -5,6 +5,7 @@ import { Flex, Form, FormInstance, Input } from 'antd';
 import { TaskEditorFormFormProps } from './types';
 
 const { Item } = Form;
+const { TextArea } = Input;
 
 export const TaskEditorForm = <TForm extends FormInstance<TFormValues> | undefined, TFormValues>({
   form,
@@ -36,7 +37,7 @@ export const TaskEditorForm = <TForm extends FormInstance<TFormValues> | undefin
             <Input />
           </Item>
           <Item name="description" label="Description" initialValue={description} labelAlign="left">
-            <Input />
+            <TextArea />
           </Item>
           <Item
             name="assignedTo"

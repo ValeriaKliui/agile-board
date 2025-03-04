@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Content = styled.div`
-margin-top: 30px`
+  margin: 30px 0;
+`;

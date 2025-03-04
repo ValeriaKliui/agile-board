@@ -12,6 +12,7 @@ export const moveTask = async ({ boardID, columnID, taskID, newColumnID }: MoveT
       TASKS_COLLECTION_NAME,
       taskID,
     ],
+    docID: taskID,
     targetCollectionPaths: [
       BOARDS_COLLECTION_NAME,
       boardID,

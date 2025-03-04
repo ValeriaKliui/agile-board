@@ -5,21 +5,29 @@ import { useModal } from '@shared/hooks';
 import { ProfileActions } from './styled';
 
 export const ProfileInfoEditor = () => {
-  const { openModal: openAvatarEditor, isModalOpen: isEditingAvatar, closeModal: closeAvatarEditor } = useModal()
-  const { openModal: openPasswordEditor, isModalOpen: isChangingPassword, closeModal: closePasswordEditor } = useModal()
+  const {
+    openModal: openAvatarEditor,
+    isModalOpen: isEditingAvatar,
+    closeModal: closeAvatarEditor,
+  } = useModal();
+  const {
+    openModal: openPasswordEditor,
+    isModalOpen: isChangingPassword,
+    closeModal: closePasswordEditor,
+  } = useModal();
 
   return (
     <>
-      <ProfileActions vertical gap='middle'>
-        <Button type="dashed" size='large' onClick={openAvatarEditor}>
+      <ProfileActions vertical gap="middle">
+        <Button variant="filled" size="large" color="primary" onClick={openAvatarEditor}>
           Update avatar
         </Button>
-        <Button type="dashed" size='large' onClick={openPasswordEditor}>
+        <Button variant="filled" color="primary" size="large" onClick={openPasswordEditor}>
           Change password
         </Button>
       </ProfileActions>
       <AvatarEditorModal isModalOpen={isEditingAvatar} onClose={closeAvatarEditor} />
       <PasswordEditorModal isModalOpen={isChangingPassword} onClose={closePasswordEditor} />
     </>
-  )
+  );
 };

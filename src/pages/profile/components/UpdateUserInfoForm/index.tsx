@@ -1,7 +1,7 @@
 import { Button } from '@shared/components';
 import { Col, Flex, Form, FormInstance, Input, Row, Spin, Typography } from 'antd';
 
-import { Container, } from './styled';
+import { Container } from './styled';
 import { UpdateUserInfoFormProps } from './types';
 
 const { Text } = Typography;
@@ -23,33 +23,33 @@ export const UpdateUserInfoForm = <
   if (isLoading) return <Spin />;
 
   return (
-    <Container vertical align='center' >
+    <Container vertical align="center">
       <Form
-        variant='underlined'
+        variant="underlined"
         form={form}
         labelCol={{ xs: 24, sm: 8 }}
         wrapperCol={{ xs: 24, sm: 22 }}
         layout="horizontal"
         onFinish={onFinish}
       >
-        <Row gutter={[16, 16]} >
+        <Row gutter={[24, 16]}>
           {fields?.map((name) => (
-            <Col xs={24} sm={12} key={name}>
-              <Flex vertical gap='small'>
+            <Col xs={24} md={12} key={name}>
+              <Flex vertical gap="middle">
                 <Text strong className="capitalize">
                   {name}
                 </Text>
-                <Item name={name}   >
-                  <Input />
+                <Item name={name}>
+                  <Input className="capitalize" placeholder={`${name}`} />
                 </Item>
               </Flex>
             </Col>
           ))}
         </Row>
-        <Button type="primary" centered size='large' htmlType="submit">
+        <Button type="primary" centered size="large" htmlType="submit">
           Save Info
         </Button>
       </Form>
-    </Container >
+    </Container>
   );
 };
