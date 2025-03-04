@@ -28,8 +28,12 @@ export const ResultStyled = styled(Result)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   .ant-result-extra {
     margin-top: 10px;
+  }
+  .ant-result-icon {
+    margin: 0;
   }
 `;

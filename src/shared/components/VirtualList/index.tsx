@@ -5,14 +5,13 @@ import { VirtualListProps } from './types';
 
 export const VirtualList = <T,>({
   data,
-  height = 350,
   itemHeight = 30,
   itemKey,
   renderItem,
 }: VirtualListProps<T>) => {
   return (
     <List>
-      <VirtualListLib data={data} height={height} itemHeight={itemHeight} itemKey={itemKey}>
+      <VirtualListLib data={data} itemHeight={itemHeight} itemKey={itemKey}>
         {(item) => renderItem(item)}
       </VirtualListLib>
     </List>

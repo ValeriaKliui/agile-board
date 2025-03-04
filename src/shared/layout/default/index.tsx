@@ -6,8 +6,8 @@ import { Content, Layout, Wrapper } from './styled';
 export const DefaultLayout = () => {
   return (
     <Layout>
+      <HeaderManager />
       <Wrapper>
-        <HeaderManager />
         <Content>
           <Outlet />
         </Content>

@@ -1,7 +1,7 @@
 import { Layout as LayoutAntd } from 'antd';
 import styled from 'styled-components';
 
-const {Content: ContentAntd,Sider:SiderAntd } = LayoutAntd
+const { Content: ContentAntd, Sider: SiderAntd } = LayoutAntd;
 
 export const Layout = styled(LayoutAntd)`
   min-height: 100vh;
@@ -21,6 +21,10 @@ export const Content = styled(ContentAntd)`
   width: 100%;
   max-width: 1400px;
   min-height: 100%;
+
+  & > *:first-child {
+    height: 100%;
+  }
 `;
 export const Sider = styled(SiderAntd)`
   background: rgba(161, 210, 255, 0.4);

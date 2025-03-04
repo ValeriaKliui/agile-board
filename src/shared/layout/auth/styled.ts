@@ -25,7 +25,10 @@ export const Card = styled(CardAntd)`
     max-width: 450px;
   }
   ${MEDIA.xl} {
-    transform: scale(2);
+    transform: scale(1.4);
+  }
+  ${MEDIA.xxl} {
+    transform: scale(1.7);
   }
 `;
 

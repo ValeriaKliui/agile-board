@@ -14,6 +14,5 @@ export const ColStyled = styled(Col)`
   display: flex;
   flex-direction: column;
   min-width: 280px;
-  max-width: unset;
-  flex: 1;
+  flex: 0 0 280px;
 `;

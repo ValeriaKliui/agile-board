@@ -3,7 +3,7 @@ import { Flex } from 'antd';
 
 import { TaskDetails } from './Details';
 import { TaskMetadata } from './Metadata';
-import { Container, Details } from './styled';
+import { Container, DividerStyled } from './styled';
 
 export const TaskViewer = ({
   title,
@@ -17,16 +17,22 @@ export const TaskViewer = ({
   return (
     <Container>
       <Flex vertical gap="middle">
-        <TaskMetadata title={title} description={description} priority={priority} />
+        <TaskMetadata
+          executionDate={executionDate}
+          title={title}
+          description={description}
+          priority={priority}
+        />
       </Flex>
-      <Details vertical gap="middle">
+      <Flex gap="small">
+        <DividerStyled type="vertical" />
         <TaskDetails
           createdAt={createdAt}
           executionDate={executionDate}
           author={author}
           assignedTo={assignedTo}
         />
-      </Details>
+      </Flex>
     </Container>
   );
 };

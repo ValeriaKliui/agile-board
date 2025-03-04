@@ -1,12 +1,21 @@
-import { Flex } from 'antd';
+import { MEDIA } from '@config';
+import { Divider } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 0.7fr 0.3fr;
-  gap: 20px;
+  ${MEDIA.xxs} {
+    display: grid;
+    gap: 40px;
+  }
+  ${MEDIA.l} {
+    grid-template-columns: 0.7fr 0.3fr;
+  }
 `;
-
-export const Details = styled(Flex)`
-  padding-top: 20px;
+export const DividerStyled = styled(Divider)`
+  ${MEDIA.xxs} {
+    display: none;
+  }
+  ${MEDIA.m} {
+    height: 100%;
+  }
 `;

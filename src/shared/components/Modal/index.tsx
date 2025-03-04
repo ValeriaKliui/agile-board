@@ -23,11 +23,17 @@ export const Modal = memo(
         onOk={onOk}
         onCancel={onCancel}
         footer={footer ?? defaultFooter}
+        width={{
+          xs: '90%',
+          sm: '80%',
+          md: '70%',
+          lg: '60%',
+          xl: '50%',
+          xxl: '40%',
+        }}
         {...modalProps}
       >
-        <ModalContent>
-          {children}
-        </ModalContent>
+        <ModalContent>{children}</ModalContent>
       </ModalAntd>
     );
   },

@@ -8,26 +8,32 @@ import { FlexStyled } from './styled';
 import { BoardManagerProps } from './types';
 
 export const BoardManager = observer(({ boardID }: BoardManagerProps) => {
-    const isLoading = boardStore.isLoading
+  const isLoading = boardStore.isLoading;
 
-    const fetchCurrentBoard = useCallback(async () => {
-        if (boardID) await boardStore.fetchCurrentBoard({ boardID });
-    }, [boardID]);
+  const fetchCurrentBoard = useCallback(async () => {
+    if (boardID) await boardStore.fetchCurrentBoard({ boardID });
+  }, [boardID]);
 
-    useEffect(() => {
-        fetchCurrentBoard();
-    }, [fetchCurrentBoard]);
+  useEffect(() => {
+    fetchCurrentBoard();
+  }, [fetchCurrentBoard]);
 
-    return (
-        <FlexStyled vertical gap="large" align={isLoading ? 'center' : 'flex-start'} justify='center' >
-            {isLoading ? (
-                <Spin size="large" />
-            ) : (
-                <>
-                    <BoardDetails />
-                    <Board />
-                </>
-            )}
-        </FlexStyled>
-    );
+  return (
+    <FlexStyled
+      vertical
+      gap="large"
+      align={isLoading ? 'center' : 'flex-start'}
+      justify="center"
+      $isLoading={isLoading}
+    >
+      {isLoading ? (
+        <Spin size="large" />
+      ) : (
+        <>
+          <BoardDetails />
+          <Board />
+        </>
+      )}
+    </FlexStyled>
+  );
 });

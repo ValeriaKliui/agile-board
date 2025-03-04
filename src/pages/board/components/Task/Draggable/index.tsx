@@ -21,6 +21,7 @@ export const TaskDraggable = ({
   priority,
   author,
   assignedTo,
+  onClick,
 }: TaskDraggableProps) => {
   const { attributes, listeners, setNodeRef, x, y } = useTaskDraggable(taskID);
   const createdData = formatDatetime(createdAt);
@@ -30,6 +31,7 @@ export const TaskDraggable = ({
     <CardStyled
       size="small"
       hoverable
+      onClick={onClick}
       ref={setNodeRef}
       $color={TASK_PRIORITY_COLORS[priority]}
       $transformX={x}
