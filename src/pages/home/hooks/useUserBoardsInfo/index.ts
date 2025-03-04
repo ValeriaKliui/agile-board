@@ -1,11 +1,12 @@
 import { fetchUserBoards } from '@pages/home/services';
+import { ROLES } from '@shared/constants';
 import { BoardInfo } from '@store';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useUserBoardsInfo = (userID?: string) => {
   const [error, setError] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [boardsInfo, setBoardsInfo] = useState<[string, BoardInfo[]] | []>([]);
+  const [boardsInfo, setBoardsInfo] = useState<[ROLES, BoardInfo[]][]>([]);
 
   const fetchBoards = useCallback(async () => {
     setIsLoading(true);

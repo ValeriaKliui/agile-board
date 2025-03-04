@@ -28,7 +28,7 @@ export type BoardCreationInfo = Omit<BoardInfo, 'boardID' | 'createdAt'> & { tem
 export type UpdateBoardInfo = Pick<BoardInfo, 'boardID'> & Partial<BoardInfo>;
 
 export interface Member extends User {
-  userRole: ROLES;
+  role: ROLES;
   color: string;
 }
 export type TemplatedBoard = Pick<BoardInfo, 'boardID'> & Pick<BoardCreationInfo, 'template'>;

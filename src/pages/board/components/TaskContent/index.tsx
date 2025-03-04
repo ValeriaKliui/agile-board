@@ -22,18 +22,17 @@ export const TaskContent = observer(({ author, ...task }: TaskWithUser) => {
   const onEditFinish = () => setIsEditing(false);
 
   return (
-    <Flex vertical gap='middle' align='flex-start'>
+    <Flex vertical gap="middle" align="flex-start">
       {canEdit && isEditing ? (
         <TaskEditor onEditFinish={onEditFinish} isEditing={isEditing} {...task} />
       ) : (
         <TaskViewer author={author} {...task} />
       )}
       {canEdit && !isEditing && (
-        <Button type="primary" onClick={toggleEditing} size='large'>
+        <Button type="primary" onClick={toggleEditing} size="large">
           Edit
         </Button>
       )}
-
     </Flex>
   );
 });

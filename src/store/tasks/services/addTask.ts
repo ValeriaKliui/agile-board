@@ -20,7 +20,7 @@ export const addTask = async ({ boardID, columnID, task }: AddTaskParams) => {
     });
     if (!taskID) throw new Error('Task wasn’t created in Firestore');
 
-    return { ...task, taskID };
+    return { ...taskWithDates, taskID };
   } catch (error) {
     console.error('Error adding task:', error);
     throw new Error(

@@ -10,7 +10,7 @@ import { useCallback } from 'react';
 const { Item } = Form;
 
 export const BasicBoardInfo = observer(() => {
-  const searchUser = useCallback((searchTerm: string) => {
+  const searchUser = useCallback((searchTerm?: string) => {
     const username = userStore.user?.username;
 
     return getCollection<User>({

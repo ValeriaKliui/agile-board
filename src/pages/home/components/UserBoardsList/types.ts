@@ -1,5 +1,7 @@
-import { UserBoardsInfo } from '@pages/home/hooks/useUserBoardsInfo/types';
+import { ROLES } from '@shared/constants';
+import { BoardInfo } from '@store';
 
 export interface UserBoardsProps {
-  boardsInfo: UserBoardsInfo[];
+  boardsInfo: Array<[ROLES, BoardInfo[]]>;
+  fetchBoards: () => Promise<void>;
 }

@@ -3,7 +3,7 @@ import { ROLES } from '@shared/constants';
 import { getCollection } from '@shared/services';
 import { User } from '@store';
 
-export const fetchNewUsers = (searchTerm: string, currMembers?: { [user: string]: ROLES }) =>
+export const fetchNewUsers = (searchTerm?: string, currMembers?: { [user: string]: ROLES }) =>
   getCollection<User>({
     collectionPaths: [USERS_COLLECTION_NAME],
     searchKey: 'username',

@@ -19,7 +19,7 @@ export const useDebouncedFetch = <T>({
 
       try {
         const result = await fetchFunc(value);
-        if (currentFetchId === fetchRef.current) {
+        if (currentFetchId === fetchRef.current && result) {
           setResult(result);
         }
       } catch (error) {

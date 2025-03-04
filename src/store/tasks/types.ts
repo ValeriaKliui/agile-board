@@ -10,7 +10,7 @@ export interface Task {
   title: string;
   description?: string;
   createdAt: Date;
-  assignedTo: Date;
+  assignedTo: string;
   author: string;
   priority: TASK_PRIORITY;
   executionDate: Date;
