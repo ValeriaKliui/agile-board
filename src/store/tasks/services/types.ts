@@ -16,4 +16,7 @@ export type MoveTaskParams = Pick<Task, 'taskID'> &
   Pick<BoardInfo, 'boardID'> & {
     newColumnID: string;
   };
-export type MoveTask = MoveTaskParams & Pick<Column, 'columnID'>;
+export type MoveTask = MoveTaskParams &
+  Pick<Column, 'columnID'> & {
+    task?: Task;
+  };

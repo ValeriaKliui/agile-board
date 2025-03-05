@@ -1,28 +1,25 @@
 import { db } from '@config';
-import { MoveTocumentParams, setData } from '@shared/services';
-import { deleteDoc, doc, getDoc } from 'firebase/firestore';
+import { MoveDocumentParams, setData } from '@shared/services';
+import { deleteDoc, doc, DocumentData, WithFieldValue } from 'firebase/firestore';
 
-export const moveDocument = async ({
+export const moveDocument = async <T extends WithFieldValue<DocumentData>>({
   collectionPaths,
   targetCollectionPaths,
   docID,
-}: MoveTocumentParams) => {
+  docData,
+}: MoveDocumentParams<T>) => {
   try {
     const sourceDocRef = doc(db, ...collectionPaths);
 
-    const docSnap = await getDoc(sourceDocRef);
+    const result = await setData({
+      collectionPaths: targetCollectionPaths,
+      docID,
+      data: docData,
+    });
+    console.log('result', result);
 
-    if (docSnap.exists()) {
-      const docData = docSnap.data();
-
-      await setData({
-        collectionPaths: targetCollectionPaths,
-        docID: docID,
-        data: docData,
-      });
-
-      await deleteDoc(sourceDocRef);
-    }
+    const deleteD = await deleteDoc(sourceDocRef);
+    console.log('deleteD', deleteD);
   } catch (error) {
     console.error('Error while moving element: ', error);
     if (error instanceof Error) throw new Error(error.message);

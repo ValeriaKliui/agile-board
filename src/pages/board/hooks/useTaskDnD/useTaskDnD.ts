@@ -9,6 +9,7 @@ export const useTaskDnD = () => {
     const { active, over } = event;
     const { boardID } = boardStore.currentBoardInfo ?? {};
 
+    console.log(active.id, over?.id);
     if (!over || !hasPermission(PERMISSIONS.tasks.move)) return;
     const taskID = active.id as string;
     const newColumnID = over.id as string;
