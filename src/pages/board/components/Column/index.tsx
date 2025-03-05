@@ -9,19 +9,18 @@ import { observer } from 'mobx-react-lite';
 import { Container, TitleStyled } from './styled';
 
 export const Column = observer(({ columnID, title, order }: ColumnType) => {
-    const { setNodeRef } = useDroppable({ id: columnID });
-    const tasks = tasksStore.tasks?.[columnID];
+  const { setNodeRef } = useDroppable({ id: columnID });
+  const tasks = tasksStore.tasks?.[columnID];
+  const canCreateNew = order === 1 && hasPermission(PERMISSIONS.tasks.create);
 
-    const canCreateNew = order === 1 && hasPermission(PERMISSIONS.tasks.create);
-
-    return (
-        <Container ref={setNodeRef}>
-            <TitleStyled level={5}>{title}</TitleStyled>
-            <Divider />
-            <Flex vertical gap="middle">
-                <TasksList tasks={tasks} />
-                {canCreateNew && <TaskCreatorModal columnID={columnID} />}
-            </Flex>
-        </Container>
-    );
+  return (
+    <Container ref={setNodeRef}>
+      <TitleStyled level={5}>{title}</TitleStyled>
+      <Divider />
+      <Flex vertical gap="middle">
+        <TasksList tasks={tasks} />
+        {canCreateNew && <TaskCreatorModal columnID={columnID} />}
+      </Flex>
+    </Container>
+  );
 });

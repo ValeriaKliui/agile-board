@@ -1,4 +1,11 @@
 export enum TASK_PRIORITY {
+  urgent,
+  high,
+  medium,
+  low,
+}
+
+export enum TASK_PRIORITY_TEXT {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
@@ -12,7 +19,7 @@ export interface Task {
   createdAt: Date;
   assignedTo: string;
   author: string;
-  priority: TASK_PRIORITY;
+  priority: TASK_PRIORITY_TEXT;
   executionDate: Date;
 }
 export type Tasks = Record<string, Task[]>;
