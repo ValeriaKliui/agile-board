@@ -1,4 +1,3 @@
-import { getConfirmPasswordRules } from '@pages/register/utils';
 import { Button, EmailField, PasswordField } from '@shared/components';
 import { AuthFormPropsDefault } from '@shared/types';
 import { setRequiredRule } from '@shared/utils';
@@ -12,51 +11,32 @@ export const RegisterForm = <TFormValues, TForm extends FormInstance<TFormValues
   onChange,
   error,
   isLoading,
-}: AuthFormPropsDefault<TFormValues, TForm>) => {
-  const confirmPasswordRules = getConfirmPasswordRules();
+}: AuthFormPropsDefault<TFormValues, TForm>) => (
+  <Form
+    form={form}
+    name="register"
+    onFinish={onSubmit}
+    onChange={onChange}
+    scrollToFirstError
+    colon={false}
+    labelCol={{ span: 6 }}
+    wrapperCol={{ span: 18 }}
+    labelWrap
+  >
+    <EmailField />
 
-  return (
-    <Form
-      form={form}
-      name="register"
-      onFinish={onSubmit}
-      onChange={onChange}
-      scrollToFirstError
-      colon={false}
-      labelCol={{ span: 6 }}
-      wrapperCol={{ span: 18 }}
-      labelWrap
-    >
-      <EmailField />
+    <Item label="Username" name="username" rules={setRequiredRule('username')}>
+      <Input placeholder="Nickname" />
+    </Item>
 
-      <Item
-        label="Username"
-        name="username"
-        rules={setRequiredRule('username')}
-      >
-        <Input placeholder="Nickname" />
-      </Item>
+    <PasswordField withConfirmation />
 
-      <PasswordField />
+    <Flex vertical gap={'middle'}>
+      {error && <Alert type="error" message={error} />}
 
-      <Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        labelAlign='left'
-        rules={confirmPasswordRules}
-      >
-        <Input.Password autoComplete="password" placeholder='Confirm Password' />
-      </Item>
-
-      <Flex vertical gap={'middle'}>
-        {error && <Alert type="error" message={error} />}
-
-        <Button type="primary" htmlType="submit" loading={isLoading} centered>
-          Register
-        </Button>
-      </Flex>
-    </Form>
-  );
-};
+      <Button type="primary" htmlType="submit" loading={isLoading} centered>
+        Register
+      </Button>
+    </Flex>
+  </Form>
+);

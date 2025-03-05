@@ -36,3 +36,15 @@ export const validatePassword = (_: unknown, value: string) => {
 
   return Promise.resolve();
 };
+
+export const getConfirmPasswordRules = (name = 'password'): Rule[] => [
+  ...setRequiredRule('password confirmation'),
+  ({ getFieldValue }) => ({
+    validator(_, value) {
+      if (!value || getFieldValue(name) === value) {
+        return Promise.resolve();
+      }
+      return Promise.reject(new Error('The new password that you entered do not match!'));
+    },
+  }),
+];

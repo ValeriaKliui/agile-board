@@ -22,8 +22,8 @@ export const UpdatePasswordForm = <
     >
       <Flex vertical gap="middle">
         <div>
-          <PasswordField name="oldPassword" label="Current password" />
-          <PasswordField name="newPassword" label="New password" />
+          <PasswordField name="oldPassword" label="Current password" validated={false} />
+          <PasswordField name="newPassword" label="New password" withConfirmation />
         </div>
         <Flex vertical align="center" gap={'middle'}>
           {error && <Alert type="error" message={error} />}
