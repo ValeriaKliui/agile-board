@@ -1,10 +1,10 @@
 import { fetchUser, User } from '@store';
-import { makeAutoObservable, runInAction } from 'mobx';
 import { updateUser } from '@store';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 class UserStore {
   user: User | null = null;
-  loadingUser = false;
+  loadingUser = true;
   loadingError = '';
 
   constructor() {
@@ -18,6 +18,9 @@ class UserStore {
       this.loadingError = error.message;
     });
   }
+  setLoadingUser = (isLoading: boolean) => {
+    this.loadingUser = isLoading;
+  };
 
   get isLoggedIn() {
     return !!this.user;

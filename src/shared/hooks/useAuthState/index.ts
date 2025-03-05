@@ -7,7 +7,7 @@ export const useAuthState = () => {
     const unsubscribe = auth?.onAuthStateChanged(async (user) => {
       if (user) {
         await userStore.fetchUser(user.uid);
-      }
+      } else userStore.setLoadingUser(false);
     });
 
     return () => unsubscribe?.();

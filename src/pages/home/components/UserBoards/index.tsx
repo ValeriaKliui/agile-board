@@ -18,7 +18,7 @@ export const UserBoards = observer(() => {
 
   return (
     <>
-      {boardsInfo.length > 0 && <UserBoardsHeader fetchBoards={fetchBoards} />}
+      {boardsInfo && boardsInfo.length > 0 && <UserBoardsHeader fetchBoards={fetchBoards} />}
       <UserBoardsList boardsInfo={boardsInfo} fetchBoards={fetchBoards} />
     </>
   );
