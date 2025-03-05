@@ -1,32 +1,23 @@
 import { Board, BoardDetails } from '@pages/board/components';
-import { boardStore } from '@store';
+import { useBoard } from '@pages/board/hooks';
 import { Spin } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { useCallback, useEffect } from 'react';
 
 import { FlexStyled } from './styled';
 import { BoardManagerProps } from './types';
 
 export const BoardManager = observer(({ boardID }: BoardManagerProps) => {
-  const isLoading = boardStore.isLoading;
-
-  const fetchCurrentBoard = useCallback(async () => {
-    if (boardID) await boardStore.fetchCurrentBoard({ boardID });
-  }, [boardID]);
-
-  useEffect(() => {
-    fetchCurrentBoard();
-  }, [fetchCurrentBoard]);
+  const { canBeDisplayed } = useBoard(boardID);
 
   return (
     <FlexStyled
       vertical
       gap="large"
-      align={isLoading ? 'center' : 'flex-start'}
+      align={canBeDisplayed ? 'flex-start' : 'center'}
       justify="center"
-      $isLoading={isLoading}
+      $isLoading={!canBeDisplayed}
     >
-      {isLoading ? (
+      {!canBeDisplayed ? (
         <Spin size="large" />
       ) : (
         <>

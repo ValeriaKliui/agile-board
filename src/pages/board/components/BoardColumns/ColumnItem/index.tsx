@@ -10,7 +10,6 @@ export const ColumnItem = memo(
   ({ columnID, title, order }: Pick<ColumnType, 'columnID' | 'title' | 'order'>) => (
     <Flex gap="small">
       <ColStyled>
-        {columnID}
         <Column columnID={columnID} title={title} order={order} />
       </ColStyled>
       <ColumnDivider type="vertical" variant="dashed" />

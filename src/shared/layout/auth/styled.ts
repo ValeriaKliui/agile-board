@@ -24,12 +24,6 @@ export const Card = styled(CardAntd)`
   ${MEDIA.s} {
     max-width: 450px;
   }
-  ${MEDIA.xl} {
-    transform: scale(1.3);
-  }
-  ${MEDIA.xxl} {
-    transform: scale(1.6);
-  }
 `;
 
 export const Flex = styled(FlexAntd)`

@@ -11,15 +11,13 @@ export const moveDocument = async <T extends WithFieldValue<DocumentData>>({
   try {
     const sourceDocRef = doc(db, ...collectionPaths);
 
-    const result = await setData({
+    await setData({
       collectionPaths: targetCollectionPaths,
       docID,
       data: docData,
     });
-    console.log('result', result);
 
-    const deleteD = await deleteDoc(sourceDocRef);
-    console.log('deleteD', deleteD);
+    await deleteDoc(sourceDocRef);
   } catch (error) {
     console.error('Error while moving element: ', error);
     if (error instanceof Error) throw new Error(error.message);
