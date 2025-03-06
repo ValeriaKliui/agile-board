@@ -5,10 +5,9 @@ import { useLocation, useNavigate } from 'react-router';
 export const useRedirectAuthorizedUsers = (isLoggedIn: boolean) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || PATHS.HOME; 
+  const from = location.state?.from || PATHS.HOME;
 
   useEffect(() => {
     if (isLoggedIn) navigate(from, { replace: true });
-  }, [navigate, isLoggedIn,from]);
+  }, [navigate, isLoggedIn, from]);
 };
-

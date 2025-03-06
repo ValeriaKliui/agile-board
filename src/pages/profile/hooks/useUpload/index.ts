@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { UseUploadProps } from './types';
 
-export const useUpload = <T extends { url?: string }>({
+export const useUpload = <T extends { url?: string; status?: string }>({
   filesData = [],
   onUpload,
   onRemove,
@@ -14,7 +14,7 @@ export const useUpload = <T extends { url?: string }>({
   const [fileList, setFileList] = useState<T[]>(filesData);
 
   useEffect(() => {
-    setFileList(filesData);
+    setFileList(filesData.map((file) => ({ ...file, status: 'success' })));
   }, [filesData]);
 
   const handleUpload = async (options: UploadRequestOption) => {
@@ -27,12 +27,14 @@ export const useUpload = <T extends { url?: string }>({
       );
       onUpload?.(imageUrl);
     } catch (error) {
-      console.error('Upload error:', error);
       setIsErrorUploading(error instanceof Error ? error.message : 'Upload failed');
+      setFileList((prevFiles) => prevFiles.filter(({ status }) => status !== 'uploading'));
     }
   };
 
   const handleChange: UploadProps<T>['onChange'] = ({ fileList: updatedList, file }) => {
+    setIsErrorUploading(null);
+
     if (file.status === 'removed') {
       onRemove?.(file.url || '');
     }

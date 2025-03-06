@@ -81,6 +81,8 @@ class TasksStore {
   async moveTask({ taskID, newColumnID, boardID }: MoveTaskParams) {
     await this.performTaskOperation(async () => {
       const columnID = defineColumnForTask(this.tasks, taskID);
+      const isSameColumn = columnID === newColumnID;
+
       const currTask = this.getTaskByID(taskID);
 
       runInAction(() => {
@@ -89,7 +91,7 @@ class TasksStore {
         if (currTask) this.tasks[newColumnID] = [...(this.tasks[newColumnID] || []), currTask];
       });
 
-      await moveTask({ boardID, columnID, taskID, newColumnID });
+      if (!isSameColumn) await moveTask({ task: currTask, boardID, columnID, taskID, newColumnID });
     });
   }
 }

@@ -1,1 +1,0 @@
-export { getConfirmPasswordRules } from './getConfirmPasswordRules';

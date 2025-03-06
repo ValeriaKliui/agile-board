@@ -2,12 +2,12 @@ import './styles.css';
 
 import { CheckOutlined } from '@ant-design/icons';
 import { useUpload } from '@pages/profile/hooks';
-import { Alert, Button, Upload, UploadFile } from 'antd';
-
-import { PhotoUploaderProps } from './types';
+import { Alert, Button, Flex, Upload, UploadFile } from 'antd';
 import { Typography } from 'antd';
 
-const {Title } = Typography
+import { PhotoUploaderProps } from './types';
+
+const { Title } = Typography;
 
 export const PhotoUploader = ({
   isEditable = false,
@@ -28,11 +28,12 @@ export const PhotoUploader = ({
   const hasUploadButton = fileList.length < maxPhotoAmount;
 
   return (
-    <div>
+    <Flex vertical gap="middle">
       <Title level={4}>{title}</Title>
       {isErrorUploading && <Alert type="error" message={isErrorUploading} />}
       <Upload
         customRequest={handleUpload}
+        accept="image/png, image/jpeg"
         listType="picture-circle"
         fileList={fileList}
         onPreview={handleClick}
@@ -46,6 +47,6 @@ export const PhotoUploader = ({
       >
         {hasUploadButton ? <Button>+</Button> : null}
       </Upload>
-    </div>
+    </Flex>
   );
 };

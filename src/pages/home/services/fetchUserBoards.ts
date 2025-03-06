@@ -6,6 +6,7 @@ import {
 import { getFulfilledResults, groupArrayByValue } from '@pages/home/utils';
 import { ROLES, ROLES_VALUES } from '@shared/constants';
 import { getCollection, getData } from '@shared/services';
+import { sortArrByKey } from '@shared/utils';
 import { BoardInfo, fetchBoard } from '@store';
 
 import { UserBoard } from './types';
@@ -58,7 +59,8 @@ export const fetchUserBoards = async (userID: string | null): Promise<[ROLES, Bo
   if (!userBoards?.length) return [];
 
   const boardsWithRoles = await fetchBoardsWithRoles(userBoards);
-  const boardsWithOwners = await fetchBoardsWithOwners(boardsWithRoles);
+  const sortedByDate = sortArrByKey(boardsWithRoles, 'createdAt');
+  const boardsWithOwners = await fetchBoardsWithOwners(sortedByDate);
 
   const sortedByRole = Object.entries(
     groupArrayByValue<BoardInfo>(boardsWithOwners, 'userRole'),

@@ -5,8 +5,7 @@ import { Alert, Flex, Form, FormInstance } from 'antd';
 import { Typography } from 'antd';
 
 const { Item } = Form;
-const {Link} = Typography
-
+const { Link } = Typography;
 
 export const LoginForm = <TFormValues, TForm extends FormInstance<TFormValues>>({
   onSubmit,
@@ -26,9 +25,9 @@ export const LoginForm = <TFormValues, TForm extends FormInstance<TFormValues>>(
       wrapperCol={{ span: 18 }}
       labelWrap
     >
-      <Flex vertical gap='small'>
+      <Flex vertical gap="small">
         <EmailField />
-        <PasswordField />
+        <PasswordField validated={false} />
         <Flex vertical gap="middle">
           {error && <Alert type="error" message={error} />}
           <Flex justify="space-evenly" align="baseline">
